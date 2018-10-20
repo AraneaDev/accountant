@@ -1,4 +1,4 @@
-This package allows you to keep track of changes to your Eloquent models across time, making it easy to spot possible discrepancies and anomalies that could indicate business concerns or suspect activities.
+This package allows you to keep track of changes in your Eloquent models across time, making it easy to spot possible discrepancies and anomalies that could indicate business concerns or suspect activities.
 
 ## Version Information
  Version   | Illuminate    | Status             | PHP Version
