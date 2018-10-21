@@ -23,5 +23,7 @@ class UserResolver implements \Altek\Accountant\Contracts\UserResolver
                 return $user;
             }
         }
+
+        return null;
     }
 }
