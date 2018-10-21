@@ -60,7 +60,7 @@ class Accountant extends Manager implements Contracts\Accountant
      */
     public function record(Contracts\Recordable $model, string $event): void
     {
-        if (!$model->isRecordingEnabled()) {
+        if (!$model->isRecordingEnabled() || !$model->isEventRecordable($event)) {
             return;
         }
 
