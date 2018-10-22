@@ -25,11 +25,11 @@ class RecordableObserverTest extends AccountantTestCase
     public function itExecutesTheAuditorSuccessfully(string $method, bool $expectedBefore, bool $expectedAfter): void
     {
         $observer = new RecordableObserver();
-        $model = factory(Article::class)->create();
+        $article = factory(Article::class)->create();
 
         $this->assertSame($expectedBefore, $observer::$restoring);
 
-        $observer->$method($model);
+        $observer->$method($article);
 
         $this->assertSame($expectedAfter, $observer::$restoring);
     }
