@@ -110,7 +110,7 @@ trait Ledger
     public function getProperty(string $key)
     {
         if (!array_key_exists($key, $this->data)) {
-            return null;
+            return;
         }
 
         $value = $this->data[$key];
