@@ -21,52 +21,34 @@ interface Ledger
     public function recordable(): MorphTo;
 
     /**
-     * Ledger data resolver.
+     * Compile data and metadata.
      *
      * @return array
      */
-    public function resolveData(): array;
+    public function compile(): array;
 
     /**
-     * Get a Ledger data value.
+     * Get a property value.
      *
      * @param string $key
      *
      * @return mixed
      */
-    public function getDataValue(string $key);
+    public function getProperty(string $key);
 
     /**
-     * Get the Ledger metadata.
+     * Get the Ledger data.
      *
      * @return array
      */
     public function getMetadata(): array;
 
     /**
-     * Get the Recordable modified attributes.
+     * Get the Recordable data.
+     *
+     * @param bool $all
      *
      * @return array
      */
-    public function getModified(): array;
-
-    /**
-     * Get the Ledger metadata as JSON.
-     *
-     * @param int $options
-     * @param int $depth
-     *
-     * @return string
-     */
-    public function getMetadataAsJson(int $options = 0, int $depth = 512): string;
-
-    /**
-     * Get the Recordable modified attributes as JSON.
-     *
-     * @param int $options
-     * @param int $depth
-     *
-     * @return string
-     */
-    public function getModifiedAsJson(int $options = 0, int $depth = 512): string;
+    public function getData(bool $all = false): array;
 }
