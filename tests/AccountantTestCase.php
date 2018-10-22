@@ -2,12 +2,12 @@
 
 namespace Altek\Accountant\Tests;
 
-use Orchestra\Testbench\TestCase;
 use Altek\Accountant\AccountantServiceProvider;
 use Altek\Accountant\Resolvers\IpAddressResolver;
 use Altek\Accountant\Resolvers\UrlResolver;
 use Altek\Accountant\Resolvers\UserAgentResolver;
 use Altek\Accountant\Resolvers\UserResolver;
+use Orchestra\Testbench\TestCase;
 
 class AccountantTestCase extends TestCase
 {

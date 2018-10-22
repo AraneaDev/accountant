@@ -1,7 +1,7 @@
 <?php
 
-use Faker\Generator as Faker;
 use Altek\Accountant\Tests\Models\Article;
+use Faker\Generator as Faker;
 
 /*
 |--------------------------------------------------------------------------

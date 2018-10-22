@@ -2,9 +2,9 @@
 
 namespace Altek\Accountant\Tests\Models;
 
+use Altek\Accountant\Contracts\Recordable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Altek\Accountant\Contracts\Recordable;
 
 class Article extends Model implements Recordable
 {

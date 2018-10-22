@@ -1,9 +1,9 @@
 <?php
 
-use Faker\Generator as Faker;
 use Altek\Accountant\Models\Ledger;
 use Altek\Accountant\Tests\Models\Article;
 use Altek\Accountant\Tests\Models\User;
+use Faker\Generator as Faker;
 
 /*
 |--------------------------------------------------------------------------
