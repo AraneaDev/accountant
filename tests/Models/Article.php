@@ -23,6 +23,7 @@ class Article extends Model implements Recordable
      */
     protected $dates = [
         'published_at',
+        'deleted_at',
     ];
 
     /**
