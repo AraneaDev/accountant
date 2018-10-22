@@ -16,13 +16,11 @@ class LedgerTest extends AccountantTestCase
      */
     public function itCompilesTheLedgerData(): void
     {
-        $now = Carbon::now();
-
         $article = factory(Article::class)->create([
             'title'        => 'Keeping Track Of Eloquent Model Changes',
             'content'      => 'First step: install the Accountant package.',
             'reviewed'     => 1,
-            'published_at' => $now,
+            'published_at' => Carbon::now(),
         ]);
 
         $ledger = $article->ledgers()->first();
@@ -41,7 +39,7 @@ class LedgerTest extends AccountantTestCase
             'user_type'               => null,
             'recordable_title'        => 'Keeping Track Of Eloquent Model Changes',
             'recordable_content'      => 'First step: install the Accountant package.',
-            'recordable_published_at' => $now->toDateTimeString(),
+            'recordable_published_at' => $article->published_at->toDateTimeString(),
             'recordable_reviewed'     => 1,
             'recordable_created_at'   => $article->created_at->toDateTimeString(),
             'recordable_updated_at'   => $article->updated_at->toDateTimeString(),
@@ -55,8 +53,6 @@ class LedgerTest extends AccountantTestCase
      */
     public function itCompilesTheLedgerDataIncludingUserAttributes(): void
     {
-        $now = Carbon::now();
-
         $user = factory(User::class)->create([
             'is_admin'   => 1,
             'first_name' => 'rick',
@@ -70,7 +66,7 @@ class LedgerTest extends AccountantTestCase
             'title'        => 'Keeping Track Of Eloquent Model Changes',
             'content'      => 'First step: install the Accountant package.',
             'reviewed'     => 1,
-            'published_at' => $now,
+            'published_at' => Carbon::now(),
         ]);
 
         $ledger = $article->ledgers()->first();
@@ -95,7 +91,7 @@ class LedgerTest extends AccountantTestCase
             'user_updated_at'         => $user->updated_at->toDateTimeString(),
             'recordable_title'        => 'Keeping Track Of Eloquent Model Changes',
             'recordable_content'      => 'First step: install the Accountant package.',
-            'recordable_published_at' => $now->toDateTimeString(),
+            'recordable_published_at' => $article->published_at->toDateTimeString(),
             'recordable_reviewed'     => 1,
             'recordable_created_at'   => $article->created_at->toDateTimeString(),
             'recordable_updated_at'   => $article->updated_at->toDateTimeString(),
@@ -218,13 +214,11 @@ class LedgerTest extends AccountantTestCase
      */
     public function itOnlyReturnsTheModifiedRecordableData(): void
     {
-        $now = Carbon::now();
-
         $article = factory(Article::class)->create([
             'title'        => 'Keeping Track Of Eloquent Model Changes',
             'content'      => 'First step: install the Accountant package.',
             'reviewed'     => 1,
-            'published_at' => $now,
+            'published_at' => Carbon::now(),
         ]);
 
         $ledger = $article->ledgers()->first();
@@ -234,7 +228,7 @@ class LedgerTest extends AccountantTestCase
         $this->assertArraySubset([
             'title'        => 'KEEPING TRACK OF ELOQUENT MODEL CHANGES',
             'content'      => 'First step: install the Accountant package.',
-            'published_at' => $now->toDateTimeString(),
+            'published_at' => $article->published_at->toDateTimeString(),
             'reviewed'     => true,
             'updated_at'   => $article->updated_at->toDateTimeString(),
             'created_at'   => $article->created_at->toDateTimeString(),
