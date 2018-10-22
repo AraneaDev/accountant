@@ -16,7 +16,7 @@ class Database implements LedgerDriver
     {
         $implementation = Config::get('accountant.ledger.implementation', \Altek\Accountant\Models\Ledger::class);
 
-        return call_user_func([$implementation, 'create'], $model->toLedger($event));
+        return call_user_func([$implementation, 'create'], $model->process($event));
     }
 
     /**
