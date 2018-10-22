@@ -169,8 +169,8 @@ class LedgerTest extends AccountantTestCase
             'ledger_user_agent' => 'Symfony',
             'ledger_created_at' => $ledger->created_at->toDateTimeString(),
             'ledger_updated_at' => $ledger->updated_at->toDateTimeString(),
-            'user_id'          => null,
-            'user_type'        => null,
+            'user_id'           => null,
+            'user_type'         => null,
         ], $metadata, true);
     }
 
@@ -201,14 +201,14 @@ class LedgerTest extends AccountantTestCase
             'ledger_user_agent' => 'Symfony',
             'ledger_created_at' => $ledger->created_at->toDateTimeString(),
             'ledger_updated_at' => $ledger->updated_at->toDateTimeString(),
-            'user_id'          => 1,
-            'user_type'        => User::class,
-            'user_is_admin'    => true,
-            'user_first_name'  => 'Rick',
-            'user_last_name'   => 'Sanchez',
-            'user_email'       => 'rick@wubba-lubba-dub.dub',
-            'user_created_at'  => $user->created_at->toDateTimeString(),
-            'user_updated_at'  => $user->updated_at->toDateTimeString(),
+            'user_id'           => 1,
+            'user_type'         => User::class,
+            'user_is_admin'     => true,
+            'user_first_name'   => 'Rick',
+            'user_last_name'    => 'Sanchez',
+            'user_email'        => 'rick@wubba-lubba-dub.dub',
+            'user_created_at'   => $user->created_at->toDateTimeString(),
+            'user_updated_at'   => $user->updated_at->toDateTimeString(),
         ], $metadata, true);
     }
 
