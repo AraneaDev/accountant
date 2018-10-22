@@ -400,7 +400,6 @@ class RecordingTest extends AccountantTestCase
             'created_at',
             'id',
         ], $ledger->modified, true);
-
     }
 
     /**
