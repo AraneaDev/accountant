@@ -263,7 +263,7 @@ class RecordableTest extends AccountantTestCase
             'event'           => 'created',
             'recordable_id'   => null,
             'recordable_type' => Article::class,
-            'properties' => [
+            'properties'      => [
                 'title'        => 'Keeping Track Of Eloquent Model Changes',
                 'content'      => 'First step: install the Accountant package.',
                 'reviewed'     => 1,
@@ -321,7 +321,7 @@ class RecordableTest extends AccountantTestCase
             'event'           => 'created',
             'recordable_id'   => null,
             'recordable_type' => Article::class,
-            'properties' => [
+            'properties'      => [
                 'title'        => 'Keeping Track Of Eloquent Model Changes',
                 'content'      => 'First step: install the Accountant package.',
                 'reviewed'     => 1,
@@ -405,7 +405,7 @@ class RecordableTest extends AccountantTestCase
             'event'           => 'created',
             'recordable_id'   => null,
             'recordable_type' => get_class($article),
-            'properties' => [
+            'properties'      => [
                 'title'        => 'Keeping Track Of Eloquent Model Changes',
                 'content'      => 'First step: install the Accountant package.',
                 'reviewed'     => 1,
