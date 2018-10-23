@@ -22,7 +22,7 @@ class RecordableObserverTest extends AccountantTestCase
      * @param bool   $expectedBefore
      * @param bool   $expectedAfter
      */
-    public function itExecutesTheAuditorSuccessfully(string $method, bool $expectedBefore, bool $expectedAfter): void
+    public function itExecutesTheAccountantSuccessfully(string $method, bool $expectedBefore, bool $expectedAfter): void
     {
         $observer = new RecordableObserver();
         $article = factory(Article::class)->create();
