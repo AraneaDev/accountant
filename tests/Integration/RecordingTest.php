@@ -373,7 +373,7 @@ class RecordingTest extends AccountantTestCase
         $this->app['config']->set('accountant.ledger.driver', null);
 
         $article = factory(Article::class)->create([
-            'title'        => 'How To Audit Using The Fallback Driver',
+            'title'        => 'Keeping Track Of Eloquent Model Changes Using The Fallback Driver',
             'content'      => 'N/A',
             'published_at' => null,
             'reviewed'     => 0,
@@ -382,7 +382,7 @@ class RecordingTest extends AccountantTestCase
         $ledger = Ledger::first();
 
         $this->assertArraySubset([
-            'title'        => 'How To Audit Using The Fallback Driver',
+            'title'        => 'Keeping Track Of Eloquent Model Changes Using The Fallback Driver',
             'content'      => 'N/A',
             'published_at' => null,
             'reviewed'     => 0,
