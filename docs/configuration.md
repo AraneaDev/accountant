@@ -17,7 +17,7 @@ return [
 ];
 ```
 
-Read more about it in the [Ledger Implementation](ledger-implementation) section.
+Read more about it in the [Ledger Implementation](ledger-implementation.md) section.
 
 ## Ledger driver
 Being the only driver provided, the `Database` driver is set as default.
@@ -60,7 +60,7 @@ return [
 This package supports multiple user types, by using a polymorphic `MorphTo` relation.
 
 ### Prefix
-By default, the column names used are `user_id` and `user_type`. For different user column prefix, change the configuration value and update the [migration](ledger-migration) accordingly.
+By default, the column names used are `user_id` and `user_type`. For different user column prefix, change the configuration value and update the [migration](ledger-migration.md) accordingly.
 
 ```php
 return [
