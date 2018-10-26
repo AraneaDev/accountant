@@ -22,7 +22,7 @@ return [
 ];
 ```
 
-> {tip} Read more about this in the [Configuration](configuration) section.
+> **TIP:** Read more about this in the [Configuration](configuration) section.
 
 ## Using UUID instead of auto-incrementing ids
 Some developers prefer to use [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) instead of auto-incrementing identifiers.
@@ -60,7 +60,7 @@ $table->index([
 ]);
 ```
 
-> {note} Always ensure that the `user_*` and `recordable_*` column types match the ones in their respective tables.
+> **NOTICE:** Always ensure that the `user_*` and `recordable_*` column types match the ones in their respective tables.
 
 ## Values with more than 255 characters
 While odd, on some occasions, User Agent values may go over the 255 character mark. To avoid such problems, update the column from `string`
@@ -93,4 +93,4 @@ $table->json('modified')->nullable();
 
 This will allow the user to perform additional data filtering.
 
-> {tip} Not all RDBMS support this feature, so check before making changes!
+> **NOTICE:** Not all RDBMS support this feature, so check before making changes!

@@ -54,7 +54,7 @@ return [
 ];
 ```
 
-> {note} Resolving a `User` in the CLI may not work.
+> **NOTICE:** Resolving a `User` in the CLI may not work.
 
 ## User
 This package supports multiple user types, by using a polymorphic `MorphTo` relation.
@@ -72,7 +72,7 @@ return [
 ];
 ```
 
-> {note} The `Ledger` **compile()** method will still use `user_id` and other `user_` prefixed keys for any user data, regardless of the prefix set in the configuration.
+> **NOTICE:** The `Ledger` **compile()** method will still use `user_id` and other `user_` prefixed keys for any user data, regardless of the prefix set in the configuration.
 
 ### Auth Guards
 Specify the authentication guards the `UserResolver` should use when trying to resolve a user.

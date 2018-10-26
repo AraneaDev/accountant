@@ -42,7 +42,7 @@ Previous state (**$original** array):
 
 Which makes the `getDirty()` and `isDirty()` methods to give a false positive when comparing data.
  
-> {tip} This behaviour has been [fixed](https://github.com/laravel/framework/pull/18400) in Laravel 5.5+. For older versions of Laravel, use this [trait](https://gist.github.com/crashkonijn/7d581e55770d2379494067d8b0ce0f6d), courtesy of [Peter Klooster](https://github.com/crashkonijn)!
+> **TIP:** This behaviour has been [fixed](https://github.com/laravel/framework/pull/18400) in Laravel 5.5+. For older versions of Laravel, use this [trait](https://gist.github.com/crashkonijn/7d581e55770d2379494067d8b0ce0f6d), courtesy of [Peter Klooster](https://github.com/crashkonijn)!
 
 Other discussions about this [subject](https://github.com/laravel/internals/issues/349).
 
@@ -61,7 +61,7 @@ Ledger::creating(function (Ledger $model) {
 });
 ```
 
-> {note} Keep in mind that the `modified` column of a `retrieved` event, will always be empty!
+> **NOTICE:** Keep in mind that the `modified` column of a `retrieved` event, will always be empty!
 
 ## PHP Fatal error:  Maximum function nesting level of '512' reached, aborting!
 This error happens when a `Ledger` is being created for a `retrieved` event on a `User` model.
@@ -115,4 +115,4 @@ public function user(): MorphTo
 }
 ```
 
-> {tip} A custom `Ledger` model needs to be created with the above methods. Don't forget to update the `Ledger` implementation in your configuration!
+> **TIP:** A custom `Ledger` model needs to be created with the above methods. Don't forget to update the `Ledger` implementation in your configuration!
