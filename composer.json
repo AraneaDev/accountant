@@ -61,5 +61,8 @@
                 "Altek\\Accountant\\AccountantServiceProvider"
             ]
         }
+    },
+    "suggest": {
+        "laravelista/lumen-vendor-publish": "Required to publish the package config file in Lumen."
     }
 }
