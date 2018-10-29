@@ -49,14 +49,14 @@ trait Ledger
         // Metadata
         $this->data = [
             'ledger_id'         => $this->getKey(),
-            'ledger_event'      => $this->event,
-            'ledger_url'        => $this->url,
-            'ledger_ip_address' => $this->ip_address,
-            'ledger_user_agent' => $this->user_agent,
+            'ledger_event'      => $this->getAttributeFromArray('event'),
+            'ledger_url'        => $this->getAttributeFromArray('url'),
+            'ledger_ip_address' => $this->getAttributeFromArray('ip_address'),
+            'ledger_user_agent' => $this->getAttributeFromArray('user_agent'),
             'ledger_created_at' => $this->serializeDate($this->created_at),
             'ledger_updated_at' => $this->serializeDate($this->updated_at),
-            'user_id'           => $this->getAttribute($userPrefix.'_id'),
-            'user_type'         => $this->getAttribute($userPrefix.'_type'),
+            'user_id'           => $this->getAttributeFromArray($userPrefix.'_id'),
+            'user_type'         => $this->getAttributeFromArray($userPrefix.'_type'),
         ];
 
         if ($this->user) {
