@@ -249,10 +249,10 @@ class LedgerTest extends AccountantTestCase
             'properties'      => [
                 'title'        => 'KEEPING TRACK OF ELOQUENT MODEL CHANGES',
                 'content'      => 'First step: install the Accountant package.',
-                'published_at' => '2014-06-18 21:32:34',
+                'published_at' => '2012-06-18 21:32:34',
                 'reviewed'     => true,
                 'updated_at'   => '2015-10-24 23:11:10',
-                'created_at'   => '2014-06-12 15:03:03',
+                'created_at'   => '2012-06-14 15:03:03',
                 'id'           => 1,
             ],
             'modified'        => [
