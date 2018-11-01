@@ -51,4 +51,11 @@ interface Ledger
      * @return array
      */
     public function getData(bool $all = false): array;
+
+    /**
+     * Create a Recordable instance from a Ledger.
+     *
+     * @return Recordable
+     */
+    public function toRecordable(): Recordable;
 }

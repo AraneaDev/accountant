@@ -2,6 +2,7 @@
 
 namespace Altek\Accountant;
 
+use Altek\Accountant\Contracts\Recordable;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -172,5 +173,13 @@ trait Ledger
         }
 
         return $data;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toRecordable(): Recordable
+    {
+        return $this->recordable->newFromBuilder($this->properties);
     }
 }

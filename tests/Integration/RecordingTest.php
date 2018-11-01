@@ -2,6 +2,7 @@
 
 namespace Altek\Accountant\Tests\Integration;
 
+use Altek\Accountant\Contracts\Recordable;
 use Altek\Accountant\Events\Recording;
 use Altek\Accountant\Exceptions\AccountantException;
 use Altek\Accountant\Models\Ledger;
@@ -446,5 +447,27 @@ class RecordingTest extends AccountantTestCase
 
         $this->assertSame(2, Ledger::count());
         $this->assertSame(3, Article::count());
+    }
+
+    /**
+     * @test
+     */
+    public function itCreatesRecordableInstanceFromLedger(): void
+    {
+        $article = factory(Article::class)->create()
+            ->ledgers()
+            ->first()
+            ->toRecordable();
+
+        $this->assertInstanceOf(Recordable::class, $article);
+        $this->assertInstanceOf(Article::class, $article);
+
+        $user = factory(User::class)->create()
+            ->ledgers()
+            ->first()
+            ->toRecordable();
+
+        $this->assertInstanceOf(Recordable::class, $user);
+        $this->assertInstanceOf(User::class, $user);
     }
 }
