@@ -125,7 +125,7 @@ trait Recordable
     /**
      * Resolve the User.
      *
-     * @throws AccountantException
+     * @throws \Altek\Accountant\Exceptions\AccountantException
      *
      * @return Authenticatable
      */
@@ -133,17 +133,17 @@ trait Recordable
     {
         $userResolver = Config::get('accountant.ledger.resolvers.user');
 
-        if (is_subclass_of($userResolver, UserResolver::class)) {
-            return call_user_func([$userResolver, 'resolve']);
+        if (!is_subclass_of($userResolver, UserResolver::class)) {
+            throw new AccountantException('Invalid UserResolver implementation');
         }
 
-        throw new AccountantException('Invalid UserResolver implementation');
+        return call_user_func([$userResolver, 'resolve']);
     }
 
     /**
      * Resolve the URL.
      *
-     * @throws AccountantException
+     * @throws \Altek\Accountant\Exceptions\AccountantException
      *
      * @return string
      */
@@ -151,17 +151,17 @@ trait Recordable
     {
         $urlResolver = Config::get('accountant.ledger.resolvers.url');
 
-        if (is_subclass_of($urlResolver, UrlResolver::class)) {
-            return call_user_func([$urlResolver, 'resolve']);
+        if (!is_subclass_of($urlResolver, UrlResolver::class)) {
+            throw new AccountantException('Invalid UrlResolver implementation');
         }
 
-        throw new AccountantException('Invalid UrlResolver implementation');
+        return call_user_func([$urlResolver, 'resolve']);
     }
 
     /**
      * Resolve the IP Address.
      *
-     * @throws AccountantException
+     * @throws \Altek\Accountant\Exceptions\AccountantException
      *
      * @return string
      */
@@ -169,17 +169,17 @@ trait Recordable
     {
         $ipAddressResolver = Config::get('accountant.ledger.resolvers.ip_address');
 
-        if (is_subclass_of($ipAddressResolver, IpAddressResolver::class)) {
-            return call_user_func([$ipAddressResolver, 'resolve']);
+        if (!is_subclass_of($ipAddressResolver, IpAddressResolver::class)) {
+            throw new AccountantException('Invalid IpAddressResolver implementation');
         }
 
-        throw new AccountantException('Invalid IpAddressResolver implementation');
+        return call_user_func([$ipAddressResolver, 'resolve']);
     }
 
     /**
      * Resolve the User Agent.
      *
-     * @throws AccountantException
+     * @throws \Altek\Accountant\Exceptions\AccountantException
      *
      * @return string
      */
@@ -187,11 +187,11 @@ trait Recordable
     {
         $userAgentResolver = Config::get('accountant.ledger.resolvers.user_agent');
 
-        if (is_subclass_of($userAgentResolver, UserAgentResolver::class)) {
-            return call_user_func([$userAgentResolver, 'resolve']);
+        if (!is_subclass_of($userAgentResolver, UserAgentResolver::class)) {
+            throw new AccountantException('Invalid UserAgentResolver implementation');
         }
 
-        throw new AccountantException('Invalid UserAgentResolver implementation');
+        return call_user_func([$userAgentResolver, 'resolve']);
     }
 
     /**
