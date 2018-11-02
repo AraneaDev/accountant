@@ -69,7 +69,7 @@ trait Ledger
         $this->metadata = array_keys($this->data);
 
         // Recordable data
-        foreach ($this->properties as $key => $value) {
+        foreach ($this->getAttribute('properties') as $key => $value) {
             $this->data['recordable_'.$key] = $value;
         }
 
@@ -162,7 +162,7 @@ trait Ledger
 
         $data = [];
 
-        $properties = $all ? array_keys($this->properties) : $this->modified;
+        $properties = $all ? array_keys($this->getAttribute('properties')) : $this->getAttribute('modified');
 
         foreach ($properties as $key) {
             $value = $this->getProperty(sprintf('recordable_%s', $key));
