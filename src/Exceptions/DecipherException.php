@@ -16,7 +16,7 @@ class DecipherException extends AccountantException
     /**
      * {@inheritdoc}
      */
-    public function __construct($message = '', $value, $code = 0, Throwable $previous = null)
+    public function __construct($message, $value, $code = 0, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
 
