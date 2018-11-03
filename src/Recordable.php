@@ -131,13 +131,13 @@ trait Recordable
      */
     protected function resolveUser(): ?Authenticatable
     {
-        $userResolver = Config::get('accountant.ledger.resolvers.user');
+        $implementation = Config::get('accountant.ledger.resolvers.user');
 
-        if (!is_subclass_of($userResolver, UserResolver::class)) {
-            throw new AccountantException('Invalid UserResolver implementation');
+        if (!is_subclass_of($implementation, UserResolver::class)) {
+            throw new AccountantException(sprintf('Invalid UserResolver implementation: "%s"', $implementation));
         }
 
-        return call_user_func([$userResolver, 'resolve']);
+        return call_user_func([$implementation, 'resolve']);
     }
 
     /**
@@ -149,13 +149,13 @@ trait Recordable
      */
     protected function resolveUrl(): string
     {
-        $urlResolver = Config::get('accountant.ledger.resolvers.url');
+        $implementation = Config::get('accountant.ledger.resolvers.url');
 
-        if (!is_subclass_of($urlResolver, UrlResolver::class)) {
-            throw new AccountantException('Invalid UrlResolver implementation');
+        if (!is_subclass_of($implementation, UrlResolver::class)) {
+            throw new AccountantException(sprintf('Invalid UrlResolver implementation: "%s"', $implementation));
         }
 
-        return call_user_func([$urlResolver, 'resolve']);
+        return call_user_func([$implementation, 'resolve']);
     }
 
     /**
@@ -167,13 +167,13 @@ trait Recordable
      */
     protected function resolveIpAddress(): string
     {
-        $ipAddressResolver = Config::get('accountant.ledger.resolvers.ip_address');
+        $implementation = Config::get('accountant.ledger.resolvers.ip_address');
 
-        if (!is_subclass_of($ipAddressResolver, IpAddressResolver::class)) {
-            throw new AccountantException('Invalid IpAddressResolver implementation');
+        if (!is_subclass_of($implementation, IpAddressResolver::class)) {
+            throw new AccountantException(sprintf('Invalid IpAddressResolver implementation: "%s"', $implementation));
         }
 
-        return call_user_func([$ipAddressResolver, 'resolve']);
+        return call_user_func([$implementation, 'resolve']);
     }
 
     /**
@@ -185,13 +185,13 @@ trait Recordable
      */
     protected function resolveUserAgent(): ?string
     {
-        $userAgentResolver = Config::get('accountant.ledger.resolvers.user_agent');
+        $implementation = Config::get('accountant.ledger.resolvers.user_agent');
 
-        if (!is_subclass_of($userAgentResolver, UserAgentResolver::class)) {
-            throw new AccountantException('Invalid UserAgentResolver implementation');
+        if (!is_subclass_of($implementation, UserAgentResolver::class)) {
+            throw new AccountantException(sprintf('Invalid UserAgentResolver implementation: "%s"', $implementation));
         }
 
-        return call_user_func([$userAgentResolver, 'resolve']);
+        return call_user_func([$implementation, 'resolve']);
     }
 
     /**
