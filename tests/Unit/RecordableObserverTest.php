@@ -1,8 +1,9 @@
 <?php
 
-namespace Altek\Accountant\Tests;
+namespace Altek\Accountant\Tests\Unit;
 
 use Altek\Accountant\RecordableObserver;
+use Altek\Accountant\Tests\AccountantTestCase;
 use Altek\Accountant\Tests\Models\Article;
 
 class RecordableObserverTest extends AccountantTestCase
