@@ -58,6 +58,7 @@ interface Ledger
      * @param bool $strict
      *
      * @throws \Altek\Accountant\Exceptions\AccountantException
+     * @throws \Altek\Accountant\Exceptions\DecipherException
      *
      * @return Recordable
      */
