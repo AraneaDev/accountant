@@ -55,7 +55,11 @@ interface Ledger
     /**
      * Create a Recordable instance from a Ledger.
      *
+     * @param bool $strict
+     *
+     * @throws \Altek\Accountant\Exceptions\AccountantException
+     *
      * @return Recordable
      */
-    public function toRecordable(): Recordable;
+    public function toRecordable(bool $strict = true): Recordable;
 }
