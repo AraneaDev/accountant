@@ -2,6 +2,8 @@
 
 namespace Altek\Accountant\Tests\Unit;
 
+use Altek\Accountant\Ciphers\Base64;
+use Altek\Accountant\Ciphers\Bleach;
 use Altek\Accountant\Exceptions\AccountantException;
 use Altek\Accountant\Tests\AccountantTestCase;
 use Altek\Accountant\Tests\Models\Article;
@@ -186,9 +188,9 @@ class RecordableTest extends AccountantTestCase
     public function itFailsWhenTheIpAddressResolverImplementationIsInvalid(): void
     {
         $this->expectException(AccountantException::class);
-        $this->expectExceptionMessage('Invalid IpAddressResolver implementation');
+        $this->expectExceptionMessage('Invalid IpAddressResolver implementation: "Altek\Accountant\Tests\Unit\RecordableTest"');
 
-        $this->app['config']->set('accountant.ledger.resolvers.ip_address', null);
+        $this->app['config']->set('accountant.ledger.resolvers.ip_address', self::class);
 
         $article = new Article();
 
@@ -202,9 +204,9 @@ class RecordableTest extends AccountantTestCase
     public function itFailsWhenTheUrlResolverImplementationIsInvalid(): void
     {
         $this->expectException(AccountantException::class);
-        $this->expectExceptionMessage('Invalid UrlResolver implementation');
+        $this->expectExceptionMessage('Invalid UrlResolver implementation: "Altek\Accountant\Tests\Unit\RecordableTest"');
 
-        $this->app['config']->set('accountant.ledger.resolvers.url', null);
+        $this->app['config']->set('accountant.ledger.resolvers.url', self::class);
 
         $article = new Article();
 
@@ -218,9 +220,9 @@ class RecordableTest extends AccountantTestCase
     public function itFailsWhenTheUserAgentResolverImplementationIsInvalid(): void
     {
         $this->expectException(AccountantException::class);
-        $this->expectExceptionMessage('Invalid UserAgentResolver implementation');
+        $this->expectExceptionMessage('Invalid UserAgentResolver implementation: "Altek\Accountant\Tests\Unit\RecordableTest"');
 
-        $this->app['config']->set('accountant.ledger.resolvers.user_agent', null);
+        $this->app['config']->set('accountant.ledger.resolvers.user_agent', self::class);
 
         $article = new Article();
 
@@ -234,9 +236,9 @@ class RecordableTest extends AccountantTestCase
     public function itFailsWhenTheUserResolverImplementationIsInvalid(): void
     {
         $this->expectException(AccountantException::class);
-        $this->expectExceptionMessage('Invalid UserResolver implementation');
+        $this->expectExceptionMessage('Invalid UserResolver implementation: "Altek\Accountant\Tests\Unit\RecordableTest"');
 
-        $this->app['config']->set('accountant.ledger.resolvers.user', null);
+        $this->app['config']->set('accountant.ledger.resolvers.user', self::class);
 
         $article = new Article();
 
@@ -417,6 +419,98 @@ class RecordableTest extends AccountantTestCase
                 'content',
                 'reviewed',
                 'published_at',
+            ],
+            'url'        => 'Command Line Interface',
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'Symfony',
+        ], $data, true);
+    }
+
+    /**
+     * @group Recordable::process
+     * @test
+     */
+    public function itFailsToProcessWhenAnInvalidPropertyIsSet(): void
+    {
+        $this->expectException(AccountantException::class);
+        $this->expectExceptionMessage('Invalid property: "invalid_property"');
+
+        $article = factory(Article::class)->make();
+
+        $article->ciphers = [
+            'invalid_property' => Base64::class,
+        ];
+
+        $article->process('created');
+    }
+
+    /**
+     * @group Recordable::process
+     * @test
+     */
+    public function itFailsWhenTheCipherImplementationIsInvalid(): void
+    {
+        $this->expectException(AccountantException::class);
+        $this->expectExceptionMessage('Invalid Cipher implementation: "Altek\Accountant\Tests\Unit\RecordableTest"');
+
+        $article = factory(Article::class)->make();
+
+        $article->ciphers = [
+            'title' => self::class,
+        ];
+
+        $article->process('created');
+    }
+
+    /**
+     * @group Recordable::process
+     * @test
+     */
+    public function itCiphersTheRecordablePropertiesSuccessfully(): void
+    {
+        $article = factory(Article::class)->make([
+            'title'        => 'Keeping Track Of Models',
+            'content'      => 'N/A',
+            'reviewed'     => 0,
+            'published_at' => null,
+        ]);
+
+        $article->syncOriginal();
+
+        $article->title = 'Keeping Track Of Eloquent Model Changes';
+        $article->content = 'First step: install the Accountant package.';
+        $article->published_at = Carbon::now();
+        $article->reviewed = 1;
+
+        $article->ciphers = [
+            'content'  => Bleach::class,
+            'reviewed' => Base64::class,
+        ];
+
+        $this->assertCount(10, $data = $article->process('updated'));
+
+        $this->assertArraySubset([
+            'user_id'         => null,
+            'user_type'       => null,
+            'event'           => 'updated',
+            'recordable_id'   => null,
+            'recordable_type' => Article::class,
+            'properties'      => [
+                'title'        => 'Keeping Track Of Eloquent Model Changes',
+                'content'      => '--------------------------------------kage.',
+                'published_at' => $article->published_at->toDateTimeString(),
+                'reviewed'     => 'MQ==',
+                'ciphers'      => [
+                    'content'  => Bleach::class,
+                    'reviewed' => Base64::class,
+                ],
+            ],
+            'modified' => [
+                'title',
+                'content',
+                'published_at',
+                'reviewed',
+                'ciphers',
             ],
             'url'        => 'Command Line Interface',
             'ip_address' => '127.0.0.1',
