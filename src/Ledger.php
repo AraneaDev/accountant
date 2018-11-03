@@ -2,7 +2,9 @@
 
 namespace Altek\Accountant;
 
+use Altek\Accountant\Contracts\Cipher;
 use Altek\Accountant\Contracts\Recordable;
+use Altek\Accountant\Exceptions\AccountantException;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -69,7 +71,7 @@ trait Ledger
         $this->metadata = array_keys($this->data);
 
         // Recordable data
-        foreach ($this->getAttribute('properties') as $key => $value) {
+        foreach ($this->getDecipheredProperties(false) as $key => $value) {
             $this->data['recordable_'.$key] = $value;
         }
 
@@ -103,6 +105,41 @@ trait Ledger
         }
 
         return $value;
+    }
+
+    /**
+     * Get Recordable properties (deciphered).
+     *
+     * @param bool $strict
+     *
+     * @throws \Altek\Accountant\Exceptions\AccountantException
+     * @throws \Altek\Accountant\Exceptions\DecipherException
+     *
+     * @return array
+     */
+    protected function getDecipheredProperties(bool $strict = true): array
+    {
+        $properties = $this->getAttributeValue('properties');
+
+        foreach ($this->getRelationValue('recordable')->getCiphers() as $key => $implementation) {
+            if (!array_key_exists($key, $properties)) {
+                throw new AccountantException(sprintf('Invalid property: "%s"', $key));
+            }
+
+            if (!is_subclass_of($implementation, Cipher::class)) {
+                throw new AccountantException(sprintf('Invalid Cipher implementation: "%s"', $implementation));
+            }
+
+            // If strict mode is on, an exception is thrown when there's an attempt to decipher
+            // one way ciphered data, otherwise we just skip to the next property value
+            if (call_user_func([$implementation, 'isOneWay']) && !$strict) {
+                continue;
+            }
+
+            $properties[$key] = call_user_func([$implementation, 'decipher'], $properties[$key]);
+        }
+
+        return $properties;
     }
 
     /**
@@ -178,8 +215,8 @@ trait Ledger
     /**
      * {@inheritdoc}
      */
-    public function toRecordable(): Recordable
+    public function toRecordable(bool $strict = true): Recordable
     {
-        return $this->recordable->newFromBuilder($this->properties);
+        return $this->recordable->newFromBuilder($this->getDecipheredProperties($strict));
     }
 }
