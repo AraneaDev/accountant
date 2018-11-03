@@ -199,7 +199,7 @@ trait Ledger
 
         $data = [];
 
-        $properties = $all ? array_keys($this->getAttribute('properties')) : $this->getAttribute('modified');
+        $properties = $all ? array_keys($this->getAttributeValue('properties')) : $this->getAttributeValue('modified');
 
         foreach ($properties as $key) {
             $value = $this->getProperty(sprintf('recordable_%s', $key));
