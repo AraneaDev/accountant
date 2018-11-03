@@ -25,7 +25,7 @@ interface Cipher
      *
      * @param mixed $value
      *
-     * @throws \Altek\Accountant\Exceptions\AccountantException
+     * @throws \Altek\Accountant\Exceptions\DecipherException
      *
      * @return mixed
      */

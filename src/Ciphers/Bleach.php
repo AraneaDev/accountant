@@ -2,7 +2,7 @@
 
 namespace Altek\Accountant\Ciphers;
 
-use Altek\Accountant\Exceptions\AccountantException;
+use Altek\Accountant\Exceptions\DecipherException;
 
 class Bleach implements \Altek\Accountant\Contracts\Cipher
 {
@@ -33,6 +33,6 @@ class Bleach implements \Altek\Accountant\Contracts\Cipher
      */
     public static function decipher($value)
     {
-        throw new AccountantException('This Cipher implementation does not support deciphering');
+        throw new DecipherException('Value deciphering is not supported by this implementation', $value);
     }
 }
