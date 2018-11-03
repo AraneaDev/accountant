@@ -2,6 +2,11 @@
 
 namespace Altek\Accountant\Tests\Unit;
 
+use Altek\Accountant\Ciphers\Base64;
+use Altek\Accountant\Ciphers\Bleach;
+use Altek\Accountant\Contracts\Recordable;
+use Altek\Accountant\Exceptions\AccountantException;
+use Altek\Accountant\Exceptions\DecipherException;
 use Altek\Accountant\Models\Ledger;
 use Altek\Accountant\Tests\AccountantTestCase;
 use Altek\Accountant\Tests\Models\Article;
@@ -15,7 +20,58 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::compile
      * @test
      */
-    public function itCompilesTheLedgerData(): void
+    public function itFailsToCompileLedgerDataDueToInvalidProperty(): void
+    {
+        $article = new class() extends Article {
+            protected $table = 'articles';
+
+            protected $ciphers = [
+                'invalid_property' => Base64::class,
+            ];
+        };
+
+        $ledger = factory(Ledger::class)->create([
+            'recordable_type' => get_class($article),
+        ]);
+
+        $this->expectException(AccountantException::class);
+        $this->expectExceptionMessage('Invalid property: "invalid_property"');
+
+        $ledger->toRecordable();
+    }
+
+    /**
+     * @group Ledger::compile
+     * @test
+     */
+    public function itFailsToCompileLedgerDataDueToInvalidCipherImplementation(): void
+    {
+        $article = new class() extends Article {
+            protected $table = 'articles';
+
+            protected $ciphers = [
+                'title' => AccountantTestCase::class,
+            ];
+        };
+
+        $ledger = factory(Ledger::class)->create([
+            'recordable_type' => get_class($article),
+            'properties'      => [
+                'title' => 'S2VlcGluZyBUcmFjayBPZiBFbG9xdWVudCBNb2RlbCBDaGFuZ2Vz',
+            ],
+        ]);
+
+        $this->expectException(AccountantException::class);
+        $this->expectExceptionMessage('Invalid Cipher implementation: "Altek\Accountant\Tests\AccountantTestCase"');
+
+        $ledger->toRecordable();
+    }
+
+    /**
+     * @group Ledger::compile
+     * @test
+     */
+    public function itCompilesLedgerData(): void
     {
         $article = factory(Article::class)->create([
             'title'        => 'Keeping Track Of Eloquent Model Changes',
@@ -144,8 +200,11 @@ class LedgerTest extends AccountantTestCase
         $this->assertSame('First step: install the Accountant package.', $ledger->getProperty('recordable_content'));
         $this->assertSame('Sanchez', $ledger->getProperty('user_last_name'));
 
-        // Invalid value
-        $this->assertNull($ledger->getProperty('invalid_key'));
+        $this->expectException(AccountantException::class);
+        $this->expectExceptionMessage('Invalid property: "invalid_property"');
+
+        // Fetch invalid property
+        $ledger->getProperty('invalid_property');
     }
 
     /**
@@ -224,7 +283,7 @@ class LedgerTest extends AccountantTestCase
 
         $ledger = $article->ledgers()->first();
 
-        $this->assertCount(7, $modified = $ledger->getData());
+        $this->assertCount(7, $data = $ledger->getData());
 
         $this->assertArraySubset([
             'title'        => 'KEEPING TRACK OF ELOQUENT MODEL CHANGES',
@@ -234,7 +293,7 @@ class LedgerTest extends AccountantTestCase
             'updated_at'   => $article->updated_at->toDateTimeString(),
             'created_at'   => $article->created_at->toDateTimeString(),
             'id'           => 1,
-        ], $modified, true);
+        ], $data, true);
     }
 
     /**
@@ -245,10 +304,9 @@ class LedgerTest extends AccountantTestCase
     {
         $ledger = factory(Ledger::class)->create([
             'event'           => 'updated',
-            'recordable_id'   => 1,
             'recordable_type' => Article::class,
             'properties'      => [
-                'title'        => 'KEEPING TRACK OF ELOQUENT MODEL CHANGES',
+                'title'        => 'Keeping Track Of Eloquent Model Changes',
                 'content'      => 'First step: install the Accountant package.',
                 'published_at' => '2012-06-18 21:32:34',
                 'reviewed'     => true,
@@ -261,7 +319,191 @@ class LedgerTest extends AccountantTestCase
             ],
         ]);
 
+        $this->assertCount(1, $data = $ledger->getData());
+        $this->assertCount(7, $data = $ledger->getData(true));
+    }
+
+    /**
+     * @group Ledger::getData
+     * @test
+     */
+    public function itReturnsDecipheredRecordableData(): void
+    {
+        $article = new class() extends Article {
+            protected $table = 'articles';
+
+            protected $ciphers = [
+                'title'   => Base64::class,
+                'content' => Bleach::class,
+            ];
+        };
+
+        $ledger = factory(Ledger::class)->create([
+            'event'           => 'updated',
+            'recordable_type' => get_class($article),
+            'properties'      => [
+                'title'        => 'S2VlcGluZyBUcmFjayBPZiBFbG9xdWVudCBNb2RlbCBDaGFuZ2Vz',
+                'content'      => '--------------------------------------kage.',
+                'published_at' => '2012-06-18 21:32:34',
+                'reviewed'     => true,
+                'updated_at'   => '2015-10-24 23:11:10',
+                'created_at'   => '2012-06-14 15:03:03',
+                'id'           => 1,
+            ],
+            'modified'        => [
+                'content',
+            ],
+        ]);
+
         $this->assertCount(1, $modified = $ledger->getData());
-        $this->assertCount(7, $modified = $ledger->getData(true));
+        $this->assertCount(7, $all = $ledger->getData(true));
+
+        $this->assertArraySubset([
+            'content' => '--------------------------------------kage.',
+        ], $modified, true);
+
+        $this->assertArraySubset([
+            'title'        => 'KEEPING TRACK OF ELOQUENT MODEL CHANGES',
+            'content'      => '--------------------------------------kage.',
+            'published_at' => '2012-06-18 21:32:34',
+            'reviewed'     => true,
+            'updated_at'   => '2015-10-24 23:11:10',
+            'created_at'   => '2012-06-14 15:03:03',
+            'id'           => 1,
+        ], $all, true);
+    }
+
+    /**
+     * @group Ledger::getData
+     * @test
+     */
+    public function itCreatesReturnsAllTheRecordableData(): void
+    {
+        $ledger = factory(Ledger::class)->create([
+            'event'           => 'updated',
+            'recordable_type' => Article::class,
+            'properties'      => [
+                'title'        => 'Keeping Track Of Eloquent Model Changes',
+                'content'      => 'First step: install the Accountant package.',
+                'published_at' => '2012-06-18 21:32:34',
+                'reviewed'     => true,
+                'updated_at'   => '2015-10-24 23:11:10',
+                'created_at'   => '2012-06-14 15:03:03',
+                'id'           => 1,
+            ],
+            'modified'        => [
+                'content',
+            ],
+        ]);
+
+        $this->assertCount(1, $data = $ledger->getData());
+        $this->assertCount(7, $data = $ledger->getData(true));
+    }
+
+    /**
+     * @group Ledger::toRecordable
+     * @test
+     */
+    public function itFailsToCreateARecordableInstanceFromALedgerInStrictMode(): void
+    {
+        $article = new class() extends Article {
+            protected $table = 'articles';
+
+            protected $ciphers = [
+                'title'   => Base64::class,
+                'content' => Bleach::class,
+            ];
+        };
+
+        $ledger = factory(Ledger::class)->create([
+            'event'           => 'updated',
+            'recordable_type' => get_class($article),
+            'properties'      => [
+                'title'        => 'S2VlcGluZyBUcmFjayBPZiBFbG9xdWVudCBNb2RlbCBDaGFuZ2Vz',
+                'content'      => '--------------------------------------kage.',
+                'published_at' => '2012-06-18 21:32:34',
+                'reviewed'     => true,
+                'updated_at'   => '2015-10-24 23:11:10',
+                'created_at'   => '2012-06-14 15:03:03',
+                'id'           => 1,
+            ],
+            'modified'        => [
+                'content',
+            ],
+        ]);
+
+        try {
+            $ledger->toRecordable();
+        } catch (DecipherException $exception) {
+            $this->assertSame('Value deciphering is not supported by this implementation', $exception->getMessage());
+            $this->assertSame('--------------------------------------kage.', $exception->getCipheredValue());
+        }
+    }
+
+    /**
+     * @group Ledger::toRecordable
+     * @test
+     */
+    public function itSuccessfullyCreatesARecordableInstanceFromALedger(): void
+    {
+        $article = new class() extends Article {
+            protected $table = 'articles';
+
+            protected $ciphers = [
+                'title'   => Base64::class,
+                'content' => Bleach::class,
+            ];
+        };
+
+        $ledger = factory(Ledger::class)->create([
+            'event'           => 'updated',
+            'recordable_type' => get_class($article),
+            'properties'      => [
+                'title'        => 'S2VlcGluZyBUcmFjayBPZiBFbG9xdWVudCBNb2RlbCBDaGFuZ2Vz',
+                'content'      => '--------------------------------------kage.',
+                'published_at' => '2012-06-18 21:32:34',
+                'reviewed'     => true,
+                'updated_at'   => '2015-10-24 23:11:10',
+                'created_at'   => '2012-06-14 15:03:03',
+                'id'           => 1,
+            ],
+            'modified'        => [
+                'content',
+            ],
+        ]);
+
+        $article = $ledger->toRecordable(false);
+
+        $this->assertInstanceOf(Recordable::class, $article);
+        $this->assertInstanceOf(Article::class, $article);
+    }
+
+    /**
+     * @group Ledger::toRecordable
+     * @test
+     */
+    public function itSuccessfullyCreatesARecordableInstanceFromALedgerInStrictMode(): void
+    {
+        $ledger = factory(Ledger::class)->create([
+            'event'           => 'updated',
+            'recordable_type' => Article::class,
+            'properties'      => [
+                'title'        => 'Keeping Track Of Eloquent Model Changes',
+                'content'      => 'First step: install the Accountant package.',
+                'published_at' => '2012-06-18 21:32:34',
+                'reviewed'     => true,
+                'updated_at'   => '2015-10-24 23:11:10',
+                'created_at'   => '2012-06-14 15:03:03',
+                'id'           => 1,
+            ],
+            'modified'        => [
+                'content',
+            ],
+        ]);
+
+        $article = $ledger->toRecordable();
+
+        $this->assertInstanceOf(Recordable::class, $article);
+        $this->assertInstanceOf(Article::class, $article);
     }
 }
