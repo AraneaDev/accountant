@@ -2,6 +2,7 @@
 
 namespace Altek\Accountant;
 
+use Altek\Accountant\Contracts\Cipher;
 use Altek\Accountant\Contracts\IpAddressResolver;
 use Altek\Accountant\Contracts\UrlResolver;
 use Altek\Accountant\Contracts\UserAgentResolver;
@@ -207,6 +208,21 @@ trait Recordable
             throw new AccountantException(sprintf('Invalid event: "%s"', $event));
         }
 
+        // Cipher property values
+        $properties = $this->getAttributes();
+
+        foreach ($this->getCiphers() as $property => $implementation) {
+            if (!array_key_exists($property, $properties)) {
+                throw new AccountantException(sprintf('Invalid property: "%s"', $property));
+            }
+
+            if (!is_subclass_of($implementation, Cipher::class)) {
+                throw new AccountantException(sprintf('Invalid Cipher implementation: "%s"', $implementation));
+            }
+
+            $properties[$property] = call_user_func([$implementation, 'cipher'], $properties[$property]);
+        }
+
         $user = $this->resolveUser();
 
         $userPrefix = Config::get('accountant.user.prefix', 'user');
@@ -217,7 +233,7 @@ trait Recordable
             'event'             => $event,
             'recordable_id'     => $this->getKey(),
             'recordable_type'   => $this->getMorphClass(),
-            'properties'        => $this->attributes,
+            'properties'        => $properties,
             'modified'          => array_keys($this->getDirty()),
             'url'               => $this->resolveUrl(),
             'ip_address'        => $this->resolveIpAddress(),
