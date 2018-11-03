@@ -232,4 +232,12 @@ trait Recordable
     {
         return $data;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCiphers(): array
+    {
+        return $this->ciphers ?? [];
+    }
 }

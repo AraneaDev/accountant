@@ -69,4 +69,11 @@ interface Recordable
      * @return array
      */
     public function postProcess(array $data): array;
+
+    /**
+     * Get property ciphers.
+     *
+     * @return array
+     */
+    public function getCiphers(): array;
 }
