@@ -32,6 +32,8 @@ interface Ledger
      *
      * @param string $key
      *
+     * @throws \Altek\Accountant\Exceptions\AccountantException
+     *
      * @return mixed
      */
     public function getProperty(string $key);

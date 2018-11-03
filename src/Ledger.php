@@ -148,7 +148,7 @@ trait Ledger
     public function getProperty(string $key)
     {
         if (!array_key_exists($key, $this->data)) {
-            return;
+            throw new AccountantException(sprintf('Invalid property: "%s"', $key));
         }
 
         $value = $this->data[$key];
