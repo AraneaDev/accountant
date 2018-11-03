@@ -1,8 +1,9 @@
 <?php
 
-namespace Altek\Accountant\Tests;
+namespace Altek\Accountant\Tests\Unit;
 
 use Altek\Accountant\Models\Ledger;
+use Altek\Accountant\Tests\AccountantTestCase;
 use Altek\Accountant\Tests\Models\Article;
 use Altek\Accountant\Tests\Models\User;
 use Carbon\Carbon;
