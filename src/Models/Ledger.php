@@ -24,5 +24,6 @@ class Ledger extends Model implements \Altek\Accountant\Contracts\Ledger
     protected $casts = [
         'properties' => 'json',
         'modified'   => 'json',
+        'extra'      => 'json',
     ];
 }

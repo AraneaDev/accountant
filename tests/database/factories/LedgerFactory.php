@@ -25,6 +25,7 @@ $factory->define(Ledger::class, function (Faker $faker) {
         'recordable_type' => Article::class,
         'properties'      => [],
         'modified'        => [],
+        'extra'         => [],
         'url'             => $faker->url,
         'ip_address'      => $faker->ipv4,
         'user_agent'      => $faker->userAgent,
