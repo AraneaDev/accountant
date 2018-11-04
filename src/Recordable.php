@@ -227,7 +227,7 @@ trait Recordable
 
         $userPrefix = Config::get('accountant.user.prefix', 'user');
 
-        return $this->postProcess([
+        return [
             $userPrefix.'_id'   => $user ? $user->getAuthIdentifier() : null,
             $userPrefix.'_type' => $user ? $user->getMorphClass() : null,
             'event'             => $event,
@@ -235,18 +235,19 @@ trait Recordable
             'recordable_type'   => $this->getMorphClass(),
             'properties'        => $properties,
             'modified'          => array_keys($this->getDirty()),
+            'extra'             => $this->extraLedgerData($event, $properties, $user),
             'url'               => $this->resolveUrl(),
             'ip_address'        => $this->resolveIpAddress(),
             'user_agent'        => $this->resolveUserAgent(),
-        ]);
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function postProcess(array $data): array
+    public function extraLedgerData(string $event, array $properties, ?Authenticatable $user): array
     {
-        return $data;
+        return [];
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Altek\Accountant\Contracts;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 interface Recordable
@@ -62,13 +63,15 @@ interface Recordable
     public function process(string $event): array;
 
     /**
-     * Post process the Recordable data.
+     * Surplus data for the Ledger.
      *
-     * @param array $data
+     * @param string          $event
+     * @param array           $properties
+     * @param Authenticatable $user
      *
      * @return array
      */
-    public function postProcess(array $data): array;
+    public function extraLedgerData(string $event, array $properties, ?Authenticatable $user): array;
 
     /**
      * Get property ciphers.
