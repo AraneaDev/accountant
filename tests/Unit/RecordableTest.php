@@ -9,6 +9,7 @@ use Altek\Accountant\Tests\AccountantTestCase;
 use Altek\Accountant\Tests\Models\Article;
 use Altek\Accountant\Tests\Models\User;
 use Carbon\Carbon;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\App;
 
@@ -258,7 +259,7 @@ class RecordableTest extends AccountantTestCase
             'published_at' => Carbon::now(),
         ]);
 
-        $this->assertCount(10, $data = $article->process('created'));
+        $this->assertCount(11, $data = $article->process('created'));
 
         $this->assertArraySubset([
             'user_id'         => null,
@@ -281,6 +282,7 @@ class RecordableTest extends AccountantTestCase
             'url'        => 'Command Line Interface',
             'ip_address' => '127.0.0.1',
             'user_agent' => 'Symfony',
+            'extra'      => [],
         ], $data, true);
     }
 
@@ -316,7 +318,7 @@ class RecordableTest extends AccountantTestCase
             'published_at' => Carbon::now(),
         ]);
 
-        $this->assertCount(10, $data = $article->process('created'));
+        $this->assertCount(11, $data = $article->process('created'));
 
         $this->assertArraySubset([
             'user_id'         => $id,
@@ -339,6 +341,7 @@ class RecordableTest extends AccountantTestCase
             'url'        => 'Command Line Interface',
             'ip_address' => '127.0.0.1',
             'user_agent' => 'Symfony',
+            'extra'      => [],
         ], $data, true);
     }
 
@@ -377,19 +380,19 @@ class RecordableTest extends AccountantTestCase
 
     /**
      * @group Recordable::process
-     * @group Recordable::postProcess
+     * @group Recordable::extraLedgerData
      * @test
      */
-    public function itPostProcessesTheRecordableData(): void
+    public function itIncludesExtraLedgerData(): void
     {
         $article = new class() extends Article {
             protected $table = 'articles';
 
-            public function postProcess(array $data): array
+            public function extraLedgerData(string $event, array $properties, ?Authenticatable $user): array
             {
-                $data['properties']['slug'] = str_slug($data['properties']['title']);
-
-                return $data;
+                return [
+                    'slug' => str_slug($properties['title']),
+                ];
             }
         };
 
@@ -400,7 +403,7 @@ class RecordableTest extends AccountantTestCase
             'published_at' => '2012-06-14 15:03:00',
         ]);
 
-        $this->assertCount(10, $data = $article->process('created'));
+        $this->assertCount(11, $data = $article->process('created'));
 
         $this->assertArraySubset([
             'user_id'         => null,
@@ -423,6 +426,9 @@ class RecordableTest extends AccountantTestCase
             'url'        => 'Command Line Interface',
             'ip_address' => '127.0.0.1',
             'user_agent' => 'Symfony',
+            'extra'      => [
+                'slug' => 'keeping-track-of-eloquent-model-changes',
+            ],
         ], $data, true);
     }
 
@@ -487,7 +493,7 @@ class RecordableTest extends AccountantTestCase
             'reviewed' => Base64::class,
         ];
 
-        $this->assertCount(10, $data = $article->process('updated'));
+        $this->assertCount(11, $data = $article->process('updated'));
 
         $this->assertArraySubset([
             'user_id'         => null,
@@ -515,6 +521,7 @@ class RecordableTest extends AccountantTestCase
             'url'        => 'Command Line Interface',
             'ip_address' => '127.0.0.1',
             'user_agent' => 'Symfony',
+            'extra'      => [],
         ], $data, true);
     }
 
