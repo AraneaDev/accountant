@@ -7,7 +7,7 @@ You followed the documentation to the letter and yet, `Ledger` records are not b
 ### Query Builder vs. Eloquent
 Bear in mind that this package relies on Eloquent [events](https://laravel.com/docs/5.7/eloquent#events) and if they don't fire, a `Ledger` won't be created.
 
-The most common mistake is performing an `update` or `delete` operation using a `Builder` instance, rather than an using an Eloquent `Model`.
+The most common mistake is performing an `update` or `delete` operation using a `Builder` instance, instead of an Eloquent `Model`.
 
 Using the `Builder` won't create a `Ledger`:
 ```php
@@ -25,10 +25,10 @@ By default, Eloquent events from a **Job** or from the **CLI** (i.e. migrations,
 Please refer to the [Configuration](configuration.md) for more details. 
 
 ## Attributes are considered modified, when they're not
-False positives may cause `Ledger` records to be created.
+False positives may give origin to `Ledger` records.
 This happens when an Eloquent model with boolean/date attributes gets updated, regardless of change in those attributes.
 
-The internal state of the model will be as follows:
+For illustration purposes, this is how the internal state of the model would look like:
 
 Current state (**$attributes** array):
 - `true` stays `true`
@@ -40,7 +40,7 @@ Previous state (**$original** array):
 - `false` becomes `0`
 - `YYYY-MM-DD` becomes `YYYY-MM-DD 00:00:00`
 
-Which makes the `getDirty()` and `isDirty()` methods to give a false positive when comparing data.
+That makes the `getDirty()` and `isDirty()` methods to give a false positive when comparing data.
  
 > **TIP:** This behaviour has been [fixed](https://github.com/laravel/framework/pull/18400) in Laravel 5.5+. For older versions of Laravel, use this [trait](https://gist.github.com/crashkonijn/7d581e55770d2379494067d8b0ce0f6d), courtesy of [Peter Klooster](https://github.com/crashkonijn)!
 
