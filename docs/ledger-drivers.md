@@ -1,5 +1,5 @@
 # Ledger Drivers
-Drivers contain the logic to store the data of a `Recordable` model.
+Drivers contain the logic to store `Recordable` model data.
 Out of the box, the Accountant package includes a `Database` driver.
 
 Besides storing model attribute changes and other metadata, drivers also handle pruning when a ledger threshold is set.
@@ -69,7 +69,7 @@ return [
     'ledger' => [
         // ...
 
-        'driver' => App\AuditDrivers\MyCustomDriver::class,
+        'driver' => App\LedgerDrivers\MyCustomDriver::class,
     ],
 
     // ...
@@ -104,4 +104,4 @@ class Article extends Model implements Recordable
 }
 ```
 
-> **TIP:** A locally defined driver **always** takes precedence over any globally defined one.
+> **TIP:** A locally defined driver **always** takes precedence over a globally defined one.
