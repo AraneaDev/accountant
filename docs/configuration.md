@@ -1,7 +1,7 @@
 # Configuration
 The default recording behavior can be modified by updating the settings in the `config/accountable.php` configuration file.
 
-## Audit implementation
+## Ledger implementation
 By default, the package will use `Altek\Accountant\Models\Ledger`.
 
 ```php
@@ -60,7 +60,7 @@ return [
 This package supports multiple user types, by using a polymorphic `MorphTo` relation.
 
 ### Prefix
-By default, the column names used are `user_id` and `user_type`. For different user column prefix, change the configuration value and update the [migration](ledger-migration.md) accordingly.
+By default, the column names used are `user_id` and `user_type`. For a different user column prefix, change the configuration value and update the [migration](ledger-migration.md) accordingly.
 
 ```php
 return [
@@ -72,7 +72,7 @@ return [
 ];
 ```
 
-> **NOTICE:** The `Ledger` **compile()** method will still use `user_id` and other `user_` prefixed keys for any user data, regardless of the prefix set in the configuration.
+> **NOTICE:** The `Ledger` **compile()** method will still use `user_id` and other `user_` prefixed keys for user data, regardless of the prefix set in the configuration.
 
 ### Auth Guards
 Specify the authentication guards the `UserResolver` should use when trying to resolve a user.
