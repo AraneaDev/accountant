@@ -24,7 +24,7 @@ Edit the `config/app.php` file and add the following line to register the servic
 ],
 ```
 
-> **TIP:** If you're on Laravel version **5.5** or higher, you can skip this part of the setup in favour of the Auto-Discovery feature.
+> **TIP:** If you're on Laravel version **5.5** or higher, you can skip the service provider setup in favour of the Auto-Discovery feature.
 
 ## Lumen
 Edit the `bootstrap/app.php` file and add the following line to register the service provider:
@@ -86,7 +86,7 @@ Publish the database migration file with the following command:
 ```sh
 php artisan vendor:publish --provider "Altek\Accountant\AccountantServiceProvider" --tag="migrations"
 ```
- 
+
 ## Customisation
 If needed, the `ledgers` table can be customised.
 
