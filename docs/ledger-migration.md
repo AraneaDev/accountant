@@ -1,5 +1,5 @@
 # Ledger Migration
-Even though the default migration will cover most usage cases, the ledger table schema can be somewhat customised.
+Even though the default migration should cover most usage cases, the ledger table schema can be somewhat customised.
 
 Here are some changes that can be performed without losing functionality.
 
@@ -60,7 +60,7 @@ $table->index([
 ]);
 ```
 
-> **NOTICE:** Always ensure that the `user_*` and `recordable_*` column types match the ones in their respective tables.
+> **NOTICE:** Always make sure the `user_*` and `recordable_*` column types match the ones in their respective tables.
 
 ## Values with more than 255 characters
 While odd, on some occasions, User Agent values may go over the 255 character mark. To avoid such problems, update the column from `string`
@@ -77,11 +77,12 @@ $table->text('user_agent')->nullable();
 
 ## JSON WHERE() clauses
 The Laravel [Query Builder](https://laravel.com/docs/5.7/queries#json-where-clauses) supports querying JSON columns.
-Given the `properties` and `modified` columns store JSON data as `TEXT`, the column types can be updated from
+Given the `properties`, `modified` and `extra` columns store JSON data as `TEXT`, the column types can be updated from
 
 ```php
 $table->text('properties')->nullable();
 $table->text('modified')->nullable();
+$table->text('extra')->nullable();
 ```
 
 to
@@ -89,6 +90,7 @@ to
 ```php
 $table->json('properties')->nullable();
 $table->json('modified')->nullable();
+$table->json('extra')->nullable();
 ```
 
 This will allow the user to perform additional data filtering.
