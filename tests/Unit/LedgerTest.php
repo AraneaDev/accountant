@@ -71,7 +71,7 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::compile
      * @test
      */
-    public function itCompilesLedgerData(): void
+    public function itSuccessfullyCompilesLedgerData(): void
     {
         $article = factory(Article::class)->create([
             'title'        => 'Keeping Track Of Eloquent Model Changes',
@@ -108,7 +108,7 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::compile
      * @test
      */
-    public function itCompilesTheLedgerDataIncludingUserAttributes(): void
+    public function itSuccessfullyCompilesLedgerDataIncludingUserAttributes(): void
     {
         $user = factory(User::class)->create([
             'is_admin'   => 1,
