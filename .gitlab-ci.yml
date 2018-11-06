@@ -20,9 +20,9 @@ before_script:
 test:7.1:
   image: php:7.1
   script:
-    - php vendor/bin/phpunit --colors --coverage-text
+    - php vendor/bin/phpunit --colors --coverage-text --testdox
 
 test:7.2:
   image: php:7.2
   script:
-    - php vendor/bin/phpunit --colors --coverage-text
+    - php vendor/bin/phpunit --colors --coverage-text --testdox
