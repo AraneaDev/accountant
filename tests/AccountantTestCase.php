@@ -7,6 +7,7 @@ use Altek\Accountant\Resolvers\IpAddressResolver;
 use Altek\Accountant\Resolvers\UrlResolver;
 use Altek\Accountant\Resolvers\UserAgentResolver;
 use Altek\Accountant\Resolvers\UserResolver;
+use Carbon\Carbon;
 use Orchestra\Testbench\TestCase;
 
 class AccountantTestCase extends TestCase
@@ -50,6 +51,9 @@ class AccountantTestCase extends TestCase
 
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->withFactories(__DIR__.'/database/factories');
+
+        // Define an exact date/time to be always returned
+        Carbon::setTestNow('2012-06-14 15:03:03');
     }
 
     /**
