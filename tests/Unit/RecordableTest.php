@@ -152,6 +152,7 @@ class RecordableTest extends AccountantTestCase
 
     /**
      * @group Recordable::process
+     * @group Recordable::disableRecording
      * @test
      */
     public function itFailsWhenRecordingIsNotEnabled(): void
@@ -168,6 +169,7 @@ class RecordableTest extends AccountantTestCase
 
     /**
      * @group Recordable::process
+     * @group Recordable::enableRecording
      * @test
      */
     public function itFailsWhenAnInvalidLedgerEventIsPassed(): void
@@ -271,7 +273,7 @@ class RecordableTest extends AccountantTestCase
                 'title'        => 'Keeping Track Of Eloquent Model Changes',
                 'content'      => 'First step: install the Accountant package.',
                 'reviewed'     => 1,
-                'published_at' => $article->published_at->toDateTimeString(),
+                'published_at' => '2012-06-14 15:03:03',
             ],
             'modified' => [
                 'title',
@@ -330,7 +332,7 @@ class RecordableTest extends AccountantTestCase
                 'title'        => 'Keeping Track Of Eloquent Model Changes',
                 'content'      => 'First step: install the Accountant package.',
                 'reviewed'     => 1,
-                'published_at' => $article->published_at->toDateTimeString(),
+                'published_at' => '2012-06-14 15:03:03',
             ],
             'modified' => [
                 'title',
@@ -380,7 +382,6 @@ class RecordableTest extends AccountantTestCase
 
     /**
      * @group Recordable::process
-     * @group Recordable::extraLedgerData
      * @test
      */
     public function itIncludesExtraLedgerData(): void
@@ -400,7 +401,7 @@ class RecordableTest extends AccountantTestCase
             'title'        => 'Keeping Track Of Eloquent Model Changes',
             'content'      => 'First step: install the Accountant package.',
             'reviewed'     => 1,
-            'published_at' => '2012-06-14 15:03:00',
+            'published_at' => '2012-06-14 15:03:03',
         ]);
 
         $this->assertCount(11, $data = $article->process('created'));
@@ -415,7 +416,7 @@ class RecordableTest extends AccountantTestCase
                 'title'        => 'Keeping Track Of Eloquent Model Changes',
                 'content'      => 'First step: install the Accountant package.',
                 'reviewed'     => 1,
-                'published_at' => '2012-06-14 15:03:00',
+                'published_at' => '2012-06-14 15:03:03',
             ],
             'modified' => [
                 'title',
@@ -504,7 +505,7 @@ class RecordableTest extends AccountantTestCase
             'properties'      => [
                 'title'        => 'Keeping Track Of Eloquent Model Changes',
                 'content'      => '--------------------------------------kage.',
-                'published_at' => $article->published_at->toDateTimeString(),
+                'published_at' => '2012-06-14 15:03:03',
                 'reviewed'     => 'MQ==',
                 'ciphers'      => [
                     'content'  => Bleach::class,
