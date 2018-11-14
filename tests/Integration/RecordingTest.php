@@ -85,7 +85,7 @@ class RecordingTest extends AccountantTestCase
             'retrieved',
         ]);
 
-        $article = factory(Article::class)->create([
+        factory(Article::class)->create([
             'title'        => 'Keeping Track Of Eloquent Model Changes',
             'content'      => 'N/A',
             'published_at' => null,
@@ -108,8 +108,8 @@ class RecordingTest extends AccountantTestCase
             'content'      => 'N/A',
             'published_at' => null,
             'reviewed'     => '0',
-            'updated_at'   => $article->updated_at->toDateTimeString(),
-            'created_at'   => $article->created_at->toDateTimeString(),
+            'updated_at'   => '2012-06-14 15:03:03',
+            'created_at'   => '2012-06-14 15:03:03',
             'deleted_at'   => null,
         ], $ledger->properties, true);
 
@@ -127,7 +127,7 @@ class RecordingTest extends AccountantTestCase
 
         $this->assertSame(0, Ledger::count());
 
-        $article = factory(Article::class)->create([
+        factory(Article::class)->create([
             'title'        => 'Keeping Track Of Eloquent Model Changes',
             'content'      => 'N/A',
             'published_at' => null,
@@ -145,8 +145,8 @@ class RecordingTest extends AccountantTestCase
             'content'      => 'N/A',
             'published_at' => null,
             'reviewed'     => 0,
-            'updated_at'   => $article->updated_at->toDateTimeString(),
-            'created_at'   => $article->created_at->toDateTimeString(),
+            'updated_at'   => '2012-06-14 15:03:03',
+            'created_at'   => '2012-06-14 15:03:03',
             'id'           => 1,
         ], $ledger->properties, true);
 
@@ -194,10 +194,10 @@ class RecordingTest extends AccountantTestCase
         $this->assertArraySubset([
             'title'        => 'Keeping Track Of Eloquent Model Changes',
             'content'      => 'First step: install the Accountant package.',
-            'published_at' => $article->published_at->toDateTimeString(),
+            'published_at' => '2012-06-14 15:03:03',
             'reviewed'     => 1,
-            'updated_at'   => $article->updated_at->toDateTimeString(),
-            'created_at'   => $article->created_at->toDateTimeString(),
+            'updated_at'   => '2012-06-14 15:03:03',
+            'created_at'   => '2012-06-14 15:03:03',
             'id'           => 1,
         ], $ledger->properties, true);
 
@@ -239,10 +239,10 @@ class RecordingTest extends AccountantTestCase
             'content'      => 'N/A',
             'published_at' => null,
             'reviewed'     => 0,
-            'updated_at'   => $article->updated_at->toDateTimeString(),
-            'created_at'   => $article->created_at->toDateTimeString(),
+            'updated_at'   => '2012-06-14 15:03:03',
+            'created_at'   => '2012-06-14 15:03:03',
             'id'           => 1,
-            'deleted_at'   => $article->deleted_at->toDateTimeString(),
+            'deleted_at'   => '2012-06-14 15:03:03',
         ], $ledger->properties, true);
 
         $this->assertArraySubset([
@@ -283,8 +283,8 @@ class RecordingTest extends AccountantTestCase
             'content'      => 'N/A',
             'published_at' => null,
             'reviewed'     => 0,
-            'updated_at'   => $article->updated_at->toDateTimeString(),
-            'created_at'   => $article->created_at->toDateTimeString(),
+            'updated_at'   => '2012-06-14 15:03:03',
+            'created_at'   => '2012-06-14 15:03:03',
             'id'           => 1,
             'deleted_at'   => null,
         ], $ledger->properties, true);
@@ -386,8 +386,8 @@ class RecordingTest extends AccountantTestCase
             'content'      => 'N/A',
             'published_at' => null,
             'reviewed'     => 0,
-            'updated_at'   => $article->updated_at->toDateTimeString(),
-            'created_at'   => $article->created_at->toDateTimeString(),
+            'updated_at'   => '2012-06-14 15:03:03',
+            'created_at'   => '2012-06-14 15:03:03',
             'id'           => 1,
         ], $ledger->properties, true);
 
