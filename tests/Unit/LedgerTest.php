@@ -20,57 +20,6 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::compile
      * @test
      */
-    public function itFailsToCompileLedgerDataDueToInvalidProperty(): void
-    {
-        $article = new class() extends Article {
-            protected $table = 'articles';
-
-            protected $ciphers = [
-                'invalid_property' => Base64::class,
-            ];
-        };
-
-        $ledger = factory(Ledger::class)->create([
-            'recordable_type' => get_class($article),
-        ]);
-
-        $this->expectException(AccountantException::class);
-        $this->expectExceptionMessage('Invalid property: "invalid_property"');
-
-        $ledger->toRecordable();
-    }
-
-    /**
-     * @group Ledger::compile
-     * @test
-     */
-    public function itFailsToCompileLedgerDataDueToInvalidCipherImplementation(): void
-    {
-        $article = new class() extends Article {
-            protected $table = 'articles';
-
-            protected $ciphers = [
-                'title' => AccountantTestCase::class,
-            ];
-        };
-
-        $ledger = factory(Ledger::class)->create([
-            'recordable_type' => get_class($article),
-            'properties'      => [
-                'title' => 'S2VlcGluZyBUcmFjayBPZiBFbG9xdWVudCBNb2RlbCBDaGFuZ2Vz',
-            ],
-        ]);
-
-        $this->expectException(AccountantException::class);
-        $this->expectExceptionMessage('Invalid Cipher implementation: "Altek\Accountant\Tests\AccountantTestCase"');
-
-        $ledger->toRecordable();
-    }
-
-    /**
-     * @group Ledger::compile
-     * @test
-     */
     public function itSuccessfullyCompilesLedgerData(): void
     {
         $article = factory(Article::class)->create([
@@ -136,22 +85,22 @@ class LedgerTest extends AccountantTestCase
             'ledger_url'              => 'Command Line Interface',
             'ledger_ip_address'       => '127.0.0.1',
             'ledger_user_agent'       => 'Symfony',
-            'ledger_created_at'       => $ledger->created_at->toDateTimeString(),
-            'ledger_updated_at'       => $ledger->updated_at->toDateTimeString(),
+            'ledger_created_at'       => '2012-06-14 15:03:03',
+            'ledger_updated_at'       => '2012-06-14 15:03:03',
             'user_id'                 => '1',
             'user_type'               => User::class,
             'user_is_admin'           => '1',
             'user_first_name'         => 'rick',
             'user_last_name'          => 'Sanchez',
             'user_email'              => 'rick@wubba-lubba-dub.dub',
-            'user_created_at'         => $user->created_at->toDateTimeString(),
-            'user_updated_at'         => $user->updated_at->toDateTimeString(),
+            'user_created_at'         => '2012-06-14 15:03:03',
+            'user_updated_at'         => '2012-06-14 15:03:03',
             'recordable_title'        => 'Keeping Track Of Eloquent Model Changes',
             'recordable_content'      => 'First step: install the Accountant package.',
-            'recordable_published_at' => $article->published_at->toDateTimeString(),
+            'recordable_published_at' => '2012-06-14 15:03:03',
             'recordable_reviewed'     => 1,
-            'recordable_created_at'   => $article->created_at->toDateTimeString(),
-            'recordable_updated_at'   => $article->updated_at->toDateTimeString(),
+            'recordable_created_at'   => '2012-06-14 15:03:03',
+            'recordable_updated_at'   => '2012-06-14 15:03:03',
             'recordable_id'           => 1,
         ], $compiledData, true);
     }
@@ -223,8 +172,8 @@ class LedgerTest extends AccountantTestCase
             'ledger_url'        => 'Command Line Interface',
             'ledger_ip_address' => '127.0.0.1',
             'ledger_user_agent' => 'Symfony',
-            'ledger_created_at' => $ledger->created_at->toDateTimeString(),
-            'ledger_updated_at' => $ledger->updated_at->toDateTimeString(),
+            'ledger_created_at' => '2012-06-14 15:03:03',
+            'ledger_updated_at' => '2012-06-14 15:03:03',
             'user_id'           => null,
             'user_type'         => null,
         ], $metadata, true);
@@ -255,16 +204,16 @@ class LedgerTest extends AccountantTestCase
             'ledger_url'        => 'Command Line Interface',
             'ledger_ip_address' => '127.0.0.1',
             'ledger_user_agent' => 'Symfony',
-            'ledger_created_at' => $ledger->created_at->toDateTimeString(),
-            'ledger_updated_at' => $ledger->updated_at->toDateTimeString(),
+            'ledger_created_at' => '2012-06-14 15:03:03',
+            'ledger_updated_at' => '2012-06-14 15:03:03',
             'user_id'           => 1,
             'user_type'         => User::class,
             'user_is_admin'     => true,
             'user_first_name'   => 'Rick',
             'user_last_name'    => 'Sanchez',
             'user_email'        => 'rick@wubba-lubba-dub.dub',
-            'user_created_at'   => $user->created_at->toDateTimeString(),
-            'user_updated_at'   => $user->updated_at->toDateTimeString(),
+            'user_created_at'   => '2012-06-14 15:03:03',
+            'user_updated_at'   => '2012-06-14 15:03:03',
         ], $metadata, true);
     }
 
@@ -288,10 +237,10 @@ class LedgerTest extends AccountantTestCase
         $this->assertArraySubset([
             'title'        => 'KEEPING TRACK OF ELOQUENT MODEL CHANGES',
             'content'      => 'First step: install the Accountant package.',
-            'published_at' => $article->published_at->toDateTimeString(),
+            'published_at' => '2012-06-14 15:03:03',
             'reviewed'     => true,
-            'updated_at'   => $article->updated_at->toDateTimeString(),
-            'created_at'   => $article->created_at->toDateTimeString(),
+            'updated_at'   => '2012-06-14 15:03:03',
+            'created_at'   => '2012-06-14 15:03:03',
             'id'           => 1,
         ], $data, true);
     }
@@ -398,6 +347,57 @@ class LedgerTest extends AccountantTestCase
 
         $this->assertCount(1, $data = $ledger->getData());
         $this->assertCount(7, $data = $ledger->getData(true));
+    }
+
+    /**
+     * @group Ledger::toRecordable
+     * @test
+     */
+    public function itFailsToCompileLedgerDataDueToInvalidProperty(): void
+    {
+        $article = new class() extends Article {
+            protected $table = 'articles';
+
+            protected $ciphers = [
+                'invalid_property' => Base64::class,
+            ];
+        };
+
+        $ledger = factory(Ledger::class)->create([
+            'recordable_type' => get_class($article),
+        ]);
+
+        $this->expectException(AccountantException::class);
+        $this->expectExceptionMessage('Invalid property: "invalid_property"');
+
+        $ledger->toRecordable();
+    }
+
+    /**
+     * @group Ledger::toRecordable
+     * @test
+     */
+    public function itFailsToCompileLedgerDataDueToInvalidCipherImplementation(): void
+    {
+        $article = new class() extends Article {
+            protected $table = 'articles';
+
+            protected $ciphers = [
+                'title' => AccountantTestCase::class,
+            ];
+        };
+
+        $ledger = factory(Ledger::class)->create([
+            'recordable_type' => get_class($article),
+            'properties'      => [
+                'title' => 'S2VlcGluZyBUcmFjayBPZiBFbG9xdWVudCBNb2RlbCBDaGFuZ2Vz',
+            ],
+        ]);
+
+        $this->expectException(AccountantException::class);
+        $this->expectExceptionMessage('Invalid Cipher implementation: "Altek\Accountant\Tests\AccountantTestCase"');
+
+        $ledger->toRecordable();
     }
 
     /**
