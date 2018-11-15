@@ -37,7 +37,7 @@ $app->register(Altek\Accountant\AccountantServiceProvider::class);
 // ...
 ```
 
-`Facades` and `Eloquent` will have to be enabled in the `bootstrap/app.php` file:
+`Facades` and `Eloquent` must also be enabled in the `bootstrap/app.php` file:
 
 ```php
 // ...
@@ -45,6 +45,16 @@ $app->register(Altek\Accountant\AccountantServiceProvider::class);
 $app->withFacades();
 
 $app->withEloquent();
+
+// ...
+```
+
+Configuration files must be explicitly loaded into the application by adding the following line to `bootstrap/app.php`.
+
+```php
+// ...
+
+$app->configure('accountant');
 
 // ...
 ```
