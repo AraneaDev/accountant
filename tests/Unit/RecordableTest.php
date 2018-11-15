@@ -49,6 +49,25 @@ class RecordableTest extends AccountantTestCase
     }
 
     /**
+     * @group Recordable::disableRecording
+     * @group Recordable::shouldRegisterObserver
+     * @test
+     */
+    public function itWillNotRegisterTheRecordableObserverWhenRecordingIsDisabled(): void
+    {
+        Article::disableRecording();
+
+        App::shouldReceive('runningInConsole')
+            ->andReturn(false);
+
+        $this->app['config']->set('accountant.ledger.cli', true);
+
+        $this->assertFalse(Article::shouldRegisterObserver());
+
+        Article::enableRecording();
+    }
+
+    /**
      * @group Recordable::shouldRegisterObserver
      * @test
      */

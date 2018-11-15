@@ -29,6 +29,10 @@ trait Recordable
      */
     public static function shouldRegisterObserver(): bool
     {
+        if (!static::$recordingEnabled) {
+            return false;
+        }
+
         if (App::runningInConsole()) {
             return Config::get('accountant.ledger.cli', false);
         }
