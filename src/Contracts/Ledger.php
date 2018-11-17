@@ -2,23 +2,21 @@
 
 namespace Altek\Accountant\Contracts;
 
-use Illuminate\Database\Eloquent\Relations\MorphTo;
-
 interface Ledger
 {
     /**
      * User accountable for the changes.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     * @return mixed
      */
-    public function user(): MorphTo;
+    public function user();
 
     /**
      * Recordable model to which this Ledger belongs to.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     * @return mixed
      */
-    public function recordable(): MorphTo;
+    public function recordable();
 
     /**
      * Compile data and metadata.

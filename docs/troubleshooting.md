@@ -101,7 +101,7 @@ To overcome this issue, the relation methods in the `Ledger` model must be updat
 /**
  * {@inheritdoc}
  */
-public function recordable(): MorphTo
+public function recordable()
 {
     return $this->morphTo()->withTrashed();
 }
@@ -109,7 +109,7 @@ public function recordable(): MorphTo
 /**
  * {@inheritdoc}
  */
-public function user(): MorphTo
+public function user()
 {
     return $this->morphTo()->withTrashed();
 }

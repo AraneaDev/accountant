@@ -7,7 +7,6 @@ use Altek\Accountant\Contracts\Recordable;
 use Altek\Accountant\Exceptions\AccountantException;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Config;
 
 trait Ledger
@@ -29,7 +28,7 @@ trait Ledger
     /**
      * {@inheritdoc}
      */
-    public function user(): MorphTo
+    public function user()
     {
         return $this->morphTo();
     }
@@ -37,7 +36,7 @@ trait Ledger
     /**
      * {@inheritdoc}
      */
-    public function recordable(): MorphTo
+    public function recordable()
     {
         return $this->morphTo();
     }
