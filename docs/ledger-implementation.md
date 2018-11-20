@@ -17,7 +17,6 @@ composer require jenssegers/mongodb
 namespace App\Models;
 
 use Jenssegers\Mongodb\Eloquent\Model;
-use Jenssegers\Mongodb\Relations\MorphTo;
 
 class MongoLedger extends Model implements \Altek\Accountant\Contracts\Ledger
 {
