@@ -11,7 +11,7 @@ class CreateLedgersTestTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('ledgers', function (Blueprint $table) {
             $table->increments('id');
@@ -27,7 +27,10 @@ class CreateLedgersTestTable extends Migration
             $table->string('user_agent')->nullable();
             $table->timestamps();
 
-            $table->index(['user_id', 'user_type']);
+            $table->index([
+                'user_id',
+                'user_type',
+            ]);
         });
     }
 
@@ -36,8 +39,8 @@ class CreateLedgersTestTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::drop('ledgers');
+        Schema::dropIfExists('ledgers');
     }
 }

@@ -11,7 +11,7 @@ class CreateArticlesTestTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
@@ -29,8 +29,8 @@ class CreateArticlesTestTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::drop('articles');
+        Schema::dropIfExists('articles');
     }
 }
