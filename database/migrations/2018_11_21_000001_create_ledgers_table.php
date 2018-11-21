@@ -26,8 +26,11 @@ class CreateLedgersTable extends Migration
             $table->ipAddress('ip_address')->nullable();
             $table->string('user_agent')->nullable();
             $table->timestamps();
-			
-            $table->index(['user_id', 'user_type']);
+
+            $table->index([
+                'user_id',
+                'user_type',
+            ]);
         });
     }
 
