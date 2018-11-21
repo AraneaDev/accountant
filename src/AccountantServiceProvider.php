@@ -21,17 +21,17 @@ class AccountantServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $config = __DIR__.'/../config/accountant.php';
-        $migration = __DIR__.'/../database/migrations/ledgers.stub';
+        $migrations = __DIR__.'/../database/migrations/';
 
         $this->publishes([
             $config => base_path('config/accountant.php'),
-        ], 'config');
-
-        $this->publishes([
-            $migration => database_path(sprintf('migrations/%s_create_ledgers_table.php', date('Y_m_d_His'))),
-        ], 'migrations');
+        ], 'accountant-configuration');
 
         $this->mergeConfigFrom($config, 'accountant');
+
+        $this->publishes([
+            $migrations => database_path('migrations'),
+        ], 'accountant-migration');
     }
 
     /**
