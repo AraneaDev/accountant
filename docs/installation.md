@@ -83,7 +83,7 @@ protected $commands = [
 After your framework of choice has been configured, publish the configuration file with the following command:
 
 ```sh
-php artisan vendor:publish --provider "Altek\Accountant\AccountantServiceProvider" --tag="config"
+php artisan vendor:publish --tag="accountant-configuration"
 ```
 
 This will create the `config/accountant.php` configuration file.
@@ -94,7 +94,7 @@ You can read more about the available configuration settings in the [Configurati
 Publish the database migration file with the following command:
 
 ```sh
-php artisan vendor:publish --provider "Altek\Accountant\AccountantServiceProvider" --tag="migrations"
+php artisan vendor:publish --tag="accountant-migration"
 ```
 
 ## Customisation
