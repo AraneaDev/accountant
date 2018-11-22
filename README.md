@@ -17,6 +17,7 @@ This package allows you to keep track of changes to your Eloquent models, making
   * [Ledger Migration](docs/ledger-migration.md)
   * [Ledger Drivers](docs/ledger-drivers.md)
   * [Ledger Implementation](docs/ledger-implementation.md)
+  * [Ledger Events](docs/ledger-events.md)
 * Help
   * [Troubleshooting](docs/troubleshooting.md)
 
