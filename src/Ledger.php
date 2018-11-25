@@ -120,7 +120,7 @@ trait Ledger
     {
         $properties = $this->getAttributeValue('properties');
 
-        foreach ($this->getRelationValue('recordable')->getCiphers() as $key => $implementation) {
+        foreach ($this->recordable->getCiphers() as $key => $implementation) {
             if (!array_key_exists($key, $properties)) {
                 throw new AccountantException(sprintf('Invalid property: "%s"', $key));
             }
