@@ -8,8 +8,7 @@ This package allows you to keep track of changes to your Eloquent models, making
 
 ## Documentation
 * [Installation](docs/installation.md)
-* Configuration
-  * [Configuration](docs/configuration.md)
+* [Configuration](docs/configuration.md)
 * Recordable
   * [Model Setup](docs/recordable-model-setup.md)
   * [Configuration](docs/recordable-configuration.md)
