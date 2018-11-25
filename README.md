@@ -10,15 +10,18 @@ This package allows you to keep track of changes to your Eloquent models, making
 * [Installation](docs/installation.md)
 * Configuration
   * [Configuration](docs/configuration.md)
-  * [Recordable Configuration](docs/recordable-configuration.md)
-* Essential
-  * [Model Setup](docs/model-setup.md)
+* Recordable
+  * [Model Setup](docs/recordable-model-setup.md)
+  * [Configuration](docs/recordable-configuration.md)
+* Ledger
+  * [Migration](docs/ledger-migration.md)
+  * [Implementation](docs/ledger-implementation.md)
+  * [Resolvers](docs/ledger-resolvers.md)
+  * [Drivers](docs/ledger-drivers.md)
+  * [Events](docs/ledger-events.md)
 * Advanced
-  * [Ledger Migration](docs/ledger-migration.md)
-  * [Ledger Resolvers](docs/ledger-resolvers.md)
-  * [Ledger Drivers](docs/ledger-drivers.md)
-  * [Ledger Implementation](docs/ledger-implementation.md)
-  * [Ledger Events](docs/ledger-events.md)
+  * [Ciphers](docs/ciphers.md)
+  * [Ledger To Recordable](docs/ledger-to-recordable.md)
 * Help
   * [Troubleshooting](docs/troubleshooting.md)
 
