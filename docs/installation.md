@@ -77,7 +77,7 @@ protected $commands = [
 // ...
 ```
 
-> **NOTICE:** The service provider registration is mandatory in order for the configuration to be published!
+> **CAVEAT:** The service provider registration is mandatory in order for the configuration to be published!
 
 # Publishing
 After your framework of choice has been configured, publish the configuration file with the following command:

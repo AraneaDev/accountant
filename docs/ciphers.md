@@ -38,7 +38,7 @@ class Article extends Model implements Recordable
 }
 ```
 
-> **NOTICE:** Bear in mind that **one way** ciphered data cannot be reverted to its original state. This will affect operations like [Ledger To Recordable](ledger-to-recordable.md)!
+> **CAVEAT:** Bear in mind that **one way** ciphered data cannot be reverted to its original form, which will affect operations such as [Ledger To Recordable](ledger-to-recordable.md)!
 
 ## Base64 cipher
 `Base64` is a **two way** cipher that encodes properties using the [Base64](https://en.wikipedia.org/wiki/Base64) encoding scheme.

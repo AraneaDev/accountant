@@ -95,4 +95,4 @@ $table->json('extra')->nullable();
 
 This will allow the user to perform additional data filtering.
 
-> **NOTICE:** Not all RDBMS support this feature, so check before making changes!
+> **CAVEAT:** Not all RDBMS support this feature, so check before making changes!

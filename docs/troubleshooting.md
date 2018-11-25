@@ -61,7 +61,7 @@ Ledger::creating(function (Ledger $model) {
 });
 ```
 
-> **NOTICE:** Keep in mind that the `modified` column of a `retrieved` event, will always be empty!
+> **CAVEAT:** Keep in mind that the `modified` column of a `retrieved` event, will always be empty!
 
 ## PHP Fatal error:  Maximum function nesting level of '512' reached, aborting!
 This error happens when a `Ledger` is being created for a `retrieved` event on a `User` model.
