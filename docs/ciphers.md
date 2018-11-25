@@ -77,7 +77,7 @@ class Article extends Model implements Recordable
 }
 ```
 
-> **TIP:** Any **two way** ciphered property will be returned in its original form by the `getData()` method.
+> **NOTICE:** Any **two way** ciphered property value will be returned in its original form by the `getData()` method.
 
 ## Custom ciphers
 If the included ciphers don't suit your needs, you can always roll your own.
