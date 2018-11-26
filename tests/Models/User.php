@@ -2,11 +2,12 @@
 
 namespace Altek\Accountant\Tests\Models;
 
+use Altek\Accountant\Contracts\Identifiable;
 use Altek\Accountant\Contracts\Recordable;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model implements Recordable, Authenticatable
+class User extends Model implements Recordable, Identifiable, Authenticatable
 {
     use \Altek\Accountant\Recordable;
     use \Illuminate\Auth\Authenticatable;
@@ -17,6 +18,14 @@ class User extends Model implements Recordable, Authenticatable
     protected $casts = [
         'is_admin' => 'bool',
     ];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIdentifier()
+    {
+        return $this->getAuthIdentifier();
+    }
 
     /**
      * Uppercase first name character accessor.

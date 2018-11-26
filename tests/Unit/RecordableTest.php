@@ -4,12 +4,12 @@ namespace Altek\Accountant\Tests\Unit;
 
 use Altek\Accountant\Ciphers\Base64;
 use Altek\Accountant\Ciphers\Bleach;
+use Altek\Accountant\Contracts\Identifiable;
 use Altek\Accountant\Exceptions\AccountantException;
 use Altek\Accountant\Tests\AccountantTestCase;
 use Altek\Accountant\Tests\Models\Article;
 use Altek\Accountant\Tests\Models\User;
 use Carbon\Carbon;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\App;
 
@@ -408,7 +408,7 @@ class RecordableTest extends AccountantTestCase
         $article = new class() extends Article {
             protected $table = 'articles';
 
-            public function extraLedgerData(string $event, array $properties, ?Authenticatable $user): array
+            public function extraLedgerData(string $event, array $properties, ?Identifiable $user): array
             {
                 return [
                     'slug' => str_slug($properties['title']),
