@@ -158,15 +158,15 @@ When using other authentication mechanisms like [Sentinel](https://github.com/ca
 
 namespace App\Resolvers;
 
+use Altek\Accountant\Contracts\Identifiable;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
-use Illuminate\Contracts\Auth\Authenticatable;
 
 class UserResolver implements \Altek\Accountant\Contracts\UserResolver
 {
     /**
      * {@inheritdoc}
      */
-    public static function resolve(): ?Authenticatable
+    public static function resolve(): ?Identifiable
     {
         return Sentinel::check() ? Sentinel::getUser() : null;
     }
@@ -191,4 +191,4 @@ return [
 ];
 ```
 
->> **NOTICE:** The resolved `User` must implement the `Illuminate\Contracts\Auth\Authenticatable` interface.
+>> **NOTICE:** The resolved `User` must implement the `Altek\Accountant\Contracts\Identifiable` interface.
