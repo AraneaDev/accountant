@@ -2,7 +2,7 @@
 
 namespace Altek\Accountant\Resolvers;
 
-use Illuminate\Contracts\Auth\Authenticatable;
+use Altek\Accountant\Contracts\Identifiable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 
@@ -11,7 +11,7 @@ class UserResolver implements \Altek\Accountant\Contracts\UserResolver
     /**
      * {@inheritdoc}
      */
-    public static function resolve(): ?Authenticatable
+    public static function resolve(): ?Identifiable
     {
         $guards = Config::get('accountant.user.guards', [
             'web',

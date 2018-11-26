@@ -2,14 +2,12 @@
 
 namespace Altek\Accountant\Contracts;
 
-use Illuminate\Contracts\Auth\Authenticatable;
-
 interface UserResolver
 {
     /**
      * Resolve the User.
      *
-     * @return Authenticatable
+     * @return Identifiable
      */
-    public static function resolve(): ?Authenticatable;
+    public static function resolve(): ?Identifiable;
 }

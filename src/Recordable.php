@@ -3,12 +3,12 @@
 namespace Altek\Accountant;
 
 use Altek\Accountant\Contracts\Cipher;
+use Altek\Accountant\Contracts\Identifiable;
 use Altek\Accountant\Contracts\IpAddressResolver;
 use Altek\Accountant\Contracts\UrlResolver;
 use Altek\Accountant\Contracts\UserAgentResolver;
 use Altek\Accountant\Contracts\UserResolver;
 use Altek\Accountant\Exceptions\AccountantException;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
@@ -132,9 +132,9 @@ trait Recordable
      *
      * @throws \Altek\Accountant\Exceptions\AccountantException
      *
-     * @return Authenticatable
+     * @return Identifiable
      */
-    protected function resolveUser(): ?Authenticatable
+    protected function resolveUser(): ?Identifiable
     {
         $implementation = Config::get('accountant.ledger.resolvers.user');
 
@@ -232,7 +232,7 @@ trait Recordable
         $userPrefix = Config::get('accountant.user.prefix', 'user');
 
         return [
-            $userPrefix.'_id'   => $user ? $user->getAuthIdentifier() : null,
+            $userPrefix.'_id'   => $user ? $user->getIdentifier() : null,
             $userPrefix.'_type' => $user ? $user->getMorphClass() : null,
             'event'             => $event,
             'recordable_id'     => $this->getKey(),
@@ -249,7 +249,7 @@ trait Recordable
     /**
      * {@inheritdoc}
      */
-    public function extraLedgerData(string $event, array $properties, ?Authenticatable $user): array
+    public function extraLedgerData(string $event, array $properties, ?Identifiable $user): array
     {
         return [];
     }
