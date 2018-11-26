@@ -19,13 +19,14 @@ This package allows you to keep track of changes to your Eloquent models, making
   * [Drivers](docs/ledger-drivers.md)
   * [Events](docs/ledger-events.md)
 * Advanced
+  * [Accountant](docs/accountant.md)
   * [Ciphers](docs/ciphers.md)
   * [Ledger To Recordable](docs/ledger-to-recordable.md)
 * Help
   * [Troubleshooting](docs/troubleshooting.md)
 
 ## Contributing
-Contributions are always welcome, but before anything else, make sure you get acquainted with our [Contributing](docs/contributing.md) guide.
+Contributions are always welcome, but before anything else, make sure you get acquainted with the [Contributing](docs/contributing.md) guide.
 
 ## Credits
 - [Quetzy Garcia](https://gitlab.com/quetzyg)
