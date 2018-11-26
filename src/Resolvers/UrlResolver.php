@@ -16,6 +16,6 @@ class UrlResolver implements \Altek\Accountant\Contracts\UrlResolver
             return 'Command Line Interface';
         }
 
-        return Request::fullUrlWithQuery([]);
+        return Request::fullUrl();
     }
 }
