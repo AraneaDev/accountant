@@ -116,3 +116,8 @@ public function user()
 ```
 
 > **TIP:** A custom `Ledger` model needs to be created with the above methods. Don't forget to update the `Ledger` implementation in your configuration!
+
+## IpAddressResolver incorrectly resolving IP addresses 
+This usually happens to applications running behind a load balancer (or proxy), in which the IP address of the load balancer/proxy is being returned, instead.
+
+Refer to the `IpAddressResolver` section in the [Ledger Resolvers](ledger-resolvers.md) documentation for a workaround.
