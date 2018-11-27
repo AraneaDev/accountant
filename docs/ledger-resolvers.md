@@ -55,7 +55,7 @@ return [
 ```
 
 ## URL Resolver
-The default resolver uses the `Request::fullUrlWithQuery()` method to get the current URL (including any query strings).
+The default resolver uses the `Request::fullUrl()` method to get the current URL (including any query strings).
 
 Here's a resolver example where query strings are not included.
 
@@ -78,8 +78,8 @@ class UrlResolver implements \Altek\Accountant\Contracts\UrlResolver
             return 'Command Line Interface';
         }
 
-        // Just the full URL without query strings
-        return Request::fullUrl();
+        // Just the URL without query strings
+        return Request::url();
     }
 }
 ```
@@ -147,11 +147,39 @@ return [
 ```
 
 ## User Resolver
-Out of the box, this resolver uses the Laravel `Auth` facade.
+The included `UserResolver` implementation uses the Laravel `Auth::guard()` method, by default.
 
-The `resolve()` method must return the `Model` instance of the currently logged user, or `null` if the user cannot be resolved.
+### Identifiable interface implementation
+The `resolve()` method must either return an `Altek\Accountant\Contracts\Identifiable` instance, or `null` for when the user cannot be resolved.
 
-When using other authentication mechanisms like [Sentinel](https://github.com/cartalyst/sentinel), a different resolver must be implemented.
+Implementing the `Altek\Accountant\Contracts\Identifiable` interface on a `User` model:
+
+```php
+<?php
+
+namespace App\Models;
+
+use Altek\Accountant\Contracts\Identifiable;
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model implements Identifiable
+{
+    // ...
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    // ...
+}
+```
+
+### Other authentication systems
+When using different auth mechanisms like [Sentinel](https://github.com/cartalyst/sentinel), make sure to implement a corresponding resolver.
 
 ```php
 <?php
@@ -190,5 +218,3 @@ return [
     // ...
 ];
 ```
-
->> **NOTICE:** The resolved `User` must implement the `Altek\Accountant\Contracts\Identifiable` interface.
