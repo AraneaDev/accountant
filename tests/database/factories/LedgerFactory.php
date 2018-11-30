@@ -1,6 +1,7 @@
 <?php
 
 use Altek\Accountant\Models\Ledger;
+use Altek\Accountant\Signers\LedgerSigner;
 use Altek\Accountant\Tests\Models\Article;
 use Altek\Accountant\Tests\Models\User;
 use Faker\Generator as Faker;
@@ -29,5 +30,10 @@ $factory->define(Ledger::class, function (Faker $faker) {
         'url'             => $faker->url,
         'ip_address'      => $faker->ipv4,
         'user_agent'      => $faker->userAgent,
+        'signature'       => function (array $properties) {
+            unset($properties['signature']);
+
+            return LedgerSigner::sign($properties);
+        },
     ];
 });

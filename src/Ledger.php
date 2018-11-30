@@ -57,6 +57,7 @@ trait Ledger
             'ledger_user_agent' => $this->getAttributeFromArray('user_agent'),
             'ledger_created_at' => $this->serializeDate($this->created_at),
             'ledger_updated_at' => $this->serializeDate($this->updated_at),
+            'ledger_signature'  => $this->getAttributeFromArray('signature'),
             'user_id'           => $this->getAttributeFromArray($userPrefix.'_id'),
             'user_type'         => $this->getAttributeFromArray($userPrefix.'_type'),
         ];
