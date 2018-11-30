@@ -514,4 +514,58 @@ class LedgerTest extends AccountantTestCase
         $this->assertInstanceOf(Recordable::class, $article);
         $this->assertInstanceOf(Article::class, $article);
     }
+
+    /**
+     * @group Ledger::isTainted
+     * @test
+     */
+    public function itFailsToCheckTheRecordAsTaintedDueToInvalidSignerImplementation(): void
+    {
+        $ledger = factory(Ledger::class)->create();
+
+        $this->app['config']->set('accountant.ledger.signer', self::class);
+
+        $this->expectException(AccountantException::class);
+        $this->expectExceptionMessage('Invalid LedgerSigner implementation: "Altek\Accountant\Tests\Unit\LedgerTest"');
+
+        $ledger->isTainted();
+    }
+
+    /**
+     * @group Ledger::isTainted
+     * @test
+     */
+    public function itSuccessfullyChecksTheRecordAsTaintedDueToMismatchingDates(): void
+    {
+        $ledger = factory(Ledger::class)->create([
+            'updated_at' => '2015-10-24 23:11:10',
+            'created_at' => '2012-06-14 15:03:03',
+        ]);
+
+        $this->assertTrue($ledger->isTainted());
+    }
+
+    /**
+     * @group Ledger::isTainted
+     * @test
+     */
+    public function itSuccessfullyChecksTheRecordAsTaintedDueToMismatchingSignatures(): void
+    {
+        $ledger = factory(Ledger::class)->create([
+            'signature' => 'ZqFYoMVIKZgffY7VEQ6tUpaRz5XrEWpO',
+        ]);
+
+        $this->assertTrue($ledger->isTainted());
+    }
+
+    /**
+     * @group Ledger::isTainted
+     * @test
+     */
+    public function itFailsToCheckTheRecordAsTaintedDueToMatchingSignatures(): void
+    {
+        $ledger = factory(Ledger::class)->create();
+
+        $this->assertFalse($ledger->isTainted());
+    }
 }
