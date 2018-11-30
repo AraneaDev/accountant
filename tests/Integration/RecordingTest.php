@@ -354,7 +354,7 @@ class RecordingTest extends AccountantTestCase
     /**
      * @test
      */
-    public function itWillNotRecordDueToClassWithoutDriverInterface(): void
+    public function itWillNotRecordDueToClassNotImplementingDriverInterface(): void
     {
         // We just pass a FQCN that does not implement the LedgerDriver interface
         $this->app['config']->set('accountant.ledger.driver', self::class);
@@ -368,11 +368,39 @@ class RecordingTest extends AccountantTestCase
     /**
      * @test
      */
+    public function itWillNotRecordDueToClassNotImplementingLedgerInterface(): void
+    {
+        // We just pass a FQCN that does not implement the Ledger interface
+        $this->app['config']->set('accountant.ledger.implementation', self::class);
+
+        $this->expectException(AccountantException::class);
+        $this->expectExceptionMessage('Invalid Ledger implementation: "Altek\Accountant\Tests\Integration\RecordingTest"');
+
+        factory(Article::class)->create();
+    }
+
+    /**
+     * @test
+     */
+    public function itWillNotRecordDueToClassNotImplementingLedgerSignerInterface(): void
+    {
+        // We just pass a FQCN that does not implement the LedgerSigner interface
+        $this->app['config']->set('accountant.ledger.signer', self::class);
+
+        $this->expectException(AccountantException::class);
+        $this->expectExceptionMessage('Invalid LedgerSigner implementation: "Altek\Accountant\Tests\Integration\RecordingTest"');
+
+        factory(Article::class)->create();
+    }
+
+    /**
+     * @test
+     */
     public function itWillRecordUsingTheDefaultDriver(): void
     {
         $this->app['config']->set('accountant.ledger.driver', null);
 
-        $article = factory(Article::class)->create([
+        factory(Article::class)->create([
             'title'        => 'Keeping Track Of Eloquent Model Changes Using The Fallback Driver',
             'content'      => 'N/A',
             'published_at' => null,
