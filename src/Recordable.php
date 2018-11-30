@@ -212,9 +212,9 @@ trait Recordable
             throw new AccountantException(sprintf('Invalid event: "%s"', $event));
         }
 
-        // Cipher property values
         $properties = $this->getAttributes();
 
+        // Cipher property values
         foreach ($this->getCiphers() as $property => $implementation) {
             if (!array_key_exists($property, $properties)) {
                 throw new AccountantException(sprintf('Invalid property: "%s"', $property));
