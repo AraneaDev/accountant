@@ -3,6 +3,7 @@
 namespace Altek\Accountant;
 
 use Altek\Accountant\Contracts\Cipher;
+use Altek\Accountant\Contracts\LedgerSigner;
 use Altek\Accountant\Contracts\Recordable;
 use Altek\Accountant\Exceptions\AccountantException;
 use DateTimeInterface;
@@ -218,5 +219,32 @@ trait Ledger
     public function toRecordable(bool $strict = true): Recordable
     {
         return $this->recordable->newFromBuilder($this->getDecipheredProperties($strict));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isTainted(): bool
+    {
+        $signer = Config::get('accountant.ledger.signer', \Altek\Accountant\Signers\LedgerSigner::class);
+
+        if (!is_subclass_of($signer, LedgerSigner::class)) {
+            throw new AccountantException(sprintf('Invalid LedgerSigner implementation: "%s"', $signer));
+        }
+
+        // A date mismatch is enough for considering the record tainted
+        if ($this->created_at->notEqualTo($this->updated_at)) {
+            return true;
+        }
+
+        // Exclude properties that were not present when the signing took place
+        $properties = array_diff_key($this->attributesToArray(), array_flip([
+            'id',
+            'created_at',
+            'updated_at',
+            'signature',
+        ]));
+
+        return $this->getAttributeFromArray('signature') !== call_user_func([$signer, 'sign'], $properties);
     }
 }

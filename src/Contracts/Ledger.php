@@ -63,4 +63,11 @@ interface Ledger
      * @return Recordable
      */
     public function toRecordable(bool $strict = true): Recordable;
+
+    /**
+     * Check if the record is tainted.
+     *
+     * @return bool
+     */
+    public function isTainted(): bool;
 }
