@@ -23,12 +23,24 @@ return [
         | Define the User, IP Address, User Agent and URL resolver implementations.
         |
         */
+
         'resolvers' => [
             'user'       => Altek\Accountant\Resolvers\UserResolver::class,
             'ip_address' => Altek\Accountant\Resolvers\IpAddressResolver::class,
             'user_agent' => Altek\Accountant\Resolvers\UserAgentResolver::class,
             'url'        => Altek\Accountant\Resolvers\UrlResolver::class,
         ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Ledger Signer Implementation
+        |--------------------------------------------------------------------------
+        |
+        | Define the signer implementations.
+        |
+        */
+
+        'signer' => Altek\Accountant\Signers\LedgerSigner::class,
 
         /*
         |--------------------------------------------------------------------------
