@@ -16,11 +16,6 @@ class Ledger extends Model implements \Altek\Accountant\Contracts\Ledger
     /**
      * {@inheritdoc}
      */
-    protected $guarded = [];
-
-    /**
-     * {@inheritdoc}
-     */
     protected $casts = [
         'properties' => 'json',
         'modified'   => 'json',
