@@ -1,6 +1,8 @@
 # Introduction
 This package allows you to keep track of changes to your Eloquent models, making it easy to spot possible discrepancies and anomalies that could indicate business concerns or suspect activities.
 
+[![Latest Stable Version](https://poser.pugx.org/altek/accountant/v/stable)](https://packagist.org/packages/altek/accountant) [![Total Downloads](https://poser.pugx.org/altek/accountant/downloads)](https://packagist.org/packages/altek/accountant) [![Build Status](https://scrutinizer-ci.com/gl/altek/altek/accountant/badges/build.png?b=master&s=d57e0f845b51b5c122f6b8d3069e607316df3feb)](https://scrutinizer-ci.com/gl/altek/altek/accountant/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/gl/altek/altek/accountant/badges/quality-score.png?b=master&s=b863b32db2dc1674d15d7c9396db46a4139db09e)](https://scrutinizer-ci.com/gl/altek/altek/accountant/?branch=master) [![License](https://poser.pugx.org/altek/accountant/license)](https://packagist.org/packages/altek/accountant)
+
 ## Version Information
  Version   | Illuminate    | Status             | PHP Version
 :----------|:--------------|:-------------------|:------------
