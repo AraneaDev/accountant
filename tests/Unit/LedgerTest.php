@@ -31,7 +31,7 @@ class LedgerTest extends AccountantTestCase
 
         $ledger = $article->ledgers()->first();
 
-        $this->assertCount(16, $compiledData = $ledger->compile());
+        $this->assertCount(17, $compiledData = $ledger->compile());
 
         $this->assertArraySubset([
             'ledger_id'               => 1,
@@ -51,6 +51,8 @@ class LedgerTest extends AccountantTestCase
             'recordable_updated_at'   => '2012-06-14 15:03:03',
             'recordable_id'           => 1,
         ], $compiledData, true);
+
+        $this->assertArrayHasKey('ledger_signature', $compiledData);
     }
 
     /**
@@ -77,7 +79,7 @@ class LedgerTest extends AccountantTestCase
 
         $ledger = $article->ledgers()->first();
 
-        $this->assertCount(22, $compiledData = $ledger->compile());
+        $this->assertCount(23, $compiledData = $ledger->compile());
 
         $this->assertArraySubset([
             'ledger_id'               => 2,
@@ -103,6 +105,8 @@ class LedgerTest extends AccountantTestCase
             'recordable_updated_at'   => '2012-06-14 15:03:03',
             'recordable_id'           => 1,
         ], $compiledData, true);
+
+        $this->assertArrayHasKey('ledger_signature', $compiledData);
     }
 
     /**
@@ -131,7 +135,7 @@ class LedgerTest extends AccountantTestCase
         ->first();
 
         // Compile data, making it available to the getProperty() method
-        $this->assertCount(22, $ledger->compile());
+        $this->assertCount(23, $ledger->compile());
 
         // Mutate value
         $this->assertSame('KEEPING TRACK OF ELOQUENT MODEL CHANGES', $ledger->getProperty('recordable_title'));
@@ -164,7 +168,7 @@ class LedgerTest extends AccountantTestCase
     {
         $ledger = factory(Article::class)->create()->ledgers()->first();
 
-        $this->assertCount(9, $metadata = $ledger->getMetadata());
+        $this->assertCount(10, $metadata = $ledger->getMetadata());
 
         $this->assertArraySubset([
             'ledger_id'         => 1,
@@ -177,6 +181,8 @@ class LedgerTest extends AccountantTestCase
             'user_id'           => null,
             'user_type'         => null,
         ], $metadata, true);
+
+        $this->assertArrayHasKey('ledger_signature', $metadata);
     }
 
     /**
@@ -196,7 +202,7 @@ class LedgerTest extends AccountantTestCase
 
         $ledger = factory(Article::class)->create()->ledgers()->first();
 
-        $this->assertCount(15, $metadata = $ledger->getMetadata());
+        $this->assertCount(16, $metadata = $ledger->getMetadata());
 
         $this->assertArraySubset([
             'ledger_id'         => 2,
@@ -215,6 +221,8 @@ class LedgerTest extends AccountantTestCase
             'user_created_at'   => '2012-06-14 15:03:03',
             'user_updated_at'   => '2012-06-14 15:03:03',
         ], $metadata, true);
+
+        $this->assertArrayHasKey('ledger_signature', $metadata);
     }
 
     /**
