@@ -8,6 +8,7 @@ use Altek\Accountant\Contracts\Recordable;
 use Altek\Accountant\Exceptions\AccountantException;
 use Altek\Accountant\Exceptions\DecipherException;
 use Altek\Accountant\Models\Ledger;
+use Altek\Accountant\Signers\LedgerSigner;
 use Altek\Accountant\Tests\AccountantTestCase;
 use Altek\Accountant\Tests\Models\Article;
 use Altek\Accountant\Tests\Models\User;
@@ -519,7 +520,7 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::isTainted
      * @test
      */
-    public function itFailsToCheckTheRecordAsTaintedDueToInvalidSignerImplementation(): void
+    public function itFailsToAssertTheRecordAsTaintedDueToInvalidSignerImplementation(): void
     {
         $ledger = factory(Ledger::class)->create();
 
@@ -535,7 +536,7 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::isTainted
      * @test
      */
-    public function itSuccessfullyChecksTheRecordAsTaintedDueToMismatchingDates(): void
+    public function itSuccessfullyAssertsTheRecordAsTaintedDueToMismatchingDates(): void
     {
         $ledger = factory(Ledger::class)->create([
             'updated_at' => '2015-10-24 23:11:10',
@@ -549,10 +550,16 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::isTainted
      * @test
      */
-    public function itSuccessfullyChecksTheRecordAsTaintedDueToMismatchingSignatures(): void
+    public function itSuccessfullyAssertsTheRecordAsTaintedDueToMismatchingSignatures(): void
     {
         $ledger = factory(Ledger::class)->create([
-            'signature' => 'ZqFYoMVIKZgffY7VEQ6tUpaRz5XrEWpO',
+            'signature' => LedgerSigner::sign([
+                'completely' => 'different',
+                'array'      => 'structure',
+                'from'       => 'the',
+                'one'        => 'used',
+                'when'       => 'signing',
+            ]),
         ]);
 
         $this->assertTrue($ledger->isTainted());
@@ -562,7 +569,7 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::isTainted
      * @test
      */
-    public function itFailsToCheckTheRecordAsTaintedDueToMatchingSignatures(): void
+    public function itFailsToAssertTheRecordAsTaintedDueToMatchingSignatures(): void
     {
         $ledger = factory(Ledger::class)->create();
 
