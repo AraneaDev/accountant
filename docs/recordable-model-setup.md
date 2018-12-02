@@ -5,7 +5,7 @@ Just **implement** the `Altek\Accountant\Contracts\Recordable` interface and **u
 ```php
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Altek\Accountant\Contracts\Recordable;
 use Illuminate\Database\Eloquent\Model;

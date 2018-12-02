@@ -31,7 +31,7 @@ This is done on a per `Recordable` model basis, by assigning an `int` value to t
 
 ```php
 <?php
-namespace App;
+namespace App\Models;
 
 use Altek\Accountant\Contracts\Recordable;
 use Illuminate\Database\Eloquent\Model;
@@ -88,7 +88,7 @@ This is done on a per `Recordable` model basis, by assigning an `array` value to
 
 ```php
 <?php
-namespace App;
+namespace App\Models;
 
 use Altek\Accountant\Contracts\Recordable;
 use Illuminate\Database\Eloquent\Model;

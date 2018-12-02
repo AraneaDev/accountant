@@ -72,7 +72,7 @@ To avoid this, make sure the `User` model isn't configured to record on `retriev
 ```php
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Altek\Accountant\Contracts\Recordable;
 use Illuminate\Database\Eloquent\Model;
