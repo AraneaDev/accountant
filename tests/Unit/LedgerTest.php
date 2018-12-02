@@ -359,7 +359,7 @@ class LedgerTest extends AccountantTestCase
     }
 
     /**
-     * @group Ledger::toRecordable
+     * @group Ledger::extract
      * @test
      */
     public function itFailsToCompileLedgerDataDueToInvalidProperty(): void
@@ -379,11 +379,11 @@ class LedgerTest extends AccountantTestCase
         $this->expectException(AccountantException::class);
         $this->expectExceptionMessage('Invalid property: "invalid_property"');
 
-        $ledger->toRecordable();
+        $ledger->extract();
     }
 
     /**
-     * @group Ledger::toRecordable
+     * @group Ledger::extract
      * @test
      */
     public function itFailsToCompileLedgerDataDueToInvalidCipherImplementation(): void
@@ -406,11 +406,11 @@ class LedgerTest extends AccountantTestCase
         $this->expectException(AccountantException::class);
         $this->expectExceptionMessage('Invalid Cipher implementation: "Altek\Accountant\Tests\AccountantTestCase"');
 
-        $ledger->toRecordable();
+        $ledger->extract();
     }
 
     /**
-     * @group Ledger::toRecordable
+     * @group Ledger::extract
      * @test
      */
     public function itFailsToCreateARecordableInstanceFromALedgerInStrictMode(): void
@@ -442,7 +442,7 @@ class LedgerTest extends AccountantTestCase
         ]);
 
         try {
-            $ledger->toRecordable();
+            $ledger->extract();
         } catch (DecipherException $exception) {
             $this->assertSame('Value deciphering is not supported by this implementation', $exception->getMessage());
             $this->assertSame('--------------------------------------kage.', $exception->getCipheredValue());
@@ -450,7 +450,7 @@ class LedgerTest extends AccountantTestCase
     }
 
     /**
-     * @group Ledger::toRecordable
+     * @group Ledger::extract
      * @test
      */
     public function itSuccessfullyCreatesARecordableInstanceFromALedger(): void
@@ -481,14 +481,14 @@ class LedgerTest extends AccountantTestCase
             ],
         ]);
 
-        $article = $ledger->toRecordable(false);
+        $article = $ledger->extract(false);
 
         $this->assertInstanceOf(Recordable::class, $article);
         $this->assertInstanceOf(Article::class, $article);
     }
 
     /**
-     * @group Ledger::toRecordable
+     * @group Ledger::extract
      * @test
      */
     public function itSuccessfullyCreatesARecordableInstanceFromALedgerInStrictMode(): void
@@ -510,7 +510,7 @@ class LedgerTest extends AccountantTestCase
             ],
         ]);
 
-        $article = $ledger->toRecordable();
+        $article = $ledger->extract();
 
         $this->assertInstanceOf(Recordable::class, $article);
         $this->assertInstanceOf(Article::class, $article);
