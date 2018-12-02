@@ -409,7 +409,7 @@ class RecordableTest extends AccountantTestCase
         $article = new class() extends Article {
             protected $table = 'articles';
 
-            public function extraLedgerData(string $event, array $properties, ?Identifiable $user): array
+            public function supplyExtra(string $event, array $properties, ?Identifiable $user): array
             {
                 return [
                     'slug' => str_slug($properties['title']),

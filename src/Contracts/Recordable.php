@@ -62,7 +62,7 @@ interface Recordable
     public function process(string $event): array;
 
     /**
-     * Surplus data for the Ledger.
+     * Supply extra data to the Ledger.
      *
      * @param string       $event
      * @param array        $properties
@@ -70,7 +70,7 @@ interface Recordable
      *
      * @return array
      */
-    public function extraLedgerData(string $event, array $properties, ?Identifiable $user): array;
+    public function supplyExtra(string $event, array $properties, ?Identifiable $user): array;
 
     /**
      * Get property ciphers.

@@ -239,7 +239,7 @@ trait Recordable
             'recordable_type'   => $this->getMorphClass(),
             'properties'        => $properties,
             'modified'          => array_keys($this->getDirty()),
-            'extra'             => $this->extraLedgerData($event, $properties, $user),
+            'extra'             => $this->supplyExtra($event, $properties, $user),
             'url'               => $this->resolveUrl(),
             'ip_address'        => $this->resolveIpAddress(),
             'user_agent'        => $this->resolveUserAgent(),
@@ -249,7 +249,7 @@ trait Recordable
     /**
      * {@inheritdoc}
      */
-    public function extraLedgerData(string $event, array $properties, ?Identifiable $user): array
+    public function supplyExtra(string $event, array $properties, ?Identifiable $user): array
     {
         return [];
     }
