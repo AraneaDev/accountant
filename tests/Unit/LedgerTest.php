@@ -362,6 +362,28 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::extract
      * @test
      */
+    public function itFailsToExtractARecordableInstanceDueToATaintedLedger(): void
+    {
+        $this->expectException(AccountantException::class);
+        $this->expectExceptionMessage('Extraction failed due to tainted data');
+
+        $article = factory(Article::class)->create();
+
+        // Taint the Ledger
+        $ledger = $article->ledgers()->first();
+        $ledger->modified = [
+            'title',
+        ];
+
+        $ledger->save();
+
+        $ledger->extract();
+    }
+
+    /**
+     * @group Ledger::extract
+     * @test
+     */
     public function itFailsToCompileLedgerDataDueToInvalidProperty(): void
     {
         $article = new class() extends Article {
@@ -413,7 +435,7 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::extract
      * @test
      */
-    public function itFailsToCreateARecordableInstanceFromALedgerInStrictMode(): void
+    public function itFailsToExtractARecordableInstanceFromALedgerInStrictMode(): void
     {
         $article = new class() extends Article {
             protected $table = 'articles';
@@ -453,7 +475,7 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::extract
      * @test
      */
-    public function itSuccessfullyCreatesARecordableInstanceFromALedger(): void
+    public function itSuccessfullyExtractsARecordableInstanceFromALedger(): void
     {
         $article = new class() extends Article {
             protected $table = 'articles';

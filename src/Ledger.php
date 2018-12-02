@@ -218,6 +218,10 @@ trait Ledger
      */
     public function extract(bool $strict = true): Recordable
     {
+        if ($strict && $this->isTainted()) {
+            throw new AccountantException('Extraction failed due to tainted data');
+        }
+
         return $this->recordable->newFromBuilder($this->getDecipheredProperties($strict));
     }
 
