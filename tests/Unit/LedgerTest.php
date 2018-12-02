@@ -513,7 +513,7 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::extract
      * @test
      */
-    public function itSuccessfullyCreatesARecordableInstanceFromALedgerInStrictMode(): void
+    public function itSuccessfullyExtractsARecordableInstanceFromALedgerInStrictMode(): void
     {
         $ledger = factory(Ledger::class)->create([
             'event'           => 'updated',
