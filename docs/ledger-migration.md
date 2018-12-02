@@ -28,7 +28,7 @@ return [
 Some developers prefer to use [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) instead of auto-incrementing identifiers.
 Here is how the migration should look like for the `user` and `recordable` columns.
 
-Update the `User` from
+Update the `User` columns from
 ```php
 $table->nullableMorphs('user');
 ```
@@ -44,7 +44,7 @@ $table->index([
 ]);
 ```
 
-The `Recordable` should be updated from
+The `Recordable` columns should be updated from
 ```php
 $table->morphs('recordable');
 ```
@@ -63,13 +63,12 @@ $table->index([
 > **NOTICE:** Always make sure the `user_*` and `recordable_*` column types match the ones in their respective tables.
 
 ## Values with more than 255 characters
-While odd, on some occasions, User Agent values may go over the 255 character mark. To avoid such problems, update the column from `string`
-
+While odd, on some occasions, User Agent values may go over the 255 character mark. To avoid such problems, update the column from
 ```php
 $table->string('user_agent')->nullable();
 ```
 
-to `text`
+to
 
 ```php
 $table->text('user_agent')->nullable();
