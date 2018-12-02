@@ -6,6 +6,7 @@ use Altek\Accountant\Ciphers\Base64;
 use Altek\Accountant\Ciphers\Bleach;
 use Altek\Accountant\Contracts\Identifiable;
 use Altek\Accountant\Exceptions\AccountantException;
+use Altek\Accountant\Models\Ledger;
 use Altek\Accountant\Tests\AccountantTestCase;
 use Altek\Accountant\Tests\Models\Article;
 use Altek\Accountant\Tests\Models\User;
@@ -617,5 +618,180 @@ class RecordableTest extends AccountantTestCase
         $article = new Article();
 
         $this->assertSame(200, $article->getLedgerThreshold());
+    }
+
+    /**
+     * @group Recordable::isCurrentStateReachable
+     * @test
+     */
+    public function itFailsToValidateTheCurrentStateDueToMissingTimestamps(): void
+    {
+        $this->expectException(AccountantException::class);
+        $this->expectExceptionMessage('The use of timestamps is required');
+
+        $article = factory(Article::class)->make();
+
+        $article->timestamps = false;
+
+        $article->isCurrentStateReachable();
+    }
+
+    /**
+     * @group Recordable::isCurrentStateReachable
+     * @test
+     */
+    public function itFailsToValidateTheCurrentStateDueToMissingLedgers(): void
+    {
+        $article = factory(Article::class)->make();
+
+        $this->assertFalse($article->isCurrentStateReachable());
+    }
+
+    /**
+     * @group Recordable::isCurrentStateReachable
+     * @test
+     */
+    public function itFailsToValidateTheCurrentStateDueToCreatedEventMissingFromFirstLedger(): void
+    {
+        $this->app['config']->set('accountant.ledger.events', [
+            'updated',
+        ]);
+
+        $article = factory(Article::class)->create();
+
+        $article->update([
+            'title' => 'A change was made to the title',
+        ]);
+
+        $this->assertFalse($article->isCurrentStateReachable());
+    }
+
+    /**
+     * @group Recordable::isCurrentStateReachable
+     * @test
+     */
+    public function itFailsToValidateTheCurrentStateDueToCreatedAtValueMismatch(): void
+    {
+        $this->app['config']->set('accountant.ledger.events', []);
+
+        $article = factory(Article::class)->create();
+
+        factory(Ledger::class)->create([
+            'event'           => 'created',
+            'recordable_type' => Article::class,
+            'recordable_id'   => $article->id,
+            'properties'      => [
+                'created_at' => '2015-10-24 23:11:10',
+            ],
+        ]);
+
+        $this->assertFalse($article->isCurrentStateReachable());
+    }
+
+    /**
+     * @group Recordable::isCurrentStateReachable
+     * @test
+     */
+    public function itFailsToValidateTheCurrentStateDueToUpdatedAtValueMismatch(): void
+    {
+        $this->app['config']->set('accountant.ledger.events', []);
+
+        $article = factory(Article::class)->create();
+
+        factory(Ledger::class)->create([
+            'event'           => 'created',
+            'recordable_type' => Article::class,
+            'recordable_id'   => $article->id,
+            'properties'      => [
+                'created_at' => '2012-06-14 15:03:03',
+                'updated_at' => '2015-10-24 23:11:10',
+            ],
+        ]);
+
+        $this->assertFalse($article->isCurrentStateReachable());
+    }
+
+    /**
+     * @group Recordable::isCurrentStateReachable
+     * @test
+     */
+    public function itFailsToValidateTheCurrentStateDueToATaintedLedger(): void
+    {
+        $article = factory(Article::class)->create();
+
+        // Taint the Ledger
+        $ledger = $article->ledgers()->first();
+        $ledger->modified = [
+            'title',
+        ];
+
+        $ledger->save();
+
+        $this->assertFalse($article->isCurrentStateReachable());
+    }
+
+    /**
+     * @group Recordable::isCurrentStateReachable
+     * @test
+     */
+    public function itFailsToValidateTheCurrentStateDueToPropertyMismatch(): void
+    {
+        $this->app['config']->set('accountant.ledger.events', [
+            'created',
+        ]);
+
+        $article = factory(Article::class)->create();
+
+        $article->update([
+            'content' => 'A change was made to the content',
+        ]);
+
+        $this->assertFalse($article->isCurrentStateReachable());
+    }
+
+    /**
+     * @group Recordable::isCurrentStateReachable
+     * @test
+     */
+    public function itSuccessfullyValidatesTheCurrentState(): void
+    {
+        $article = factory(Article::class)->create();
+
+        $article->update([
+            'content' => 'A change was made to the content',
+        ]);
+
+        $article->update([
+            'title' => 'A change was made to the title, too!',
+        ]);
+
+        $this->assertTrue($article->isCurrentStateReachable());
+    }
+
+    /**
+     * @group Recordable::isCurrentStateReachable
+     * @test
+     */
+    public function itSuccessfullyValidatesTheCurrentStateWhileIgnoringRetrievedEvents(): void
+    {
+        $this->app['config']->set('accountant.ledger.events', [
+            'created',
+            'updated',
+            'retrieved',
+        ]);
+
+        $article = factory(Article::class)->create();
+
+        $article->update([
+            'content' => 'A change was made to the content',
+        ]);
+
+        Article::first();
+
+        $article->update([
+            'title' => 'A change was made to the title, too!',
+        ]);
+
+        $this->assertTrue($article->isCurrentStateReachable());
     }
 }
