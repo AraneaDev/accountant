@@ -78,4 +78,13 @@ interface Recordable
      * @return array
      */
     public function getCiphers(): array;
+
+    /**
+     * Check if the current state is reachable by retracing all the recorded steps.
+     *
+     * @throws \Altek\Accountant\Exceptions\AccountantException
+     *
+     * @return bool
+     */
+    public function isCurrentStateReachable(): bool;
 }

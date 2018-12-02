@@ -261,4 +261,59 @@ trait Recordable
     {
         return $this->ciphers ?? [];
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isCurrentStateReachable(): bool
+    {
+        if (!$this->usesTimestamps()) {
+            throw new AccountantException('The use of timestamps is required');
+        }
+
+        $ledgers = $this->ledgers()->oldest()->get();
+
+        // Unavailable Ledger history
+        if ($ledgers->isEmpty()) {
+            return false;
+        }
+
+        // The first Ledger must be for the created event
+        if ($ledgers->first()->event !== 'created') {
+            return false;
+        }
+
+        // The created at value must match
+        $createdAt = $this->getAttributeValue($this->getCreatedAtColumn());
+
+        if ($createdAt->notEqualTo($ledgers->first()->properties[$this->getCreatedAtColumn()])) {
+            return false;
+        }
+
+        // The updated at value must match
+        $updatedAt = $this->getAttributeValue($this->getUpdatedAtColumn());
+
+        if ($updatedAt->notEqualTo($ledgers->last()->properties[$this->getUpdatedAtColumn()])) {
+            return false;
+        }
+
+        $properties = [];
+
+        foreach ($ledgers as $ledger) {
+            // Ledgers cannot be tainted
+            if ($ledger->isTainted()) {
+                return false;
+            }
+
+            // Ignore retrieved events
+            if ($ledger->event === 'retrieved') {
+                continue;
+            }
+
+            $properties[] = $ledger->properties;
+        }
+
+        // Finally, compare the current properties with the compiled ones
+        return array_merge(...$properties) === $this->getAttributes();
+    }
 }
