@@ -53,7 +53,7 @@ interface Ledger
     public function getData(bool $all = false): array;
 
     /**
-     * Create a Recordable instance from a Ledger.
+     * Extract a Recordable instance from the Ledger.
      *
      * @param bool $strict
      *
@@ -62,7 +62,7 @@ interface Ledger
      *
      * @return Recordable
      */
-    public function toRecordable(bool $strict = true): Recordable;
+    public function extract(bool $strict = true): Recordable;
 
     /**
      * Check if the record is tainted.

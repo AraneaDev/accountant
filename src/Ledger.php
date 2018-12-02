@@ -216,7 +216,7 @@ trait Ledger
     /**
      * {@inheritdoc}
      */
-    public function toRecordable(bool $strict = true): Recordable
+    public function extract(bool $strict = true): Recordable
     {
         return $this->recordable->newFromBuilder($this->getDecipheredProperties($strict));
     }
