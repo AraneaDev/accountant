@@ -56,8 +56,8 @@ trait Ledger
             'ledger_url'        => $this->getAttributeFromArray('url'),
             'ledger_ip_address' => $this->getAttributeFromArray('ip_address'),
             'ledger_user_agent' => $this->getAttributeFromArray('user_agent'),
-            'ledger_created_at' => $this->serializeDate($this->created_at),
-            'ledger_updated_at' => $this->serializeDate($this->updated_at),
+            'ledger_created_at' => $this->serializeDate($this->getAttributeValue($this->getCreatedAtColumn())),
+            'ledger_updated_at' => $this->serializeDate($this->getAttributeValue($this->getUpdatedAtColumn())),
             'ledger_signature'  => $this->getAttributeFromArray('signature'),
             'user_id'           => $this->getAttributeFromArray($userPrefix.'_id'),
             'user_type'         => $this->getAttributeFromArray($userPrefix.'_type'),
@@ -232,16 +232,19 @@ trait Ledger
             throw new AccountantException(sprintf('Invalid LedgerSigner implementation: "%s"', $signer));
         }
 
-        // A date mismatch is enough for considering the record tainted
-        if ($this->created_at->notEqualTo($this->updated_at)) {
+        // A date mismatch is enough for a record to be considered tainted
+        $createdAt = $this->getAttributeValue($this->getCreatedAtColumn());
+        $updatedAt = $this->getAttributeValue($this->getUpdatedAtColumn());
+
+        if ($createdAt->notEqualTo($updatedAt)) {
             return true;
         }
 
         // Exclude properties that were not present when the signing took place
         $properties = array_diff_key($this->attributesToArray(), array_flip([
-            'id',
-            'created_at',
-            'updated_at',
+            $this->getKeyName(),
+            $this->getCreatedAtColumn(),
+            $this->getUpdatedAtColumn(),
             'signature',
         ]));
 
