@@ -54,7 +54,7 @@ There's metadata like `event`, `user_*`, `url`, `ip_address` and `user_agent`, w
 Still, if you don't want to keep track of such information when the `modified` is empty, register the following observer in the `Ledger` model's `boot()` method:
 
 ```php
-Ledger::creating(function (Ledger $model) {
+self::creating(function (Ledger $model) {
     if (empty($model->modified)) {
         return false;
     }
@@ -65,7 +65,7 @@ Ledger::creating(function (Ledger $model) {
 
 ## PHP Fatal error:  Maximum function nesting level of '512' reached, aborting!
 This error happens when a `Ledger` is being created for a `retrieved` event on a `User` model.
-It boils down to the `UserResolver`, retrieving a `User` record, which will fire a new `retrieved` event, leading to a new resolve cycle and so on.
+It boils down to the `UserResolver` retrieving a `User` record, which will fire a new `retrieved` event, always leading to a new resolve cycle.
 
 To avoid this, make sure the `User` model isn't configured to record on `retrieved` events, like so:
 
