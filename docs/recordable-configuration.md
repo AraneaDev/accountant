@@ -55,10 +55,10 @@ The above configuration, will keep the `10` latest `Ledger` records.
 
 > **TIP:** By default, the `accountant.ledger.threshold` value is set to `0` (zero), which stands for no limit.
 
-## Ledger events
-By default, only the `created`, `updated`, `deleted` and `restored` Eloquent events are recorded.
+## Events
+By default, only the `created`, `updated`, `deleted` and `restored` Eloquent events are monitored.
 
-To change this behavior, update the events configuration with an `array` including the events of your choice.
+To change this behavior, update the events configuration `array` with the events of your choice.
 
 ### Globally
 This is done in the `config/accountant.php` configuration file.
