@@ -5,7 +5,7 @@ With the `extract()` method, an exact `Recordable` instance can be instantiated 
 This method supports two modes of operation.
 
 ## Strict mode
-This is the default, when the `extract()` method is called without arguments.
+This is the default, when the `extract()` method is called with no arguments.
 
 In order to recreate an exact `Recordable` instance in this mode, **ALL** properties must be available in their original form and the `Ledger` cannot be tainted.
 
@@ -21,7 +21,7 @@ try {
 } catch (DecipherException $e) {
     // Handle potential exception while deciphering
 } catch (AccountantException $e) {
-    // Handle potential exception due to an invalid ledger, property or cipher implementation
+    // Handle potential exception due to tainted ledger or invalid property/cipher implementation
 }
 
 // ...
@@ -44,7 +44,7 @@ try {
     $snapshot = $article->ledgers()->first()->extract(false);
 
 } catch (AccountantException $e) {
-    // Handle potential exception due to an invalid ledger, property or cipher implementation
+    // Handle potential exception due to tainted ledger or invalid property/cipher implementation
 }
 
 // ...
