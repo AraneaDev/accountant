@@ -1,5 +1,5 @@
 # Configuration
-The default recording behavior can be modified by updating the settings in the `config/accountant.php` configuration file.
+The default recording behavior can be modified by modifying the `config/accountant.php` configuration file.
 
 ## Ledger implementation
 By default, the package will use `Altek\Accountant\Models\Ledger`.
