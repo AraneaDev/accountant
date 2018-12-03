@@ -21,9 +21,10 @@ This package allows you to keep track of changes to your Eloquent models, making
   * [Drivers](docs/ledger-drivers.md)
   * [Events](docs/ledger-events.md)
 * Advanced
-  * [Accountant](docs/accountant.md)
-  * [Ciphers](docs/ciphers.md)
+  * [Ledger Extra](docs/ledger-extra.md)
   * [Ledger Extract](docs/ledger-extract.md)
+  * [Ciphers](docs/ciphers.md)
+  * [Accountant](docs/accountant.md)
 * Help
   * [Troubleshooting](docs/troubleshooting.md)
 
