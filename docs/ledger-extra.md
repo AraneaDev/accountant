@@ -32,10 +32,8 @@ class Article extends Model implements Recordable
 }
 ```
 
-The above example is quite simple, but the `extra` column in the `ledgers` table can be used for all sorts of things.
+The above example is quite simple, but the `extra` column in the `ledgers` table can be used for all sorts of things (additional fields, notes, tagging, ...).
 
-By default, the `extra` column has a `TEXT` type and the data will be stored as a `JSON` string.
+By default, the column type is defined as `TEXT`, the data is stored as a string of **JSON** and can be fetched as an `array` property from the `Ledger` model.
 
-The user can take advantage of RDBMS that support the `JSON` column type and update the `ledgers` table migration accordingly, to perform queries against JSON columns.
-
-> **TIP:** Refer to the [Ledger Migration](ledger-migration.md) section for more information.
+> **TIP:** The user can take advantage of RDBMS that support the `JSON` column type, by updating the `ledgers` table migration accordingly. Refer to the [Ledger Migration](ledger-migration.md) documentation for more information.
