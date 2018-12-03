@@ -1,7 +1,7 @@
 # Ciphers
 Using a cipher makes it easy to conceal sensitive information and/or store binary data, while recording a `Ledger`.
 
-There are two types available in this package, **one way** and **two way**.
+There are two supported types available, **one way** and **two way**.
 
 ## Bleach cipher
 `Bleach` is a **one way** cipher that conceals around 90% of the data from the left to the right.
@@ -77,7 +77,7 @@ class Article extends Model implements Recordable
 }
 ```
 
-> **NOTICE:** Any **two way** ciphered property value will be returned in its original form by the `getData()` method.
+> **NOTICE:** Any **two way** ciphered property value will be returned to its original form by the `getData()` method.
 
 ## Custom ciphers
 If the included ciphers don't suit your needs, you can always roll your own.
