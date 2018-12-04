@@ -69,8 +69,9 @@ array(10) {
 ```
 
 ## Getting modified Recordable properties (default)
-Obtain an `array` with the **modified** properties of the `Recordable` model at a given point in time.
+When calling the `getData()` method without arguments, an `array` only including the **modified** properties of the `Recordable` model is returned. 
 
+### Usage example
 ```php
 // Get first available Article
 $article = Article::first();
@@ -81,7 +82,7 @@ $ledger = $article->ledgers()->latest()->first();
 var_dump($ledger->getData());
 ```
 
-**Output:**
+### Output example
 ```php
 array(1) {
   'content' =>
@@ -90,8 +91,9 @@ array(1) {
 ```
 
 ## Getting all Recordable properties
-Retrieve an `array` with **all** the properties of the `Recordable` model at a given point in time.
+To retrieve an `array` with **all** the properties of the `Recordable` model at the time of recording, pass `true` as the only argument to the `getData()` method.
 
+### Usage example
 ```php
 // Get the first available Article
 $article = Article::first();
@@ -102,7 +104,7 @@ $ledger = $article->ledgers()->latest()->first();
 var_dump($ledger->getData(true));
 ```
 
-**Output:**
+### Output example
 ```php
 array(7) {
   'title' =>
