@@ -1,5 +1,5 @@
 # Contributing
-We appreciate your interest in this project. This document contains essential information, should you want or need to contribute to this project.
+We appreciate your interest in this project. This document contains essential information, should you want to contribute.
 
 ## Bug reporting
 We encourage active collaboration, but before opening a new issue, go through the following checklist, and make sure that:
