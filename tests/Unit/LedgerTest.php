@@ -32,7 +32,7 @@ class LedgerTest extends AccountantTestCase
 
         $ledger = $article->ledgers()->first();
 
-        $this->assertCount(17, $compiledData = $ledger->compile());
+        $this->assertCount(17, $compiled = $ledger->compile());
 
         $this->assertArraySubset([
             'ledger_id'               => 1,
@@ -51,9 +51,9 @@ class LedgerTest extends AccountantTestCase
             'recordable_created_at'   => '2012-06-14 15:03:03',
             'recordable_updated_at'   => '2012-06-14 15:03:03',
             'recordable_id'           => 1,
-        ], $compiledData, true);
+        ], $compiled, true);
 
-        $this->assertArrayHasKey('ledger_signature', $compiledData);
+        $this->assertArrayHasKey('ledger_signature', $compiled);
     }
 
     /**
@@ -80,7 +80,7 @@ class LedgerTest extends AccountantTestCase
 
         $ledger = $article->ledgers()->first();
 
-        $this->assertCount(23, $compiledData = $ledger->compile());
+        $this->assertCount(23, $compiled = $ledger->compile());
 
         $this->assertArraySubset([
             'ledger_id'               => 2,
@@ -105,9 +105,9 @@ class LedgerTest extends AccountantTestCase
             'recordable_created_at'   => '2012-06-14 15:03:03',
             'recordable_updated_at'   => '2012-06-14 15:03:03',
             'recordable_id'           => 1,
-        ], $compiledData, true);
+        ], $compiled, true);
 
-        $this->assertArrayHasKey('ledger_signature', $compiledData);
+        $this->assertArrayHasKey('ledger_signature', $compiled);
     }
 
     /**
@@ -277,8 +277,8 @@ class LedgerTest extends AccountantTestCase
             ],
         ]);
 
-        $this->assertCount(1, $data = $ledger->getData());
-        $this->assertCount(7, $data = $ledger->getData(true));
+        $this->assertCount(1, $ledger->getData());
+        $this->assertCount(7, $ledger->getData(true));
     }
 
     /**
@@ -354,8 +354,8 @@ class LedgerTest extends AccountantTestCase
             ],
         ]);
 
-        $this->assertCount(1, $data = $ledger->getData());
-        $this->assertCount(7, $data = $ledger->getData(true));
+        $this->assertCount(1, $ledger->getData());
+        $this->assertCount(7, $ledger->getData(true));
     }
 
     /**
