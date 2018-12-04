@@ -15,6 +15,7 @@ This package allows you to keep track of changes to your Eloquent models, making
   * [Model Setup](docs/recordable-model-setup.md)
   * [Configuration](docs/recordable-configuration.md)
 * Ledger
+  * [Retrieval](docs/ledger-retrieval.md)
   * [Migration](docs/ledger-migration.md)
   * [Implementation](docs/ledger-implementation.md)
   * [Resolvers](docs/ledger-resolvers.md)
@@ -29,7 +30,7 @@ This package allows you to keep track of changes to your Eloquent models, making
   * [Troubleshooting](docs/troubleshooting.md)
 
 ## Contributing
-Contributions are always welcome, but before anything else, make sure you get acquainted with the [Contributing](docs/contributing.md) guide.
+Contributions are always welcome, but before anything else, make sure you get acquainted with the [Contributing](CONTRIBUTING.md) guide.
 
 ## Credits
 - [Quetzy Garcia](https://gitlab.com/quetzyg)
