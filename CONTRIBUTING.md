@@ -1,28 +1,28 @@
 # Contributing
-This document contains essential information, should you want or need to contribute to this project.
+We appreciate your interest in this project. This document contains essential information, should you want or need to contribute to this project.
 
 ## Bug reporting
 We encourage active collaboration, but before opening a new issue, go through the following checklist, and make sure that:
 
-- You have **read** the [installation](installation.md), [configuration](configuration.md) and [recordable configuration](recordable-configuration.md) sections of the documentation;
-- The problem you are facing is **not** documented in the [troubleshooting](troubleshooting.md) section;
+- You have **read** the [installation](docs/installation.md), [configuration](docs/configuration.md) and [recordable configuration](docs/recordable-configuration.md) sections of the documentation;
+- The problem you are facing is **not** documented in the [troubleshooting](docs/troubleshooting.md) section;
 - A [GitLab issue](https://gitlab.com/altek/accountant/issues) with the same or similar problem you're having, doesn't already exist in an **open** or **closed** state;
 
-If after going through all the previous steps you still have an issue, feel free to [open a new issue](https://gitlab.com/altek/accountant/issues/new) using the [Bug](../.gitlab/issue_templates/Bug.md) template.
+If after going through all the previous steps you still have an issue, feel free to [open a new issue](https://gitlab.com/altek/accountant/issues/new) using the [Bug](.gitlab/issue_templates/Bug.md) template.
 
 **Make sure the bug report is properly filled.**
 
 ## Development discussion
-For new feature or improvement proposals, open a new issue using the [Proposal](../.gitlab/issue_templates/Proposal.md) template.
+For new features or improvements, open a new issue using the [Proposal](.gitlab/issue_templates/Proposal.md) template.
 
 ## Which Branch?
 Pull requests containing bug fixes or new features should always be done against the `master` branch.
 
 ## Coding Style
-This package follows the [PSR-2](https://www.php-fig.org/psr/psr-2/) coding style guide and the [PSR-4](https://www.php-fig.org/psr/psr-4/) autoloader standards.
+This package follows the [PSR-2](https://www.php-fig.org/psr/psr-2/) coding style guide and the [PSR-4](https://www.php-fig.org/psr/psr-4/) autoloader standard.
 
 ### StyleCI
-The [StyleCI](https://styleci.io) service is hooked into our CI pipeline, so any styling issues found while pushing code will be reported.
+The [StyleCI](https://styleci.io) service is hooked into our CI pipeline, so you'll be notified of any styling issues while pushing code.
 
 ### PHPDoc
 Here's a valid documentation block example:
