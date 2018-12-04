@@ -39,7 +39,7 @@ $article = Article::first();
 // Get the last Ledger
 $ledger = $article->ledgers()->latest()->first();
 
-var_dump($ledger->getData());
+var_dump($ledger->getMetadata());
 ```
 
 **Output:**
