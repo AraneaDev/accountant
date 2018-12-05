@@ -1,8 +1,8 @@
 <?php
 
-namespace Altek\Accountant\Signers;
+namespace Altek\Accountant;
 
-class LedgerSigner implements \Altek\Accountant\Contracts\LedgerSigner
+class Notary implements Contracts\Notary
 {
     /**
      * {@inheritdoc}
@@ -18,5 +18,13 @@ class LedgerSigner implements \Altek\Accountant\Contracts\LedgerSigner
         ksort($data);
 
         return hash('sha512', json_encode($data, JSON_NUMERIC_CHECK));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function validate(array $data, string $signature): bool
+    {
+        return static::sign($data) === $signature;
     }
 }
