@@ -17,38 +17,6 @@ return [
 
         /*
         |--------------------------------------------------------------------------
-        | Ledger Resolver Implementations
-        |--------------------------------------------------------------------------
-        |
-        | Define the User, IP Address, User Agent and URL resolver implementations.
-        |
-        */
-
-        'resolvers' => [
-            'user'       => Altek\Accountant\Resolvers\UserResolver::class,
-            'ip_address' => Altek\Accountant\Resolvers\IpAddressResolver::class,
-            'user_agent' => Altek\Accountant\Resolvers\UserAgentResolver::class,
-            'url'        => Altek\Accountant\Resolvers\UrlResolver::class,
-        ],
-
-        /*
-        |--------------------------------------------------------------------------
-        | Ledger Events
-        |--------------------------------------------------------------------------
-        |
-        | The events that should give origin to a new Ledger record.
-        |
-        */
-
-        'events' => [
-            'created',
-            'updated',
-            'deleted',
-            'restored',
-        ],
-
-        /*
-        |--------------------------------------------------------------------------
         | CLI Recording
         |--------------------------------------------------------------------------
         |
@@ -75,11 +43,27 @@ return [
         | Ledger Driver
         |--------------------------------------------------------------------------
         |
-        | The default driver used to keep track of changes.
+        | The default driver used to store Ledger records.
         |
         */
 
         'driver' => 'database',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Resolver Implementations
+    |--------------------------------------------------------------------------
+    |
+    | Define the User, IP Address, User Agent and URL resolver implementations.
+    |
+    */
+
+    'resolvers' => [
+        'user'       => Altek\Accountant\Resolvers\UserResolver::class,
+        'ip_address' => Altek\Accountant\Resolvers\IpAddressResolver::class,
+        'user_agent' => Altek\Accountant\Resolvers\UserAgentResolver::class,
+        'url'        => Altek\Accountant\Resolvers\UrlResolver::class,
     ],
 
     /*
@@ -95,10 +79,27 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Recordable Events
+    |--------------------------------------------------------------------------
+    |
+    | The events that trigger a new Ledger record.
+    |
+    */
+
+    'events' => [
+        'created',
+        'updated',
+        'deleted',
+        'restored',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | User MorphTo relation prefix & default Guards
     |--------------------------------------------------------------------------
     |
-    | Define the morph prefix and authentication guards for the User resolver.
+    | Define the morph prefix and which authentication guards the User resolver
+    | should use.
     |
     */
 
