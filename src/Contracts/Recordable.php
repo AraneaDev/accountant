@@ -30,11 +30,11 @@ interface Recordable
     public function isEventRecordable(?string $event): bool;
 
     /**
-     * Get the events that trigger a Ledger.
+     * Get the events that trigger a new Ledger record.
      *
      * @return array
      */
-    public function getLedgerEvents(): array;
+    public function getRecordableEvents(): array;
 
     /**
      * Get the Ledger threshold.

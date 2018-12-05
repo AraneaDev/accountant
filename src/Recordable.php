@@ -95,13 +95,13 @@ trait Recordable
      */
     public function isEventRecordable(?string $event): bool
     {
-        return in_array($event, $this->getLedgerEvents(), true);
+        return in_array($event, $this->getRecordableEvents(), true);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getLedgerEvents(): array
+    public function getRecordableEvents(): array
     {
         return $this->recordableEvents ?? Config::get('accountant.events', [
             'created',
