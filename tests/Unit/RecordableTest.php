@@ -83,7 +83,7 @@ class RecordableTest extends AccountantTestCase
     }
 
     /**
-     * @group Recordable::getLedgerEvents
+     * @group Recordable::getRecordableEvents
      * @test
      */
     public function itReturnsTheDefaultLedgerEvents(): void
@@ -95,18 +95,18 @@ class RecordableTest extends AccountantTestCase
             'updated',
             'deleted',
             'restored',
-        ], $article->getLedgerEvents(), true);
+        ], $article->getRecordableEvents(), true);
     }
 
     /**
-     * @group Recordable::getLedgerEvents
+     * @group Recordable::getRecordableEvents
      * @test
      */
     public function itReturnsTheCustomLedgerEventsFromAttribute(): void
     {
         $article = new Article();
 
-        $article->ledgerEvents = [
+        $article->recordableEvents = [
             'deleted',
             'restored',
         ];
@@ -114,16 +114,16 @@ class RecordableTest extends AccountantTestCase
         $this->assertArraySubset([
             'deleted',
             'restored',
-        ], $article->getLedgerEvents(), true);
+        ], $article->getRecordableEvents(), true);
     }
 
     /**
-     * @group Recordable::getLedgerEvents
+     * @group Recordable::getRecordableEvents
      * @test
      */
     public function itReturnsTheCustomLedgerEventsFromConfig(): void
     {
-        $this->app['config']->set('accountant.ledger.events', [
+        $this->app['config']->set('accountant.events', [
             'deleted',
             'restored',
         ]);
@@ -133,7 +133,7 @@ class RecordableTest extends AccountantTestCase
         $this->assertArraySubset([
             'deleted',
             'restored',
-        ], $article->getLedgerEvents(), true);
+        ], $article->getRecordableEvents(), true);
     }
 
     /**
@@ -155,7 +155,7 @@ class RecordableTest extends AccountantTestCase
     {
         $article = new Article();
 
-        $article->ledgerEvents = [
+        $article->recordableEvents = [
             'created',
             'updated',
             'deleted',
@@ -213,7 +213,7 @@ class RecordableTest extends AccountantTestCase
         $this->expectException(AccountantException::class);
         $this->expectExceptionMessage('Invalid IpAddressResolver implementation: "Altek\Accountant\Tests\Unit\RecordableTest"');
 
-        $this->app['config']->set('accountant.ledger.resolvers.ip_address', self::class);
+        $this->app['config']->set('accountant.resolvers.ip_address', self::class);
 
         $article = new Article();
 
@@ -229,7 +229,7 @@ class RecordableTest extends AccountantTestCase
         $this->expectException(AccountantException::class);
         $this->expectExceptionMessage('Invalid UrlResolver implementation: "Altek\Accountant\Tests\Unit\RecordableTest"');
 
-        $this->app['config']->set('accountant.ledger.resolvers.url', self::class);
+        $this->app['config']->set('accountant.resolvers.url', self::class);
 
         $article = new Article();
 
@@ -245,7 +245,7 @@ class RecordableTest extends AccountantTestCase
         $this->expectException(AccountantException::class);
         $this->expectExceptionMessage('Invalid UserAgentResolver implementation: "Altek\Accountant\Tests\Unit\RecordableTest"');
 
-        $this->app['config']->set('accountant.ledger.resolvers.user_agent', self::class);
+        $this->app['config']->set('accountant.resolvers.user_agent', self::class);
 
         $article = new Article();
 
@@ -261,7 +261,7 @@ class RecordableTest extends AccountantTestCase
         $this->expectException(AccountantException::class);
         $this->expectExceptionMessage('Invalid UserResolver implementation: "Altek\Accountant\Tests\Unit\RecordableTest"');
 
-        $this->app['config']->set('accountant.ledger.resolvers.user', self::class);
+        $this->app['config']->set('accountant.resolvers.user', self::class);
 
         $article = new Article();
 
@@ -653,7 +653,7 @@ class RecordableTest extends AccountantTestCase
      */
     public function itFailsToValidateTheCurrentStateDueToCreatedEventMissingFromFirstLedger(): void
     {
-        $this->app['config']->set('accountant.ledger.events', [
+        $this->app['config']->set('accountant.events', [
             'updated',
         ]);
 
@@ -672,7 +672,7 @@ class RecordableTest extends AccountantTestCase
      */
     public function itFailsToValidateTheCurrentStateDueToCreatedAtValueMismatch(): void
     {
-        $this->app['config']->set('accountant.ledger.events', []);
+        $this->app['config']->set('accountant.events', []);
 
         $article = factory(Article::class)->create();
 
@@ -694,7 +694,7 @@ class RecordableTest extends AccountantTestCase
      */
     public function itFailsToValidateTheCurrentStateDueToUpdatedAtValueMismatch(): void
     {
-        $this->app['config']->set('accountant.ledger.events', []);
+        $this->app['config']->set('accountant.events', []);
 
         $article = factory(Article::class)->create();
 
@@ -736,7 +736,7 @@ class RecordableTest extends AccountantTestCase
      */
     public function itFailsToValidateTheCurrentStateDueToPropertyMismatch(): void
     {
-        $this->app['config']->set('accountant.ledger.events', [
+        $this->app['config']->set('accountant.events', [
             'created',
         ]);
 
@@ -774,7 +774,7 @@ class RecordableTest extends AccountantTestCase
      */
     public function itSuccessfullyValidatesTheCurrentStateWhileIgnoringRetrievedEvents(): void
     {
-        $this->app['config']->set('accountant.ledger.events', [
+        $this->app['config']->set('accountant.events', [
             'created',
             'updated',
             'retrieved',
