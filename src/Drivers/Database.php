@@ -4,7 +4,7 @@ namespace Altek\Accountant\Drivers;
 
 use Altek\Accountant\Contracts\Ledger;
 use Altek\Accountant\Contracts\LedgerDriver;
-use Altek\Accountant\Contracts\LedgerSigner;
+use Altek\Accountant\Contracts\Notary;
 use Altek\Accountant\Contracts\Recordable;
 use Altek\Accountant\Exceptions\AccountantException;
 use Illuminate\Support\Facades\Config;
@@ -16,6 +16,12 @@ class Database implements LedgerDriver
      */
     public function record(Recordable $model, string $event): Ledger
     {
+        $notary = Config::get('accountant.notary', \Altek\Accountant\Notary::class);
+
+        if (!is_subclass_of($notary, Notary::class)) {
+            throw new AccountantException(sprintf('Invalid Notary implementation: "%s"', $notary));
+        }
+
         $implementation = Config::get('accountant.ledger.implementation', \Altek\Accountant\Models\Ledger::class);
 
         if (!is_subclass_of($implementation, Ledger::class)) {
@@ -24,17 +30,18 @@ class Database implements LedgerDriver
 
         $ledger = new $implementation();
 
-        foreach ($data = $model->process($event) as $key => $value) {
-            $ledger->setAttribute($key, $value);
+        // Set the Ledger properties
+        foreach ($model->process($event) as $property => $value) {
+            $ledger->setAttribute($property, $value);
         }
 
-        $signer = Config::get('accountant.ledger.signer', \Altek\Accountant\Signers\LedgerSigner::class);
-
-        if (!is_subclass_of($signer, LedgerSigner::class)) {
-            throw new AccountantException(sprintf('Invalid LedgerSigner implementation: "%s"', $signer));
+        if ($ledger->usesTimestamps()) {
+            $ledger->setCreatedAt($ledger->freshTimestamp())
+                ->setUpdatedAt($ledger->freshTimestamp());
         }
 
-        $ledger->setAttribute('signature', call_user_func([$signer, 'sign'], $data))
+        // Sign and store the record
+        $ledger->setAttribute('signature', call_user_func([$notary, 'sign'], $ledger->attributesToArray()))
             ->save();
 
         return $ledger;
