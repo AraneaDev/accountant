@@ -52,7 +52,7 @@ class CommandTest extends AccountantTestCase
         $this->assertFileNotExists($migrationFilePath);
 
         $this->artisan('vendor:publish', [
-            '--tag' => 'accountant-migration',
+            '--tag' => 'accountant-migrations',
         ]);
 
         $this->assertFileExists($migrationFilePath);
