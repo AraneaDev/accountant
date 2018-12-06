@@ -112,4 +112,4 @@ php artisan migrate
 This will create the `ledgers` table in your database.
 
 # Resolvers
-Read more about resolvers in the [Ledger Resolvers](ledger-resolvers.md) section!
+Read more about this subject in the [Resolvers](resolvers.md) section!

@@ -120,4 +120,4 @@ public function user()
 ## IpAddressResolver incorrectly resolving IP addresses 
 This usually happens to applications running behind a load balancer (or proxy), in which the IP address of the load balancer/proxy is being returned, instead.
 
-Refer to the `IpAddressResolver` section in the [Ledger Resolvers](ledger-resolvers.md) documentation for a workaround.
+Refer to the `IpAddressResolver` section in the [Resolvers](resolvers.md) documentation for a workaround.

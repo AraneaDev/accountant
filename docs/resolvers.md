@@ -1,4 +1,4 @@
-# Ledger Resolvers
+# Resolvers
 A resolver is a class implementing one of the following contracts:
 - `Altek\Accountant\Contracts\IpAddressResolver`
 - `Altek\Accountant\Contracts\UrlResolver`

@@ -18,12 +18,12 @@ This package allows you to keep track of changes to your Eloquent models, making
   * [Retrieval](docs/ledger-retrieval.md)
   * [Migration](docs/ledger-migration.md)
   * [Implementation](docs/ledger-implementation.md)
-  * [Resolvers](docs/ledger-resolvers.md)
   * [Drivers](docs/ledger-drivers.md)
   * [Events](docs/ledger-events.md)
 * Advanced
   * [Ledger Extra](docs/ledger-extra.md)
   * [Ledger Extract](docs/ledger-extract.md)
+  * [Resolvers](docs/resolvers.md)
   * [Ciphers](docs/ciphers.md)
   * [Accountant](docs/accountant.md)
 * Help
