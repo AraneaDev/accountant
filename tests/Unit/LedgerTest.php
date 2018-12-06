@@ -362,20 +362,31 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::extract
      * @test
      */
-    public function itFailsToExtractARecordableInstanceDueToATaintedLedger(): void
+    public function itFailsToExtractARecordableInstanceDueToATaintedLedgerDueToDateMismatch(): void
     {
         $this->expectException(AccountantException::class);
         $this->expectExceptionMessage('Extraction failed due to tainted data');
 
-        $article = factory(Article::class)->create();
+        $ledger = factory(Ledger::class)->create([
+            'created_at' => '1975-07-25 16:25:34',
+            'updated_at' => '1981-12-16 03:33:01',
+        ]);
 
-        // Taint the Ledger
-        $ledger = $article->ledgers()->first();
-        $ledger->modified = [
-            'title',
-        ];
+        $ledger->extract();
+    }
 
-        $ledger->save();
+    /**
+     * @group Ledger::extract
+     * @test
+     */
+    public function itFailsToExtractARecordableInstanceDueToATaintedLedgerDueToSignatureMismatch(): void
+    {
+        $this->expectException(AccountantException::class);
+        $this->expectExceptionMessage('Extraction failed due to tainted data');
+
+        $ledger = factory(Ledger::class)->create([
+            'signature' => '',
+        ]);
 
         $ledger->extract();
     }
