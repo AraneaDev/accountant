@@ -3,7 +3,7 @@
 namespace Altek\Accountant;
 
 use Altek\Accountant\Contracts\Cipher;
-use Altek\Accountant\Contracts\LedgerSigner;
+use Altek\Accountant\Contracts\Notary;
 use Altek\Accountant\Contracts\Recordable;
 use Altek\Accountant\Exceptions\AccountantException;
 use DateTimeInterface;
@@ -230,10 +230,10 @@ trait Ledger
      */
     public function isTainted(): bool
     {
-        $signer = Config::get('accountant.ledger.signer', \Altek\Accountant\Signers\LedgerSigner::class);
+        $notary = Config::get('accountant.notary', \Altek\Accountant\Notary::class);
 
-        if (!is_subclass_of($signer, LedgerSigner::class)) {
-            throw new AccountantException(sprintf('Invalid LedgerSigner implementation: "%s"', $signer));
+        if (!is_subclass_of($notary, Notary::class)) {
+            throw new AccountantException(sprintf('Invalid Notary implementation: "%s"', $notary));
         }
 
         // A date mismatch is enough for a record to be considered tainted
@@ -244,14 +244,11 @@ trait Ledger
             return true;
         }
 
-        // Exclude properties that were not present when the signing took place
-        $properties = array_diff_key($this->attributesToArray(), array_flip([
-            $this->getKeyName(),
-            $this->getCreatedAtColumn(),
-            $this->getUpdatedAtColumn(),
-            'signature',
-        ]));
+        $properties = $this->attributesToArray();
 
-        return $this->getAttributeFromArray('signature') !== call_user_func([$signer, 'sign'], $properties);
+        // Exclude properties that were not present when the signing took place
+        unset($properties[$this->getKeyName()], $properties['signature']);
+
+        return call_user_func([$notary, 'validate'], $properties, $this->getAttributeFromArray('signature')) === false;
     }
 }
