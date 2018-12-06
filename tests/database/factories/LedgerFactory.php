@@ -1,9 +1,10 @@
 <?php
 
 use Altek\Accountant\Models\Ledger;
-use Altek\Accountant\Signers\LedgerSigner;
+use Altek\Accountant\Notary;
 use Altek\Accountant\Tests\Models\Article;
 use Altek\Accountant\Tests\Models\User;
+use Carbon\Carbon;
 use Faker\Generator as Faker;
 
 /*
@@ -33,7 +34,9 @@ $factory->define(Ledger::class, function (Faker $faker) {
         'signature'       => function (array $properties) {
             unset($properties['signature']);
 
-            return LedgerSigner::sign($properties);
+            return Notary::sign($properties);
         },
+        'created_at' => Carbon::now()->toDateTimeString(),
+        'updated_at' => Carbon::now()->toDateTimeString(),
     ];
 });
