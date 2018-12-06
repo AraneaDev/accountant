@@ -81,7 +81,7 @@ class RecordingTest extends AccountantTestCase
      */
     public function itWillRecordTheRetrievedEvent(): void
     {
-        $this->app['config']->set('accountant.ledger.events', [
+        $this->app['config']->set('accountant.events', [
             'retrieved',
         ]);
 
@@ -121,7 +121,7 @@ class RecordingTest extends AccountantTestCase
      */
     public function itWillRecordTheCreatedEvent(): void
     {
-        $this->app['config']->set('accountant.ledger.events', [
+        $this->app['config']->set('accountant.events', [
             'created',
         ]);
 
@@ -166,7 +166,7 @@ class RecordingTest extends AccountantTestCase
      */
     public function itWillRecordTheUpdatedEvent(): void
     {
-        $this->app['config']->set('accountant.ledger.events', [
+        $this->app['config']->set('accountant.events', [
             'updated',
         ]);
 
@@ -213,7 +213,7 @@ class RecordingTest extends AccountantTestCase
      */
     public function itWillRecordTheDeletedEvent(): void
     {
-        $this->app['config']->set('accountant.ledger.events', [
+        $this->app['config']->set('accountant.events', [
             'deleted',
         ]);
 
@@ -255,7 +255,7 @@ class RecordingTest extends AccountantTestCase
      */
     public function itWillRecordTheRestoredEvent(): void
     {
-        $this->app['config']->set('accountant.ledger.events', [
+        $this->app['config']->set('accountant.events', [
             'restored',
         ]);
 
@@ -298,7 +298,7 @@ class RecordingTest extends AccountantTestCase
     public function itWillKeepAllLedgers(): void
     {
         $this->app['config']->set('accountant.ledger.threshold', 0);
-        $this->app['config']->set('accountant.ledger.events', [
+        $this->app['config']->set('accountant.events', [
             'updated',
         ]);
 
@@ -321,7 +321,7 @@ class RecordingTest extends AccountantTestCase
     public function itWillRemoveOlderLedgersAboveTheThreshold(): void
     {
         $this->app['config']->set('accountant.ledger.threshold', 10);
-        $this->app['config']->set('accountant.ledger.events', [
+        $this->app['config']->set('accountant.events', [
             'updated',
         ]);
 
@@ -382,13 +382,13 @@ class RecordingTest extends AccountantTestCase
     /**
      * @test
      */
-    public function itWillNotRecordDueToClassNotImplementingLedgerSignerInterface(): void
+    public function itWillNotRecordDueToClassNotImplementingNotaryInterface(): void
     {
-        // We just pass a FQCN that does not implement the LedgerSigner interface
-        $this->app['config']->set('accountant.ledger.signer', self::class);
+        // We just pass a FQCN that does not implement the Notary interface
+        $this->app['config']->set('accountant.notary', self::class);
 
         $this->expectException(AccountantException::class);
-        $this->expectExceptionMessage('Invalid LedgerSigner implementation: "Altek\Accountant\Tests\Integration\RecordingTest"');
+        $this->expectExceptionMessage('Invalid Notary implementation: "Altek\Accountant\Tests\Integration\RecordingTest"');
 
         factory(Article::class)->create();
     }
