@@ -26,7 +26,7 @@ class AccountantTestCase extends TestCase
         ]);
 
         // Accountant
-        $app['config']->set('accountant.ledger.resolvers', [
+        $app['config']->set('accountant.resolvers', [
             'user'       => UserResolver::class,
             'url'        => UrlResolver::class,
             'ip_address' => IpAddressResolver::class,
