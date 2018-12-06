@@ -8,7 +8,7 @@ use Altek\Accountant\Contracts\Recordable;
 use Altek\Accountant\Exceptions\AccountantException;
 use Altek\Accountant\Exceptions\DecipherException;
 use Altek\Accountant\Models\Ledger;
-use Altek\Accountant\Signers\LedgerSigner;
+use Altek\Accountant\Notary;
 use Altek\Accountant\Tests\AccountantTestCase;
 use Altek\Accountant\Tests\Models\Article;
 use Altek\Accountant\Tests\Models\User;
@@ -542,14 +542,14 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::isTainted
      * @test
      */
-    public function itFailsToAssertTheRecordAsTaintedDueToInvalidSignerImplementation(): void
+    public function itFailsToAssertTheRecordAsTaintedDueToInvalidNotaryImplementation(): void
     {
         $ledger = factory(Ledger::class)->create();
 
-        $this->app['config']->set('accountant.ledger.signer', self::class);
+        $this->app['config']->set('accountant.notary', self::class);
 
         $this->expectException(AccountantException::class);
-        $this->expectExceptionMessage('Invalid LedgerSigner implementation: "Altek\Accountant\Tests\Unit\LedgerTest"');
+        $this->expectExceptionMessage('Invalid Notary implementation: "Altek\Accountant\Tests\Unit\LedgerTest"');
 
         $ledger->isTainted();
     }
@@ -575,7 +575,7 @@ class LedgerTest extends AccountantTestCase
     public function itSuccessfullyAssertsTheRecordAsTaintedDueToMismatchingSignatures(): void
     {
         $ledger = factory(Ledger::class)->create([
-            'signature' => LedgerSigner::sign([
+            'signature' => Notary::sign([
                 'completely' => 'different',
                 'array'      => 'structure',
                 'from'       => 'the',
