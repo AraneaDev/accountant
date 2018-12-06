@@ -31,6 +31,7 @@ This is done on a per `Recordable` model basis, by assigning an `int` value to t
 
 ```php
 <?php
+
 namespace App\Models;
 
 use Altek\Accountant\Contracts\Recordable;
@@ -66,15 +67,11 @@ This is done in the `config/accountant.php` configuration file.
 ```php
 return [
 
-    'ledger' => [
-        // ...
+    // ...
 
-        'events' => [
-            'deleted',
-            'restored',
-        ],
-    
-        // ...
+    'events' => [
+        'deleted',
+        'restored',
     ],
 
     // ...
@@ -82,12 +79,13 @@ return [
 ```
 
 ### Locally
-This is done on a per `Recordable` model basis, by assigning an `array` value to the `$ledgerEvents` attribute.
+This is done on a per `Recordable` model basis, by assigning an `array` value to the `$recordableEvents` attribute.
 
 > **TIP:** Locally defined events **always** take precedence over globally defined ones.
 
 ```php
 <?php
+
 namespace App\Models;
 
 use Altek\Accountant\Contracts\Recordable;
@@ -98,11 +96,11 @@ class Article extends Model implements Recordable
     use \Altek\Accountant\Recordable;
 
     /**
-     * Ledger events.
+     * Recordable events.
      *
      * @var array
      */
-    protected $ledgerEvents = [
+    protected $recordableEvents = [
         'deleted',
         'restored',
     ];
