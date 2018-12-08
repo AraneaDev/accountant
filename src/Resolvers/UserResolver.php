@@ -13,12 +13,7 @@ class UserResolver implements \Altek\Accountant\Contracts\UserResolver
      */
     public static function resolve(): ?Identifiable
     {
-        $guards = Config::get('accountant.user.guards', [
-            'web',
-            'api',
-        ]);
-
-        foreach ($guards as $guard) {
+        foreach (Config::get('accountant.user.guards') as $guard) {
             if ($user = Auth::guard($guard)->user()) {
                 return $user;
             }

@@ -47,7 +47,7 @@ trait Ledger
      */
     public function compile(): array
     {
-        $userPrefix = Config::get('accountant.user.prefix', 'user');
+        $userPrefix = Config::get('accountant.user.prefix');
 
         // Metadata
         $this->data = [
@@ -230,7 +230,7 @@ trait Ledger
      */
     public function isTainted(): bool
     {
-        $notary = Config::get('accountant.notary', \Altek\Accountant\Notary::class);
+        $notary = Config::get('accountant.notary');
 
         if (!is_subclass_of($notary, Notary::class)) {
             throw new AccountantException(sprintf('Invalid Notary implementation: "%s"', $notary));

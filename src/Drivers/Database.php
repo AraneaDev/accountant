@@ -16,13 +16,13 @@ class Database implements LedgerDriver
      */
     public function record(Recordable $model, string $event): Ledger
     {
-        $notary = Config::get('accountant.notary', \Altek\Accountant\Notary::class);
+        $notary = Config::get('accountant.notary');
 
         if (!is_subclass_of($notary, Notary::class)) {
             throw new AccountantException(sprintf('Invalid Notary implementation: "%s"', $notary));
         }
 
-        $implementation = Config::get('accountant.ledger.implementation', \Altek\Accountant\Models\Ledger::class);
+        $implementation = Config::get('accountant.ledger.implementation');
 
         if (!is_subclass_of($implementation, Ledger::class)) {
             throw new AccountantException(sprintf('Invalid Ledger implementation: "%s"', $implementation));

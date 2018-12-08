@@ -85,9 +85,7 @@ trait Recordable
      */
     public function ledgers(): MorphMany
     {
-        $implementation = Config::get('accountant.ledger.implementation', Models\Ledger::class);
-
-        return $this->morphMany($implementation, 'recordable');
+        return $this->morphMany(Config::get('accountant.ledger.implementation'), 'recordable');
     }
 
     /**
@@ -111,12 +109,7 @@ trait Recordable
      */
     public function getRecordableEvents(): array
     {
-        return $this->recordableEvents ?? Config::get('accountant.events', [
-            'created',
-            'updated',
-            'deleted',
-            'restored',
-        ]);
+        return $this->recordableEvents ?? Config::get('accountant.events');
     }
 
     /**
@@ -124,7 +117,7 @@ trait Recordable
      */
     public function getLedgerThreshold(): int
     {
-        return $this->ledgerThreshold ?? Config::get('accountant.ledger.threshold', 0);
+        return $this->ledgerThreshold ?? Config::get('accountant.ledger.threshold');
     }
 
     /**
@@ -132,7 +125,7 @@ trait Recordable
      */
     public function getLedgerDriver(): ?string
     {
-        return $this->ledgerDriver ?? Config::get('accountant.ledger.driver', 'database');
+        return $this->ledgerDriver ?? Config::get('accountant.ledger.driver');
     }
 
     /**
@@ -237,7 +230,7 @@ trait Recordable
 
         $user = $this->resolveUser();
 
-        $userPrefix = Config::get('accountant.user.prefix', 'user');
+        $userPrefix = Config::get('accountant.user.prefix');
 
         return [
             $userPrefix.'_id'   => $user ? $user->getIdentifier() : null,
