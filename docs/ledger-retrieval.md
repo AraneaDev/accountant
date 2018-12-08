@@ -32,6 +32,7 @@ $ledgers = $article->ledgers()->with('user')->get();
 ## Getting Ledger metadata
 Retrieving an `array` with `Ledger` metadata:
 
+### Usage example
 ```php
 // Get the first available Article
 $article = Article::first();
@@ -42,7 +43,7 @@ $ledger = $article->ledgers()->latest()->first();
 var_dump($ledger->getMetadata());
 ```
 
-**Output:**
+### Output example
 ```php
 array(10) {
   'ledger_id' =>
