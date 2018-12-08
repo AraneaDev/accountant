@@ -3,6 +3,7 @@
 namespace Altek\Accountant;
 
 use Altek\Accountant\Contracts\Cipher;
+use Altek\Accountant\Contracts\ContextResolver;
 use Altek\Accountant\Contracts\Identifiable;
 use Altek\Accountant\Contracts\IpAddressResolver;
 use Altek\Accountant\Contracts\UrlResolver;
@@ -10,7 +11,6 @@ use Altek\Accountant\Contracts\UserAgentResolver;
 use Altek\Accountant\Contracts\UserResolver;
 use Altek\Accountant\Exceptions\AccountantException;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 
 trait Recordable
@@ -25,6 +25,8 @@ trait Recordable
     /**
      * Determine if the observer should be registered.
      *
+     * @throws AccountantException
+     *
      * @return bool
      */
     public static function shouldRegisterObserver(): bool
@@ -33,15 +35,21 @@ trait Recordable
             return false;
         }
 
-        if (App::runningInConsole()) {
-            return Config::get('accountant.ledger.cli', false);
+        $implementation = Config::get('accountant.resolvers.context');
+
+        if (!is_subclass_of($implementation, ContextResolver::class)) {
+            throw new AccountantException(sprintf('Invalid ContextResolver implementation: "%s"', $implementation));
         }
 
-        return true;
+        $context = call_user_func([$implementation, 'resolve']);
+
+        return Context::isValid($context);
     }
 
     /**
      * Recordable boot logic.
+     *
+     * @throws AccountantException
      *
      * @return void
      */
