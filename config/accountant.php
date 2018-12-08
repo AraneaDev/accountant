@@ -1,5 +1,7 @@
 <?php
 
+use Altek\Accountant\Context;
+
 return [
 
     'ledger' => [
@@ -14,17 +16,6 @@ return [
         */
 
         'implementation' => Altek\Accountant\Models\Ledger::class,
-
-        /*
-        |--------------------------------------------------------------------------
-        | CLI Recording
-        |--------------------------------------------------------------------------
-        |
-        | Whether a Ledger should be created from Command Line Interface events.
-        |
-        */
-
-        'cli' => false,
 
         /*
         |--------------------------------------------------------------------------
@@ -65,6 +56,17 @@ return [
         'user_agent' => Altek\Accountant\Resolvers\UserAgentResolver::class,
         'url'        => Altek\Accountant\Resolvers\UrlResolver::class,
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Recording contexts
+    |--------------------------------------------------------------------------
+    |
+    | Define the contexts in which recording should take place.
+    |
+    */
+
+    'contexts' => Context::TEST | Context::CLI | Context::WEB,
 
     /*
     |--------------------------------------------------------------------------
