@@ -2,6 +2,7 @@
 
 namespace Altek\Accountant\Tests\Integration;
 
+use Altek\Accountant\Context;
 use Altek\Accountant\Events\Recording;
 use Altek\Accountant\Exceptions\AccountantException;
 use Altek\Accountant\Models\Ledger;
@@ -18,9 +19,9 @@ class RecordingTest extends AccountantTestCase
     /**
      * @test
      */
-    public function itWillNotRecordModelsWhenRunningFromTheConsole(): void
+    public function itWillNotRecordWhenInTestContext(): void
     {
-        $this->app['config']->set('accountant.ledger.cli', false);
+        $this->app['config']->set('accountant.contexts', Context::CLI | Context::WEB);
 
         factory(User::class)->create();
 
@@ -31,9 +32,60 @@ class RecordingTest extends AccountantTestCase
     /**
      * @test
      */
-    public function itWillRecordModelsWhenRunningFromTheConsole(): void
+    public function itWillNotRecordWhenInCliContext(): void
     {
-        $this->app['config']->set('accountant.ledger.cli', true);
+        $this->app['config']->set('accountant.contexts', Context::TEST | Context::WEB);
+
+        App::shouldReceive('runningUnitTests')
+            ->andReturn(false);
+
+        App::shouldReceive('runningInConsole')
+            ->andReturn(true);
+
+        factory(User::class)->create();
+
+        $this->assertSame(1, User::count());
+        $this->assertSame(0, Ledger::count());
+    }
+
+    /**
+     * @test
+     */
+    public function itWillNotRecordWhenInWebContext(): void
+    {
+        $this->app['config']->set('accountant.contexts', Context::TEST | Context::CLI);
+
+        App::shouldReceive('runningUnitTests')
+            ->andReturn(false);
+
+        App::shouldReceive('runningInConsole')
+            ->andReturn(false);
+
+        factory(User::class)->create();
+
+        $this->assertSame(1, User::count());
+        $this->assertSame(0, Ledger::count());
+    }
+
+    /**
+     * @test
+     */
+    public function itWillNotRecordInAnyContext(): void
+    {
+        $this->app['config']->set('accountant.contexts', 0b000);
+
+        factory(User::class)->create();
+
+        $this->assertSame(1, User::count());
+        $this->assertSame(0, Ledger::count());
+    }
+
+    /**
+     * @test
+     */
+    public function itWillRecordWhenInTestContext(): void
+    {
+        $this->app['config']->set('accountant.contexts', Context::TEST);
 
         factory(User::class)->create();
 
@@ -44,12 +96,34 @@ class RecordingTest extends AccountantTestCase
     /**
      * @test
      */
-    public function itWillAlwaysRecordModelsWhenNotRunningFromTheConsole(): void
+    public function itWillRecordWhenInCliContext(): void
     {
-        App::shouldReceive('runningInConsole')
+        $this->app['config']->set('accountant.contexts', Context::CLI);
+
+        App::shouldReceive('runningUnitTests')
             ->andReturn(false);
 
-        $this->app['config']->set('accountant.ledger.cli', false);
+        App::shouldReceive('runningInConsole')
+            ->andReturn(true);
+
+        factory(User::class)->create();
+
+        $this->assertSame(1, User::count());
+        $this->assertSame(1, Ledger::count());
+    }
+
+    /**
+     * @test
+     */
+    public function itWillRecordWhenInWebContext(): void
+    {
+        $this->app['config']->set('accountant.contexts', Context::WEB);
+
+        App::shouldReceive('runningUnitTests')
+            ->andReturn(false);
+
+        App::shouldReceive('runningInConsole')
+            ->andReturn(false);
 
         factory(User::class)->create();
 

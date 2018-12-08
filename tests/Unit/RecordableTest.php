@@ -4,6 +4,7 @@ namespace Altek\Accountant\Tests\Unit;
 
 use Altek\Accountant\Ciphers\Base64;
 use Altek\Accountant\Ciphers\Bleach;
+use Altek\Accountant\Context;
 use Altek\Accountant\Contracts\Identifiable;
 use Altek\Accountant\Exceptions\AccountantException;
 use Altek\Accountant\Models\Ledger;
@@ -30,23 +31,62 @@ class RecordableTest extends AccountantTestCase
     /**
      * @group Recordable::shouldRegisterObserver
      * @test
+     *
+     * @dataProvider contextResolverProvider
+     *
+     * @param int  $contexts
+     * @param bool $test
+     * @param bool $cli
      */
-    public function itWillNotRegisterTheRecordableObserverWhenRunningFromTheConsole(): void
+    public function itWillNotRegisterTheRecordableObserverWhenNotInContext(int $contexts, bool $test, bool $cli): void
     {
-        $this->app['config']->set('accountant.ledger.cli', false);
+        $this->app['config']->set('accountant.contexts', $contexts);
+
+        App::shouldReceive('runningUnitTests')
+            ->andReturn($test);
+
+        App::shouldReceive('runningInConsole')
+            ->andReturn($cli);
 
         $this->assertFalse(Article::shouldRegisterObserver());
+    }
+
+    /**
+     * @return array
+     */
+    public function contextResolverProvider(): array
+    {
+        return [
+            [
+                Context::CLI | Context::WEB,
+                true,
+                false,
+            ],
+            [
+                Context::TEST | Context::WEB,
+                false,
+                true,
+            ],
+            [
+                Context::TEST | Context::CLI,
+                false,
+                false,
+            ],
+        ];
     }
 
     /**
      * @group Recordable::shouldRegisterObserver
      * @test
      */
-    public function itWillRegisterTheRecordableObserverWhenRunningFromTheConsole(): void
+    public function itWillNotRegisterTheRecordableObserverDueToClassNotImplementingContextResolverInterface(): void
     {
-        $this->app['config']->set('accountant.ledger.cli', true);
+        $this->app['config']->set('accountant.resolvers.context', self::class);
 
-        $this->assertTrue(Article::shouldRegisterObserver());
+        $this->expectException(AccountantException::class);
+        $this->expectExceptionMessage('Invalid ContextResolver implementation: "Altek\Accountant\Tests\Unit\RecordableTest"');
+
+        Article::shouldRegisterObserver();
     }
 
     /**
@@ -58,11 +98,6 @@ class RecordableTest extends AccountantTestCase
     {
         Article::disableRecording();
 
-        App::shouldReceive('runningInConsole')
-            ->andReturn(false);
-
-        $this->app['config']->set('accountant.ledger.cli', true);
-
         $this->assertFalse(Article::shouldRegisterObserver());
 
         Article::enableRecording();
@@ -72,13 +107,8 @@ class RecordableTest extends AccountantTestCase
      * @group Recordable::shouldRegisterObserver
      * @test
      */
-    public function itWillAlwaysRegisterTheRecordableObserverWhenNotRunningFromTheConsole(): void
+    public function itWillRegisterTheRecordableObserverByDefault(): void
     {
-        App::shouldReceive('runningInConsole')
-            ->andReturn(false);
-
-        $this->app['config']->set('accountant.ledger.cli', false);
-
         $this->assertTrue(Article::shouldRegisterObserver());
     }
 

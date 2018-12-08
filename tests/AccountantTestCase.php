@@ -3,6 +3,8 @@
 namespace Altek\Accountant\Tests;
 
 use Altek\Accountant\AccountantServiceProvider;
+use Altek\Accountant\Context;
+use Altek\Accountant\Resolvers\ContextResolver;
 use Altek\Accountant\Resolvers\IpAddressResolver;
 use Altek\Accountant\Resolvers\UrlResolver;
 use Altek\Accountant\Resolvers\UserAgentResolver;
@@ -27,13 +29,14 @@ class AccountantTestCase extends TestCase
 
         // Accountant
         $app['config']->set('accountant.resolvers', [
+            'context'    => ContextResolver::class,
             'user'       => UserResolver::class,
             'url'        => UrlResolver::class,
             'ip_address' => IpAddressResolver::class,
             'user_agent' => UserAgentResolver::class,
         ]);
 
-        $app['config']->set('accountant.ledger.cli', true);
+        $app['config']->set('accountant.contexts', Context::TEST | Context::CLI | Context::WEB);
 
         $app['config']->set('accountant.user.prefix', 'user');
         $app['config']->set('accountant.user.guards', [
