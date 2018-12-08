@@ -6,9 +6,20 @@ use Illuminate\Support\Facades\Config;
 
 class Context
 {
+    /**
+     * Testing context (PHPUnit).
+     */
     public const TEST = 0b001;
-    public const CLI  = 0b010;
-    public const WEB  = 0b100;
+
+    /**
+     * Command Line Interface context (Migrations, Commands, Tinker, ...).
+     */
+    public const CLI = 0b010;
+
+    /**
+     * Web context (Apache, CGI, FPM, ...).
+     */
+    public const WEB = 0b100;
 
     /**
      * Determine if a given context is valid.
