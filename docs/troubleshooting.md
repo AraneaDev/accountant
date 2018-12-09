@@ -19,10 +19,10 @@ But using `Eloquent` will:
 Article::find($id)->update($data);
 ```
 
-### Command Line Interface and Jobs
-By default, Eloquent events from a **Job** or from the **CLI** (i.e. migrations, tests, commands, Tinker, ...), **WILL NOT** be recorded.
+### Testing and Command Line Interface
+By default, Eloquent events fired from a **CLI** (i.e. jobs, migrations, commands, Tinker, ...) or **Testing** context, **WILL NOT** be recorded.
 
-Please refer to the [Configuration](configuration.md) for more details. 
+Refer to the **Recording Contexts** section in the [Configuration](configuration.md) documentation for more details. 
 
 ## Attributes are considered modified, when they're not
 False positives may give origin to `Ledger` records.

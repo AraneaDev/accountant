@@ -1,11 +1,65 @@
 # Resolvers
-A resolver is a class implementing one of the following contracts:
-- `Altek\Accountant\Contracts\IpAddressResolver`
-- `Altek\Accountant\Contracts\UrlResolver`
-- `Altek\Accountant\Contracts\UserAgentResolver`
-- `Altek\Accountant\Contracts\UserResolver`
+Currently, there are five resolver types available.
 
-Each resolver must have a **public static** `resolve()` method with the appropriate logic.
+Name       | Interface                         
+-----------|-----------------------------------------------
+Context    | `Altek\Accountant\Contracts\ContextResolver`
+IP Address | `Altek\Accountant\Contracts\IpAddressResolver`
+URL        | `Altek\Accountant\Contracts\UrlResolver`
+User Agent | `Altek\Accountant\Contracts\UserAgentResolver`
+User       | `Altek\Accountant\Contracts\UserResolver`
+
+Each resolver has a **public static** `resolve()` method with the appropriate logic.
+
+The package already includes concrete implementations that can be replaced with custom ones, should there be a special need.
+
+## Context Resolver
+The default `ContextResolver` implementation uses `App::runningUnitTests()` and `App::runningInConsole()` in its logic.
+
+Here's an alternative implementation that does not depend on `Illuminate\Foundation\Application`:
+
+```php
+<?php
+
+namespace App\Resolvers;
+
+use Altek\Accountant\Context;
+
+class ContextResolver implements \Altek\Accountant\Contracts\ContextResolver
+{
+    /**
+     * {@inheritdoc}
+     */
+    public static function resolve(): int
+    {
+        if (strpos($_SERVER['argv'][0] ?? '', 'phpunit') !== false) {
+            return Context::TEST;
+        }
+
+        if (PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg') {
+            return Context::CLI;
+        }
+
+        return Context::WEB;
+    }
+}
+```
+
+Set the custom _Context_ resolver in the `config/accountant.php` configuration file:
+
+```php
+return [
+
+    // ...
+
+    'resolvers' = [
+        'context' => App\Resolvers\ContextResolver::class,
+        // ...
+    ],
+
+    // ...
+];
+```
 
 ## IP Address Resolver
 The default `IpAddressResolver` implementation uses `Request::ip()` to get client IP addresses.
@@ -92,6 +146,7 @@ return [
     'resolvers' = [
         // ...
         'url' => App\Resolvers\UrlResolver::class,
+        // ...
     ],
 
     // ...
@@ -203,10 +258,12 @@ return [
     // ...
 
     'resolvers' = [
-        'user' => App\Resolvers\UserResolver::class,
         // ...
+        'user' => App\Resolvers\UserResolver::class,
     ],
 
     // ...
 ];
 ```
+
+> **CAVEAT:** Resolving a `User` in the CLI may not work.
