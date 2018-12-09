@@ -51,16 +51,16 @@ trait Ledger
 
         // Metadata
         $this->data = [
-            'ledger_id'         => $this->getKey(),
-            'ledger_event'      => $this->getAttributeFromArray('event'),
-            'ledger_url'        => $this->getAttributeFromArray('url'),
-            'ledger_ip_address' => $this->getAttributeFromArray('ip_address'),
-            'ledger_user_agent' => $this->getAttributeFromArray('user_agent'),
-            'ledger_created_at' => $this->serializeDate($this->getAttributeValue($this->getCreatedAtColumn())),
-            'ledger_updated_at' => $this->serializeDate($this->getAttributeValue($this->getUpdatedAtColumn())),
-            'ledger_signature'  => $this->getAttributeFromArray('signature'),
-            'user_id'           => $this->getAttributeFromArray($userPrefix.'_id'),
-            'user_type'         => $this->getAttributeFromArray($userPrefix.'_type'),
+            'ledger_id'                  => $this->getKey(),
+            'ledger_event'               => $this->getAttributeFromArray('event'),
+            'ledger_url'                 => $this->getAttributeFromArray('url'),
+            'ledger_ip_address'          => $this->getAttributeFromArray('ip_address'),
+            'ledger_user_agent'          => $this->getAttributeFromArray('user_agent'),
+            'ledger_'.static::CREATED_AT => $this->serializeDate($this->getAttributeValue(static::CREATED_AT)),
+            'ledger_'.static::UPDATED_AT => $this->serializeDate($this->getAttributeValue(static::UPDATED_AT)),
+            'ledger_signature'           => $this->getAttributeFromArray('signature'),
+            'user_id'                    => $this->getAttributeFromArray($userPrefix.'_id'),
+            'user_type'                  => $this->getAttributeFromArray($userPrefix.'_type'),
         ];
 
         if ($this->user) {
@@ -237,8 +237,8 @@ trait Ledger
         }
 
         // A date mismatch is enough for a record to be considered tainted
-        $createdAt = $this->getAttributeValue($this->getCreatedAtColumn());
-        $updatedAt = $this->getAttributeValue($this->getUpdatedAtColumn());
+        $createdAt = $this->getAttributeValue(static::CREATED_AT);
+        $updatedAt = $this->getAttributeValue(static::UPDATED_AT);
 
         if ($createdAt->notEqualTo($updatedAt)) {
             return true;

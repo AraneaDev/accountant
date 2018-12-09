@@ -285,16 +285,16 @@ trait Recordable
         }
 
         // The created at value must match
-        $createdAt = $this->getAttributeValue($this->getCreatedAtColumn());
+        $createdAt = $this->getAttributeValue(static::CREATED_AT);
 
-        if ($createdAt->notEqualTo($ledgers->first()->properties[$this->getCreatedAtColumn()])) {
+        if ($createdAt->notEqualTo($ledgers->first()->properties[static::CREATED_AT])) {
             return false;
         }
 
         // The updated at value must match
-        $updatedAt = $this->getAttributeValue($this->getUpdatedAtColumn());
+        $updatedAt = $this->getAttributeValue(static::UPDATED_AT);
 
-        if ($updatedAt->notEqualTo($ledgers->last()->properties[$this->getUpdatedAtColumn()])) {
+        if ($updatedAt->notEqualTo($ledgers->last()->properties[static::UPDATED_AT])) {
             return false;
         }
 
