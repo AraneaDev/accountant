@@ -59,13 +59,13 @@ trait Ledger
             'ledger_'.static::CREATED_AT => $this->serializeDate($this->getAttributeValue(static::CREATED_AT)),
             'ledger_'.static::UPDATED_AT => $this->serializeDate($this->getAttributeValue(static::UPDATED_AT)),
             'ledger_signature'           => $this->getAttributeFromArray('signature'),
-            'user_id'                    => $this->getAttributeFromArray($userPrefix.'_id'),
-            'user_type'                  => $this->getAttributeFromArray($userPrefix.'_type'),
+            $userPrefix.'_id'            => $this->getAttributeFromArray($userPrefix.'_id'),
+            $userPrefix.'_type'          => $this->getAttributeFromArray($userPrefix.'_type'),
         ];
 
         if ($this->user) {
             foreach ($this->user->getArrayableAttributes() as $attribute => $value) {
-                $this->data['user_'.$attribute] = $value;
+                $this->data[$userPrefix.'_'.$attribute] = $value;
             }
         }
 
@@ -155,13 +155,17 @@ trait Ledger
         $value = $this->data[$key];
 
         // User property
-        if ($this->user && starts_with($key, 'user_')) {
-            return $this->getFormattedProperty($this->user, substr($key, 5), $value);
+        $userPrefix = Config::get('accountant.user.prefix');
+
+        if ($this->user && starts_with($key, $userPrefix.'_')) {
+            $userPrefixOffset = mb_strlen($userPrefix.'_');
+
+            return $this->getFormattedProperty($this->user, mb_substr($key, $userPrefixOffset), $value);
         }
 
         // Recordable property
         if ($this->recordable && starts_with($key, 'recordable_')) {
-            return $this->getFormattedProperty($this->recordable, substr($key, 11), $value);
+            return $this->getFormattedProperty($this->recordable, mb_substr($key, 11), $value);
         }
 
         return $value;
