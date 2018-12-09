@@ -12,7 +12,7 @@ class Context
     public const TEST = 0b001;
 
     /**
-     * Command Line Interface context (Migrations, Commands, Tinker, ...).
+     * Command Line Interface context (Migrations, Jobs, Commands, Tinker, ...).
      */
     public const CLI = 0b010;
 
