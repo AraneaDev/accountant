@@ -44,17 +44,17 @@ return [
     | Resolver Implementations
     |--------------------------------------------------------------------------
     |
-    | Define the Context, User, IP Address, User Agent and URL resolver
+    | Define the Context, IP Address, URL, User Agent and User resolver
     | implementations.
     |
     */
 
     'resolvers' => [
         'context'    => Altek\Accountant\Resolvers\ContextResolver::class,
-        'user'       => Altek\Accountant\Resolvers\UserResolver::class,
         'ip_address' => Altek\Accountant\Resolvers\IpAddressResolver::class,
-        'user_agent' => Altek\Accountant\Resolvers\UserAgentResolver::class,
         'url'        => Altek\Accountant\Resolvers\UrlResolver::class,
+        'user_agent' => Altek\Accountant\Resolvers\UserAgentResolver::class,
+        'user'       => Altek\Accountant\Resolvers\UserResolver::class,
     ],
 
     /*
