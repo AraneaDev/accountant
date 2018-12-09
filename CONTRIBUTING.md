@@ -16,7 +16,7 @@ If after going through all the previous steps you still have an issue, feel free
 For new features or improvements, open a new issue using the [Proposal](.gitlab/issue_templates/Proposal.md) template.
 
 ## Which Branch?
-Pull requests containing bug fixes or new features should always be done against the `master` branch.
+Merge requests containing bug fixes or new features should always be done against the `master` branch.
 
 ## Coding Style
 This package follows the [PSR-2](https://www.php-fig.org/psr/psr-2/) coding style guide and the [PSR-4](https://www.php-fig.org/psr/psr-4/) autoloader standard.
