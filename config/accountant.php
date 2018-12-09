@@ -1,7 +1,5 @@
 <?php
 
-use Altek\Accountant\Context;
-
 return [
 
     'ledger' => [
@@ -68,7 +66,7 @@ return [
     |
     */
 
-    'contexts' => Context::TEST | Context::CLI | Context::WEB,
+    'contexts' => Altek\Accountant\Context::WEB,
 
     /*
     |--------------------------------------------------------------------------
