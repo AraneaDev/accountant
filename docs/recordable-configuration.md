@@ -57,7 +57,7 @@ class Article extends Model implements Recordable
 
 The above configuration, will keep the `10` latest `Ledger` records.
 
-> **CAVEAT:** Pruning `Ledger` records will affect tampering checks!
+> **CAVEAT:** Bear in mind that pruning `Ledger` records will affect operations such as [tampering check](ledger-signatures.md)!
 
 ## Events
 By default, only the `created`, `updated`, `deleted` and `restored` Eloquent events are monitored.
