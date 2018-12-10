@@ -1,7 +1,7 @@
 # Ledger Migration
 Even though the default migration should cover most usage cases, the ledger table schema can be somewhat customised.
 
-Here are some changes that can be performed without losing functionality.
+Here are some of the changes that can be performed.
 
 ## Using a different prefix for the User ID/Type columns
 Instead of the default `user_id` and `user_type` columns, a different prefix can be set:
