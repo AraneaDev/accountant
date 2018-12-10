@@ -1,12 +1,12 @@
 # Installation
 The Accountant package should be installed using [Composer](http://getcomposer.org/doc/00-intro.md).
-Running the following command from your project root, should get you the latest available version:
+Running the following command from your project root, gets you the latest available version:
 
 ```sh
 composer require altek/accountant
 ```
 
-> **NOTICE:** This package supports **Laravel** and **Lumen** from version 5.2 onward.
+> **NOTICE:** This package supports **Laravel** and **Lumen** from version **5.2** onward.
 
 # Configuration
 There's a slight difference between the **Laravel** and **Lumen** configurations, so we cover them both.
@@ -94,7 +94,7 @@ You can read more about the available configuration settings in the [Configurati
 Publish the database migration file with the following command:
 
 ```sh
-php artisan vendor:publish --tag="accountant-migration"
+php artisan vendor:publish --tag="accountant-migrations"
 ```
 
 ## Customisation
