@@ -1,6 +1,7 @@
 # Recordable configuration 
-When recording a `Ledger`, there might be different outcomes.
-It will depend on what has been set globally, or on a per `Recordable` model basis.
+When recording a `Ledger`, different outcomes may happen.
+
+It depends on what has been set globally, or per `Recordable` model.
 
 ## Ledger threshold
 Out of the box, there's no limit to the number of `Ledger` records that are kept for a given `Recordable` model.
@@ -25,7 +26,7 @@ return [
 ```
 
 ### Locally
-This is done on a per `Recordable` model basis, by assigning an `int` value to the `$ledgerThreshold` attribute.
+This is done on a `Recordable` model, by assigning an `int` value to the `$ledgerThreshold` attribute.
 
 > **TIP:** A locally defined threshold **always** takes precedence over a globally defined one.
 
@@ -79,7 +80,7 @@ return [
 ```
 
 ### Locally
-This is done on a per `Recordable` model basis, by assigning an `array` value to the `$recordableEvents` attribute.
+This is done on a `Recordable` model, by assigning an `array` value to the `$recordableEvents` attribute.
 
 > **TIP:** Locally defined events **always** take precedence over globally defined ones.
 
