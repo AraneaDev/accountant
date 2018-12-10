@@ -4,7 +4,7 @@ Out of the box, the Accountant package includes a `Database` driver.
 
 Besides storing model attribute changes and other metadata, drivers also handle pruning when a ledger threshold is set.
 
-While the `Database` driver can be enough for most use cases, should you need to write a custom driver, you can do so.
+While the `Database` driver can be enough for most use cases, should you need to write a custom one, you can do so.
 
 ## Creating a custom Driver
 A driver is just a class that implements the `LedgerDriver` interface.
