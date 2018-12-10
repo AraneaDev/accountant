@@ -77,7 +77,7 @@ return [
 ```
 
 ## User
-This package supports multiple user types, by using a polymorphic `MorphTo` relation.
+This package supports multiple user types, through the use of a polymorphic `MorphTo` relation.
 
 ### Prefix
 By default, the column names used are `user_id` and `user_type`. For a different user column prefix, change the configuration value, and update the [Ledger Migration](ledger-migration.md) accordingly.
