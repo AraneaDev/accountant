@@ -2,7 +2,7 @@
 During and after the recording process, two events are fired.
 
 ## Recording
-This first event is fired during the recording of a `Ledger`. If necessary, the recording can be aborted by returning `false` from the event listener `handle()` method.
+This first event is fired during the recording of a `Ledger`. If necessary, the recording can be aborted by returning `false` from the event listener's `handle()` method.
 
 ```php
 <?php
