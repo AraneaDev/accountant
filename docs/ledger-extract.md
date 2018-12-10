@@ -7,7 +7,7 @@ This method supports two modes of operation.
 ## Strict mode
 This is the default, when the `extract()` method is called with no arguments.
 
-In order to recreate an exact `Recordable` instance in this mode, **ALL** properties must be available in their original form and the `Ledger` cannot be tainted.
+In order to recreate an exact `Recordable` instance in this mode, **ALL** properties must be available in their original form and the `Ledger` cannot be [tainted](ledger-signatures.md).
 
 ### Usage example
 ```php
@@ -27,7 +27,7 @@ try {
 // ...
 ```
 
-> **CAVEAT:** The method will throw a `Altek\Accountant\Exceptions\DecipherException` if a property has been encoded by a **one way** cipher, which makes deciphering unfeasible.
+> **CAVEAT:** The method will throw a `Altek\Accountant\Exceptions\DecipherException` if a property has been encoded with a **one way** cipher, which makes deciphering unfeasible.
 
 ## Soft mode
 This is more easy-going approach, which will tolerate tainted ledgers and **one way** ciphered property values.
