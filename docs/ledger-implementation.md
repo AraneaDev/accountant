@@ -71,5 +71,3 @@ return [
     // ...
 ];
 ```
-
-> **TIP:** If the value is missing from the configuration, the `ledgers()` relation method of the `Recording` trait will default to `Altek\Accountant\Models\Ledger`.
