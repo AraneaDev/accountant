@@ -7,6 +7,8 @@ It depends on what has been set globally, or per `Recordable` model.
 Out of the box, there's no limit to the number of `Ledger` records that are kept for a given `Recordable` model.
 If needed, set the threshold configuration to a positive `int` of your choice, to keep `Ledger` records to a minimum.
 
+> **TIP:** By default, the `accountant.ledger.threshold` value is set to `0` (zero), which stands for no limit.
+
 ### Globally
 This is done in the `config/accountant.php` configuration file.
 
@@ -55,7 +57,7 @@ class Article extends Model implements Recordable
 
 The above configuration, will keep the `10` latest `Ledger` records.
 
-> **TIP:** By default, the `accountant.ledger.threshold` value is set to `0` (zero), which stands for no limit.
+> **CAVEAT:** Pruning `Ledger` records will affect tampering checks!
 
 ## Events
 By default, only the `created`, `updated`, `deleted` and `restored` Eloquent events are monitored.
