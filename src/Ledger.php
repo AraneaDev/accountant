@@ -52,6 +52,7 @@ trait Ledger
         // Metadata
         $this->data = [
             'ledger_id'                  => $this->getKey(),
+            'ledger_context'             => (int) $this->getAttributeFromArray('context'),
             'ledger_event'               => $this->getAttributeFromArray('event'),
             'ledger_url'                 => $this->getAttributeFromArray('url'),
             'ledger_ip_address'          => $this->getAttributeFromArray('ip_address'),

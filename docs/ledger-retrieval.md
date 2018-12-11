@@ -45,16 +45,18 @@ var_dump($ledger->getMetadata());
 
 ### Output example
 ```php
-array(10) {
+array(11) {
   'ledger_id' =>
   int(2)
+  'ledger_context' =>
+  int(1)
   'ledger_event' =>
   string(7) "updated"
   'ledger_url' =>
   string(29) "http://example.com/articles/1"
-  ["ledger_ip_address"]=>
+  'ledger_ip_address'=>
   string(9) "127.0.0.1"
-  ["ledger_user_agent"]=>
+  'ledger_user_agent'=>
   string(68) "Mozilla/5.0 (X11; Linux x86_64; rv:63.0) Gecko/20100101 Firefox/63.0"
   'ledger_created_at' =>
   string(19) "2012-06-14 15:03:03"

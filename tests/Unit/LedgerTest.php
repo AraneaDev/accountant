@@ -4,6 +4,7 @@ namespace Altek\Accountant\Tests\Unit;
 
 use Altek\Accountant\Ciphers\Base64;
 use Altek\Accountant\Ciphers\Bleach;
+use Altek\Accountant\Context;
 use Altek\Accountant\Contracts\Recordable;
 use Altek\Accountant\Exceptions\AccountantException;
 use Altek\Accountant\Exceptions\DecipherException;
@@ -32,10 +33,11 @@ class LedgerTest extends AccountantTestCase
 
         $ledger = $article->ledgers()->first();
 
-        $this->assertCount(17, $compiled = $ledger->compile());
+        $this->assertCount(18, $compiled = $ledger->compile());
 
         $this->assertArraySubset([
             'ledger_id'               => 1,
+            'ledger_context'          => Context::TEST,
             'ledger_event'            => 'created',
             'ledger_url'              => 'Command Line Interface',
             'ledger_ip_address'       => '127.0.0.1',
@@ -80,10 +82,11 @@ class LedgerTest extends AccountantTestCase
 
         $ledger = $article->ledgers()->first();
 
-        $this->assertCount(23, $compiled = $ledger->compile());
+        $this->assertCount(24, $compiled = $ledger->compile());
 
         $this->assertArraySubset([
             'ledger_id'               => 2,
+            'ledger_context'          => Context::TEST,
             'ledger_event'            => 'created',
             'ledger_url'              => 'Command Line Interface',
             'ledger_ip_address'       => '127.0.0.1',
@@ -136,7 +139,7 @@ class LedgerTest extends AccountantTestCase
         ->first();
 
         // Compile data, making it available to the getProperty() method
-        $this->assertCount(23, $ledger->compile());
+        $this->assertCount(24, $ledger->compile());
 
         // Mutate value
         $this->assertSame('KEEPING TRACK OF ELOQUENT MODEL CHANGES', $ledger->getProperty('recordable_title'));
@@ -169,10 +172,11 @@ class LedgerTest extends AccountantTestCase
     {
         $ledger = factory(Article::class)->create()->ledgers()->first();
 
-        $this->assertCount(10, $metadata = $ledger->getMetadata());
+        $this->assertCount(11, $metadata = $ledger->getMetadata());
 
         $this->assertArraySubset([
             'ledger_id'         => 1,
+            'ledger_context'    => Context::TEST,
             'ledger_event'      => 'created',
             'ledger_url'        => 'Command Line Interface',
             'ledger_ip_address' => '127.0.0.1',
@@ -203,10 +207,11 @@ class LedgerTest extends AccountantTestCase
 
         $ledger = factory(Article::class)->create()->ledgers()->first();
 
-        $this->assertCount(16, $metadata = $ledger->getMetadata());
+        $this->assertCount(17, $metadata = $ledger->getMetadata());
 
         $this->assertArraySubset([
             'ledger_id'         => 2,
+            'ledger_context'    => Context::TEST,
             'ledger_event'      => 'created',
             'ledger_url'        => 'Command Line Interface',
             'ledger_ip_address' => '127.0.0.1',
