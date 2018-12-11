@@ -9,7 +9,7 @@ This is the default, when the `extract()` method is called with no arguments.
 
 In order to recreate an exact `Recordable` instance in this mode, **ALL** properties must be available in their original form and the `Ledger` cannot be **tainted**.
 
-> **TIP:** Check the [Data Integrity](data-integrity.md) documentation for additional information.
+> **TIP:** Read the [Data Integrity Check](data-integrity-check.md) documentation for additional information.
 
 ### Usage example
 ```php

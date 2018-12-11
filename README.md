@@ -23,6 +23,7 @@ Possible discrepancies and anomalies that may indicate business concerns or susp
   * [Drivers](docs/ledger-drivers.md)
   * [Events](docs/ledger-events.md)
 * Advanced
+  * [Data Integrity Check](docs/data-integrity-check.md)
   * [Ledger Extra](docs/ledger-extra.md)
   * [Ledger Extract](docs/ledger-extract.md)
   * [Resolvers](docs/resolvers.md)
