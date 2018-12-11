@@ -238,6 +238,22 @@ class RecordableTest extends AccountantTestCase
      * @group Recordable::collect
      * @test
      */
+    public function itFailsToCollectDataWhenTheContextResolverImplementationIsInvalid(): void
+    {
+        $this->expectException(AccountantException::class);
+        $this->expectExceptionMessage('Invalid ContextResolver implementation: "Altek\Accountant\Tests\Unit\RecordableTest"');
+
+        $this->app['config']->set('accountant.resolvers.context', self::class);
+
+        $article = new Article();
+
+        $article->collect('created');
+    }
+
+    /**
+     * @group Recordable::collect
+     * @test
+     */
     public function itFailsToCollectDataWhenTheIpAddressResolverImplementationIsInvalid(): void
     {
         $this->expectException(AccountantException::class);
