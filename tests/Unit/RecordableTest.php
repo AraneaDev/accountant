@@ -201,11 +201,11 @@ class RecordableTest extends AccountantTestCase
     }
 
     /**
-     * @group Recordable::process
+     * @group Recordable::collect
      * @group Recordable::disableRecording
      * @test
      */
-    public function itFailsWhenRecordingIsNotEnabled(): void
+    public function itFailsToCollectDataWhenRecordingIsNotEnabled(): void
     {
         $this->expectException(AccountantException::class);
         $this->expectExceptionMessage('Recording is not enabled');
@@ -214,15 +214,15 @@ class RecordableTest extends AccountantTestCase
 
         $article::disableRecording();
 
-        $article->process('created');
+        $article->collect('created');
     }
 
     /**
-     * @group Recordable::process
+     * @group Recordable::collect
      * @group Recordable::enableRecording
      * @test
      */
-    public function itFailsWhenAnInvalidLedgerEventIsPassed(): void
+    public function itFailsToCollectDataWhenAnInvalidLedgerEventIsPassed(): void
     {
         $this->expectException(AccountantException::class);
         $this->expectExceptionMessage('Invalid event: "retrieved"');
@@ -231,14 +231,14 @@ class RecordableTest extends AccountantTestCase
 
         $article::enableRecording();
 
-        $article->process('retrieved');
+        $article->collect('retrieved');
     }
 
     /**
-     * @group Recordable::process
+     * @group Recordable::collect
      * @test
      */
-    public function itFailsWhenTheIpAddressResolverImplementationIsInvalid(): void
+    public function itFailsToCollectDataWhenTheIpAddressResolverImplementationIsInvalid(): void
     {
         $this->expectException(AccountantException::class);
         $this->expectExceptionMessage('Invalid IpAddressResolver implementation: "Altek\Accountant\Tests\Unit\RecordableTest"');
@@ -247,14 +247,14 @@ class RecordableTest extends AccountantTestCase
 
         $article = new Article();
 
-        $article->process('created');
+        $article->collect('created');
     }
 
     /**
-     * @group Recordable::process
+     * @group Recordable::collect
      * @test
      */
-    public function itFailsWhenTheUrlResolverImplementationIsInvalid(): void
+    public function itFailsToCollectDataWhenTheUrlResolverImplementationIsInvalid(): void
     {
         $this->expectException(AccountantException::class);
         $this->expectExceptionMessage('Invalid UrlResolver implementation: "Altek\Accountant\Tests\Unit\RecordableTest"');
@@ -263,14 +263,14 @@ class RecordableTest extends AccountantTestCase
 
         $article = new Article();
 
-        $article->process('created');
+        $article->collect('created');
     }
 
     /**
-     * @group Recordable::process
+     * @group Recordable::collect
      * @test
      */
-    public function itFailsWhenTheUserAgentResolverImplementationIsInvalid(): void
+    public function itFailsToCollectDataWhenTheUserAgentResolverImplementationIsInvalid(): void
     {
         $this->expectException(AccountantException::class);
         $this->expectExceptionMessage('Invalid UserAgentResolver implementation: "Altek\Accountant\Tests\Unit\RecordableTest"');
@@ -279,14 +279,14 @@ class RecordableTest extends AccountantTestCase
 
         $article = new Article();
 
-        $article->process('created');
+        $article->collect('created');
     }
 
     /**
-     * @group Recordable::process
+     * @group Recordable::collect
      * @test
      */
-    public function itFailsWhenTheUserResolverImplementationIsInvalid(): void
+    public function itFailsToCollectDataWhenTheUserResolverImplementationIsInvalid(): void
     {
         $this->expectException(AccountantException::class);
         $this->expectExceptionMessage('Invalid UserResolver implementation: "Altek\Accountant\Tests\Unit\RecordableTest"');
@@ -295,14 +295,14 @@ class RecordableTest extends AccountantTestCase
 
         $article = new Article();
 
-        $article->process('created');
+        $article->collect('created');
     }
 
     /**
-     * @group Recordable::process
+     * @group Recordable::collect
      * @test
      */
-    public function itReturnsTheProcessedDataForALedger(): void
+    public function itSuccessfullyReturnsTheCollectedDataForRecording(): void
     {
         $article = factory(Article::class)->make([
             'title'        => 'Keeping Track Of Eloquent Model Changes',
@@ -311,7 +311,7 @@ class RecordableTest extends AccountantTestCase
             'published_at' => Carbon::now(),
         ]);
 
-        $this->assertCount(12, $data = $article->process('created'));
+        $this->assertCount(12, $data = $article->collect('created'));
 
         $this->assertArraySubset([
             'user_id'         => null,
@@ -340,7 +340,7 @@ class RecordableTest extends AccountantTestCase
     }
 
     /**
-     * @group Recordable::process
+     * @group Recordable::collect
      * @test
      *
      * @dataProvider userResolverProvider
@@ -350,7 +350,7 @@ class RecordableTest extends AccountantTestCase
      * @param int    $id
      * @param string $type
      */
-    public function itReturnsTheProcessedDataForALedgerIncludingResolvedUser(
+    public function itSuccessfullyReturnsCollectedDataForRecordingIncludingResolvedUser(
         string $guard,
         string $driver,
         int $id = null,
@@ -371,7 +371,7 @@ class RecordableTest extends AccountantTestCase
             'published_at' => Carbon::now(),
         ]);
 
-        $this->assertCount(12, $data = $article->process('created'));
+        $this->assertCount(12, $data = $article->collect('created'));
 
         $this->assertArraySubset([
             'user_id'         => $id,
@@ -433,10 +433,10 @@ class RecordableTest extends AccountantTestCase
     }
 
     /**
-     * @group Recordable::process
+     * @group Recordable::collect
      * @test
      */
-    public function itIncludesExtraLedgerData(): void
+    public function itSuccessfullyReturnsCollectedDataIncludingExtraSupply(): void
     {
         $article = new class() extends Article {
             protected $table = 'articles';
@@ -456,7 +456,7 @@ class RecordableTest extends AccountantTestCase
             'published_at' => '2012-06-14 15:03:03',
         ]);
 
-        $this->assertCount(12, $data = $article->process('created'));
+        $this->assertCount(12, $data = $article->collect('created'));
 
         $this->assertArraySubset([
             'user_id'         => null,
@@ -487,10 +487,10 @@ class RecordableTest extends AccountantTestCase
     }
 
     /**
-     * @group Recordable::process
+     * @group Recordable::collect
      * @test
      */
-    public function itFailsToProcessWhenAnInvalidPropertyIsSet(): void
+    public function itFailsToCollectDataWhenUsingInvalidCipherProperty(): void
     {
         $this->expectException(AccountantException::class);
         $this->expectExceptionMessage('Invalid property: "invalid_property"');
@@ -501,14 +501,14 @@ class RecordableTest extends AccountantTestCase
             'invalid_property' => Base64::class,
         ];
 
-        $article->process('created');
+        $article->collect('created');
     }
 
     /**
-     * @group Recordable::process
+     * @group Recordable::collect
      * @test
      */
-    public function itFailsWhenTheCipherImplementationIsInvalid(): void
+    public function itFailsToCollectDataWhenUsingInvalidCipherImplementation(): void
     {
         $this->expectException(AccountantException::class);
         $this->expectExceptionMessage('Invalid Cipher implementation: "Altek\Accountant\Tests\Unit\RecordableTest"');
@@ -519,14 +519,14 @@ class RecordableTest extends AccountantTestCase
             'title' => self::class,
         ];
 
-        $article->process('created');
+        $article->collect('created');
     }
 
     /**
-     * @group Recordable::process
+     * @group Recordable::collect
      * @test
      */
-    public function itCiphersTheRecordablePropertiesSuccessfully(): void
+    public function itSuccessfullyCiphersTheCollectedData(): void
     {
         $article = factory(Article::class)->make([
             'title'        => 'Keeping Track Of Models',
@@ -547,7 +547,7 @@ class RecordableTest extends AccountantTestCase
             'reviewed' => Base64::class,
         ];
 
-        $this->assertCount(12, $data = $article->process('updated'));
+        $this->assertCount(12, $data = $article->collect('updated'));
 
         $this->assertArraySubset([
             'user_id'         => null,
