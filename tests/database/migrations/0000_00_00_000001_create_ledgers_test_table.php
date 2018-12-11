@@ -17,8 +17,9 @@ class CreateLedgersTestTable extends Migration
             $table->increments('id');
             $table->string('user_type')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->string('event');
             $table->morphs('recordable');
+            $table->unsignedTinyInteger('context');
+            $table->string('event');
             $table->text('properties')->nullable();
             $table->text('modified')->nullable();
             $table->text('extra')->nullable();

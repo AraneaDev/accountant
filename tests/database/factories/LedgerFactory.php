@@ -1,5 +1,6 @@
 <?php
 
+use Altek\Accountant\Context;
 use Altek\Accountant\Models\Ledger;
 use Altek\Accountant\Notary;
 use Altek\Accountant\Tests\Models\Article;
@@ -19,12 +20,13 @@ $factory->define(Ledger::class, function (Faker $faker) {
         'user_id' => function () {
             return factory(User::class)->create()->id;
         },
-        'user_type'     => User::class,
-        'event'         => 'updated',
+        'user_type' => User::class,
         'recordable_id' => function () {
             return factory(Article::class)->create()->id;
         },
         'recordable_type' => Article::class,
+        'context'         => Context::WEB,
+        'event'           => 'updated',
         'properties'      => [],
         'modified'        => [],
         'extra'           => [],
