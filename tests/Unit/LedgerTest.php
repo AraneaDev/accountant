@@ -558,7 +558,23 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::isTainted
      * @test
      */
-    public function itFailsToAssertTheRecordAsTaintedDueToInvalidNotaryImplementation(): void
+    public function itFailsToAssertTheRecordIsTaintedDueToMissingTimestamps(): void
+    {
+        $this->expectException(AccountantException::class);
+        $this->expectExceptionMessage('The use of timestamps is required');
+
+        $article = factory(Ledger::class)->make();
+
+        $article->timestamps = false;
+
+        $article->isTainted();
+    }
+
+    /**
+     * @group Ledger::isTainted
+     * @test
+     */
+    public function itFailsToAssertTheRecordIsTaintedDueToInvalidNotaryImplementation(): void
     {
         $ledger = factory(Ledger::class)->create();
 
@@ -574,7 +590,7 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::isTainted
      * @test
      */
-    public function itSuccessfullyAssertsTheRecordAsTaintedDueToMismatchingDates(): void
+    public function itSuccessfullyAssertsTheRecordIsTaintedDueToMismatchingDates(): void
     {
         $ledger = factory(Ledger::class)->create([
             'updated_at' => '2015-10-24 23:11:10',
@@ -588,7 +604,7 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::isTainted
      * @test
      */
-    public function itSuccessfullyAssertsTheRecordAsTaintedDueToMismatchingSignatures(): void
+    public function itSuccessfullyAssertsTheRecordIsTaintedDueToSignatureMismatch(): void
     {
         $ledger = factory(Ledger::class)->create([
             'signature' => Notary::sign([
@@ -607,7 +623,7 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::isTainted
      * @test
      */
-    public function itFailsToAssertTheRecordAsTaintedDueToMatchingSignatures(): void
+    public function itSuccessfullyAssertsTheRecordIsNotTainted(): void
     {
         $ledger = factory(Ledger::class)->create();
 
