@@ -235,6 +235,10 @@ trait Ledger
      */
     public function isTainted(): bool
     {
+        if (!$this->usesTimestamps()) {
+            throw new AccountantException('The use of timestamps is required');
+        }
+
         $notary = Config::get('accountant.notary');
 
         if (!is_subclass_of($notary, Notary::class)) {
