@@ -8,8 +8,8 @@ The bundled `Notary` implementation generates signatures using the `SHA-512` alg
 
 If needed, the default implementation can be replaced with a custom one. 
 
-### Implementation example
-A custom `Notary` using the Argon2 algorithm.
+### Example
+A custom `Notary` implementation using the **Argon2** algorithm.
 
 ```php
 <?php
@@ -52,7 +52,7 @@ class Notary implements \Altek\Accountant\Contracts\Notary
 }
 ```
 
-To enable, update the `config/accountant.php` configuration file with:
+Update the `accountant.notary` configuration value with:
 
 ```php
 return [
@@ -72,7 +72,7 @@ During the `Ledger` creation process, a signature is generated and stored along 
 
 ### Validation process
 Firstly, the method will check if the timestamps match, since there shouldn't be a discrepancy between the created and updated date/time.
-If the previous check passes, it will then validate the stored signature against the data and return accordingly.
+If the previous check passes, it will then validate the stored signature against the data.
 
 The method will return `true` when a record has been tampered with, otherwise `false`.
 
