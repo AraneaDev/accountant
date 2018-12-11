@@ -3,12 +3,7 @@
 namespace Altek\Accountant;
 
 use Altek\Accountant\Contracts\Cipher;
-use Altek\Accountant\Contracts\ContextResolver;
 use Altek\Accountant\Contracts\Identifiable;
-use Altek\Accountant\Contracts\IpAddressResolver;
-use Altek\Accountant\Contracts\UrlResolver;
-use Altek\Accountant\Contracts\UserAgentResolver;
-use Altek\Accountant\Contracts\UserResolver;
 use Altek\Accountant\Exceptions\AccountantException;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Facades\Config;
@@ -35,15 +30,7 @@ trait Recordable
             return false;
         }
 
-        $implementation = Config::get('accountant.resolvers.context');
-
-        if (!is_subclass_of($implementation, ContextResolver::class)) {
-            throw new AccountantException(sprintf('Invalid ContextResolver implementation: "%s"', $implementation));
-        }
-
-        $context = call_user_func([$implementation, 'resolve']);
-
-        return Context::isValid($context);
+        return Context::isValid(Resolve::context());
     }
 
     /**
@@ -129,78 +116,6 @@ trait Recordable
     }
 
     /**
-     * Resolve the User.
-     *
-     * @throws \Altek\Accountant\Exceptions\AccountantException
-     *
-     * @return Identifiable
-     */
-    protected function resolveUser(): ?Identifiable
-    {
-        $implementation = Config::get('accountant.resolvers.user');
-
-        if (!is_subclass_of($implementation, UserResolver::class)) {
-            throw new AccountantException(sprintf('Invalid UserResolver implementation: "%s"', $implementation));
-        }
-
-        return call_user_func([$implementation, 'resolve']);
-    }
-
-    /**
-     * Resolve the URL.
-     *
-     * @throws \Altek\Accountant\Exceptions\AccountantException
-     *
-     * @return string
-     */
-    protected function resolveUrl(): string
-    {
-        $implementation = Config::get('accountant.resolvers.url');
-
-        if (!is_subclass_of($implementation, UrlResolver::class)) {
-            throw new AccountantException(sprintf('Invalid UrlResolver implementation: "%s"', $implementation));
-        }
-
-        return call_user_func([$implementation, 'resolve']);
-    }
-
-    /**
-     * Resolve the IP Address.
-     *
-     * @throws \Altek\Accountant\Exceptions\AccountantException
-     *
-     * @return string
-     */
-    protected function resolveIpAddress(): string
-    {
-        $implementation = Config::get('accountant.resolvers.ip_address');
-
-        if (!is_subclass_of($implementation, IpAddressResolver::class)) {
-            throw new AccountantException(sprintf('Invalid IpAddressResolver implementation: "%s"', $implementation));
-        }
-
-        return call_user_func([$implementation, 'resolve']);
-    }
-
-    /**
-     * Resolve the User Agent.
-     *
-     * @throws \Altek\Accountant\Exceptions\AccountantException
-     *
-     * @return string
-     */
-    protected function resolveUserAgent(): ?string
-    {
-        $implementation = Config::get('accountant.resolvers.user_agent');
-
-        if (!is_subclass_of($implementation, UserAgentResolver::class)) {
-            throw new AccountantException(sprintf('Invalid UserAgentResolver implementation: "%s"', $implementation));
-        }
-
-        return call_user_func([$implementation, 'resolve']);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function process(string $event): array
@@ -228,22 +143,23 @@ trait Recordable
             $properties[$property] = call_user_func([$implementation, 'cipher'], $properties[$property]);
         }
 
-        $user = $this->resolveUser();
+        $user = Resolve::user();
 
         $userPrefix = Config::get('accountant.user.prefix');
 
         return [
             $userPrefix.'_id'   => $user ? $user->getIdentifier() : null,
             $userPrefix.'_type' => $user ? $user->getMorphClass() : null,
+            'context'           => Resolve::context(),
             'event'             => $event,
             'recordable_id'     => $this->getKey(),
             'recordable_type'   => $this->getMorphClass(),
             'properties'        => $properties,
             'modified'          => array_keys($this->getDirty()),
             'extra'             => $this->supplyExtra($event, $properties, $user),
-            'url'               => $this->resolveUrl(),
-            'ip_address'        => $this->resolveIpAddress(),
-            'user_agent'        => $this->resolveUserAgent(),
+            'url'               => Resolve::url(),
+            'ip_address'        => Resolve::ipAddress(),
+            'user_agent'        => Resolve::userAgent(),
         ];
     }
 
