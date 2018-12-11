@@ -51,7 +51,7 @@ interface Recordable
     public function getLedgerDriver(): ?string;
 
     /**
-     * Process the Recordable data.
+     * Collect the data for recording.
      *
      * @param string $event
      *
@@ -59,10 +59,10 @@ interface Recordable
      *
      * @return array
      */
-    public function process(string $event): array;
+    public function collect(string $event): array;
 
     /**
-     * Supply extra data to the Ledger.
+     * Supply extra data for recording.
      *
      * @param string       $event
      * @param array        $properties
