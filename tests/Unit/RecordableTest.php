@@ -311,11 +311,12 @@ class RecordableTest extends AccountantTestCase
             'published_at' => Carbon::now(),
         ]);
 
-        $this->assertCount(11, $data = $article->process('created'));
+        $this->assertCount(12, $data = $article->process('created'));
 
         $this->assertArraySubset([
             'user_id'         => null,
             'user_type'       => null,
+            'context'         => Context::TEST,
             'event'           => 'created',
             'recordable_id'   => null,
             'recordable_type' => Article::class,
@@ -370,11 +371,12 @@ class RecordableTest extends AccountantTestCase
             'published_at' => Carbon::now(),
         ]);
 
-        $this->assertCount(11, $data = $article->process('created'));
+        $this->assertCount(12, $data = $article->process('created'));
 
         $this->assertArraySubset([
             'user_id'         => $id,
             'user_type'       => $type,
+            'context'         => Context::TEST,
             'event'           => 'created',
             'recordable_id'   => null,
             'recordable_type' => Article::class,
@@ -454,11 +456,12 @@ class RecordableTest extends AccountantTestCase
             'published_at' => '2012-06-14 15:03:03',
         ]);
 
-        $this->assertCount(11, $data = $article->process('created'));
+        $this->assertCount(12, $data = $article->process('created'));
 
         $this->assertArraySubset([
             'user_id'         => null,
             'user_type'       => null,
+            'context'         => Context::TEST,
             'event'           => 'created',
             'recordable_id'   => null,
             'recordable_type' => get_class($article),
@@ -544,11 +547,12 @@ class RecordableTest extends AccountantTestCase
             'reviewed' => Base64::class,
         ];
 
-        $this->assertCount(11, $data = $article->process('updated'));
+        $this->assertCount(12, $data = $article->process('updated'));
 
         $this->assertArraySubset([
             'user_id'         => null,
             'user_type'       => null,
+            'context'         => Context::TEST,
             'event'           => 'updated',
             'recordable_id'   => null,
             'recordable_type' => Article::class,
