@@ -50,7 +50,7 @@ By default, the package is set to record only in a **Web** context.
 
 To enable additional contexts, set the `accountant.contexts` value to a [bit mask](https://en.wikipedia.org/wiki/Mask_(computing)).
 
-The following example promotes all contexts:
+The following example promotes all available contexts:
 
 ```php
 return [
