@@ -23,6 +23,7 @@ class NotaryTest extends AccountantTestCase
     {
         $signature = '6715649568ab2d59e395960e46758b6149497f83773ffdc4a0e25e72bc152a729a845e56e3f44ed4d5fa161374046fe0fe533874ffac1de1f04dc2d9a63a62a9';
 
+        $this->assertSame($signature, Notary::sign($data));
         $this->assertTrue(Notary::validate($data, $signature));
     }
 
