@@ -27,7 +27,7 @@ class Notary implements \Altek\Accountant\Contracts\Notary
      */
     public static function isIndexed(array $data): bool
     {
-        return array_keys($data) === range(0, count($data)-1);
+        return array_keys($data) === range(0, count($data) - 1);
     }
 
     /**
