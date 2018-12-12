@@ -19,17 +19,41 @@ namespace App\Support;
 class Notary implements \Altek\Accountant\Contracts\Notary
 {
     /**
+     * Determine if an array is indexed.
+     *
+     * @param array $data
+     *
+     * @return bool
+     */
+    public static function isIndexed(array $data): bool
+    {
+        return array_keys($data) === range(0, count($data)-1);
+    }
+
+    /**
+     * Sort a multidimensional array.
+     *
+     * @param array $data
+     *
+     * @return void
+     */
+    public static function sort(array &$data): void
+    {
+        foreach ($data as $key => $value) {
+            if (is_array($value) && $value) {
+                static::sort($data[$key]);
+            }
+        }
+
+        static::isIndexed($data) ? sort($data) : ksort($data);
+    }
+    
+    /**
      * {@inheritdoc}
      */
     public static function sign(array $data): string
     {
-        foreach ($data as $key => $value) {
-            if (is_array($value)) {
-                ksort($data[$key]);
-            }
-        }
-
-        ksort($data);
+        static::sort($data);
 
         return password_hash(json_encode($data, JSON_NUMERIC_CHECK), PASSWORD_ARGON2I);
     }
@@ -39,13 +63,7 @@ class Notary implements \Altek\Accountant\Contracts\Notary
      */
     public static function validate(array $data, string $signature): bool
     {
-        foreach ($data as $key => $value) {
-            if (is_array($value)) {
-                ksort($data[$key]);
-            }
-        }
-
-        ksort($data);
+        static::sort($data);
 
         return password_verify(json_encode($data, JSON_NUMERIC_CHECK), $signature);
     }
