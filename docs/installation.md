@@ -111,5 +111,10 @@ php artisan migrate
 
 This will create the `ledgers` table in your database.
 
+## User model
+In order to use this package, the `User` model needs to implement the `Altek\Accountant\Contracts\Identifiable` interface.
+
+Please refer to the [Identifiable implementation](resolvers.md#identifiable-implementation) section for details.
+
 # Resolvers
 Read more about this subject in the [Resolvers](resolvers.md) section!

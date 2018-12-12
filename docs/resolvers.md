@@ -198,9 +198,9 @@ return [
 ## User Resolver
 The included `UserResolver` implementation uses the Laravel `Auth::guard()` method, by default.
 
-The `resolve()` method must either return an `Altek\Accountant\Contracts\Identifiable` instance, or `null` when the user can't be resolved.
+The `resolve()` method must return an object implementing `Altek\Accountant\Contracts\Identifiable`, or `null` if the user cannot be resolved.
 
-### Identifiable interface implementation
+### Identifiable implementation
 Implementing the `Altek\Accountant\Contracts\Identifiable` interface on a `User` model:
 
 ```php

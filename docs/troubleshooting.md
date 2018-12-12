@@ -24,6 +24,11 @@ By default, Eloquent events fired from a **CLI** (i.e. jobs, migrations, command
 
 Refer to the **Recording Contexts** section in the [Configuration](configuration.md) documentation for more details. 
 
+## Return value of Altek\Accountant\Resolvers\UserResolver::resolve() must be an instance of Altek\Accountant\Contracts\Identifiable or null
+This means the `User` model being returned by the `resolve()` method doesn't implement the `Identifiable` interface.
+
+Refer to the [Identifiable implementation](resolvers.md#identifiable-implementation) section for details.
+
 ## Attributes are considered modified, when they're not
 False positives may give origin to `Ledger` records.
 This happens when an Eloquent model with boolean/date attributes gets updated, regardless of change in those attributes.
