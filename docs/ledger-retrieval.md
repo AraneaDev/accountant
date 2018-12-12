@@ -21,6 +21,8 @@ $ledger = $article->ledgers()->latest()->first();
 $ledger = $article->ledgers()->find(3);
 ```
 
+> **NOTICE:** `Ledger` records fetched through the magic `->ledgers` relation attribute, result in a `Collection` ordered by `created_at` in ascending order (oldest to newest).
+
 ## Getting Ledgers with the associated User model
 ```php
 // Get all the Ledgers
@@ -127,4 +129,4 @@ array(7) {
 }
 ```
 
-> **NOTICE:** `Ledger` records will be sorted by `created_at` in ascending order (oldest to newest), by default.
+> **TIP:** The `getMetadata()` and `getData()` methods will honour any established attribute **mutator** or **cast**.
