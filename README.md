@@ -13,6 +13,7 @@ Discrepancies that may indicate business concerns or suspect activities and othe
 ## Key Features
 - Stores **complete snapshots** of `Recordable` models when created, retrieved and modified;
 - Recreates `Recordable` model instances in the exact state they were in at a given point in time;
+- `Ledger` signatures;
 - Effortless data integrity checks;
 - [Recording contexts](docs/configuration.md#recording-contexts);
 - Huge support for customisation ([drivers](docs/ledger-drivers.md), [resolvers](docs/resolvers.md), and more);
