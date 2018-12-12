@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Altek\Accountant\Context;
 use Altek\Accountant\Models\Ledger;
 use Altek\Accountant\Notary;

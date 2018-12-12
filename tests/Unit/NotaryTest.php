@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Altek\Accountant\Tests\Unit;
 
 use Altek\Accountant\Context;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Altek\Accountant\Resolvers;
 
 use Illuminate\Support\Facades\App;

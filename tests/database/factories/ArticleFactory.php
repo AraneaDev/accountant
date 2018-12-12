@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Altek\Accountant\Tests\Models\Article;
 use Faker\Generator as Faker;
 

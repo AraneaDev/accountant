@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Altek\Accountant\Drivers;
 
 use Altek\Accountant\Contracts\Ledger;

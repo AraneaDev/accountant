@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Altek\Accountant\Console;
 
 use Illuminate\Console\GeneratorCommand;

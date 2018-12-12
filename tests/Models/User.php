@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Altek\Accountant\Tests\Models;
 
 use Altek\Accountant\Contracts\Identifiable;
