@@ -10,7 +10,7 @@ namespace App\Models;
 use Altek\Accountant\Contracts\Recordable;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model implements Recordable
+class Article extends Model implements Recordable
 {
     use \Altek\Accountant\Recordable;
 
