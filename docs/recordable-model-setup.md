@@ -1,6 +1,6 @@
 # Recordable model setup
-Setting up a `Recordable` model could not be easier.
-Just **implement** the `Altek\Accountant\Contracts\Recordable` interface and **use** the `Altek\Accountant\Recordable` trait.
+Setting up a `Recordable` model is just a matter of implementing the `Altek\Accountant\Contracts\Recordable` interface.
+The use of the `Altek\Accountant\Recordable` trait is also advised, since it contains the actual implementation.
 
 ```php
 <?php
@@ -18,6 +18,6 @@ class Article extends Model implements Recordable
 }
 ```
 
-The `Database` ledger driver will be used by default.
+If no changes are made to the configuration, the `Database` driver will be used by default.
 
-> **TIP:** If needed, a custom driver could be used instead. Read more about it in the [Ledger Driver](ledger-drivers.md) section.
+> **TIP:** Refer to the [Ledger Driver](ledger-drivers.md) documentation, for alternatives.
