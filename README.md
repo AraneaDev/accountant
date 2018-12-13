@@ -52,7 +52,7 @@ Contributions are always welcome, but before anything else, make sure you get ac
 - [Quetzy Garcia](https://gitlab.com/quetzyg)
 
 ## Alternatives
-Here are other packages that provide similar features:
+Other packages that provide features similar to this one:
 - [Laravel Auditing](https://github.com/owen-it/laravel-auditing)
 - [Revisionable](https://github.com/VentureCraft/revisionable)
 
