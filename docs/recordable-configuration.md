@@ -57,7 +57,7 @@ class Article extends Model implements Recordable
 
 The above configuration, will keep the `10` latest `Ledger` records.
 
-> **CAVEAT:** Bear in mind that pruning `Ledger` records may affect operations such as the [Data Integrity Check](data-integrity-check.md)!
+> **CAVEAT:** Bear in mind that pruning `Ledger` records will affect operations such as the [Data Integrity Check](data-integrity-check.md)!
 
 ## Events
 By default, only the `created`, `updated`, `deleted` and `restored` Eloquent events are monitored.
