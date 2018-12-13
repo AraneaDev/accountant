@@ -22,7 +22,7 @@ return [
 ];
 ```
 
-> **TIP:** Read more about this in the [Configuration](configuration.md) section.
+> **TIP:** Read more about this in the [User prefix](configuration.md#prefix) section.
 
 ## Using UUID instead of auto-incrementing ids
 Some developers prefer to use [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) instead of auto-incrementing identifiers.
