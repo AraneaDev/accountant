@@ -1,7 +1,7 @@
 # Introduction
 This package provides a convenient way to keep track of Eloquent model changes.
 
-Discrepancies that may indicate business concerns or suspect activities and other actions which would otherwise pass unnoticed, are now easily spotted.
+Discrepancies that may indicate business concerns or suspect activities and other actions which would otherwise pass unnoticed, can now be easily spotted.
 
 [![Latest Stable Version](https://poser.pugx.org/altek/accountant/v/stable)](https://packagist.org/packages/altek/accountant) [![Total Downloads](https://poser.pugx.org/altek/accountant/downloads)](https://packagist.org/packages/altek/accountant) [![Build Status](https://scrutinizer-ci.com/gl/altek/altek/accountant/badges/build.png?b=master&s=d57e0f845b51b5c122f6b8d3069e607316df3feb)](https://scrutinizer-ci.com/gl/altek/altek/accountant/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/gl/altek/altek/accountant/badges/quality-score.png?b=master&s=b863b32db2dc1674d15d7c9396db46a4139db09e)](https://scrutinizer-ci.com/gl/altek/altek/accountant/?branch=master) [![License](https://poser.pugx.org/altek/accountant/license)](https://packagist.org/packages/altek/accountant)
 
@@ -54,7 +54,7 @@ Contributions are always welcome, but before anything else, make sure you get ac
 ## Alternatives
 Here are other packages that provide similar features:
 - [Laravel Auditing](https://github.com/owen-it/laravel-auditing)
-- [Revisionable](https://packagist.org/packages/venturecraft/revisionable)
+- [Revisionable](https://github.com/VentureCraft/revisionable)
 
 ## License
 The **Accountant** package is open source software licensed under the [MIT LICENSE](LICENSE.md).
