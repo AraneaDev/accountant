@@ -22,12 +22,12 @@ Article::find($id)->update($data);
 ### Testing and Command Line Interface
 By default, Eloquent events fired from a **CLI** (i.e. jobs, migrations, commands, Tinker, ...) or **Testing** context, **WILL NOT** be recorded.
 
-Refer to the **Recording Contexts** section in the [Configuration](configuration.md) documentation for more details. 
+Refer to the [Recording Contexts](configuration.md#recording-contexts) section for more details.
 
 ## Return value of Altek\Accountant\Resolvers\UserResolver::resolve() must be an instance of Altek\Accountant\Contracts\Identifiable or null
 This means the `User` model being returned by the `resolve()` method doesn't implement the `Identifiable` interface.
 
-Refer to the [Identifiable implementation](resolvers.md#identifiable-implementation) section for details.
+Refer to the [Identifiable implementation](resolvers.md#identifiable-implementation) section for more details.
 
 ## Attributes are considered modified, when they're not
 False positives may give origin to `Ledger` records.
@@ -51,15 +51,15 @@ That makes the `getDirty()` and `isDirty()` methods to give a false positive whe
 
 Other discussions about this [subject](https://github.com/laravel/internals/issues/349).
 
-## Empty modified values being recorded
-A `Ledger` record is more than just the **modified** values.
+## Ledgers without modified values are being recorded
+A `Ledger` is more than just the `modified` property value.
 
-There's metadata like `event`, `user_*`, `url`, `ip_address` and `user_agent`, which in some cases is more than enough for accountability purposes.
+There's other metadata like `user_*`, `recordable_*`, `context`, `event`, `properties`, `extra`, `url`, `ip_address`, `user_agent` and `signature`, which should be more than enough for accountability purposes.
 
-Still, if you don't want to keep track of such information when the `modified` is empty, register the following observer in the `Ledger` model's `boot()` method:
+Nevertheless, if such information isn't of use to retain, just register the following observer in the `boot()` method of the `Ledger` model:
 
 ```php
-self::creating(function (Ledger $model) {
+static::creating(function (Ledger $model) {
     if (empty($model->modified)) {
         return false;
     }
@@ -68,21 +68,29 @@ self::creating(function (Ledger $model) {
 
 > **CAVEAT:** Keep in mind that the `modified` column of a `retrieved` event, will always be empty!
 
-## PHP Fatal error:  Maximum function nesting level of '512' reached, aborting!
-This error happens when a `Ledger` is being created for a `retrieved` event on a `User` model.
-It boils down to the `UserResolver` retrieving a `User` record, which will fire a new `retrieved` event, always leading to a new resolve cycle.
+## PHP Fatal error: Maximum function nesting level of '512' reached, aborting!
+This will happen when the `retrieved` Eloquent event is monitored for recording on a `User` model and a retrieval happens.
 
-To avoid this, make sure the `User` model isn't configured to record on `retrieved` events, like so:
+It boils down to the following:
+
+1. An application user retrieves a `User` record from the database;
+2. Because the `retrieved` event is set for recording, a new `Ledger` will be created;
+3. During the data gathering process for the new `Ledger`, the current user must be resolved for accountability purposes;
+4. A `User` record is retrieved once the current user is resolved;
+5. Step **4** starts the process all over again from step **2**, leading to an infinite cycle;
+
+To avoid this situation, make sure the `retrieved` event isn't set for the `User` model:
 
 ```php
 <?php
 
 namespace App\Models;
 
+use Altek\Accountant\Contracts\Identifiable;
 use Altek\Accountant\Contracts\Recordable;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model implements Recordable
+class User extends Model implements Identifiable, Recordable
 {
     use \Altek\Accountant\Recordable;
 
@@ -92,6 +100,14 @@ class User extends Model implements Recordable
         'deleted',
         'restored',
     ];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIdentifier()
+    {
+        return $this->getKey();
+    }
 
     // ...
 }
@@ -125,4 +141,4 @@ public function user()
 ## IpAddressResolver incorrectly resolving IP addresses 
 This usually happens to applications running behind a load balancer (or proxy), in which the IP address of the load balancer/proxy is being returned, instead.
 
-Refer to the `IpAddressResolver` section in the [Resolvers](resolvers.md) documentation for a workaround.
+Refer to the [IP Address Resolver](resolvers.md#ip-address-resolver) section for a workaround.
