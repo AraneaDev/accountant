@@ -51,10 +51,8 @@ Contributions are always welcome, but before anything else, make sure you get ac
 ## Credits
 - [Quetzy Garcia](https://gitlab.com/quetzyg)
 
-## Alternatives
-Other packages that provide features similar to this one:
-- [Laravel Auditing](https://github.com/owen-it/laravel-auditing)
-- [Revisionable](https://github.com/VentureCraft/revisionable)
+## Alternative
+If this package doesn't suit you, try [Laravel Auditing](https://github.com/owen-it/laravel-auditing), which provides a similar set of features.
 
 ## License
 The **Accountant** package is open source software licensed under the [MIT LICENSE](LICENSE.md).
