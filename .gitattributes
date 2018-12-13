@@ -5,6 +5,7 @@ tests            export-ignore
 .gitignore       export-ignore
 .gitlab-ci.yml   export-ignore
 .styleci.yml     export-ignore
+CHANGELOG.md     export-ignore
 CONTRIBUTING.md  export-ignore
 phpunit.xml.dist export-ignore
 README.md        export-ignore
