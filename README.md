@@ -11,7 +11,7 @@ Discrepancies that may indicate business concerns or suspect activities and othe
  1.x       | 5.2.x - 5.7.x | Actively supported | >= 7.1.3
 
 ## Key Features
-- Stores **complete snapshots** of `Recordable` models when created, retrieved and modified;
+- Stores **complete snapshots** of `Recordable` models when created, retrieved or modified;
 - Recreates `Recordable` model instances in the exact state they were in at a given point in time;
 - Signed `Ledger` records;
 - Effortless [data integrity checks](docs/data-integrity-check.md);
