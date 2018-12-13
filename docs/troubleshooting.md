@@ -86,7 +86,7 @@ class User extends Model implements Recordable
 {
     use \Altek\Accountant\Recordable;
 
-    protected $ledgerEvents = [
+    protected $recordableEvents = [
         'created',
         'updated',
         'deleted',
