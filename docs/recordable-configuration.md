@@ -1,7 +1,5 @@
 # Recordable configuration 
-When recording a `Ledger`, different outcomes may happen.
-
-It depends on what has been set globally, or per `Recordable` model.
+This section of the documentation describes the basic `Recordable` settings.
 
 ## Ledger threshold
 Out of the box, there's no limit to the number of `Ledger` records that are kept for a given `Recordable` model.
