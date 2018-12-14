@@ -1,6 +1,6 @@
 # READ THIS FIRST!
 Before opening a new issue, go through the following checklist, and make sure that:
-- You've **read** the [installation](../../docs/installation.md), [configuration](../../docs/configuration.md) and [recordable configuration](../../docs/recordable-configuration.md) sections of the documentation;
+- You have - **at the very least** - read the [installation](../../docs/installation.md), [configuration](../../docs/configuration.md) and [recordable configuration](../../docs/recordable-configuration.md) documentation;
 - The problem you are facing is **not** documented in the [troubleshooting](../../docs/troubleshooting.md) section;
 - A [GitLab issue](https://gitlab.com/altek/accountant/issues) with the same or similar problem you're having, doesn't already exist in an **open** or **closed** state;
 
