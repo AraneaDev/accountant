@@ -1,5 +1,5 @@
 # Contributing
-We appreciate your interest in this project. This document contains essential information, should you want to contribute.
+First and foremost, we appreciate your interest in this project. This document contains essential information, should you want to contribute.
 
 ## Bug reporting
 We encourage active collaboration, but before opening a new issue, go through the following checklist, and make sure that:
@@ -8,7 +8,7 @@ We encourage active collaboration, but before opening a new issue, go through th
 - The problem you are facing is **not** documented in the [troubleshooting](docs/troubleshooting.md) section;
 - A [GitLab issue](https://gitlab.com/altek/accountant/issues) with the same or similar problem you're having, doesn't already exist in an **open** or **closed** state;
 
-If after going through all the previous steps you still have an issue, feel free to [open a new issue](https://gitlab.com/altek/accountant/issues/new) using the [Bug](.gitlab/issue_templates/Bug.md) template.
+If going through all the previous steps didn't help, feel free to [open a new issue](https://gitlab.com/altek/accountant/issues/new) using the [Bug](.gitlab/issue_templates/Bug.md) template.
 
 **Make sure the bug report is properly filled.**
 
@@ -25,7 +25,7 @@ This package follows the [PSR-2](https://www.php-fig.org/psr/psr-2/) coding styl
 The [StyleCI](https://styleci.io) service is hooked into our CI pipeline, so you'll be notified of any styling issues while pushing code.
 
 ### PHPDoc
-Here's a valid documentation block example:
+The following is a valid documentation block example:
 
 ```php
 /**
