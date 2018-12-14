@@ -1,5 +1,6 @@
 # Recordable model setup
 Setting up a `Recordable` model is just a matter of implementing the `Altek\Accountant\Contracts\Recordable` interface.
+
 The use of the `Altek\Accountant\Recordable` trait is also advised, since it contains the actual implementation.
 
 ```php
