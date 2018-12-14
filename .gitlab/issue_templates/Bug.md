@@ -4,7 +4,7 @@ Before opening a new issue, go through the following checklist, and make sure th
 - The problem you are facing is **not** documented in the [troubleshooting](../../docs/troubleshooting.md) section;
 - A [GitLab issue](https://gitlab.com/altek/accountant/issues) with the same or similar problem you're having, doesn't already exist in an **open** or **closed** state;
 
-If after going through all the previous steps you still have an issue, feel free to continue.
+If going through all the previous steps didn't help, feel free to continue.
 
 **Make sure the bug report is properly filled and remove this disclaimer before submitting.**
 
@@ -18,7 +18,8 @@ If after going through all the previous steps you still have an issue, feel free
 
 ### Actual Behaviour
 Be thorough when describing the behaviour you're experiencing.
-Complement with an error message, or even a stack trace, but don't just paste without context.
+
+Complement with any error messages you may get, or even a stack trace, as long as you don't just paste an error message out of context.
 
 
 ### Expected Behaviour
@@ -31,8 +32,8 @@ List **all the steps** needed to reproduce the issue you're having - **this one 
 Make sure to **include code** (affected models, configuration, ...).
 
 
-### Relevant logs and/or screenshots
-Screenshots, error messages, logs, stack traces and other resources that may help us understand what's going on, will also be appreciated.
+### Relevant information, logs and/or screenshots
+Information about your stack, screenshots, error messages, logs, stack traces and other resources that may help us understand what's going on, will also be appreciated.
 
 In a nutshell, help us, help you.
 
