@@ -1,6 +1,6 @@
 # Installation
-The Accountant package should be installed using [Composer](http://getcomposer.org/doc/00-intro.md).
-Running the following command from your project root, gets you the latest available version:
+The easiest way to install the Accountant package, is through [Composer](http://getcomposer.org/doc/00-intro.md).
+Executing the following command from your project root will get you the latest available version:
 
 ```sh
 composer require altek/accountant
@@ -24,10 +24,10 @@ Edit the `config/app.php` file and add the following line to register the servic
 ],
 ```
 
-> **TIP:** If you're on Laravel version **5.5** or higher, you can skip the service provider setup in favour of the Auto-Discovery feature.
+> **TIP:** From Laravel **5.5** onward, you can skip the service provider setup in favour of the [Package Auto-Discovery](https://laravel.com/docs/5.7/packages#package-discovery) feature.
 
 ## Lumen
-Edit the `bootstrap/app.php` file and add the following line to register the service provider:
+Add the following line to register the service provider in the `bootstrap/app.php` file:
 
 ```php
 // ...
@@ -37,7 +37,7 @@ $app->register(Altek\Accountant\AccountantServiceProvider::class);
 // ...
 ```
 
-`Facades` and `Eloquent` must also be enabled in the `bootstrap/app.php` file:
+Also in the `bootstrap/app.php` file, enable `Facades` and `Eloquent`:
 
 ```php
 // ...
@@ -49,7 +49,7 @@ $app->withEloquent();
 // ...
 ```
 
-Configuration files must be explicitly loaded into the application by adding the following line to `bootstrap/app.php`.
+Finally, the configuration file must be loaded into the application by adding the following to `bootstrap/app.php`:
 
 ```php
 // ...
@@ -77,7 +77,7 @@ protected $commands = [
 // ...
 ```
 
-> **CAVEAT:** The service provider registration is mandatory in order for the configuration to be published!
+> **NOTICE:** The service provider registration is mandatory in order for the configuration to be published!
 
 # Publishing
 After your framework of choice has been configured, publish the configuration file with the following command:
