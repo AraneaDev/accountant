@@ -10,20 +10,70 @@ class CommandTest extends AccountantTestCase
 {
     /**
      * @test
+     *
+     * @dataProvider makeCommandProvider
+     *
+     * @param string $relativePath
+     * @param string $command
+     * @param string $argument
      */
-    public function itCreatesLedgerDriverSkeleton(): void
+    public function itSuccessfullyCreatesClassSkeleton(string $relativePath, string $command, string $argument): void
     {
-        $driverFilePath = $this->app->path('LedgerDrivers/TestDriver.php');
+        $filePath = $this->app->path($relativePath);
 
-        $this->assertFileNotExists($driverFilePath);
+        $this->assertFileNotExists($filePath);
 
-        $this->artisan('make:ledger-driver', [
-            'name' => 'TestDriver',
+        $this->artisan($command, [
+            'name' => $argument,
         ]);
 
-        $this->assertFileExists($driverFilePath);
+        $this->assertFileExists($filePath);
 
-        $this->assertTrue(unlink($driverFilePath));
+        $this->assertTrue(unlink($filePath));
+    }
+
+    /**
+     * @return array
+     */
+    public function makeCommandProvider(): array
+    {
+        return [
+            [
+                'Resolvers/TestContextResolver.php',
+                'make:context-resolver',
+                'TestContextResolver',
+            ],
+            [
+                'Resolvers/TestIpAddressResolver.php',
+                'make:ip-address-resolver',
+                'TestIpAddressResolver',
+            ],
+            [
+                'LedgerDrivers/TestDriver.php',
+                'make:ledger-driver',
+                'TestDriver',
+            ],
+            [
+                'TestNotary.php',
+                'make:notary',
+                'TestNotary',
+            ],
+            [
+                'Resolvers/TestUrlResolver.php',
+                'make:url-resolver',
+                'TestUrlResolver',
+            ],
+            [
+                'Resolvers/TestUserAgentResolver.php',
+                'make:user-agent-resolver',
+                'TestUserAgentResolver',
+            ],
+            [
+                'Resolvers/TestUserResolver.php',
+                'make:user-resolver',
+                'TestUserResolver',
+            ],
+        ];
     }
 
     /**
