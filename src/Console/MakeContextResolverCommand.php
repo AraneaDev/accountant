@@ -6,29 +6,29 @@ namespace Altek\Accountant\Console;
 
 use Illuminate\Console\GeneratorCommand;
 
-class UserResolverMakeCommand extends GeneratorCommand
+class MakeContextResolverCommand extends GeneratorCommand
 {
     /**
      * {@inheritdoc}
      */
-    protected $name = 'make:user-resolver';
+    protected $name = 'make:context-resolver';
 
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Create a new User resolver';
+    protected $description = 'Create a new Context resolver';
 
     /**
      * {@inheritdoc}
      */
-    protected $type = 'UserResolver';
+    protected $type = 'ContextResolver';
 
     /**
      * {@inheritdoc}
      */
     protected function getStub(): string
     {
-        return __DIR__.'/../../stubs/UserResolver.stub';
+        return __DIR__.'/../../stubs/ContextResolver.stub';
     }
 
     /**

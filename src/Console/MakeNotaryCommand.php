@@ -6,7 +6,7 @@ namespace Altek\Accountant\Console;
 
 use Illuminate\Console\GeneratorCommand;
 
-class NotaryMakeCommand extends GeneratorCommand
+class MakeNotaryCommand extends GeneratorCommand
 {
     /**
      * {@inheritdoc}

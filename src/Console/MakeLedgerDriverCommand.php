@@ -6,7 +6,7 @@ namespace Altek\Accountant\Console;
 
 use Illuminate\Console\GeneratorCommand;
 
-class LedgerDriverMakeCommand extends GeneratorCommand
+class MakeLedgerDriverCommand extends GeneratorCommand
 {
     /**
      * {@inheritdoc}

@@ -6,29 +6,29 @@ namespace Altek\Accountant\Console;
 
 use Illuminate\Console\GeneratorCommand;
 
-class UrlResolverMakeCommand extends GeneratorCommand
+class MakeUserAgentResolverCommand extends GeneratorCommand
 {
     /**
      * {@inheritdoc}
      */
-    protected $name = 'make:url-resolver';
+    protected $name = 'make:user-agent-resolver';
 
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Create a new URL resolver';
+    protected $description = 'Create a new User Agent resolver';
 
     /**
      * {@inheritdoc}
      */
-    protected $type = 'UrlResolver';
+    protected $type = 'UserAgentResolver';
 
     /**
      * {@inheritdoc}
      */
     protected function getStub(): string
     {
-        return __DIR__.'/../../stubs/UrlResolver.stub';
+        return __DIR__.'/../../stubs/UserAgentResolver.stub';
     }
 
     /**

@@ -6,7 +6,7 @@ namespace Altek\Accountant\Console;
 
 use Illuminate\Console\GeneratorCommand;
 
-class IpAddressResolverMakeCommand extends GeneratorCommand
+class MakeIpAddressResolverCommand extends GeneratorCommand
 {
     /**
      * {@inheritdoc}
