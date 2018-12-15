@@ -4,7 +4,13 @@ declare(strict_types=1);
 
 namespace Altek\Accountant;
 
+use Altek\Accountant\Console\ContextResolverMakeCommand;
+use Altek\Accountant\Console\IpAddressResolverMakeCommand;
 use Altek\Accountant\Console\LedgerDriverMakeCommand;
+use Altek\Accountant\Console\NotaryMakeCommand;
+use Altek\Accountant\Console\UrlResolverMakeCommand;
+use Altek\Accountant\Console\UserAgentResolverMakeCommand;
+use Altek\Accountant\Console\UserResolverMakeCommand;
 use Altek\Accountant\Contracts\Accountant;
 use Illuminate\Support\ServiceProvider;
 
@@ -47,7 +53,13 @@ class AccountantServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->commands([
+            ContextResolverMakeCommand::class,
+            IpAddressResolverMakeCommand::class,
             LedgerDriverMakeCommand::class,
+            NotaryMakeCommand::class,
+            UrlResolverMakeCommand::class,
+            UserAgentResolverMakeCommand::class,
+            UserResolverMakeCommand::class,
         ]);
 
         $this->app->singleton(Accountant::class, function ($app) {
