@@ -45,7 +45,7 @@ class ContextResolver implements \Altek\Accountant\Contracts\ContextResolver
 }
 ```
 
-Set the custom _Context_ resolver in the `config/accountant.php` configuration file:
+Set the `accountant.resolvers.context` configuration value to the custom `ContextResolver` FQCN:
 
 ```php
 return [
@@ -89,7 +89,7 @@ class IpAddressResolver implements \Altek\Accountant\Contracts\IpAddressResolver
 }
 ```
 
-Set the custom _IP Address_ resolver in the `config/accountant.php` configuration file:
+Set the `accountant.resolvers.ip_address` configuration value to the custom `IpAddressResolver` FQCN:
 
 ```php
 return [
@@ -136,7 +136,7 @@ class UrlResolver implements \Altek\Accountant\Contracts\UrlResolver
 }
 ```
 
-Set the custom _URL_ resolver in the `config/accountant.php` configuration file:
+Set the `accountant.resolvers.url` configuration value to the custom `UrlResolver` FQCN:
 
 ```php
 return [
@@ -178,7 +178,7 @@ class UserAgentResolver implements \Altek\Accountant\Contracts\UserAgentResolver
 }
 ```
 
-Set the custom _User Agent_ resolver in the `config/accountant.php` configuration file:
+Set the `accountant.resolvers.user_agent` configuration value to the custom `UserAgentResolver` FQCN:
 
 ```php
 return [
@@ -250,7 +250,7 @@ class UserResolver implements \Altek\Accountant\Contracts\UserResolver
 }
 ```
 
-Set the custom _User_ resolver in the `config/accountant.php` configuration file:
+Set the `accountant.resolvers.user` configuration value to the custom `UserResolver` FQCN:
 
 ```php
 return [
