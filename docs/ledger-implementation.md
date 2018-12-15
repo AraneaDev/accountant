@@ -1,5 +1,5 @@
 # Ledger Implementation
-The default `Ledger` extends the traditional `Illuminate\Database\Eloquent\Model` class, but if that's not appropriate, a custom one can be implemented.
+The default `Ledger` extends the traditional `Illuminate\Database\Eloquent\Model` class, but if that's not appropriate, a custom model can be implemented.
 
 > **TIP:** `Ledger` models must implement the `Altek\Accountant\Contracts\Ledger` interface!
 
@@ -56,8 +56,8 @@ class MongoLedger extends Model implements \Altek\Accountant\Contracts\Ledger
 
 > **NOTICE:** The bulk of the `Ledger` logic is in the `Altek\Accountant\Ledger` trait.
 
-## Defining the Ledger model
-This is how to set the above custom `MongoLedger` implementation in `config/accountant.php`:
+## Defining a custom Ledger model
+To use the custom `Ledger` implementation, update the `accountant.ledger.implementation` configuration value with the FQCN:
 
 ```php
 return [
