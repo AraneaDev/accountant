@@ -27,7 +27,7 @@ Refer to the [Recording Contexts](configuration.md#recording-contexts) section f
 ## Return value of Altek\Accountant\Resolvers\UserResolver::resolve() must be an instance of Altek\Accountant\Contracts\Identifiable or null
 This means the `User` model being returned by the `resolve()` method doesn't implement the `Identifiable` interface.
 
-Refer to the [Identifiable implementation](resolvers.md#identifiable-implementation) section for more details.
+Refer to the [UserResolver](resolvers.md#user-resolver) documentation for more details.
 
 ## Attributes are considered modified, when they're not
 False positives may give origin to `Ledger` records.
