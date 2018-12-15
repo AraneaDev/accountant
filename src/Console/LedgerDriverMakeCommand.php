@@ -28,7 +28,7 @@ class LedgerDriverMakeCommand extends GeneratorCommand
      */
     protected function getStub(): string
     {
-        return __DIR__.'/../../drivers/driver.stub';
+        return __DIR__.'/../../stubs/driver.stub';
     }
 
     /**
