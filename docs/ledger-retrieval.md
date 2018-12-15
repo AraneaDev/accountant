@@ -1,15 +1,12 @@
 # Ledger retrieval
-`Ledger` records can be easily fetched, via typical [Eloquent](https://laravel.com/docs/5.7/eloquent) relations.
+`Ledger` records can be easily fetched, through typical [Eloquent](https://laravel.com/docs/5.7/eloquent) relations.
 
 ## Getting Ledgers
-Example using an `Article` model:
+Example with an `Article` model:
 
 ```php
 // Get the fourth Article created
 $article = Article::find(4);
-
-// Get all the Ledgers
-$ledgers = $article->ledgers;
 
 // Get the first Ledger
 $ledger = $article->ledgers()->first();
@@ -19,27 +16,36 @@ $ledger = $article->ledgers()->latest()->first();
 
 // Get the third Ledger
 $ledger = $article->ledgers()->find(3);
+
+// Get all Ledgers and traverse them
+foreach ($article->ledgers()->get() as $ledger) {
+    // ...
+}
 ```
 
-> **NOTICE:** `Ledger` records fetched through the magic `->ledgers` relation attribute, result in a `Collection` ordered by `created_at` in ascending order (oldest to newest).
+> **NOTICE:** If no custom ordering is applied, `Ledger` records will be returned by `created_at` ascending order.
 
 ## Getting Ledgers with the associated User model
 ```php
-// Get all the Ledgers
+// Get all the Ledgers and traverse them
 $ledgers = $article->ledgers()->with('user')->get();
+
+foreach ($ledgers as $ledger) {
+    // ...
+}
 ```
 
-> **TIP:** Make sure to properly configure the `User` **prefix** and **guards** in `config/accountant.php`.
+> **TIP:** Make sure the `User` [prefix](configuration.md#prefix) and [guards](configuration.md#auth-guards) are properly set.
 
-## Getting Ledger metadata
-Retrieving an `array` with `Ledger` metadata:
+## Getting the Ledger metadata
+Retrieving an `array` with the `Ledger` metadata.
 
 ### Usage example
 ```php
 // Get the first available Article
 $article = Article::first();
 
-// Get the last Ledger
+// Get the latest Ledger
 $ledger = $article->ledgers()->latest()->first();
 
 var_dump($ledger->getMetadata());
@@ -73,8 +79,8 @@ array(11) {
 }
 ```
 
-## Getting modified Recordable properties (default)
-When calling the `getData()` method without arguments, an `array` only including the **modified** properties of the `Recordable` model is returned. 
+## Getting modified only Recordable properties (default)
+When calling the `getData()` method with no arguments, only the **modified** `Recordable` properties will be included in the `array`. 
 
 ### Usage example
 ```php
@@ -96,14 +102,14 @@ array(1) {
 ```
 
 ## Getting all Recordable properties
-To retrieve an `array` with **all** the properties of the `Recordable` model at the time of recording, pass `true` as the only argument to the `getData()` method.
+To retrieve an `array` with **all** the available `Recordable` properties when the recording took place, pass `true` to the `getData()` method.
 
 ### Usage example
 ```php
 // Get the first available Article
 $article = Article::first();
 
-// Get the last Ledger
+// Get the latest Ledger
 $ledger = $article->ledgers()->latest()->first();
 
 var_dump($ledger->getData(true));
