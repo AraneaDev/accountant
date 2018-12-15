@@ -1,7 +1,7 @@
 # Ledger Migration
-Even though the default migration should cover most usage cases, the ledger table schema can be somewhat customised.
+Even though the default migration should cover most use cases, the ledger table schema allows for some customisation.
 
-Here are some of the changes that can be performed.
+Here you'll find some of the changes that can be performed.
 
 ## Using a different prefix for the User ID/Type columns
 Instead of the default `user_id` and `user_type` columns, a different prefix can be set:
@@ -22,7 +22,7 @@ return [
 ];
 ```
 
-> **TIP:** Read more about this in the [User prefix](configuration.md#prefix) section.
+> **TIP:** Refer to the [User prefix](configuration.md#prefix) section for more details.
 
 ## Using UUID instead of auto-incrementing ids
 Some developers prefer to use [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) instead of auto-incrementing identifiers.
@@ -75,8 +75,8 @@ $table->text('user_agent')->nullable();
 ```
 
 ## JSON WHERE() clauses
-The Laravel [Query Builder](https://laravel.com/docs/5.7/queries#json-where-clauses) supports querying JSON columns.
-Given the `properties`, `modified` and `extra` columns store JSON data as `TEXT`, the column types can be updated from
+The Laravel [Query Builder](https://laravel.com/docs/5.7/queries#json-where-clauses) supports `JSON` type columns.
+Given that the `properties`, `modified` and `extra` columns store JSON data as `TEXT`, the column types can be updated from
 
 ```php
 $table->text('properties')->nullable();
