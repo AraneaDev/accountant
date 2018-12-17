@@ -11,9 +11,9 @@ Data discrepancies that may indicate business concerns, suspect activities, and 
  1.x       | 5.2.x - 5.7.x | Actively supported | >= 7.1.3
 
 ## Motivation
-For the past couple of years, I've been actively involved in a similar [project](https://github.com/owen-it/laravel-auditing), where I took over maintenance and did new releases.
+For the past couple of years, I've been actively involved in a similar project, where I took over maintenance and did new releases.
 
-Over time, I already had new concepts and feature ideas, but implementing some of them would mean totally breaking backwards compatibility.
+Over time, I got new concepts and feature ideas, but implementing some of them would mean totally breaking backwards compatibility.
 
 Due to the nature of said project, and with an increasing user base relying on it, starting a new one seemed the best approach.
 
