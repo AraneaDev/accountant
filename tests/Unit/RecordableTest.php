@@ -61,16 +61,43 @@ class RecordableTest extends AccountantTestCase
         return [
             [
                 Context::CLI | Context::WEB,
+
+                // Test
                 true,
                 false,
             ],
             [
                 Context::TEST | Context::WEB,
+
+                // CLI
                 false,
                 true,
             ],
             [
                 Context::TEST | Context::CLI,
+
+                // Web
+                false,
+                false,
+            ],
+            [
+                0, // No context
+
+                // Test
+                true,
+                false,
+            ],
+            [
+                0, // No context
+
+                // CLI
+                false,
+                true,
+            ],
+            [
+                0, // No context
+
+                // Web
                 false,
                 false,
             ],
