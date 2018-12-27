@@ -6,12 +6,14 @@ namespace Altek\Accountant\Tests\Models;
 
 use Altek\Accountant\Contracts\Identifiable;
 use Altek\Accountant\Contracts\Recordable;
+use Altek\Eventually\Relations\BelongsToMany;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Model implements Recordable, Identifiable, Authenticatable
 {
     use \Altek\Accountant\Recordable;
+    use \Altek\Eventually\Eventually;
     use \Illuminate\Auth\Authenticatable;
 
     /**
@@ -20,6 +22,18 @@ class User extends Model implements Recordable, Identifiable, Authenticatable
     protected $casts = [
         'is_admin' => 'bool',
     ];
+
+    /**
+     * Associated Articles.
+     *
+     * @return \Altek\Eventually\Relations\BelongsToMany
+     */
+    public function articles(): BelongsToMany
+    {
+        return $this->belongsToMany(Article::class)
+            ->withPivot('liked')
+            ->withTimestamps();
+    }
 
     /**
      * {@inheritdoc}
