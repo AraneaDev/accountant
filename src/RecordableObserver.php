@@ -97,4 +97,74 @@ class RecordableObserver
         // in case a legitimate update event is fired
         static::$restoring = false;
     }
+
+    /**
+     * Handle the toggled event.
+     *
+     * @param \Altek\Accountant\Contracts\Recordable $model
+     * @param string                                 $relation
+     * @param array                                  $attributes
+     *
+     * @return void
+     */
+    public function toggled(Recordable $model, string $relation, array $attributes): void
+    {
+        Accountant::record($model, 'toggled', $relation, $attributes);
+    }
+
+    /**
+     * Handle the synced event.
+     *
+     * @param \Altek\Accountant\Contracts\Recordable $model
+     * @param string                                 $relation
+     * @param array                                  $attributes
+     *
+     * @return void
+     */
+    public function synced(Recordable $model, string $relation, array $attributes): void
+    {
+        Accountant::record($model, 'synced', $relation, $attributes);
+    }
+
+    /**
+     * Handle the existingPivotUpdated event.
+     *
+     * @param \Altek\Accountant\Contracts\Recordable $model
+     * @param string                                 $relation
+     * @param array                                  $attributes
+     *
+     * @return void
+     */
+    public function existingPivotUpdated(Recordable $model, string $relation, array $attributes): void
+    {
+        Accountant::record($model, 'existingPivotUpdated', $relation, $attributes);
+    }
+
+    /**
+     * Handle the attached event.
+     *
+     * @param \Altek\Accountant\Contracts\Recordable $model
+     * @param string                                 $relation
+     * @param array                                  $attributes
+     *
+     * @return void
+     */
+    public function attached(Recordable $model, string $relation, array $attributes): void
+    {
+        Accountant::record($model, 'attached', $relation, $attributes);
+    }
+
+    /**
+     * Handle the detached event.
+     *
+     * @param \Altek\Accountant\Contracts\Recordable $model
+     * @param string                                 $relation
+     * @param array                                  $attributes
+     *
+     * @return void
+     */
+    public function detached(Recordable $model, string $relation, array $attributes): void
+    {
+        Accountant::record($model, 'detached', $relation, $attributes);
+    }
 }
