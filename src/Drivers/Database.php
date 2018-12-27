@@ -16,8 +16,12 @@ class Database implements LedgerDriver
     /**
      * {@inheritdoc}
      */
-    public function record(Recordable $model, string $event): Ledger
-    {
+    public function record(
+        Recordable $model,
+        string $event,
+        string $pivotRelation = null,
+        array $pivotProperties = []
+    ): Ledger {
         $notary = Config::get('accountant.notary');
 
         if (!is_subclass_of($notary, Notary::class)) {
@@ -41,6 +45,11 @@ class Database implements LedgerDriver
             $ledger->setCreatedAt($ledger->freshTimestamp())
                 ->setUpdatedAt($ledger->freshTimestamp());
         }
+
+        $ledger->setAttribute('pivot', $pivotRelation ? [
+            'relation'   => $pivotRelation,
+            'properties' => $pivotProperties,
+        ] : []);
 
         // Sign and store the record
         $ledger->setAttribute('signature', call_user_func([$notary, 'sign'], $ledger->attributesToArray()))
