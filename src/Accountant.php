@@ -60,8 +60,12 @@ class Accountant extends Manager implements Contracts\Accountant
     /**
      * {@inheritdoc}
      */
-    public function record(Contracts\Recordable $model, string $event): void
-    {
+    public function record(
+        Contracts\Recordable $model,
+        string $event,
+        string $pivotRelation = null,
+        array $pivotProperties = []
+    ): void {
         if (!$model->isRecordingEnabled() || !$model->isEventRecordable($event)) {
             return;
         }
@@ -72,7 +76,7 @@ class Accountant extends Manager implements Contracts\Accountant
             return;
         }
 
-        if ($ledger = $driver->record($model, $event)) {
+        if ($ledger = $driver->record($model, $event, $pivotRelation, $pivotProperties)) {
             $driver->prune($model);
         }
 

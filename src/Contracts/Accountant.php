@@ -23,11 +23,17 @@ interface Accountant
      *
      * @param \Altek\Accountant\Contracts\Recordable $model
      * @param string                                 $event
+     * @param string                                 $pivotRelation
+     * @param array                                  $pivotProperties
      *
      * @throws \Altek\Accountant\Exceptions\AccountantException
      * @throws \InvalidArgumentException
-     *
      * @return void
      */
-    public function record(Recordable $model, string $event): void;
+    public function record(
+        Recordable $model,
+        string $event,
+        string $pivotRelation = null,
+        array $pivotProperties = []
+    ): void;
 }
