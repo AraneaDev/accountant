@@ -1,5 +1,5 @@
 # Installation
-The easiest way to install the Accountant package, is through [Composer](http://getcomposer.org/doc/00-intro.md).
+The easiest way to install the Accountant package, is through [Composer](https://getcomposer.org/doc/00-intro.md).
 Executing the following command from your project root will get you the latest available version:
 
 ```sh
