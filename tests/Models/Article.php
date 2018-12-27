@@ -17,6 +17,11 @@ class Article extends Model implements Recordable
     /**
      * {@inheritdoc}
      */
+    protected $table = 'articles';
+
+    /**
+     * {@inheritdoc}
+     */
     protected $casts = [
         'reviewed' => 'bool',
     ];

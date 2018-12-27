@@ -19,6 +19,11 @@ class User extends Model implements Recordable, Identifiable, Authenticatable
     /**
      * {@inheritdoc}
      */
+    protected $table = 'users';
+
+    /**
+     * {@inheritdoc}
+     */
     protected $casts = [
         'is_admin' => 'bool',
     ];
