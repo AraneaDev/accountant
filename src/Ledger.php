@@ -225,7 +225,7 @@ trait Ledger
      */
     public function getPivotData(): array
     {
-        return $this->pivot ?? [];
+        return $this->pivot;
     }
 
     /**

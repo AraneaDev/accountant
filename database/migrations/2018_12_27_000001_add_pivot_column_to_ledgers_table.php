@@ -16,7 +16,7 @@ class AddPivotColumnToLedgersTable extends Migration
     public function up(): void
     {
         Schema::table('ledgers', function (Blueprint $table) {
-            $table->text('pivot')->nullable();
+            $table->text('pivot');
         });
     }
 
