@@ -851,7 +851,7 @@ class RecordableTest extends AccountantTestCase
      * @group Recordable::isCurrentStateReachable
      * @test
      */
-    public function itSuccessfullyValidatesTheCurrentStateWhileIgnoringRetrievedEvents(): void
+    public function itSuccessfullyValidatesTheCurrentStateWhileIgnoringNonModifyingEvents(): void
     {
         $this->app['config']->set('accountant.events', [
             'created',
