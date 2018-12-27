@@ -55,6 +55,13 @@ interface Ledger
     public function getData(bool $all = false): array;
 
     /**
+     * Get the Pivot data.
+     *
+     * @return array
+     */
+    public function getPivotData(): array;
+
+    /**
      * Extract a Recordable instance from the Ledger.
      *
      * @param bool $strict

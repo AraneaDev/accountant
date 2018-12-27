@@ -223,6 +223,14 @@ trait Ledger
     /**
      * {@inheritdoc}
      */
+    public function getPivotData(): array
+    {
+        return $this->pivot ?? [];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function extract(bool $strict = true): Recordable
     {
         if ($strict && $this->isTainted()) {
