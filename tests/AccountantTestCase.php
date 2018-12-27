@@ -14,7 +14,7 @@ use Altek\Accountant\Resolvers\UserResolver;
 use Carbon\Carbon;
 use Orchestra\Testbench\TestCase;
 
-class AccountantTestCase extends TestCase
+abstract class AccountantTestCase extends TestCase
 {
     /**
      * {@inheritdoc}
