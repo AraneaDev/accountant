@@ -85,7 +85,7 @@ class NotaryTest extends AccountantTestCase
                     'recordable_type' => Article::class,
                     'user_type'       => User::class,
                     'event'           => 'created',
-                    'pivot'         => [
+                    'pivot'           => [
                         'data'     => [
                             2 => [
                                 'liked' => false,

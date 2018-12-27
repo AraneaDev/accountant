@@ -28,6 +28,7 @@ interface Accountant
      *
      * @throws \Altek\Accountant\Exceptions\AccountantException
      * @throws \InvalidArgumentException
+     *
      * @return void
      */
     public function record(
