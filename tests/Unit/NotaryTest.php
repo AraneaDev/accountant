@@ -23,7 +23,7 @@ class NotaryTest extends AccountantTestCase
      */
     public function itSuccessfullyValidatesTheSameArrayDataOutOfOrder(array $data): void
     {
-        $signature = '6715649568ab2d59e395960e46758b6149497f83773ffdc4a0e25e72bc152a729a845e56e3f44ed4d5fa161374046fe0fe533874ffac1de1f04dc2d9a63a62a9';
+        $signature = 'dd12ec5708cb23602e7aae8e70e463b911ed3e350d2f9a9c55fe8b8c1b82a1e223ef11b1df457d34a51d6b698f6edffd9f59ab8e5ec06cc8a645ca59d08cc952';
 
         $this->assertSame($signature, Notary::sign($data));
         $this->assertTrue(Notary::validate($data, $signature));
@@ -58,6 +58,17 @@ class NotaryTest extends AccountantTestCase
                     'url'           => 'Command Line Interface',
                     'ip_address'    => '127.0.0.1',
                     'user_agent'    => 'Symfony',
+                    'pivot'         => [
+                        'relation' => 'users',
+                        'data'     => [
+                            1 => [
+                                'liked' => true,
+                            ],
+                            2 => [
+                                'liked' => false,
+                            ],
+                        ],
+                    ],
                     'extra'         => [
                         'tags' => [
                             'laravel',
@@ -74,6 +85,17 @@ class NotaryTest extends AccountantTestCase
                     'recordable_type' => Article::class,
                     'user_type'       => User::class,
                     'event'           => 'created',
+                    'pivot'         => [
+                        'data'     => [
+                            2 => [
+                                'liked' => false,
+                            ],
+                            1 => [
+                                'liked' => true,
+                            ],
+                        ],
+                        'relation' => 'users',
+                    ],
                     'properties'      => [
                         'reviewed'     => 1,
                         'content'      => 'First step: install the Accountant package.',
@@ -101,6 +123,17 @@ class NotaryTest extends AccountantTestCase
             ],
             [
                 [
+                    'pivot'         => [
+                        'relation' => 'users',
+                        'data'     => [
+                            2 => [
+                                'liked' => false,
+                            ],
+                            1 => [
+                                'liked' => true,
+                            ],
+                        ],
+                    ],
                     'modified' => [
                         'title',
                         'content',
@@ -161,6 +194,17 @@ class NotaryTest extends AccountantTestCase
                     'recordable_id' => 456,
                     'ip_address'    => '127.0.0.1',
                     'user_agent'    => 'Symfony',
+                    'pivot'         => [
+                        'data'     => [
+                            1 => [
+                                'liked' => true,
+                            ],
+                            2 => [
+                                'liked' => false,
+                            ],
+                        ],
+                        'relation' => 'users',
+                    ],
                 ],
             ],
         ];
