@@ -39,6 +39,7 @@
     },
     "require-dev": {
         "orchestra/testbench": "^3.7",
+        "doctrine/dbal": "^2.9",
         "altek/eventually": "@dev"
     },
     "autoload": {
