@@ -31,13 +31,19 @@ class MyCustomDriver implements LedgerDriver
      *
      * @param \Altek\Accountant\Contracts\Recordable $model
      * @param string                                 $event
+     * @param string                                 $pivotRelation
+     * @param array                                  $pivotProperties
      *
      * @throws \Altek\Accountant\Exceptions\AccountantException
      *
      * @return \Altek\Accountant\Contracts\Ledger
      */
-    public function record(Recordable $model, string $event): Ledger
-    {
+    public function record(
+        Recordable $model,
+        string $event,
+        string $pivotRelation = null,
+        array $pivotProperties = []
+    ): Ledger {
         // TODO: Implement the recording logic
     }
 
@@ -86,7 +92,6 @@ This is done on a per `Recordable` model basis, by assigning the `FQCN` of the d
 namespace App\Models;
 
 use Altek\Accountant\Contracts\Recordable;
-use App\LedgerDrivers\MyCustomDriver;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model implements Recordable
@@ -98,7 +103,7 @@ class Article extends Model implements Recordable
      *
      * @var \App\LedgerDrivers\MyCustomDriver
      */
-    protected $ledgerDriver = MyCustomDriver::class;
+    protected $ledgerDriver = App\LedgerDrivers\MyCustomDriver::class;
 
     // ...
 }
