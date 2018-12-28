@@ -19,6 +19,7 @@ class DummyClass implements LedgerDriver
      * @param array                                  $pivotProperties
      *
      * @throws \Altek\Accountant\Exceptions\AccountantException
+     *
      * @return \Altek\Accountant\Contracts\Ledger
      */
     public function record(
