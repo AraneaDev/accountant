@@ -54,7 +54,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.1-dev"
         },
         "laravel": {
             "providers": [
@@ -63,7 +63,7 @@
         }
     },
     "suggest": {
-        "altek/eventually": "Required for recording pivot table events",
+        "altek/eventually": "Required for keeping track of BelongsToMany and MorphToMany relations.",
         "laravelista/lumen-vendor-publish": "Required to publish the package config file in Lumen."
     }
 }
