@@ -11,6 +11,7 @@ Data discrepancies that may indicate business concerns, suspect activities, and 
  1.x       | 5.2.x - 5.7.x | Actively supported | >= 7.1.3
 
 ## Key Features
+- Many-to-many (BelongsToMany and MorphToMany) relation support;
 - Event source style approach, by storing **complete snapshots** of `Recordable` models when created, modified or retrieved;
 - Ability to recreate `Recordable` model instances in the exact state they were in when recorded;
 - Signed `Ledger` records;
