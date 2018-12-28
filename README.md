@@ -10,15 +10,6 @@ Data discrepancies that may indicate business concerns, suspect activities, and 
 -----------|---------------|--------------------|-------------
  1.x       | 5.2.x - 5.7.x | Actively supported | >= 7.1.3
 
-## Motivation
-For the past couple of years, I've been actively involved in a similar project, where I took over maintenance and did new releases.
-
-Over time, I got new concepts and feature ideas, but implementing some of them would mean totally breaking backwards compatibility.
-
-Due to the nature of said project, and with an increasing user base relying on it, starting a new one seemed the best approach.
-
-Given this package leverages on previous work, there's functionality in common, some that was removed, and other completely new!
-
 ## Key Features
 - Event source style approach, by storing **complete snapshots** of `Recordable` models when created, modified or retrieved;
 - Ability to recreate `Recordable` model instances in the exact state they were in when recorded;
@@ -40,9 +31,6 @@ Contributions are always welcome, but before anything else, make sure you get ac
 
 ## Credits
 - [Quetzy Garcia](https://gitlab.com/quetzyg)
-
-## Alternative
-If this package doesn't suit you, try [Laravel Auditing](https://github.com/owen-it/laravel-auditing), which provides a similar set of features.
 
 ## License
 The **Accountant** package is open source software licensed under the [MIT LICENSE](LICENSE.md).
