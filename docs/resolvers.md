@@ -14,7 +14,7 @@ Each resolver has a **public static** `resolve()` method with the appropriate lo
 The package already includes concrete implementations that can be replaced with custom ones, should there be a special need.
 
 ## Context Resolver
-The default `ContextResolver` implementation uses `App::runningUnitTests()` and `App::runningInConsole()` in its logic.
+The default `ContextResolver` implementation uses `App::runningUnitTests()` and `App::runningInConsole()` for its logic.
 
 > **TIP:** You can generate a skeleton `ContextResolver` class with the `php artisan make:context-resolver` command.
 
@@ -47,7 +47,7 @@ class ContextResolver implements \Altek\Accountant\Contracts\ContextResolver
 }
 ```
 
-Set the `accountant.resolvers.context` configuration value to the custom `ContextResolver` FQCN:
+Set the `accountant.resolvers.context` configuration value to the `FQCN` of the custom `ContextResolver` class:
 
 ```php
 return [
@@ -93,7 +93,7 @@ class IpAddressResolver implements \Altek\Accountant\Contracts\IpAddressResolver
 }
 ```
 
-Set the `accountant.resolvers.ip_address` configuration value to the custom `IpAddressResolver` FQCN:
+Set the `accountant.resolvers.ip_address` configuration value to the `FQCN` of the custom `IpAddressResolver` class:
 
 ```php
 return [
@@ -142,7 +142,7 @@ class UrlResolver implements \Altek\Accountant\Contracts\UrlResolver
 }
 ```
 
-Set the `accountant.resolvers.url` configuration value to the custom `UrlResolver` FQCN:
+Set the `accountant.resolvers.url` configuration value to the `FQCN` of the custom `UrlResolver` class:
 
 ```php
 return [
@@ -186,7 +186,7 @@ class UserAgentResolver implements \Altek\Accountant\Contracts\UserAgentResolver
 }
 ```
 
-Set the `accountant.resolvers.user_agent` configuration value to the custom `UserAgentResolver` FQCN:
+Set the `accountant.resolvers.user_agent` configuration value to the `FQCN` of the custom `UserAgentResolver` class:
 
 ```php
 return [
@@ -260,7 +260,7 @@ class UserResolver implements \Altek\Accountant\Contracts\UserResolver
 }
 ```
 
-Set the `accountant.resolvers.user` configuration value to the custom `UserResolver` FQCN:
+Set the `accountant.resolvers.user` configuration value to the `FQCN` of the custom `UserResolver` class:
 
 ```php
 return [
