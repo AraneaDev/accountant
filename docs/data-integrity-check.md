@@ -113,7 +113,7 @@ if ($ledger->isTainted()) {
 By default, a `Ledger` record will be created each time a `Recordable` model is created and subsequently modified.
 
 ### Validation process
-In a nutshell, the method will check if the current state can be reached by going through all the recorded history, comparing the reached state to the current one.
+In a nutshell, the method will check if the current state can be reached by going through all the recorded states, comparing the reached state to the current one.
 
 This method also returns a `bool` value.
 
