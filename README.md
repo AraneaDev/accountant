@@ -11,14 +11,14 @@ Data discrepancies that may indicate business concerns, suspect activities, and 
  1.x       | 5.2.x - 5.7.x | Actively supported | >= 7.1.3
 
 ## Key Features
-- Many-to-many (BelongsToMany and MorphToMany) relation support;
-- Event source style approach, by storing **complete snapshots** of `Recordable` models when created, modified or retrieved;
+- Many-to-many (`BelongsToMany` and `MorphToMany`) relation support;
+- Event source style approach, by keeping **complete snapshots** of `Recordable` models when created, modified or retrieved;
 - Ability to recreate `Recordable` model instances in the exact state they were in when recorded;
-- Signed `Ledger` records;
+- Signed `Ledger` records for data integrity;
 - Effortless [data integrity checks](docs/data-integrity-check.md);
 - [Recording contexts](docs/configuration.md#recording-contexts);
-- Huge support for customisation ([drivers](docs/ledger-drivers.md), [resolvers](docs/resolvers.md), and more);
-- Easy to follow documentation and troubleshooting guide;
+- Huge customisation support ([drivers](docs/ledger-drivers.md), [resolvers](docs/resolvers.md), and more);
+- Easy to follow [documentation](docs/index.md) and [troubleshooting](docs/troubleshooting.md) guide;
 - Laravel and Lumen 5.2+ support;
 
 ## Documentation
