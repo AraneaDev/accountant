@@ -102,7 +102,7 @@ array(1) {
 ```
 
 ## Getting all Recordable properties
-To retrieve an `array` with **all** the available `Recordable` properties when the recording took place, pass `true` to the `getData()` method.
+To retrieve an `array` with **all** the `Recordable` properties when the recording took place, pass `true` to the `getData()` method.
 
 ### Usage example
 ```php
@@ -138,7 +138,9 @@ array(7) {
 > **TIP:** The `getMetadata()` and `getData()` methods will honour any established attribute **mutator** or **cast**.
 
 ## Getting pivot data
-Version **1.1.0** supports recording pivot event data. To get it, use the `getPivotData()` method.
+Support for recording pivot events was introduced in version **1.1.0**.
+
+To get the relation and the properties, use the `getPivotData()` method.
 
 ### Usage example
 ```php
