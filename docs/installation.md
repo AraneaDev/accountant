@@ -91,7 +91,7 @@ This will create the `config/accountant.php` configuration file.
 You can read more about the available configuration settings in the [Configuration](configuration.md) section.
 
 # Database
-Publish the database migration file with the following command:
+Publish the database migration files with the following command:
 
 ```sh
 php artisan vendor:publish --tag="accountant-migrations"
