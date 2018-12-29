@@ -26,7 +26,7 @@ return [
 ```
 
 ### Locally
-The value is set per `Recordable` model, by assigning an `int` value to the `$ledgerThreshold` attribute.
+The value is set per `Recordable` model, by assigning an `int` to the `$ledgerThreshold` attribute.
 
 > **TIP:** A locally defined threshold **always** takes precedence over a globally defined one.
 
@@ -126,7 +126,7 @@ return [
 ```
 
 #### Locally
-The value is set per `Recordable` model, by assigning an `array` value to the `$recordableEvents` attribute.
+The value is set per `Recordable` model, by assigning an `array` to the `$recordableEvents` attribute.
 
 > **TIP:** Locally defined events **always** take precedence over globally defined ones.
 
