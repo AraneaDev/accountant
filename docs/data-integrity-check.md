@@ -8,7 +8,7 @@ The bundled `Notary` implementation generates signatures using the `SHA-512` alg
 
 If needed, the default implementation can be replaced with a custom one. 
 
-> **TIP:** You cab generate a skeleton `Notary` class with the `php artisan make:notary` command.
+> **TIP:** You can generate a skeleton `Notary` class with the `php artisan make:notary` command.
 
 ### Example
 A custom `Notary` implementation using the **Argon2** algorithm.
