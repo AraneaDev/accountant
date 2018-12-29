@@ -33,6 +33,7 @@ class MongoLedger extends Model implements \Altek\Accountant\Contracts\Ledger
     protected $casts = [
         'properties' => 'json',
         'modified'   => 'json',
+        'pivot'      => 'json',
         'extra'      => 'json',
     ];
 
