@@ -58,7 +58,7 @@ class MongoLedger extends Model implements \Altek\Accountant\Contracts\Ledger
 > **NOTICE:** The bulk of the `Ledger` logic is in the `Altek\Accountant\Ledger` trait.
 
 ## Defining a custom Ledger model
-To use the custom `Ledger` implementation, update the `accountant.ledger.implementation` configuration value with the FQCN:
+To use the custom `Ledger` implementation, update the `accountant.ledger.implementation` configuration value with the `FQCN`:
 
 ```php
 return [
