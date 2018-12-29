@@ -14,6 +14,7 @@ composer require jenssegers/mongodb
 
 ```php
 <?php
+
 namespace App\Models;
 
 use Jenssegers\Mongodb\Eloquent\Model;
