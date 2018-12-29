@@ -39,6 +39,11 @@ class CommandTest extends AccountantTestCase
     {
         return [
             [
+                'Ciphers/TestCipher.php',
+                'make:cipher',
+                'TestCipher',
+            ],
+            [
                 'Resolvers/TestContextResolver.php',
                 'make:context-resolver',
                 'TestContextResolver',
