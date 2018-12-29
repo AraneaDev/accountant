@@ -35,6 +35,7 @@ $factory->define(Ledger::class, function (Faker $faker) {
         'url'             => $faker->url,
         'ip_address'      => $faker->ipv4,
         'user_agent'      => $faker->userAgent,
+        'pivot'           => [],
         'signature'       => function (array $properties) {
             unset($properties['signature']);
 

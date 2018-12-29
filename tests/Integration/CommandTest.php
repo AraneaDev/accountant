@@ -97,18 +97,22 @@ class CommandTest extends AccountantTestCase
     /**
      * @test
      */
-    public function itPublishesMigrationFile(): void
+    public function itPublishesMigrationFiles(): void
     {
-        $migrationFilePath = $this->app->databasePath('migrations/2018_11_21_000001_create_ledgers_table.php');
+        $migrationFilePath01 = $this->app->databasePath('migrations/2018_11_21_000001_create_ledgers_table.php');
+        $migrationFilePath02 = $this->app->databasePath('migrations/2018_12_27_000001_add_pivot_column_to_ledgers_table.php');
 
-        $this->assertFileNotExists($migrationFilePath);
+        $this->assertFileNotExists($migrationFilePath01);
+        $this->assertFileNotExists($migrationFilePath02);
 
         $this->artisan('vendor:publish', [
             '--tag' => 'accountant-migrations',
         ]);
 
-        $this->assertFileExists($migrationFilePath);
+        $this->assertFileExists($migrationFilePath01);
+        $this->assertFileExists($migrationFilePath02);
 
-        $this->assertTrue(unlink($migrationFilePath));
+        $this->assertTrue(unlink($migrationFilePath01));
+        $this->assertTrue(unlink($migrationFilePath02));
     }
 }

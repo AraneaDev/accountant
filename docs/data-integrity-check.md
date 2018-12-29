@@ -8,7 +8,7 @@ The bundled `Notary` implementation generates signatures using the `SHA-512` alg
 
 If needed, the default implementation can be replaced with a custom one. 
 
-> **TIP:** You cab generate a skeleton `Notary` class with the `php artisan make:notary` command.
+> **TIP:** You can generate a skeleton `Notary` class with the `php artisan make:notary` command.
 
 ### Example
 A custom `Notary` implementation using the **Argon2** algorithm.
@@ -113,7 +113,7 @@ if ($ledger->isTainted()) {
 By default, a `Ledger` record will be created each time a `Recordable` model is created and subsequently modified.
 
 ### Validation process
-In a nutshell, the method will check if the current state can be reached by going through all the recorded history, comparing the reached state to the current one.
+In a nutshell, the method will check if the current state can be reached by going through all the recorded states, comparing the reached state to the current one.
 
 This method also returns a `bool` value.
 

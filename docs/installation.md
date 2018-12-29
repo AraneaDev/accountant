@@ -1,5 +1,5 @@
 # Installation
-The easiest way to install the Accountant package, is through [Composer](http://getcomposer.org/doc/00-intro.md).
+The easiest way to install the Accountant package, is through [Composer](https://getcomposer.org/doc/00-intro.md).
 Executing the following command from your project root will get you the latest available version:
 
 ```sh
@@ -49,7 +49,7 @@ $app->withEloquent();
 // ...
 ```
 
-Finally, the configuration file must be loaded into the application by adding the following to `bootstrap/app.php`:
+Finally, the configuration file must be loaded into the application by adding the following line to `bootstrap/app.php`:
 
 ```php
 // ...
@@ -80,7 +80,7 @@ protected $commands = [
 > **NOTICE:** The service provider registration is mandatory in order for the configuration to be published!
 
 # Publishing
-After your framework of choice has been configured, publish the configuration file with the following command:
+After your framework of choice has been configured, publish the configuration file using the following command:
 
 ```sh
 php artisan vendor:publish --tag="accountant-configuration"
@@ -91,7 +91,7 @@ This will create the `config/accountant.php` configuration file.
 You can read more about the available configuration settings in the [Configuration](configuration.md) section.
 
 # Database
-Publish the database migration file with the following command:
+Publish the database migration files with the following command:
 
 ```sh
 php artisan vendor:publish --tag="accountant-migrations"

@@ -10,23 +10,15 @@ Data discrepancies that may indicate business concerns, suspect activities, and 
 -----------|---------------|--------------------|-------------
  1.x       | 5.2.x - 5.7.x | Actively supported | >= 7.1.3
 
-## Motivation
-For the past couple of years, I've been actively involved in a similar project, where I took over maintenance and did new releases.
-
-Over time, I got new concepts and feature ideas, but implementing some of them would mean totally breaking backwards compatibility.
-
-Due to the nature of said project, and with an increasing user base relying on it, starting a new one seemed the best approach.
-
-Given this package leverages on previous work, there's functionality in common, some that was removed, and other completely new!
-
 ## Key Features
-- Event source style approach, by storing **complete snapshots** of `Recordable` models when created, modified or retrieved;
+- Many-to-many (`BelongsToMany` and `MorphToMany`) relation support;
+- Event source style approach, by keeping **complete snapshots** of `Recordable` models when created, modified or retrieved;
 - Ability to recreate `Recordable` model instances in the exact state they were in when recorded;
-- Signed `Ledger` records;
+- Signed `Ledger` records for data integrity;
 - Effortless [data integrity checks](docs/data-integrity-check.md);
 - [Recording contexts](docs/configuration.md#recording-contexts);
-- Huge support for customisation ([drivers](docs/ledger-drivers.md), [resolvers](docs/resolvers.md), and more);
-- Easy to follow documentation and troubleshooting guide;
+- Huge customisation support ([drivers](docs/ledger-drivers.md), [resolvers](docs/resolvers.md), and more);
+- Easy to follow [documentation](docs/index.md) and [troubleshooting](docs/troubleshooting.md) guide;
 - Laravel and Lumen 5.2+ support;
 
 ## Documentation
@@ -36,13 +28,10 @@ The package documentation can be found [here](docs/index.md).
 For information on recent changes, check the [CHANGELOG](CHANGELOG.md).
 
 ## Contributing
-Contributions are always welcome, but before anything else, make sure you get acquainted with the [Contributing](CONTRIBUTING.md) guide.
+Contributions are always welcome, but before anything else, make sure you get acquainted with the [CONTRIBUTING](CONTRIBUTING.md) guide.
 
 ## Credits
 - [Quetzy Garcia](https://gitlab.com/quetzyg)
-
-## Alternative
-If this package doesn't suit you, try [Laravel Auditing](https://github.com/owen-it/laravel-auditing), which provides a similar set of features.
 
 ## License
 The **Accountant** package is open source software licensed under the [MIT LICENSE](LICENSE.md).

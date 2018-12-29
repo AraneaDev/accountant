@@ -218,14 +218,20 @@ trait Recordable
 
         $properties = [];
 
+        $modifyingEvents = [
+            'created',
+            'updated',
+            'deleted',
+            'restored',
+        ];
+
         foreach ($ledgers as $ledger) {
             // Ledgers cannot be tainted
             if ($ledger->isTainted()) {
                 return false;
             }
 
-            // Ignore retrieved events
-            if ($ledger->event === 'retrieved') {
+            if (!in_array($ledger->event, $modifyingEvents, true)) {
                 continue;
             }
 

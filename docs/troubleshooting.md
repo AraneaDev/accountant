@@ -2,7 +2,7 @@
 A compilation of common problems and ways to work around them.
 
 ## Recording does not work
-You followed the documentation to the letter and yet, `Ledger` records are not being created?
+You followed all the steps in the documentation and still, `Ledger` records are not being created?
 
 ### Query Builder vs. Eloquent
 Bear in mind that this package relies on Eloquent [events](https://laravel.com/docs/5.7/eloquent#events) and if they don't fire, a `Ledger` won't be created.
@@ -52,7 +52,7 @@ Under these circumstances, the `getDirty()` and `isDirty()` methods will give a 
 ## Ledgers without modified values are being recorded
 A `Ledger` is more than just the `modified` property value.
 
-There's other metadata like `user_*`, `recordable_*`, `context`, `event`, `properties`, `extra`, `url`, `ip_address`, `user_agent` and `signature`, which should be more than enough for accountability purposes.
+There's other metadata like `user_*`, `recordable_*`, `context`, `event`, `properties`, `extra`, `url`, `ip_address`, `user_agent`, `signature` and `pivot`, which should be more than enough for accountability purposes.
 
 Nevertheless, if such information isn't of use to retain, just register the following observer in the `boot()` method of the `Ledger` model:
 
@@ -64,7 +64,7 @@ static::creating(function (Ledger $model) {
 });
 ```
 
-> **CAVEAT:** Keep in mind that the `modified` column of a `retrieved` event, will always be empty!
+> **CAVEAT:** Keep in mind that the `modified` column of a `retrieved` and pivot events (`toggled`, `synced`, `existingPivotUpdated`,`attached` and `detached`), will always be empty!
 
 ## PHP Fatal error: Maximum function nesting level of '512' reached, aborting!
 This might happen when a `User` model has the `retrieved` Eloquent event set as recordable, and a retrieval happens.
@@ -113,7 +113,7 @@ class User extends Model implements Identifiable, Recordable
 ```
 
 ### Solution #2
-Another way to work around this, is to implement a `UserResolver` where the logic to fetch a `User` relies on a `Illuminate\Database\Query\Builder`, which doesn't fire events.
+Another way to work around this, is to implement a `UserResolver` where the logic to fetch a `User` relies on the `Illuminate\Database\Query\Builder`, which doesn't fire events.
 
 ## Attribute accessors and modifiers are not applied to SoftDeleted models
 Because not everyone uses the `SoftDeletes` trait, the `Ledger` relationships (`Recordable` and `User`) will return `null` by default, if any of those related records has been soft deleted.

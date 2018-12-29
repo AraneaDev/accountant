@@ -38,7 +38,9 @@
         "illuminate/filesystem": "5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*"
     },
     "require-dev": {
-        "orchestra/testbench": "^3.7"
+        "orchestra/testbench": "^3.7",
+        "doctrine/dbal": "^2.9",
+        "altek/eventually": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -52,7 +54,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.1-dev"
         },
         "laravel": {
             "providers": [
@@ -61,6 +63,7 @@
         }
     },
     "suggest": {
+        "altek/eventually": "Required for keeping track of BelongsToMany and MorphToMany relations.",
         "laravelista/lumen-vendor-publish": "Required to publish the package config file in Lumen."
     }
 }

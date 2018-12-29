@@ -1,13 +1,13 @@
 # Ledger Extract
 A `Ledger` is a snapshot of a `Recordable` model at a given point in time.
-With the `extract()` method, an exact `Recordable` instance can be instantiated from a `Ledger`.
+With the `extract()` method, an exact `Recordable` instance can be recreated from a `Ledger`.
 
 This method supports two modes of operation.
 
 ## Strict mode
 This is the default, when the `extract()` method is called with no arguments.
 
-In order to recreate an exact `Recordable` instance in this mode, **ALL** properties must be available in their original form and the `Ledger` cannot be **tainted**.
+In order to recreate an exact `Recordable` instance in this mode, **all** properties must be available in their original form and the `Ledger` **cannot** be tainted.
 
 > **TIP:** Read the [Data Integrity Check](data-integrity-check.md) documentation for additional information.
 

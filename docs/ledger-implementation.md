@@ -14,6 +14,7 @@ composer require jenssegers/mongodb
 
 ```php
 <?php
+
 namespace App\Models;
 
 use Jenssegers\Mongodb\Eloquent\Model;
@@ -33,6 +34,7 @@ class MongoLedger extends Model implements \Altek\Accountant\Contracts\Ledger
     protected $casts = [
         'properties' => 'json',
         'modified'   => 'json',
+        'pivot'      => 'json',
         'extra'      => 'json',
     ];
 
@@ -57,7 +59,7 @@ class MongoLedger extends Model implements \Altek\Accountant\Contracts\Ledger
 > **NOTICE:** The bulk of the `Ledger` logic is in the `Altek\Accountant\Ledger` trait.
 
 ## Defining a custom Ledger model
-To use the custom `Ledger` implementation, update the `accountant.ledger.implementation` configuration value with the FQCN:
+To use the custom `Ledger`, update the `accountant.ledger.implementation` configuration value with the implementation's `FQCN`:
 
 ```php
 return [

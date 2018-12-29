@@ -14,9 +14,9 @@ Each resolver has a **public static** `resolve()` method with the appropriate lo
 The package already includes concrete implementations that can be replaced with custom ones, should there be a special need.
 
 ## Context Resolver
-The default `ContextResolver` implementation uses `App::runningUnitTests()` and `App::runningInConsole()` in its logic.
+The default `ContextResolver` implementation uses `App::runningUnitTests()` and `App::runningInConsole()` for its logic.
 
-> **TIP:** You cab generate a skeleton `ContextResolver` class with the `php artisan make:context-resolver` command.
+> **TIP:** You can generate a skeleton `ContextResolver` class with the `php artisan make:context-resolver` command.
 
 Here's an alternative implementation that does not depend on `Illuminate\Foundation\Application`:
 
@@ -47,7 +47,7 @@ class ContextResolver implements \Altek\Accountant\Contracts\ContextResolver
 }
 ```
 
-Set the `accountant.resolvers.context` configuration value to the custom `ContextResolver` FQCN:
+Set the `accountant.resolvers.context` configuration value to the `FQCN` of the custom `ContextResolver` class:
 
 ```php
 return [
@@ -70,7 +70,7 @@ While that works for most applications, the ones running behind a proxy or a [lo
 
 Usually, the real IP address will be passed in a **X-Forwarded-For** HTTP header.
 
-> **TIP:** You cab generate a skeleton `IpAddressResolver` class with the `php artisan make:ip-address-resolver` command.
+> **TIP:** You can generate a skeleton `IpAddressResolver` class with the `php artisan make:ip-address-resolver` command.
 
 Here's a resolver example for this use case.
 
@@ -93,7 +93,7 @@ class IpAddressResolver implements \Altek\Accountant\Contracts\IpAddressResolver
 }
 ```
 
-Set the `accountant.resolvers.ip_address` configuration value to the custom `IpAddressResolver` FQCN:
+Set the `accountant.resolvers.ip_address` configuration value to the `FQCN` of the custom `IpAddressResolver` class:
 
 ```php
 return [
@@ -113,7 +113,7 @@ return [
 ## URL Resolver
 The default resolver uses the `Request::fullUrl()` method to get the current URL (including any query strings).
 
-> **TIP:** You cab generate a skeleton `UrlResolver` class with the `php artisan make:url-resolver` command.
+> **TIP:** You can generate a skeleton `UrlResolver` class with the `php artisan make:url-resolver` command.
 
 Here's a resolver example where query strings are not included.
 
@@ -142,7 +142,7 @@ class UrlResolver implements \Altek\Accountant\Contracts\UrlResolver
 }
 ```
 
-Set the `accountant.resolvers.url` configuration value to the custom `UrlResolver` FQCN:
+Set the `accountant.resolvers.url` configuration value to the `FQCN` of the custom `UrlResolver` class:
 
 ```php
 return [
@@ -162,7 +162,7 @@ return [
 ## User Agent Resolver
 This resolver uses the `Request::header()` method without a default value, which returns `null` if a User Agent isn't available.
 
-> **TIP:** You cab generate a skeleton `UserAgentResolver` class with the `php artisan make:user-agent-resolver` command.
+> **TIP:** You can generate a skeleton `UserAgentResolver` class with the `php artisan make:user-agent-resolver` command.
 
 The following example will return a default string when the `User-Agent` HTTP header is empty/unavailable.
 
@@ -186,7 +186,7 @@ class UserAgentResolver implements \Altek\Accountant\Contracts\UserAgentResolver
 }
 ```
 
-Set the `accountant.resolvers.user_agent` configuration value to the custom `UserAgentResolver` FQCN:
+Set the `accountant.resolvers.user_agent` configuration value to the `FQCN` of the custom `UserAgentResolver` class:
 
 ```php
 return [
@@ -208,7 +208,7 @@ The included `UserResolver` implementation uses the Laravel `Auth::guard()` meth
 
 The `resolve()` method must return an object implementing `Altek\Accountant\Contracts\Identifiable`, or `null` if the user cannot be resolved.
 
-> **TIP:** You cab generate a skeleton `UserResolver` class with the `php artisan make:user-resolver` command.
+> **TIP:** You can generate a skeleton `UserResolver` class with the `php artisan make:user-resolver` command.
 
 ### Identifiable implementation
 Implementing the `Altek\Accountant\Contracts\Identifiable` interface on a `User` model:
@@ -260,7 +260,7 @@ class UserResolver implements \Altek\Accountant\Contracts\UserResolver
 }
 ```
 
-Set the `accountant.resolvers.user` configuration value to the custom `UserResolver` FQCN:
+Set the `accountant.resolvers.user` configuration value to the `FQCN` of the custom `UserResolver` class:
 
 ```php
 return [

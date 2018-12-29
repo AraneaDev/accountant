@@ -371,6 +371,220 @@ class RecordingTest extends AccountantTestCase
     /**
      * @test
      */
+    public function itWillRecordTheToggledEvent(): void
+    {
+        $this->app['config']->set('accountant.events', [
+            'toggled',
+        ]);
+
+        $user = factory(User::class)->create();
+        factory(Article::class, 2)->create();
+
+        $this->assertSame(0, Ledger::count());
+
+        $user->articles()->toggle([
+            2 => [
+                'liked' => false,
+            ],
+            1 => [
+                'liked' => true,
+            ],
+        ]);
+
+        $this->assertSame(1, Ledger::count());
+
+        $ledger = Ledger::first();
+
+        $this->assertSame('toggled', $ledger->event);
+
+        $this->assertEmpty($ledger->modified);
+
+        $this->assertArraySubset([
+            'relation'   => 'articles',
+            'properties' => [
+                2 => [
+                    'liked' => false,
+                ],
+                1 => [
+                    'liked' => true,
+                ],
+            ],
+        ], $ledger->getPivotData(), true);
+    }
+
+    /**
+     * @test
+     */
+    public function itWillRecordTheSyncedEvent(): void
+    {
+        $this->app['config']->set('accountant.events', [
+            'synced',
+        ]);
+
+        $user = factory(User::class)->create();
+        factory(Article::class, 2)->create();
+
+        $this->assertSame(0, Ledger::count());
+
+        $user->articles()->sync([
+            2 => [
+                'liked' => false,
+            ],
+            1 => [
+                'liked' => true,
+            ],
+        ]);
+
+        $this->assertSame(1, Ledger::count());
+
+        $ledger = Ledger::first();
+
+        $this->assertSame('synced', $ledger->event);
+
+        $this->assertEmpty($ledger->modified);
+
+        $this->assertArraySubset([
+            'relation'   => 'articles',
+            'properties' => [
+                2 => [
+                    'liked' => false,
+                ],
+                1 => [
+                    'liked' => true,
+                ],
+            ],
+        ], $ledger->getPivotData(), true);
+    }
+
+    /**
+     * @test
+     */
+    public function itWillRecordTheExistingPivotUpdatedEvent(): void
+    {
+        $this->app['config']->set('accountant.events', [
+            'existingPivotUpdated',
+        ]);
+
+        $user = factory(User::class)->create();
+
+        $articles = factory(Article::class, 2)->create()->each(function (Article $article) use ($user) {
+            $article->users()->attach($user, [
+                'liked' => false,
+            ]);
+        });
+
+        $this->assertSame(0, Ledger::count());
+
+        $user->articles()->updateExistingPivot($articles, [
+            'liked' => true,
+        ]);
+
+        $this->assertSame(1, Ledger::count());
+
+        $ledger = Ledger::first();
+
+        $this->assertSame('existingPivotUpdated', $ledger->event);
+
+        $this->assertEmpty($ledger->modified);
+
+        $this->assertArraySubset([
+            'relation'   => 'articles',
+            'properties' => [
+                2 => [
+                    'liked' => true,
+                ],
+                1 => [
+                    'liked' => true,
+                ],
+            ],
+        ], $ledger->getPivotData(), true);
+    }
+
+    /**
+     * @test
+     */
+    public function itWillRecordTheAttachedEvent(): void
+    {
+        $this->app['config']->set('accountant.events', [
+            'attached',
+        ]);
+
+        $user = factory(User::class)->create();
+        factory(Article::class, 2)->create();
+
+        $this->assertSame(0, Ledger::count());
+
+        $user->articles()->attach([
+            2 => [
+                'liked' => false,
+            ],
+            1 => [
+                'liked' => true,
+            ],
+        ]);
+
+        $this->assertSame(1, Ledger::count());
+
+        $ledger = Ledger::first();
+
+        $this->assertSame('attached', $ledger->event);
+
+        $this->assertEmpty($ledger->modified);
+
+        $this->assertArraySubset([
+            'relation'   => 'articles',
+            'properties' => [
+                2 => [
+                    'liked' => false,
+                ],
+                1 => [
+                    'liked' => true,
+                ],
+            ],
+        ], $ledger->getPivotData(), true);
+    }
+
+    /**
+     * @test
+     */
+    public function itWillRecordTheDetachedEvent(): void
+    {
+        $this->app['config']->set('accountant.events', [
+            'detached',
+        ]);
+
+        $user = factory(User::class)->create();
+
+        factory(Article::class, 2)->create()->each(function (Article $article) use ($user) {
+            $article->users()->attach($user, [
+                'liked' => $article->id === 1,
+            ]);
+        });
+
+        $this->assertSame(0, Ledger::count());
+
+        $user->articles()->detach();
+
+        $this->assertSame(1, Ledger::count());
+
+        $ledger = Ledger::first();
+
+        $this->assertSame('detached', $ledger->event);
+
+        $this->assertEmpty($ledger->modified);
+
+        $this->assertArraySubset([
+            'relation'   => 'articles',
+            'properties' => [
+                1 => [],
+                2 => [],
+            ],
+        ], $ledger->getPivotData(), true);
+    }
+
+    /**
+     * @test
+     */
     public function itWillKeepAllLedgers(): void
     {
         $this->app['config']->set('accountant.ledger.threshold', 0);

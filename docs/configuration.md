@@ -1,5 +1,5 @@
 # Configuration
-The recording behavior can be modified in the configuration.
+This section describes some of the basic configuration settings of the package.
 
 ## Ledger implementation
 The `Altek\Accountant\Models\Ledger` implementation is set by omission.
@@ -17,7 +17,7 @@ return [
 ];
 ```
 
-> **TIP:** Read the [Ledger Implementation](ledger-implementation.md) documentation, should you want to implement your own custom implementation.
+> **TIP:** Read the [Ledger Implementation](ledger-implementation.md) documentation, should you want to create your own custom implementation.
 
 ## Ledger driver
 The bundled `Database` driver is set as default.
@@ -42,15 +42,15 @@ There are three recording contexts.
 
 Name                   | Constant                         | Value   | Resolved when running
 -----------------------|----------------------------------|---------|----------------------------------------
-Testing                | `Altek\Accountant\Context::TEST` | `0b001` | PHPUnit
+Testing                | `Altek\Accountant\Context::TEST` | `0b001` | PHPUnit, ...
 Command Line Interface | `Altek\Accountant\Context::CLI`  | `0b010` | Migrations, Jobs, Commands, Tinker, ...
 Web                    | `Altek\Accountant\Context::WEB`  | `0b100` | Apache, CGI, FPM, ...
 
-By default, the package **only** records when in `WEB` context.
+By default, the package **only** records in a `WEB` context.
 
 To enable additional contexts, set the `accountant.contexts` value to a [bit mask](https://en.wikipedia.org/wiki/Mask_(computing)).
 
-The following example promotes all available contexts:
+The following example promotes all available contexts for recording.
 
 ```php
 return [
@@ -93,7 +93,7 @@ return [
 ```
 
 ### Auth Guards
-Specify the authentication guards the `UserResolver` should use when resolving a user.
+Specify the authentication guards the default `UserResolver` should use when resolving a user.
 
 ```php
 return [

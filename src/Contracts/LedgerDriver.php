@@ -11,12 +11,19 @@ interface LedgerDriver
      *
      * @param \Altek\Accountant\Contracts\Recordable $model
      * @param string                                 $event
+     * @param string                                 $pivotRelation
+     * @param array                                  $pivotProperties
      *
      * @throws \Altek\Accountant\Exceptions\AccountantException
      *
      * @return \Altek\Accountant\Contracts\Ledger
      */
-    public function record(Recordable $model, string $event): Ledger;
+    public function record(
+        Recordable $model,
+        string $event,
+        string $pivotRelation = null,
+        array $pivotProperties = []
+    ): Ledger;
 
     /**
      * Remove older ledgers that go over the threshold.

@@ -5,13 +5,19 @@ declare(strict_types=1);
 namespace Altek\Accountant\Tests\Models;
 
 use Altek\Accountant\Contracts\Recordable;
+use Altek\Eventually\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Article extends Model implements Recordable
 {
     use \Altek\Accountant\Recordable;
-    use SoftDeletes;
+    use \Altek\Eventually\Eventually;
+    use \Illuminate\Database\Eloquent\SoftDeletes;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected $table = 'articles';
 
     /**
      * {@inheritdoc}
@@ -37,6 +43,18 @@ class Article extends Model implements Recordable
         'published_at',
         'reviewed',
     ];
+
+    /**
+     * Associated Users.
+     *
+     * @return \Altek\Eventually\Relations\BelongsToMany
+     */
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class)
+            ->withPivot('liked')
+            ->withTimestamps();
+    }
 
     /**
      * Uppercase Title accessor.
