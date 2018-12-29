@@ -1,5 +1,5 @@
 # Configuration
-The recording behavior can be modified in the configuration.
+This section describes some of the basic configuration settings of the package.
 
 ## Ledger implementation
 The `Altek\Accountant\Models\Ledger` implementation is set by omission.
