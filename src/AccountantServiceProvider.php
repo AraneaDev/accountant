@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Altek\Accountant;
 
+use Altek\Accountant\Console\MakeCipherCommand;
 use Altek\Accountant\Console\MakeContextResolverCommand;
 use Altek\Accountant\Console\MakeIpAddressResolverCommand;
 use Altek\Accountant\Console\MakeLedgerDriverCommand;
@@ -53,6 +54,7 @@ class AccountantServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->commands([
+            MakeCipherCommand::class,
             MakeContextResolverCommand::class,
             MakeIpAddressResolverCommand::class,
             MakeLedgerDriverCommand::class,
