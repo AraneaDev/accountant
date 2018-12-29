@@ -510,7 +510,7 @@ class RecordingTest extends AccountantTestCase
         ]);
 
         $user = factory(User::class)->create();
-        $articles = factory(Article::class, 2)->create();
+        factory(Article::class, 2)->create();
 
         $this->assertSame(0, Ledger::count());
 
