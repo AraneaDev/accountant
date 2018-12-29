@@ -7,17 +7,19 @@ Besides storing model attribute changes and other metadata, drivers also handle 
 While the `Database` driver can be enough for most use cases, should you need to write a custom one, you can do so.
 
 ## Creating a custom Driver
-A driver is just a class that implements the `LedgerDriver` interface.
-To create a new driver, execute the following command:
+A driver is just a class implementing the `LedgerDriver` interface.
+
+To create a new driver, execute
 
 ```sh
 php artisan make:ledger-driver MyCustomDriver
 ```
 
-The above command will place a file called `MyCustomDriver.php` in the `app/LedgerDrivers` folder with the following content:
+The previous command will create a file called `MyCustomDriver.php` in the `app/LedgerDrivers` folder with the following content:
 
 ```php
 <?php
+
 namespace App\LedgerDrivers;
 
 use Altek\Accountant\Contracts\Ledger;
@@ -85,10 +87,11 @@ return [
 In this example, the `MyCustomDriver` is set as the default ledger driver for all the `Recordable` models.
 
 ### Locally
-This is done on a per `Recordable` model basis, by assigning the `FQCN` of the driver to the `$ledgerDriver` attribute.
+The value is set per `Recordable` model, by assigning the `FQCN` of the driver to the `$ledgerDriver` attribute.
 
 ```php
 <?php
+
 namespace App\Models;
 
 use Altek\Accountant\Contracts\Recordable;
