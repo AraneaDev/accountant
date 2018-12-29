@@ -113,7 +113,7 @@ class User extends Model implements Identifiable, Recordable
 ```
 
 ### Solution #2
-Another way to work around this, is to implement a `UserResolver` where the logic to fetch a `User` relies on a `Illuminate\Database\Query\Builder`, which doesn't fire events.
+Another way to work around this, is to implement a `UserResolver` where the logic to fetch a `User` relies on the `Illuminate\Database\Query\Builder`, which doesn't fire events.
 
 ## Attribute accessors and modifiers are not applied to SoftDeleted models
 Because not everyone uses the `SoftDeletes` trait, the `Ledger` relationships (`Recordable` and `User`) will return `null` by default, if any of those related records has been soft deleted.
