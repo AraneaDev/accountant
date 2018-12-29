@@ -2,6 +2,7 @@
 
 * [Installation](installation.md)
 * [Configuration](configuration.md)
+* [Upgrading](upgrading.md)
 * Recordable
   * [Model Setup](recordable-model-setup.md)
   * [Configuration](recordable-configuration.md)
