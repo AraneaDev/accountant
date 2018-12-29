@@ -1,8 +1,8 @@
 # Recordable configuration 
-This section of the documentation describes the basic `Recordable` settings.
+This section describes the basic `Recordable` settings.
 
 ## Ledger threshold
-Out of the box, there's no limit to the number of `Ledger` records that are kept for a given `Recordable` model.
+Out of the box, there's no limit for the number of `Ledger` records that are kept for a given `Recordable` model.
 If needed, set the threshold configuration to a positive `int` of your choice, to keep `Ledger` records to a minimum.
 
 > **TIP:** By default, the `accountant.ledger.threshold` value is set to `0` (zero), which stands for no limit.
@@ -26,7 +26,7 @@ return [
 ```
 
 ### Locally
-This is done on a `Recordable` model, by assigning an `int` value to the `$ledgerThreshold` attribute.
+The value is set per `Recordable` model, by assigning an `int` value to the `$ledgerThreshold` attribute.
 
 > **TIP:** A locally defined threshold **always** takes precedence over a globally defined one.
 
@@ -58,11 +58,51 @@ The above configuration, will keep the `10` latest `Ledger` records.
 > **CAVEAT:** Bear in mind that pruning `Ledger` records will affect operations such as the [Data Integrity Check](data-integrity-check.md)!
 
 ## Events
-By default, only the `created`, `updated`, `deleted` and `restored` Eloquent events are monitored.
+[Eloquent events](https://laravel.com/docs/5.7/eloquent#events) are what trigger the recording of a `Ledger`, and by default, only the `created`, `updated`, `deleted` and `restored` events are observed.
 
-To change this behavior, update the events configuration `array` with the events of your choice.
+### Standard events
+Event name              | Default state
+------------------------|---------------
+ `created`              | Enabled
+ `updated`              | Enabled
+ `deleted`              | Enabled
+ `restored`             | Enabled
+ `retrieved`            | **Disabled**
 
-### Globally
+#### Retrieved event
+From version **5.5.0**, Eloquent introduced the `retrieved` event. While supported, this event is **not** observed by default.
+
+The rationale is to prevent large amounts of `Ledger` records, specially on busy applications, so enable it with care.
+
+> **NOTICE:** When caching is active - and depending on how it's configured - the `retrieved` event might not fire as often!
+
+> **TIP:** If tou get a **PHP Fatal error: Maximum function nesting level of '512' reached, aborting!** after enabling the `retrieved` event, check the [troubleshooting](troubleshooting.md#php-fatal-error-maximum-function-nesting-level-of-512-reached-aborting) guide for help. 
+
+### Pivot events
+Support for pivot event recording was introduced in version **1.1.0**.
+
+Event name              | Default state
+------------------------|---------------
+ `toggled`              | **Disabled** 
+ `synced`               | **Disabled**
+ `existingPivotUpdated` | **Disabled**
+ `attached`             | **Disabled**
+ `detached`             | **Disabled**
+
+To enable these events, the `altek/eventually` package needs to be installed
+
+```sh
+composer require altek/eventually
+```
+
+and the `\Altek\Eventually\Eventually` trait must be set in the required models.
+
+> **CAVEAT:** The `sync()` and `toggle()` methods trigger multiple events, since they call `attach()` and `detach()` internally. You should only observe the `toggled` and `synced` **or** `attached` and `detached` events, to avoid multiple `Ledger` records for the same action.
+
+### Event configuration
+There are two ways to define which events should be observed.
+
+#### Globally
 This is done in the `config/accountant.php` configuration file.
 
 ```php
@@ -71,16 +111,22 @@ return [
     // ...
 
     'events' => [
+        'created',
+        'updated',
         'deleted',
         'restored',
+        'retrieved',
+        'existingPivotUpdated',
+        'attached',
+        'detached',
     ],
 
     // ...
 ];
 ```
 
-### Locally
-This is done on a `Recordable` model, by assigning an `array` value to the `$recordableEvents` attribute.
+#### Locally
+The value is set per `Recordable` model, by assigning an `array` value to the `$recordableEvents` attribute.
 
 > **TIP:** Locally defined events **always** take precedence over globally defined ones.
 
@@ -95,6 +141,7 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model implements Recordable
 {
     use \Altek\Accountant\Recordable;
+    use \Altek\Eventually\Eventually;
 
     /**
      * Recordable events.
@@ -102,27 +149,24 @@ class Article extends Model implements Recordable
      * @var array
      */
     protected $recordableEvents = [
+        'created',
+        'updated',
         'deleted',
         'restored',
+        'retrieved',
+        'existingPivotUpdated',
+        'attached',
+        'detached',
     ];
 
     // ...
 }
 ```
 
-### Retrieved event
-Eloquent version **5.5.0** introduced the `retrieved` event. While supported by this package, `retrieved` events are **not** recorded by default.
-
-The reason is to prevent a **massive** amount of `Ledger` records, specially on busy applications, so enable it with care.
-
-Keep in mind that when caching is active - and depending on how it's configured - the `retrieved` event might not fire as often!
-
-> **TIP:** If tou get a **PHP Fatal error:  Maximum function nesting level of '512' reached, aborting!** after enabling the `retrieved` event, make sure to check the [troubleshooting](troubleshooting.md) guide for help. 
+> **NOTICE:** The `\Altek\Eventually\Eventually` trait needs to be set in the model for the pivot events to fire.
 
 ## Enable/Disable recording
-The recording functionality can be enabled and disabled via two static methods.
-
-Using the `Article` model from other examples, here is how it works:
+The `Recordable` trait provides two static methods to enable and disable the recording functionality.
 
 ```php
 // Disable recording from this point on
