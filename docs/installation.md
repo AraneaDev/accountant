@@ -49,7 +49,7 @@ $app->withEloquent();
 // ...
 ```
 
-Finally, the configuration file must be loaded into the application by adding the following to `bootstrap/app.php`:
+Finally, the configuration file must be loaded into the application by adding the following line to `bootstrap/app.php`:
 
 ```php
 // ...
@@ -80,7 +80,7 @@ protected $commands = [
 > **NOTICE:** The service provider registration is mandatory in order for the configuration to be published!
 
 # Publishing
-After your framework of choice has been configured, publish the configuration file with the following command:
+After your framework of choice has been configured, publish the configuration file using the following command:
 
 ```sh
 php artisan vendor:publish --tag="accountant-configuration"
