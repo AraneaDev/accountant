@@ -4,7 +4,7 @@ Using a cipher makes it easy to conceal sensitive information and/or store binar
 There are two supported types available, **one way** and **two way**.
 
 ## Bleach cipher
-`Bleach` is a **one way** cipher that conceals around 90% of the data from the left to the right.
+`Bleach` is a **one way** cipher that conceals around 90% of the data from left to right.
 
 ### Example
 Input value                               | Output value
