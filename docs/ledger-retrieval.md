@@ -23,7 +23,7 @@ foreach ($article->ledgers()->get() as $ledger) {
 }
 ```
 
-> **NOTICE:** If no custom ordering is applied, `Ledger` records will be returned by `created_at` ascending order.
+> **NOTICE:** If no custom ordering is applied, `Ledger` records will be returned by `created_at` in ascending order.
 
 ## Getting Ledgers with the associated User model
 ```php
@@ -59,7 +59,7 @@ array(11) {
   'ledger_context' =>
   int(1)
   'ledger_event' =>
-  string(7) "updated"
+  string(8) "attached"
   'ledger_url' =>
   string(29) "http://example.com/articles/1"
   'ledger_ip_address'=>
@@ -136,3 +136,44 @@ array(7) {
 ```
 
 > **TIP:** The `getMetadata()` and `getData()` methods will honour any established attribute **mutator** or **cast**.
+
+## Getting pivot data
+Version **1.1.0** supports recording pivot event data. To get it, use the `getPivotData()` method.
+
+### Usage example
+```php
+// Get the first available Article
+$article = Article::first();
+
+// Get the latest Ledger containing pivot data
+$ledger = $article->ledgers()->whereIn('event', [
+    'existingPivotUpdated',
+    'attached',
+    'detached',
+])
+->latest()
+->first();
+
+var_dump($ledger->getPivotData());
+```
+
+### Output example
+```php
+array(2) {
+  'relation' =>
+  string(8) "articles"
+  'properties' =>
+  array(2) {
+    [1] =>
+    array(1) {
+      'liked' =>
+      bool(true)
+    }
+    [2] =>
+    array(1) {
+      'liked' =>
+      bool(true)
+    }
+  }
+}
+```
