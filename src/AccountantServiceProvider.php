@@ -18,11 +18,6 @@ use Illuminate\Support\ServiceProvider;
 class AccountantServiceProvider extends ServiceProvider
 {
     /**
-     * {@inheritdoc}
-     */
-    protected $defer = true;
-
-    /**
      * Bootstrap the service provider.
      *
      * @return void
@@ -67,15 +62,5 @@ class AccountantServiceProvider extends ServiceProvider
         $this->app->singleton(Accountant::class, function ($app) {
             return new \Altek\Accountant\Accountant($app);
         });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function provides(): array
-    {
-        return [
-            Accountant::class,
-        ];
     }
 }
