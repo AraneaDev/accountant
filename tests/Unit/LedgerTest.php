@@ -295,8 +295,6 @@ class LedgerTest extends AccountantTestCase
     public function itReturnsDecipheredRecordableData(): void
     {
         $article = new class() extends Article {
-            protected $table = 'articles';
-
             protected $ciphers = [
                 'title'   => Base64::class,
                 'content' => Bleach::class,
@@ -405,8 +403,6 @@ class LedgerTest extends AccountantTestCase
     public function itFailsToCompileLedgerDataDueToInvalidProperty(): void
     {
         $article = new class() extends Article {
-            protected $table = 'articles';
-
             protected $ciphers = [
                 'invalid_property' => Base64::class,
             ];
@@ -429,8 +425,6 @@ class LedgerTest extends AccountantTestCase
     public function itFailsToCompileLedgerDataDueToInvalidCipherImplementation(): void
     {
         $article = new class() extends Article {
-            protected $table = 'articles';
-
             protected $ciphers = [
                 'title' => AccountantTestCase::class,
             ];
@@ -456,8 +450,6 @@ class LedgerTest extends AccountantTestCase
     public function itFailsToExtractARecordableInstanceFromALedgerInStrictMode(): void
     {
         $article = new class() extends Article {
-            protected $table = 'articles';
-
             protected $ciphers = [
                 'title'   => Base64::class,
                 'content' => Bleach::class,
@@ -496,8 +488,6 @@ class LedgerTest extends AccountantTestCase
     public function itSuccessfullyExtractsARecordableInstanceFromALedger(): void
     {
         $article = new class() extends Article {
-            protected $table = 'articles';
-
             protected $ciphers = [
                 'title'   => Base64::class,
                 'content' => Bleach::class,

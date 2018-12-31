@@ -484,8 +484,6 @@ class RecordableTest extends AccountantTestCase
     public function itSuccessfullyReturnsCollectedDataIncludingExtraSupply(): void
     {
         $article = new class() extends Article {
-            protected $table = 'articles';
-
             public function supplyExtra(string $event, array $properties, ?Identifiable $user): array
             {
                 return [
