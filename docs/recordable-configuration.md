@@ -58,16 +58,17 @@ The above configuration, will keep the `10` latest `Ledger` records.
 > **CAVEAT:** Bear in mind that pruning `Ledger` records will affect operations such as the [Data Integrity Check](data-integrity-check.md)!
 
 ## Events
-[Eloquent events](https://laravel.com/docs/5.7/eloquent#events) are what trigger the recording of a `Ledger`, and by default, only the `created`, `updated`, `deleted` and `restored` events are observed.
+[Eloquent events](https://laravel.com/docs/5.7/eloquent#events) are what trigger the recording of a `Ledger`, and by default, only the `created`, `updated`, `restored`, `deleted` and `forceDeleted` events are observed.
 
 ### Standard events
 Event name              | Default state
 ------------------------|---------------
+ `retrieved`            | **Disabled**
  `created`              | Enabled
  `updated`              | Enabled
- `deleted`              | Enabled
  `restored`             | Enabled
- `retrieved`            | **Disabled**
+ `deleted`              | Enabled
+ `forceDeleted`         | Enabled
 
 #### Retrieved event
 From version **5.5.0**, Eloquent introduced the `retrieved` event. While supported, this event is **not** observed by default.
@@ -111,11 +112,12 @@ return [
     // ...
 
     'events' => [
+        'retrieved',
         'created',
         'updated',
-        'deleted',
         'restored',
-        'retrieved',
+        'deleted',
+        'forceDeleted',
         'existingPivotUpdated',
         'attached',
         'detached',
@@ -149,11 +151,12 @@ class Article extends Model implements Recordable
      * @var array
      */
     protected $recordableEvents = [
+        'retrieved',
         'created',
         'updated',
-        'deleted',
         'restored',
-        'retrieved',
+        'deleted',
+        'forceDeleted',
         'existingPivotUpdated',
         'attached',
         'detached',
