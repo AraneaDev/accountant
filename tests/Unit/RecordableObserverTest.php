@@ -14,9 +14,15 @@ class RecordableObserverTest extends AccountantTestCase
      * @group RecordableObserver::retrieved
      * @group RecordableObserver::created
      * @group RecordableObserver::updated
-     * @group RecordableObserver::deleted
      * @group RecordableObserver::restoring
      * @group RecordableObserver::restored
+     * @group RecordableObserver::deleted
+     * @group RecordableObserver::forceDeleted
+     * @group RecordableObserver::toggled
+     * @group RecordableObserver::synced
+     * @group RecordableObserver::existingPivotUpdated
+     * @group RecordableObserver::attached
+     * @group RecordableObserver::detached
      * @test
      *
      * @dataProvider recordableObserverTestProvider
@@ -25,14 +31,14 @@ class RecordableObserverTest extends AccountantTestCase
      * @param bool   $expectedBefore
      * @param bool   $expectedAfter
      */
-    public function itExecutesTheAccountantSuccessfully(string $method, bool $expectedBefore, bool $expectedAfter): void
+    public function itSuccessfullyExecutesTheAccountant(string $method, bool $expectedBefore, bool $expectedAfter): void
     {
         $observer = new RecordableObserver();
         $article = factory(Article::class)->create();
 
         $this->assertSame($expectedBefore, $observer::$restoring);
 
-        $observer->$method($article);
+        $observer->$method($article, 'users', []);
 
         $this->assertSame($expectedAfter, $observer::$restoring);
     }
@@ -59,11 +65,6 @@ class RecordableObserverTest extends AccountantTestCase
                 false,
             ],
             [
-                'deleted',
-                false,
-                false,
-            ],
-            [
                 'restoring',
                 false,
                 true,
@@ -73,6 +74,42 @@ class RecordableObserverTest extends AccountantTestCase
                 true,
                 false,
             ],
+            [
+                'deleted',
+                false,
+                false,
+            ],
+            [
+                'forceDeleted',
+                false,
+                false,
+            ],
+            [
+                'toggled',
+                false,
+                false,
+            ],
+            [
+                'synced',
+                false,
+                false,
+            ],
+            [
+                'existingPivotUpdated',
+                false,
+                false,
+            ],
+            [
+                'attached',
+                false,
+                false,
+            ],
+            [
+                'detached',
+                false,
+                false,
+            ],
+
         ];
     }
 }
