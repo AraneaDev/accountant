@@ -152,8 +152,9 @@ class RecordableTest extends AccountantTestCase
         $this->assertArraySubset([
             'created',
             'updated',
-            'deleted',
             'restored',
+            'deleted',
+            'forceDeleted',
         ], $article->getRecordableEvents(), true);
     }
 
@@ -215,18 +216,31 @@ class RecordableTest extends AccountantTestCase
         $article = new Article();
 
         $article->recordableEvents = [
+            'retrieved',
             'created',
             'updated',
-            'deleted',
             'restored',
-            'retrieved',
+            'deleted',
+            'forceDeleted',
+            'toggle',
+            'sync',
+            'existingPivotUpdated',
+            'attached',
+            'detached',
+
         ];
 
+        $this->assertTrue($article->isEventRecordable('retrieved'));
         $this->assertTrue($article->isEventRecordable('created'));
         $this->assertTrue($article->isEventRecordable('updated'));
-        $this->assertTrue($article->isEventRecordable('deleted'));
         $this->assertTrue($article->isEventRecordable('restored'));
-        $this->assertTrue($article->isEventRecordable('retrieved'));
+        $this->assertTrue($article->isEventRecordable('deleted'));
+        $this->assertTrue($article->isEventRecordable('forceDeleted'));
+        $this->assertTrue($article->isEventRecordable('toggle'));
+        $this->assertTrue($article->isEventRecordable('sync'));
+        $this->assertTrue($article->isEventRecordable('existingPivotUpdated'));
+        $this->assertTrue($article->isEventRecordable('attached'));
+        $this->assertTrue($article->isEventRecordable('detached'));
     }
 
     /**
