@@ -287,6 +287,45 @@ class RecordingTest extends AccountantTestCase
     /**
      * @test
      */
+    public function itWillRecordTheRestoredEvent(): void
+    {
+        $this->app['config']->set('accountant.events', [
+            'restored',
+        ]);
+
+        $article = factory(Article::class)->create([
+            'title'        => 'Keeping Track Of Eloquent Model Changes',
+            'content'      => 'N/A',
+            'published_at' => null,
+            'reviewed'     => 0,
+            'deleted_at'   => Carbon::now(),
+        ]);
+
+        $article->restore();
+
+        $this->assertSame(1, Ledger::count());
+
+        $ledger = Ledger::first();
+
+        $this->assertSame('restored', $ledger->event);
+
+        $this->assertArraySubset([
+            'title'        => 'Keeping Track Of Eloquent Model Changes',
+            'content'      => 'N/A',
+            'published_at' => null,
+            'reviewed'     => 0,
+            'updated_at'   => '2012-06-14 15:03:03',
+            'created_at'   => '2012-06-14 15:03:03',
+            'id'           => 1,
+            'deleted_at'   => null,
+        ], $ledger->properties, true);
+
+        $this->assertEmpty($ledger->modified);
+    }
+
+    /**
+     * @test
+     */
     public function itWillRecordTheDeletedEvent(): void
     {
         $this->app['config']->set('accountant.events', [
@@ -329,10 +368,10 @@ class RecordingTest extends AccountantTestCase
     /**
      * @test
      */
-    public function itWillRecordTheRestoredEvent(): void
+    public function itWillRecordTheForceDeletedEvent(): void
     {
         $this->app['config']->set('accountant.events', [
-            'restored',
+            'forceDeleted',
         ]);
 
         $article = factory(Article::class)->create([
@@ -340,29 +379,26 @@ class RecordingTest extends AccountantTestCase
             'content'      => 'N/A',
             'published_at' => null,
             'reviewed'     => 0,
+            'deleted_at'   => Carbon::now(),
         ]);
 
-        $article->delete();
-
-        $this->assertSame(0, Ledger::count());
-
-        $article->restore();
+        $article->forceDelete();
 
         $this->assertSame(1, Ledger::count());
 
         $ledger = Ledger::first();
 
-        $this->assertSame('restored', $ledger->event);
+        $this->assertSame('forceDeleted', $ledger->event);
 
         $this->assertArraySubset([
             'title'        => 'Keeping Track Of Eloquent Model Changes',
             'content'      => 'N/A',
             'published_at' => null,
             'reviewed'     => 0,
+            'deleted_at'   => '2012-06-14 15:03:03',
             'updated_at'   => '2012-06-14 15:03:03',
             'created_at'   => '2012-06-14 15:03:03',
             'id'           => 1,
-            'deleted_at'   => null,
         ], $ledger->properties, true);
 
         $this->assertEmpty($ledger->modified);
