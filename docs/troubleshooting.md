@@ -96,8 +96,9 @@ class User extends Model implements Identifiable, Recordable
     protected $recordableEvents = [
         'created',
         'updated',
-        'deleted',
         'restored',
+        'deleted',
+        'forceDeleted',
     ];
 
     /**
