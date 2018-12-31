@@ -91,8 +91,9 @@ return [
     'events' => [
         'created',
         'updated',
-        'deleted',
         'restored',
+        'deleted',
+        'forceDeleted',
     ],
 
     /*

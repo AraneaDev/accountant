@@ -56,18 +56,6 @@ class RecordableObserver
     }
 
     /**
-     * Handle the deleted event.
-     *
-     * @param \Altek\Accountant\Contracts\Recordable $model
-     *
-     * @return void
-     */
-    public function deleted(Recordable $model): void
-    {
-        Accountant::record($model, 'deleted');
-    }
-
-    /**
      * Handle the restoring event.
      *
      * @param \Altek\Accountant\Contracts\Recordable $model
@@ -96,6 +84,30 @@ class RecordableObserver
         // Once the model is restored, we need to revert the state,
         // in case a legitimate update event is fired
         static::$restoring = false;
+    }
+
+    /**
+     * Handle the deleted event.
+     *
+     * @param \Altek\Accountant\Contracts\Recordable $model
+     *
+     * @return void
+     */
+    public function deleted(Recordable $model): void
+    {
+        Accountant::record($model, 'deleted');
+    }
+
+    /**
+     * Handle the forceDeleted event.
+     *
+     * @param \Altek\Accountant\Contracts\Recordable $model
+     *
+     * @return void
+     */
+    public function forceDeleted(Recordable $model): void
+    {
+        Accountant::record($model, 'forceDeleted');
     }
 
     /**
