@@ -166,15 +166,23 @@ array(2) {
   string(8) "articles"
   'properties' =>
   array(2) {
-    [1] =>
-    array(1) {
+    [0] =>
+    array(3) {
+      'user_id' =>
+      int(1)
       'liked' =>
-      bool(true)
+      bool(false)
+      'article_id' =>
+      int(2)
     }
-    [2] =>
-    array(1) {
+    [1] =>
+    array(3) {
+      'user_id' =>
+      int(1)
       'liked' =>
       bool(true)
+      'article_id' =>
+      int(1)
     }
   }
 }
