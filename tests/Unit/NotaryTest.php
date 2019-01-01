@@ -23,7 +23,7 @@ class NotaryTest extends AccountantTestCase
      */
     public function itSuccessfullyValidatesTheSameArrayDataOutOfOrder(array $data): void
     {
-        $signature = 'dd12ec5708cb23602e7aae8e70e463b911ed3e350d2f9a9c55fe8b8c1b82a1e223ef11b1df457d34a51d6b698f6edffd9f59ab8e5ec06cc8a645ca59d08cc952';
+        $signature = '381b776c460717a27732910bfd69c48e3ebd5e53efacba0d80d0ccfcf474ae17f9d63599604fe87781553a1933fbdf556cd72ebef0088236caad63cbef76f1a0';
 
         $this->assertSame($signature, Notary::sign($data));
         $this->assertTrue(Notary::validate($data, $signature));
@@ -61,11 +61,15 @@ class NotaryTest extends AccountantTestCase
                     'pivot'         => [
                         'relation' => 'users',
                         'data'     => [
-                            1 => [
-                                'liked' => true,
+                            [
+                                'article_id' => 1,
+                                'user_id'    => 2,
+                                'liked'      => false,
                             ],
-                            2 => [
-                                'liked' => false,
+                            [
+                                'liked'      => true,
+                                'user_id'    => 1,
+                                'article_id' => 1,
                             ],
                         ],
                     ],
@@ -87,11 +91,15 @@ class NotaryTest extends AccountantTestCase
                     'event'           => 'created',
                     'pivot'           => [
                         'data'     => [
-                            2 => [
-                                'liked' => false,
+                            [
+                                'user_id'    => 2,
+                                'liked'      => false,
+                                'article_id' => 1,
                             ],
-                            1 => [
-                                'liked' => true,
+                            [
+                                'article_id' => 1,
+                                'liked'      => true,
+                                'user_id'    => 1,
                             ],
                         ],
                         'relation' => 'users',
@@ -126,11 +134,15 @@ class NotaryTest extends AccountantTestCase
                     'pivot'         => [
                         'relation' => 'users',
                         'data'     => [
-                            2 => [
-                                'liked' => false,
+                            [
+                                'user_id'    => 2,
+                                'liked'      => false,
+                                'article_id' => 1,
                             ],
-                            1 => [
-                                'liked' => true,
+                            [
+                                'user_id'    => 1,
+                                'liked'      => true,
+                                'article_id' => 1,
                             ],
                         ],
                     ],
@@ -196,11 +208,15 @@ class NotaryTest extends AccountantTestCase
                     'user_agent'    => 'Symfony',
                     'pivot'         => [
                         'data'     => [
-                            1 => [
-                                'liked' => true,
+                            [
+                                'article_id' => 1,
+                                'user_id'    => 2,
+                                'liked'      => false,
                             ],
-                            2 => [
-                                'liked' => false,
+                            [
+                                'article_id' => 1,
+                                'liked'      => true,
+                                'user_id'    => 1,
                             ],
                         ],
                         'relation' => 'users',
