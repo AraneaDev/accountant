@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.1 (2019-01-04)
+### Added
+- Migration to disable `NULL` values in the `properties`, `modified` and `extra` columns
+
 ## v1.1.0 (2019-01-01)
 ### Added
 - Many-to-many (`BelongsToMany` and `MorphToMany`) relation support ([#1](https://gitlab.com/altek/accountant/merge_requests/1))
