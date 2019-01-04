@@ -74,26 +74,27 @@ to
 $table->text('user_agent')->nullable();
 ```
 
-## JSON WHERE() clauses
+## Using JSON column type instead of TEXT
 The Laravel [Query Builder](https://laravel.com/docs/5.7/queries#json-where-clauses) supports querying `JSON` type columns.
-Given that the `properties`, `modified`, `pivot` and `extra` columns store JSON data as `TEXT`, the column types can actually be updated from
+
+By default, the `properties`, `modified`, `pivot` and `extra` columns store JSON data as `TEXT`, but the column types can be updated from
 
 ```php
-$table->text('properties')->nullable();
-$table->text('modified')->nullable();
-$table->text('pivot')->nullable();
-$table->text('extra')->nullable();
+$table->text('properties');
+$table->text('modified');
+$table->text('pivot');
+$table->text('extra');
 ```
 
 to
 
 ```php
-$table->json('properties')->nullable();
-$table->json('modified')->nullable();
-$table->json('pivot')->nullable();
-$table->json('extra')->nullable();
+$table->json('properties');
+$table->json('modified');
+$table->json('pivot');
+$table->json('extra');
 ```
 
-This will allow for extended data filtering.
+This change allows for extended data filtering capabilities.
 
 > **CAVEAT:** Not all RDBMS support this feature, so check before making changes!
