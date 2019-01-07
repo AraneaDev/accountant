@@ -40,7 +40,7 @@ class Recorded
      */
     public function __construct(Recordable $model, LedgerDriver $driver, ?Ledger $ledger)
     {
-        $this->model = $model;
+        $this->model  = $model;
         $this->driver = $driver;
         $this->ledger = $ledger;
     }

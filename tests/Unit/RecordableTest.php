@@ -594,10 +594,10 @@ class RecordableTest extends AccountantTestCase
 
         $article->syncOriginal();
 
-        $article->title = 'Keeping Track Of Eloquent Model Changes';
-        $article->content = 'First step: install the Accountant package.';
+        $article->title        = 'Keeping Track Of Eloquent Model Changes';
+        $article->content      = 'First step: install the Accountant package.';
         $article->published_at = Carbon::now();
-        $article->reviewed = 1;
+        $article->reviewed     = 1;
 
         $article->ciphers = [
             'content'  => Bleach::class,
@@ -811,7 +811,7 @@ class RecordableTest extends AccountantTestCase
         $article = factory(Article::class)->create();
 
         // Taint the Ledger
-        $ledger = $article->ledgers()->first();
+        $ledger           = $article->ledgers()->first();
         $ledger->modified = [
             'title',
         ];

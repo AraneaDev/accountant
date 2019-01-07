@@ -73,7 +73,7 @@ class NotaryTest extends AccountantTestCase
                             ],
                         ],
                     ],
-                    'extra'         => [
+                    'extra' => [
                         'tags' => [
                             'laravel',
                             'eloquent',
@@ -90,7 +90,7 @@ class NotaryTest extends AccountantTestCase
                     'user_type'       => User::class,
                     'event'           => 'created',
                     'pivot'           => [
-                        'data'     => [
+                        'data' => [
                             [
                                 'user_id'    => 2,
                                 'liked'      => false,
@@ -104,7 +104,7 @@ class NotaryTest extends AccountantTestCase
                         ],
                         'relation' => 'users',
                     ],
-                    'properties'      => [
+                    'properties' => [
                         'reviewed'     => 1,
                         'content'      => 'First step: install the Accountant package.',
                         'published_at' => '2012-06-14 15:03:03',
@@ -131,7 +131,7 @@ class NotaryTest extends AccountantTestCase
             ],
             [
                 [
-                    'pivot'         => [
+                    'pivot' => [
                         'relation' => 'users',
                         'data'     => [
                             [
@@ -207,7 +207,7 @@ class NotaryTest extends AccountantTestCase
                     'ip_address'    => '127.0.0.1',
                     'user_agent'    => 'Symfony',
                     'pivot'         => [
-                        'data'     => [
+                        'data' => [
                             [
                                 'article_id' => 1,
                                 'user_id'    => 2,

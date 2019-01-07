@@ -31,7 +31,7 @@ class Recording
      */
     public function __construct(Recordable $model, LedgerDriver $driver)
     {
-        $this->model = $model;
+        $this->model  = $model;
         $this->driver = $driver;
     }
 }

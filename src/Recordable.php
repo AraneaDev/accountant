@@ -28,7 +28,7 @@ trait Recordable
      */
     public static function shouldRegisterObserver(): bool
     {
-        if (!static::$recordingEnabled) {
+        if (! static::$recordingEnabled) {
             return false;
         }
 
@@ -122,11 +122,11 @@ trait Recordable
      */
     public function collect(string $event): array
     {
-        if (!$this->isRecordingEnabled()) {
+        if (! $this->isRecordingEnabled()) {
             throw new AccountantException('Recording is not enabled');
         }
 
-        if (!$this->isEventRecordable($event)) {
+        if (! $this->isEventRecordable($event)) {
             throw new AccountantException(sprintf('Invalid event: "%s"', $event));
         }
 
@@ -134,11 +134,11 @@ trait Recordable
 
         // Cipher property values
         foreach ($this->getCiphers() as $property => $implementation) {
-            if (!array_key_exists($property, $properties)) {
+            if (! array_key_exists($property, $properties)) {
                 throw new AccountantException(sprintf('Invalid property: "%s"', $property));
             }
 
-            if (!is_subclass_of($implementation, Cipher::class)) {
+            if (! is_subclass_of($implementation, Cipher::class)) {
                 throw new AccountantException(sprintf('Invalid Cipher implementation: "%s"', $implementation));
             }
 
@@ -186,7 +186,7 @@ trait Recordable
      */
     public function isCurrentStateReachable(): bool
     {
-        if (!$this->usesTimestamps()) {
+        if (! $this->usesTimestamps()) {
             throw new AccountantException('The use of timestamps is required');
         }
 
@@ -231,7 +231,7 @@ trait Recordable
                 return false;
             }
 
-            if (!in_array($ledger->event, $modifyingEvents, true)) {
+            if (! in_array($ledger->event, $modifyingEvents, true)) {
                 continue;
             }
 

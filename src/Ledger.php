@@ -126,17 +126,17 @@ trait Ledger
         $properties = $this->getAttributeValue('properties');
 
         foreach ($this->recordable->getCiphers() as $key => $implementation) {
-            if (!array_key_exists($key, $properties)) {
+            if (! array_key_exists($key, $properties)) {
                 throw new AccountantException(sprintf('Invalid property: "%s"', $key));
             }
 
-            if (!is_subclass_of($implementation, Cipher::class)) {
+            if (! is_subclass_of($implementation, Cipher::class)) {
                 throw new AccountantException(sprintf('Invalid Cipher implementation: "%s"', $implementation));
             }
 
             // If strict mode is on, an exception is thrown when there's an attempt to decipher
             // one way ciphered data, otherwise we just skip to the next property value
-            if (call_user_func([$implementation, 'isOneWay']) && !$strict) {
+            if (call_user_func([$implementation, 'isOneWay']) && ! $strict) {
                 continue;
             }
 
@@ -151,7 +151,7 @@ trait Ledger
      */
     public function getProperty(string $key)
     {
-        if (!array_key_exists($key, $this->data)) {
+        if (! array_key_exists($key, $this->data)) {
             throw new AccountantException(sprintf('Invalid property: "%s"', $key));
         }
 
@@ -245,13 +245,13 @@ trait Ledger
      */
     public function isTainted(): bool
     {
-        if (!$this->usesTimestamps()) {
+        if (! $this->usesTimestamps()) {
             throw new AccountantException('The use of timestamps is required');
         }
 
         $notary = Config::get('accountant.notary');
 
-        if (!is_subclass_of($notary, Notary::class)) {
+        if (! is_subclass_of($notary, Notary::class)) {
             throw new AccountantException(sprintf('Invalid Notary implementation: "%s"', $notary));
         }
 

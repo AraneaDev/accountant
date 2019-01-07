@@ -66,7 +66,7 @@ class Accountant extends Manager implements Contracts\Accountant
         string $pivotRelation = null,
         array $pivotProperties = []
     ): void {
-        if (!$model->isRecordingEnabled() || !$model->isEventRecordable($event)) {
+        if (! $model->isRecordingEnabled() || ! $model->isEventRecordable($event)) {
             return;
         }
 

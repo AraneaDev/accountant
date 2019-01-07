@@ -26,7 +26,7 @@ class Resolve
     {
         $implementation = Config::get('accountant.resolvers.context');
 
-        if (!is_subclass_of($implementation, ContextResolver::class)) {
+        if (! is_subclass_of($implementation, ContextResolver::class)) {
             throw new AccountantException(sprintf('Invalid ContextResolver implementation: "%s"', $implementation));
         }
 
@@ -44,7 +44,7 @@ class Resolve
     {
         $implementation = Config::get('accountant.resolvers.ip_address');
 
-        if (!is_subclass_of($implementation, IpAddressResolver::class)) {
+        if (! is_subclass_of($implementation, IpAddressResolver::class)) {
             throw new AccountantException(sprintf('Invalid IpAddressResolver implementation: "%s"', $implementation));
         }
 
@@ -62,7 +62,7 @@ class Resolve
     {
         $implementation = Config::get('accountant.resolvers.url');
 
-        if (!is_subclass_of($implementation, UrlResolver::class)) {
+        if (! is_subclass_of($implementation, UrlResolver::class)) {
             throw new AccountantException(sprintf('Invalid UrlResolver implementation: "%s"', $implementation));
         }
 
@@ -80,7 +80,7 @@ class Resolve
     {
         $implementation = Config::get('accountant.resolvers.user_agent');
 
-        if (!is_subclass_of($implementation, UserAgentResolver::class)) {
+        if (! is_subclass_of($implementation, UserAgentResolver::class)) {
             throw new AccountantException(sprintf('Invalid UserAgentResolver implementation: "%s"', $implementation));
         }
 
@@ -98,7 +98,7 @@ class Resolve
     {
         $implementation = Config::get('accountant.resolvers.user');
 
-        if (!is_subclass_of($implementation, UserResolver::class)) {
+        if (! is_subclass_of($implementation, UserResolver::class)) {
             throw new AccountantException(sprintf('Invalid UserResolver implementation: "%s"', $implementation));
         }
 

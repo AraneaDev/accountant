@@ -50,7 +50,7 @@ class RecordableObserver
     public function updated(Recordable $model): void
     {
         // Ignore the updated event when restoring
-        if (!static::$restoring) {
+        if (! static::$restoring) {
             Accountant::record($model, 'updated');
         }
     }

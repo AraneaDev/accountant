@@ -24,13 +24,13 @@ class Database implements LedgerDriver
     ): Ledger {
         $notary = Config::get('accountant.notary');
 
-        if (!is_subclass_of($notary, Notary::class)) {
+        if (! is_subclass_of($notary, Notary::class)) {
             throw new AccountantException(sprintf('Invalid Notary implementation: "%s"', $notary));
         }
 
         $implementation = Config::get('accountant.ledger.implementation');
 
-        if (!is_subclass_of($implementation, Ledger::class)) {
+        if (! is_subclass_of($implementation, Ledger::class)) {
             throw new AccountantException(sprintf('Invalid Ledger implementation: "%s"', $implementation));
         }
 
@@ -70,7 +70,7 @@ class Database implements LedgerDriver
                 ->slice($threshold)
                 ->pluck('id');
 
-            if (!$forRemoval->isEmpty()) {
+            if (! $forRemoval->isEmpty()) {
                 return $model->ledgers()
                     ->whereIn('id', $forRemoval)
                     ->delete() > 0;

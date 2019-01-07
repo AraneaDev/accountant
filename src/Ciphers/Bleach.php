@@ -22,7 +22,7 @@ class Bleach implements \Altek\Accountant\Contracts\Cipher
     public static function cipher($value)
     {
         $length = mb_strlen($value);
-        $tenth = (int) ceil($length / 10);
+        $tenth  = (int) ceil($length / 10);
 
         // Make sure single character strings get redacted
         $start = (int) ($length > $tenth) ? ($length - $tenth) : 1;
