@@ -15,6 +15,8 @@ Input value                               | Output value
 ```php
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Altek\Accountant\Ciphers\Bleach;
@@ -53,6 +55,8 @@ Input value                               | Output value
 ### Usage
 ```php
 <?php
+
+declare(strict_types=1);
 
 namespace App\Models;
 

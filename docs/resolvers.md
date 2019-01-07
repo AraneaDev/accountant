@@ -23,6 +23,8 @@ Here's an alternative implementation that does not depend on `Illuminate\Foundat
 ```php
 <?php
 
+declare(strict_types=1);
+
 namespace App\Resolvers;
 
 use Altek\Accountant\Context;
@@ -77,6 +79,8 @@ Here's a resolver example for this use case.
 ```php
 <?php
 
+declare(strict_types=1);
+
 namespace App\Resolvers;
 
 use Illuminate\Support\Facades\Request;
@@ -119,6 +123,8 @@ Here's a resolver example where query strings are not included.
 
 ```php
 <?php
+
+declare(strict_types=1);
 
 namespace App\Resolvers;
 
@@ -169,6 +175,8 @@ The following example will return a default string when the `User-Agent` HTTP he
 ```php
 <?php
 
+declare(strict_types=1);
+
 namespace App\Resolvers;
 
 use Illuminate\Support\Facades\Request;
@@ -216,6 +224,8 @@ Implementing the `Altek\Accountant\Contracts\Identifiable` interface on a `User`
 ```php
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Altek\Accountant\Contracts\Identifiable;
@@ -242,6 +252,8 @@ When using different auth mechanisms like [Sentinel](https://github.com/cartalys
 
 ```php
 <?php
+
+declare(strict_types=1);
 
 namespace App\Resolvers;
 

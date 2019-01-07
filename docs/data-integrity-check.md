@@ -16,6 +16,8 @@ A custom `Notary` implementation using the **Argon2** algorithm.
 ```php
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support;
 
 class Notary implements \Altek\Accountant\Contracts\Notary

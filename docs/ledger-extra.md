@@ -9,6 +9,8 @@ Three arguments are injected into the method:
 ```php
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Altek\Accountant\Contracts\Identifiable;

@@ -7,6 +7,8 @@ This first event is fired during the recording of a `Ledger`. If necessary, the 
 ```php
 <?php
 
+declare(strict_types=1);
+
 namespace App\Listeners;
 
 use Altek\Accountant\Events\Recording;
@@ -40,6 +42,8 @@ In case some immediate action needs to take place after the event, this is where
 
 ```php
 <?php
+
+declare(strict_types=1);
 
 namespace App\Listeners;
 

@@ -20,6 +20,8 @@ The previous command will create a file called `MyCustomDriver.php` in the `app/
 ```php
 <?php
 
+declare(strict_types=1);
+
 namespace App\LedgerDrivers;
 
 use Altek\Accountant\Contracts\Ledger;
@@ -91,6 +93,8 @@ The value is set per `Recordable` model, by assigning the `FQCN` of the driver t
 
 ```php
 <?php
+
+declare(strict_types=1);
 
 namespace App\Models;
 

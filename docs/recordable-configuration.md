@@ -33,6 +33,8 @@ The value is set per `Recordable` model, by assigning an `int` to the `$ledgerTh
 ```php
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Altek\Accountant\Contracts\Recordable;
@@ -134,6 +136,8 @@ The value is set per `Recordable` model, by assigning an `array` to the `$record
 
 ```php
 <?php
+
+declare(strict_types=1);
 
 namespace App\Models;
 

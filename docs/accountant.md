@@ -9,6 +9,8 @@ Still, if there's a need to manually use it, here are two examples.
 ```php
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use Altek\Accountant\Facades\Accountant;
@@ -35,6 +37,8 @@ With the `AccountantServiceProvider` registered, the IoC can be used to resolve 
 
 ```php
 <?php
+
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 

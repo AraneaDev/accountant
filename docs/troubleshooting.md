@@ -83,6 +83,8 @@ The simplest way to avoid this, is to disable the `retrieved` event from being r
 ```php
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Altek\Accountant\Contracts\Identifiable;

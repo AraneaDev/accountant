@@ -4,6 +4,8 @@ Setting up a `Recordable` model is just a matter of implementing the `Altek\Acco
 ```php
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Altek\Accountant\Contracts\Recordable;
@@ -32,6 +34,8 @@ and the `\Altek\Eventually\Eventually` trait must be added to the required model
 
 ```php
 <?php
+
+declare(strict_types=1);
 
 namespace App\Models;
 
