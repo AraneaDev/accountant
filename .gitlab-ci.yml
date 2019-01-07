@@ -18,10 +18,10 @@ before_script:
   - php composer.phar install --no-interaction
 
   # Check coding style
-  - composer cs-check config
-  - composer cs-check database
-  - composer cs-check src
-  - composer cs-check tests
+  - php composer.phar cs-check config
+  - php composer.phar cs-check database
+  - php composer.phar cs-check src
+  - php composer.phar cs-check tests
 
 test:7.1:
   image: php:7.1
