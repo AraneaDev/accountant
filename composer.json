@@ -40,7 +40,8 @@
     "require-dev": {
         "orchestra/testbench": "^3.7",
         "doctrine/dbal": "^2.9",
-        "altek/eventually": "^1.0"
+        "altek/eventually": "^1.0",
+        "friendsofphp/php-cs-fixer": "^2.14"
     },
     "autoload": {
         "psr-4": {
@@ -65,5 +66,13 @@
     "suggest": {
         "altek/eventually": "Required for keeping track of BelongsToMany and MorphToMany relations.",
         "laravelista/lumen-vendor-publish": "Required to publish the package config file in Lumen."
+    },
+    "scripts": {
+        "cs-fix": [
+            "php-cs-fixer --allow-risky=yes -v fix"
+        ],
+        "cs-check": [
+            "php-cs-fixer --allow-risky=yes -v --dry-run fix"
+        ]
     }
 }
