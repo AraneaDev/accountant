@@ -36,7 +36,7 @@ class Accountant extends Manager implements Contracts\Accountant
      */
     protected function createDriver($driver)
     {
-        if (class_exists($driver)) {
+        if (\class_exists($driver)) {
             return $this->app->make($driver);
         }
 

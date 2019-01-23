@@ -654,7 +654,7 @@ class RecordingTest extends AccountantTestCase
             'reviewed' => 1,
         ]);
 
-        foreach (range(0, 99) as $count) {
+        foreach (\range(0, 99) as $count) {
             $article->update([
                 'reviewed' => $count % 2,
             ]);
@@ -677,7 +677,7 @@ class RecordingTest extends AccountantTestCase
             'reviewed' => 1,
         ]);
 
-        foreach (range(0, 99) as $count) {
+        foreach (\range(0, 99) as $count) {
             $article->update([
                 'reviewed' => $count % 2,
             ]);

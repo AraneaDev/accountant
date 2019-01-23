@@ -29,7 +29,7 @@ class CommandTest extends AccountantTestCase
 
         $this->assertFileExists($filePath);
 
-        $this->assertTrue(unlink($filePath));
+        $this->assertTrue(\unlink($filePath));
     }
 
     /**
@@ -96,7 +96,7 @@ class CommandTest extends AccountantTestCase
 
         $this->assertFileExists($configurationFilePath);
 
-        $this->assertTrue(unlink($configurationFilePath));
+        $this->assertTrue(\unlink($configurationFilePath));
     }
 
     /**
@@ -120,8 +120,8 @@ class CommandTest extends AccountantTestCase
         $this->assertFileExists($migrationFilePath02);
         $this->assertFileExists($migrationFilePath03);
 
-        $this->assertTrue(unlink($migrationFilePath01));
-        $this->assertTrue(unlink($migrationFilePath02));
-        $this->assertTrue(unlink($migrationFilePath03));
+        $this->assertTrue(\unlink($migrationFilePath01));
+        $this->assertTrue(\unlink($migrationFilePath02));
+        $this->assertTrue(\unlink($migrationFilePath03));
     }
 }

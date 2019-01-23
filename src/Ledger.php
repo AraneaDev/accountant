@@ -72,7 +72,7 @@ trait Ledger
             }
         }
 
-        $this->metadata = array_keys($this->data);
+        $this->metadata = \array_keys($this->data);
 
         // Recordable data
         foreach ($this->getDecipheredProperties(false) as $key => $value) {
@@ -104,7 +104,7 @@ trait Ledger
         }
 
         // Honour DateTime attribute
-        if ($value !== null && in_array($key, $model->getDates(), true)) {
+        if ($value !== null && \in_array($key, $model->getDates(), true)) {
             return $model->asDateTime($value);
         }
 
@@ -126,21 +126,21 @@ trait Ledger
         $properties = $this->getAttributeValue('properties');
 
         foreach ($this->recordable->getCiphers() as $key => $implementation) {
-            if (! array_key_exists($key, $properties)) {
-                throw new AccountantException(sprintf('Invalid property: "%s"', $key));
+            if (! \array_key_exists($key, $properties)) {
+                throw new AccountantException(\sprintf('Invalid property: "%s"', $key));
             }
 
-            if (! is_subclass_of($implementation, Cipher::class)) {
-                throw new AccountantException(sprintf('Invalid Cipher implementation: "%s"', $implementation));
+            if (! \is_subclass_of($implementation, Cipher::class)) {
+                throw new AccountantException(\sprintf('Invalid Cipher implementation: "%s"', $implementation));
             }
 
             // If strict mode is on, an exception is thrown when there's an attempt to decipher
             // one way ciphered data, otherwise we just skip to the next property value
-            if (call_user_func([$implementation, 'isOneWay']) && ! $strict) {
+            if (\call_user_func([$implementation, 'isOneWay']) && ! $strict) {
                 continue;
             }
 
-            $properties[$key] = call_user_func([$implementation, 'decipher'], $properties[$key]);
+            $properties[$key] = \call_user_func([$implementation, 'decipher'], $properties[$key]);
         }
 
         return $properties;
@@ -151,8 +151,8 @@ trait Ledger
      */
     public function getProperty(string $key)
     {
-        if (! array_key_exists($key, $this->data)) {
-            throw new AccountantException(sprintf('Invalid property: "%s"', $key));
+        if (! \array_key_exists($key, $this->data)) {
+            throw new AccountantException(\sprintf('Invalid property: "%s"', $key));
         }
 
         $value = $this->data[$key];
@@ -161,14 +161,14 @@ trait Ledger
         $userPrefix = Config::get('accountant.user.prefix');
 
         if ($this->user && starts_with($key, $userPrefix.'_')) {
-            $userPrefixOffset = mb_strlen($userPrefix.'_');
+            $userPrefixOffset = \mb_strlen($userPrefix.'_');
 
-            return $this->getFormattedProperty($this->user, mb_substr($key, $userPrefixOffset), $value);
+            return $this->getFormattedProperty($this->user, \mb_substr($key, $userPrefixOffset), $value);
         }
 
         // Recordable property
         if ($this->recordable && starts_with($key, 'recordable_')) {
-            return $this->getFormattedProperty($this->recordable, mb_substr($key, 11), $value);
+            return $this->getFormattedProperty($this->recordable, \mb_substr($key, 11), $value);
         }
 
         return $value;
@@ -207,10 +207,10 @@ trait Ledger
 
         $data = [];
 
-        $properties = $all ? array_keys($this->getAttributeValue('properties')) : $this->getAttributeValue('modified');
+        $properties = $all ? \array_keys($this->getAttributeValue('properties')) : $this->getAttributeValue('modified');
 
         foreach ($properties as $key) {
-            $value = $this->getProperty(sprintf('recordable_%s', $key));
+            $value = $this->getProperty(\sprintf('recordable_%s', $key));
 
             $data[$key] = $value instanceof DateTimeInterface
                 ? $this->serializeDate($value)
@@ -251,8 +251,8 @@ trait Ledger
 
         $notary = Config::get('accountant.notary');
 
-        if (! is_subclass_of($notary, Notary::class)) {
-            throw new AccountantException(sprintf('Invalid Notary implementation: "%s"', $notary));
+        if (! \is_subclass_of($notary, Notary::class)) {
+            throw new AccountantException(\sprintf('Invalid Notary implementation: "%s"', $notary));
         }
 
         // A date mismatch is enough for a record to be considered tainted
@@ -268,6 +268,6 @@ trait Ledger
         // Exclude properties that were not present when the signing took place
         unset($properties[$this->getKeyName()], $properties['signature']);
 
-        return call_user_func([$notary, 'validate'], $properties, $this->getAttributeFromArray('signature')) === false;
+        return \call_user_func([$notary, 'validate'], $properties, $this->getAttributeFromArray('signature')) === false;
     }
 }

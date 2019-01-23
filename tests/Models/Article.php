@@ -65,6 +65,6 @@ class Article extends Model implements Recordable
      */
     public function getTitleAttribute(string $value): string
     {
-        return strtoupper($value);
+        return \mb_strtoupper($value);
     }
 }

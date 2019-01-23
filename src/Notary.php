@@ -15,7 +15,7 @@ class Notary implements Contracts\Notary
      */
     public static function isIndexed(array $data): bool
     {
-        return array_keys($data) === range(0, count($data) - 1);
+        return \array_keys($data) === \range(0, \count($data) - 1);
     }
 
     /**
@@ -28,12 +28,12 @@ class Notary implements Contracts\Notary
     public static function sort(array &$data): void
     {
         foreach ($data as $key => $value) {
-            if (is_array($value) && $value) {
+            if (\is_array($value) && $value) {
                 static::sort($data[$key]);
             }
         }
 
-        static::isIndexed($data) ? sort($data) : ksort($data);
+        static::isIndexed($data) ? \sort($data) : \ksort($data);
     }
 
     /**
@@ -43,7 +43,7 @@ class Notary implements Contracts\Notary
     {
         static::sort($data);
 
-        return hash('sha512', json_encode($data, JSON_NUMERIC_CHECK));
+        return \hash('sha512', \json_encode($data, JSON_NUMERIC_CHECK));
     }
 
     /**

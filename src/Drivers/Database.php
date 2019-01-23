@@ -24,14 +24,14 @@ class Database implements LedgerDriver
     ): Ledger {
         $notary = Config::get('accountant.notary');
 
-        if (! is_subclass_of($notary, Notary::class)) {
-            throw new AccountantException(sprintf('Invalid Notary implementation: "%s"', $notary));
+        if (! \is_subclass_of($notary, Notary::class)) {
+            throw new AccountantException(\sprintf('Invalid Notary implementation: "%s"', $notary));
         }
 
         $implementation = Config::get('accountant.ledger.implementation');
 
-        if (! is_subclass_of($implementation, Ledger::class)) {
-            throw new AccountantException(sprintf('Invalid Ledger implementation: "%s"', $implementation));
+        if (! \is_subclass_of($implementation, Ledger::class)) {
+            throw new AccountantException(\sprintf('Invalid Ledger implementation: "%s"', $implementation));
         }
 
         $ledger = new $implementation();
@@ -52,7 +52,7 @@ class Database implements LedgerDriver
         ] : []);
 
         // Sign and store the record
-        $ledger->setAttribute('signature', call_user_func([$notary, 'sign'], $ledger->attributesToArray()))
+        $ledger->setAttribute('signature', \call_user_func([$notary, 'sign'], $ledger->attributesToArray()))
             ->save();
 
         return $ledger;

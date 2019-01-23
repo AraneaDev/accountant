@@ -57,6 +57,6 @@ class User extends Model implements Recordable, Identifiable, Authenticatable
      */
     public function getFirstNameAttribute(string $value): string
     {
-        return ucfirst($value);
+        return \ucfirst($value);
     }
 }

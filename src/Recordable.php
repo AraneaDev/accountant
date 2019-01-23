@@ -90,7 +90,7 @@ trait Recordable
      */
     public function isEventRecordable(?string $event): bool
     {
-        return in_array($event, $this->getRecordableEvents(), true);
+        return \in_array($event, $this->getRecordableEvents(), true);
     }
 
     /**
@@ -127,22 +127,22 @@ trait Recordable
         }
 
         if (! $this->isEventRecordable($event)) {
-            throw new AccountantException(sprintf('Invalid event: "%s"', $event));
+            throw new AccountantException(\sprintf('Invalid event: "%s"', $event));
         }
 
         $properties = $this->getAttributes();
 
         // Cipher property values
         foreach ($this->getCiphers() as $property => $implementation) {
-            if (! array_key_exists($property, $properties)) {
-                throw new AccountantException(sprintf('Invalid property: "%s"', $property));
+            if (! \array_key_exists($property, $properties)) {
+                throw new AccountantException(\sprintf('Invalid property: "%s"', $property));
             }
 
-            if (! is_subclass_of($implementation, Cipher::class)) {
-                throw new AccountantException(sprintf('Invalid Cipher implementation: "%s"', $implementation));
+            if (! \is_subclass_of($implementation, Cipher::class)) {
+                throw new AccountantException(\sprintf('Invalid Cipher implementation: "%s"', $implementation));
             }
 
-            $properties[$property] = call_user_func([$implementation, 'cipher'], $properties[$property]);
+            $properties[$property] = \call_user_func([$implementation, 'cipher'], $properties[$property]);
         }
 
         $user = Resolve::user();
@@ -157,7 +157,7 @@ trait Recordable
             'recordable_id'     => $this->getKey(),
             'recordable_type'   => $this->getMorphClass(),
             'properties'        => $properties,
-            'modified'          => array_keys($this->getDirty()),
+            'modified'          => \array_keys($this->getDirty()),
             'extra'             => $this->supplyExtra($event, $properties, $user),
             'url'               => Resolve::url(),
             'ip_address'        => Resolve::ipAddress(),
@@ -231,7 +231,7 @@ trait Recordable
                 return false;
             }
 
-            if (! in_array($ledger->event, $modifyingEvents, true)) {
+            if (! \in_array($ledger->event, $modifyingEvents, true)) {
                 continue;
             }
 
@@ -239,6 +239,6 @@ trait Recordable
         }
 
         // Finally, compare the current properties with the compiled ones
-        return array_merge(...$properties) === $this->getAttributes();
+        return \array_merge(...$properties) === $this->getAttributes();
     }
 }

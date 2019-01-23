@@ -521,7 +521,7 @@ class RecordableTest extends AccountantTestCase
             'context'         => Context::TEST,
             'event'           => 'created',
             'recordable_id'   => null,
-            'recordable_type' => get_class($article),
+            'recordable_type' => \get_class($article),
             'properties'      => [
                 'title'        => 'Keeping Track Of Eloquent Model Changes',
                 'content'      => 'First step: install the Accountant package.',

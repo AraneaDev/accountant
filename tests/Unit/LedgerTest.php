@@ -303,7 +303,7 @@ class LedgerTest extends AccountantTestCase
 
         $ledger = factory(Ledger::class)->create([
             'event'           => 'updated',
-            'recordable_type' => get_class($article),
+            'recordable_type' => \get_class($article),
             'properties'      => [
                 'title'        => 'S2VlcGluZyBUcmFjayBPZiBFbG9xdWVudCBNb2RlbCBDaGFuZ2Vz',
                 'content'      => '--------------------------------------kage.',
@@ -409,7 +409,7 @@ class LedgerTest extends AccountantTestCase
         };
 
         $ledger = factory(Ledger::class)->create([
-            'recordable_type' => get_class($article),
+            'recordable_type' => \get_class($article),
         ]);
 
         $this->expectException(AccountantException::class);
@@ -431,7 +431,7 @@ class LedgerTest extends AccountantTestCase
         };
 
         $ledger = factory(Ledger::class)->create([
-            'recordable_type' => get_class($article),
+            'recordable_type' => \get_class($article),
             'properties'      => [
                 'title' => 'S2VlcGluZyBUcmFjayBPZiBFbG9xdWVudCBNb2RlbCBDaGFuZ2Vz',
             ],
@@ -458,7 +458,7 @@ class LedgerTest extends AccountantTestCase
 
         $ledger = factory(Ledger::class)->create([
             'event'           => 'updated',
-            'recordable_type' => get_class($article),
+            'recordable_type' => \get_class($article),
             'properties'      => [
                 'title'        => 'S2VlcGluZyBUcmFjayBPZiBFbG9xdWVudCBNb2RlbCBDaGFuZ2Vz',
                 'content'      => '--------------------------------------kage.',
@@ -496,7 +496,7 @@ class LedgerTest extends AccountantTestCase
 
         $ledger = factory(Ledger::class)->create([
             'event'           => 'updated',
-            'recordable_type' => get_class($article),
+            'recordable_type' => \get_class($article),
             'properties'      => [
                 'title'        => 'S2VlcGluZyBUcmFjayBPZiBFbG9xdWVudCBNb2RlbCBDaGFuZ2Vz',
                 'content'      => '--------------------------------------kage.',
