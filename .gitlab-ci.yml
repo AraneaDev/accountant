@@ -26,17 +26,20 @@ before_script:
 test:7.1:
   image: php:7.1
   script:
-    - php vendor/bin/phpunit --coverage-text --coverage-clover clover.xml --testdox
+    - php vendor/bin/phpunit --dump-xdebug-filter xdebug-filter.php
+    - php vendor/bin/phpunit --prepend xdebug-filter.php --coverage-text --coverage-clover clover.xml --testdox
     - bash <(curl -s https://codecov.io/bash)
 
 test:7.2:
   image: php:7.2
   script:
-    - php vendor/bin/phpunit --coverage-text --coverage-clover clover.xml --testdox
+    - php vendor/bin/phpunit --dump-xdebug-filter xdebug-filter.php
+    - php vendor/bin/phpunit --prepend xdebug-filter.php --coverage-text --coverage-clover clover.xml --testdox
     - bash <(curl -s https://codecov.io/bash)
 
 test:7.3:
   image: php:7.3
   script:
-    - php vendor/bin/phpunit --coverage-text --coverage-clover clover.xml --testdox
+    - php vendor/bin/phpunit --dump-xdebug-filter xdebug-filter.php
+    - php vendor/bin/phpunit --prepend xdebug-filter.php --coverage-text --coverage-clover clover.xml --testdox
     - bash <(curl -s https://codecov.io/bash)
