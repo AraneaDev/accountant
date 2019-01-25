@@ -337,6 +337,54 @@ class LedgerTest extends AccountantTestCase
     }
 
     /**
+     * @group Ledger::getData
+     * @test
+     */
+    public function itReturnsDecipheredRecordableDataFromDeletedRecord(): void
+    {
+        $article               = new class() extends Article {
+            protected $ciphers = [
+                'title' => Base64::class,
+            ];
+        };
+
+        $ledger = factory(Ledger::class)->create([
+            'event'           => 'forceDeleted',
+            'recordable_type' => \get_class($article),
+            'recordable_id'   => 1,
+            'properties'      => [
+                'title'        => 'S2VlcGluZyBUcmFjayBPZiBFbG9xdWVudCBNb2RlbCBDaGFuZ2Vz',
+                'content'      => 'First step: install the Accountant package.',
+                'published_at' => '2012-06-18 21:32:34',
+                'reviewed'     => true,
+                'updated_at'   => '2015-10-24 23:11:10',
+                'created_at'   => '2012-06-14 15:03:03',
+                'id'           => 1,
+            ],
+            'modified' => [
+                'content',
+            ],
+        ]);
+
+        $this->assertCount(1, $modified = $ledger->getData());
+        $this->assertCount(7, $all = $ledger->getData(true));
+
+        $this->assertArraySubset([
+            'content' => 'First step: install the Accountant package.',
+        ], $modified, true);
+
+        $this->assertArraySubset([
+            'title'        => 'KEEPING TRACK OF ELOQUENT MODEL CHANGES',
+            'content'      => 'First step: install the Accountant package.',
+            'published_at' => '2012-06-18 21:32:34',
+            'reviewed'     => true,
+            'updated_at'   => '2015-10-24 23:11:10',
+            'created_at'   => '2012-06-14 15:03:03',
+            'id'           => 1,
+        ], $all, true);
+    }
+
+    /**
      * @group Ledger::extract
      * @test
      */
@@ -485,6 +533,42 @@ class LedgerTest extends AccountantTestCase
         ]);
 
         $article = $ledger->extract(false);
+
+        $this->assertInstanceOf(Recordable::class, $article);
+        $this->assertInstanceOf(Article::class, $article);
+    }
+
+    /**
+     * @group Ledger::extract
+     * @test
+     */
+    public function itSuccessfullyExtractsDeletedRecordableInstanceFromLedger(): void
+    {
+        $article               = new class() extends Article {
+            protected $ciphers = [
+                'title' => Base64::class,
+            ];
+        };
+
+        $ledger = factory(Ledger::class)->create([
+            'event'           => 'forceDeleted',
+            'recordable_type' => \get_class($article),
+            'recordable_id'   => 1,
+            'properties'      => [
+                'title'        => 'S2VlcGluZyBUcmFjayBPZiBFbG9xdWVudCBNb2RlbCBDaGFuZ2Vz',
+                'content'      => 'First step: install the Accountant package.',
+                'published_at' => '2012-06-18 21:32:34',
+                'reviewed'     => true,
+                'updated_at'   => '2015-10-24 23:11:10',
+                'created_at'   => '2012-06-14 15:03:03',
+                'id'           => 1,
+            ],
+            'modified' => [
+                'content',
+            ],
+        ]);
+
+        $article = $ledger->extract();
 
         $this->assertInstanceOf(Recordable::class, $article);
         $this->assertInstanceOf(Article::class, $article);
