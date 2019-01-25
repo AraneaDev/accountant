@@ -79,7 +79,7 @@ The rationale is to prevent large amounts of `Ledger` records, specially on busy
 
 > **NOTICE:** When caching is active - and depending on how it's configured - the `retrieved` event might not fire as often!
 
-> **TIP:** If tou get a **PHP Fatal error: Maximum function nesting level of '512' reached, aborting!** after enabling the `retrieved` event, check the [troubleshooting](troubleshooting.md#php-fatal-error-maximum-function-nesting-level-of-512-reached-aborting) guide for help. 
+> **TIP:** If you get a **PHP Fatal error: Maximum function nesting level of '512' reached, aborting!** after enabling the `retrieved` event, check the [troubleshooting](troubleshooting.md#php-fatal-error-maximum-function-nesting-level-of-512-reached-aborting) guide for help. 
 
 ### Pivot events
 Support for pivot event recording was introduced in version **1.1.0**.
