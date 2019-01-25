@@ -388,39 +388,6 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::extract
      * @test
      */
-    public function itFailsToExtractARecordableInstanceDueToATaintedLedgerDueToDateMismatch(): void
-    {
-        $this->expectException(AccountantException::class);
-        $this->expectExceptionMessage('Extraction failed due to tainted data');
-
-        $ledger = factory(Ledger::class)->create([
-            'created_at' => '1975-07-25 16:25:34',
-            'updated_at' => '1981-12-16 03:33:01',
-        ]);
-
-        $ledger->extract();
-    }
-
-    /**
-     * @group Ledger::extract
-     * @test
-     */
-    public function itFailsToExtractARecordableInstanceDueToATaintedLedgerDueToSignatureMismatch(): void
-    {
-        $this->expectException(AccountantException::class);
-        $this->expectExceptionMessage('Extraction failed due to tainted data');
-
-        $ledger = factory(Ledger::class)->create([
-            'signature' => '',
-        ]);
-
-        $ledger->extract();
-    }
-
-    /**
-     * @group Ledger::extract
-     * @test
-     */
     public function itFailsToCompileLedgerDataDueToInvalidProperty(): void
     {
         $article               = new class() extends Article {
@@ -468,7 +435,40 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::extract
      * @test
      */
-    public function itFailsToExtractARecordableInstanceFromALedgerInStrictMode(): void
+    public function itFailsToExtractRecordableInstanceDueToTaintedLedgerDateMismatch(): void
+    {
+        $this->expectException(AccountantException::class);
+        $this->expectExceptionMessage('Extraction failed due to tainted data');
+
+        $ledger = factory(Ledger::class)->create([
+            'created_at' => '1975-07-25 16:25:34',
+            'updated_at' => '1981-12-16 03:33:01',
+        ]);
+
+        $ledger->extract();
+    }
+
+    /**
+     * @group Ledger::extract
+     * @test
+     */
+    public function itFailsToExtractRecordableInstanceDueToTaintedLedgerSignatureMismatch(): void
+    {
+        $this->expectException(AccountantException::class);
+        $this->expectExceptionMessage('Extraction failed due to tainted data');
+
+        $ledger = factory(Ledger::class)->create([
+            'signature' => '',
+        ]);
+
+        $ledger->extract();
+    }
+
+    /**
+     * @group Ledger::extract
+     * @test
+     */
+    public function itFailsToExtractRecordableInstanceFromLedgerInStrictMode(): void
     {
         $article               = new class() extends Article {
             protected $ciphers = [
@@ -506,7 +506,7 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::extract
      * @test
      */
-    public function itSuccessfullyExtractsARecordableInstanceFromALedger(): void
+    public function itSuccessfullyExtractsRecordableInstanceFromLedger(): void
     {
         $article               = new class() extends Article {
             protected $ciphers = [
@@ -578,7 +578,7 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::extract
      * @test
      */
-    public function itSuccessfullyExtractsARecordableInstanceFromALedgerInStrictMode(): void
+    public function itSuccessfullyExtractsRecordableInstanceFromLedgerInStrictMode(): void
     {
         $ledger = factory(Ledger::class)->create([
             'event'           => 'updated',
@@ -653,7 +653,7 @@ class LedgerTest extends AccountantTestCase
      * @group Ledger::isTainted
      * @test
      */
-    public function itSuccessfullyAssertsTheRecordIsTaintedDueToSignatureMismatch(): void
+    public function itSuccessfullyAssertsTheRecordIsTaintedDueToMismatchingSignatures(): void
     {
         $ledger = factory(Ledger::class)->create([
             'signature' => Notary::sign([
