@@ -59,43 +59,48 @@ class RecordableTest extends AccountantTestCase
     public function contextResolverProvider(): array
     {
         return [
-            [
+            'In Test with CLI and Web allowed' => [
                 Context::CLI | Context::WEB,
 
                 // Test
                 true,
                 false,
             ],
-            [
+
+            'In CLI with Test and Web allowed' => [
                 Context::TEST | Context::WEB,
 
                 // CLI
                 false,
                 true,
             ],
-            [
+
+            'In Web with Test and CLI allowed' => [
                 Context::TEST | Context::CLI,
 
                 // Web
                 false,
                 false,
             ],
-            [
-                0, // No context
+
+            'In Test with no context allowed' => [
+                0,
 
                 // Test
                 true,
                 false,
             ],
-            [
-                0, // No context
+
+            'In CLI with no context allowed' => [
+                0,
 
                 // CLI
                 false,
                 true,
             ],
-            [
-                0, // No context
+
+            'In Web with no context allowed' => [
+                0,
 
                 // Web
                 false,

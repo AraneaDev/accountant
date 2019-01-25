@@ -49,62 +49,62 @@ class RecordableObserverTest extends AccountantTestCase
     public function recordableObserverTestProvider(): array
     {
         return [
-            [
+            'Retrieved event' => [
                 'retrieved',
                 false,
                 false,
             ],
-            [
+            'Created event' => [
                 'created',
                 false,
                 false,
             ],
-            [
+            'Updated event' => [
                 'updated',
                 false,
                 false,
             ],
-            [
+            'Restoring event' => [
                 'restoring',
                 false,
                 true,
             ],
-            [
+            'Restored event' => [
                 'restored',
                 true,
                 false,
             ],
-            [
+            'Deleted event' => [
                 'deleted',
                 false,
                 false,
             ],
-            [
+            'ForceDeleted event' => [
                 'forceDeleted',
                 false,
                 false,
             ],
-            [
+            'Toggled event' => [
                 'toggled',
                 false,
                 false,
             ],
-            [
+            'Synced event' => [
                 'synced',
                 false,
                 false,
             ],
-            [
+            'ExistingPivotUpdated event' => [
                 'existingPivotUpdated',
                 false,
                 false,
             ],
-            [
+            'Attached event' => [
                 'attached',
                 false,
                 false,
             ],
-            [
+            'Detached event' => [
                 'detached',
                 false,
                 false,
