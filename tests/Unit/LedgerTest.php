@@ -337,33 +337,6 @@ class LedgerTest extends AccountantTestCase
     }
 
     /**
-     * @group Ledger::getData
-     * @test
-     */
-    public function itCreatesReturnsAllTheRecordableData(): void
-    {
-        $ledger = factory(Ledger::class)->create([
-            'event'           => 'updated',
-            'recordable_type' => Article::class,
-            'properties'      => [
-                'title'        => 'Keeping Track Of Eloquent Model Changes',
-                'content'      => 'First step: install the Accountant package.',
-                'published_at' => '2012-06-18 21:32:34',
-                'reviewed'     => true,
-                'updated_at'   => '2015-10-24 23:11:10',
-                'created_at'   => '2012-06-14 15:03:03',
-                'id'           => 1,
-            ],
-            'modified' => [
-                'content',
-            ],
-        ]);
-
-        $this->assertCount(1, $ledger->getData());
-        $this->assertCount(7, $ledger->getData(true));
-    }
-
-    /**
      * @group Ledger::extract
      * @test
      */
