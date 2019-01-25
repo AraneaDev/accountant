@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Altek\Accountant;
 
 use Altek\Accountant\Contracts\Cipher;
+use Altek\Accountant\Contracts\Identifiable;
 use Altek\Accountant\Contracts\Notary;
 use Altek\Accountant\Contracts\Recordable;
 use Altek\Accountant\Exceptions\AccountantException;
@@ -45,6 +46,16 @@ trait Ledger
     }
 
     /**
+     * Get a new Recordable instance.
+     *
+     * @return \Altek\Accountant\Contracts\Recordable
+     */
+    protected function getRecordableInstance(): Recordable
+    {
+        return $this->recordable()->getRelated();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function compile(): array
@@ -66,7 +77,7 @@ trait Ledger
             $userPrefix.'_type'          => $this->getAttributeFromArray($userPrefix.'_type'),
         ];
 
-        if ($this->user) {
+        if ($this->user instanceof Identifiable) {
             foreach ($this->user->getArrayableAttributes() as $attribute => $value) {
                 $this->data[$userPrefix.'_'.$attribute] = $value;
             }
@@ -125,7 +136,7 @@ trait Ledger
     {
         $properties = $this->getAttributeValue('properties');
 
-        foreach ($this->recordable->getCiphers() as $key => $implementation) {
+        foreach ($this->getRecordableInstance()->getCiphers() as $key => $implementation) {
             if (! \array_key_exists($key, $properties)) {
                 throw new AccountantException(\sprintf('Invalid property: "%s"', $key));
             }
@@ -167,8 +178,8 @@ trait Ledger
         }
 
         // Recordable property
-        if ($this->recordable && starts_with($key, 'recordable_')) {
-            return $this->getFormattedProperty($this->recordable, \mb_substr($key, 11), $value);
+        if (starts_with($key, 'recordable_')) {
+            return $this->getFormattedProperty($this->getRecordableInstance(), \mb_substr($key, 11), $value);
         }
 
         return $value;
@@ -237,7 +248,7 @@ trait Ledger
             throw new AccountantException('Extraction failed due to tainted data');
         }
 
-        return $this->recordable->newFromBuilder($this->getDecipheredProperties($strict));
+        return $this->getRecordableInstance()->newFromBuilder($this->getDecipheredProperties($strict));
     }
 
     /**
