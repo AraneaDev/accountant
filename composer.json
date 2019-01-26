@@ -40,7 +40,6 @@
     },
     "require-dev": {
         "orchestra/testbench": "^3.7",
-        "doctrine/dbal": "^2.9",
         "altek/eventually": "^1.0",
         "friendsofphp/php-cs-fixer": "^2.14",
         "roave/security-advisories": "dev-master"
