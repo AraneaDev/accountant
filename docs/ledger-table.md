@@ -13,7 +13,7 @@ While the `doctrine/dbal` is not a required dependency, it will be needed to run
 composer require doctrine/dbal
 ```
 
-The rationale is to avoid forcing users to keep a dependency once they're done with the installation process.
+The rationale is to avoid keeping a dependency once the installation process is over.
 
 ### Custom
 If you're just starting and, like myself, prefer to have just one migration file, you can use the [migration file](../tests/database/migrations/0000_00_00_000001_create_ledgers_test_table.php) used for testing purposes to replace the default migrations.
