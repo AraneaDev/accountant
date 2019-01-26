@@ -1,6 +1,9 @@
 # Troubleshooting
 A compilation of common problems and ways to work around them.
 
+## Changing columns for table "ledgers" requires Doctrine DBAL; install "doctrine/dbal"
+Refer to the [Ledger Table Migrations](ledger-table.md#migrations) section for a workaround.
+
 ## Recording does not work
 You followed all the steps in the documentation and still, `Ledger` records are not being created?
 

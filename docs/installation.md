@@ -100,7 +100,7 @@ php artisan vendor:publish --tag="accountant-migrations"
 ## Customisation
 If needed, the `ledgers` table can be customised.
 
-Read more about it in the [Ledger Migration](ledger-migration.md) section.
+Read more about it in the [Ledger Table](ledger-table.md) section.
 
 ## Migration
 Once the previous steps has been done, execute the following `artisan` command to run the migration:

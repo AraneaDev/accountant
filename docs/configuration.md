@@ -80,7 +80,7 @@ return [
 This package supports multiple user types by the use of a polymorphic `MorphTo` relation.
 
 ### Prefix
-By default, the column names used are `user_id` and `user_type`. For a different user column prefix, change the configuration value, and update the [Ledger Migration](ledger-migration.md) accordingly.
+By default, the column names used are `user_id` and `user_type`. For a different user column prefix, change the configuration value, and update the [Ledger Table](ledger-table.md) accordingly.
 
 ```php
 return [

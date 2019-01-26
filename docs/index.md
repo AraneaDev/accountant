@@ -8,7 +8,7 @@
   * [Configuration](recordable-configuration.md)
 * Ledger
   * [Retrieval](ledger-retrieval.md)
-  * [Migration](ledger-migration.md)
+  * [Table](ledger-table.md)
   * [Implementation](ledger-implementation.md)
   * [Drivers](ledger-drivers.md)
   * [Events](ledger-events.md)
