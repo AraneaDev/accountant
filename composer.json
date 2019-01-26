@@ -65,6 +65,7 @@
         }
     },
     "suggest": {
+        "doctrine/dbal": "Required to run the default migrations",
         "altek/eventually": "Required for keeping track of BelongsToMany and MorphToMany relations.",
         "laravelista/lumen-vendor-publish": "Required to publish the package config file in Lumen."
     },
