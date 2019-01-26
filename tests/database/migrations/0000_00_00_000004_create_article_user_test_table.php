@@ -34,14 +34,4 @@ class CreateArticleUserTestTable extends Migration
                 ->onUpdate('cascade');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('article_user');
-    }
 }

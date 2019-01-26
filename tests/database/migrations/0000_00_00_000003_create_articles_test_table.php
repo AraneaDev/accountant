@@ -25,14 +25,4 @@ class CreateArticlesTestTable extends Migration
             $table->softDeletes();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('articles');
-    }
 }
