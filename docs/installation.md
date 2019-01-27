@@ -6,7 +6,9 @@ Executing the following command from your project root will get you the latest a
 composer require altek/accountant
 ```
 
-> **NOTICE:** This package supports **Laravel** and **Lumen** from version **5.2** onward.
+::: warning NOTICE
+This package supports **Laravel** and **Lumen** from version **5.2** onward.
+:::
 
 # Configuration
 There's a slight difference between the **Laravel** and **Lumen** configurations, so we cover them both.
@@ -24,7 +26,9 @@ Edit the `config/app.php` file and add the following line to register the servic
 ],
 ```
 
-> **TIP:** From Laravel **5.5** onward, you can skip the service provider setup in favour of the [Package Auto-Discovery](https://laravel.com/docs/5.7/packages#package-discovery) feature.
+::: tip
+From Laravel **5.5** onward, you can skip the service provider setup in favour of the [Package Auto-Discovery](https://laravel.com/docs/5.7/packages#package-discovery) feature.
+:::
 
 ## Lumen
 Add the following line to register the service provider in the `bootstrap/app.php` file:
@@ -77,7 +81,9 @@ protected $commands = [
 // ...
 ```
 
-> **NOTICE:** The service provider registration is mandatory in order for the configuration to be published!
+::: warning NOTICE
+The service provider registration is mandatory in order for the configuration to be published!
+:::
 
 # Publishing
 After your framework of choice has been configured, publish the configuration file using the following command:

@@ -49,8 +49,10 @@ Previous state (**$original** array):
 - A `YYYY-MM-DD` format date changes to `YYYY-MM-DD 00:00:00`
 
 Under these circumstances, the `getDirty()` and `isDirty()` methods will give a false positive.
- 
-> **TIP:** This behaviour has been [fixed](https://github.com/laravel/framework/pull/18400) in Laravel 5.5+. For older versions of Laravel, use this [trait](https://gist.github.com/crashkonijn/7d581e55770d2379494067d8b0ce0f6d), courtesy of [Peter Klooster](https://github.com/crashkonijn)!
+
+::: tip
+This behaviour has been [fixed](https://github.com/laravel/framework/pull/18400) in Laravel 5.5+. For older versions of Laravel, use this [trait](https://gist.github.com/crashkonijn/7d581e55770d2379494067d8b0ce0f6d), courtesy of [Peter Klooster](https://github.com/crashkonijn)!
+:::
 
 ## Ledgers without modified values are being recorded
 A `Ledger` is more than just the `modified` property value.
@@ -67,7 +69,9 @@ static::creating(function (Ledger $model) {
 });
 ```
 
-> **CAVEAT:** Keep in mind that the `modified` column of a `retrieved` and pivot events (`toggled`, `synced`, `existingPivotUpdated`,`attached` and `detached`), will always be empty!
+::: danger CAVEAT
+Keep in mind that the `modified` column of a `retrieved` and pivot events (`toggled`, `synced`, `existingPivotUpdated`,`attached` and `detached`), will always be empty!
+:::
 
 ## PHP Fatal error: Maximum function nesting level of '512' reached, aborting!
 This might happen when a `User` model has the `retrieved` Eloquent event set as recordable, and a retrieval happens.
@@ -144,7 +148,9 @@ public function user()
 }
 ```
 
-> **TIP:** A custom `Ledger` model needs to be created with the above methods. Don't forget to [update](ledger-implementation.md#defining-the-ledger-model) the `Ledger` implementation in your configuration!
+::: tip
+A custom `Ledger` model needs to be created with the above methods. Don't forget to [update](ledger-implementation.md#defining-the-ledger-model) the `Ledger` implementation in your configuration!
+:::
 
 ## IpAddressResolver incorrectly resolving IP addresses 
 This usually happens to applications running behind a load balancer (or proxy), in which the IP address of the load balancer/proxy is being returned, instead.
