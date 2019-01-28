@@ -8,16 +8,16 @@ actionLink: /installation
 
 features:
 - title: Many-to-many relation support
-  details: Ability to record changes to pivot tables used by BelongsToMany and MorphToMany relations.
+  details: Ability to keep track of changes in pivot tables, when dealing with BelongsToMany and MorphToMany relations.
 
 - title: Event source style approach
   details: Complete snapshots of Recordable models are kept when creating, modifying or retrieving.
 
-- title: Restore Recordable states;
-  details: Extract Recordable instances from a given point in time.
+- title: Restore Recordable states
+  details: Extract a Recordable model state from a given point in time.
 
 - title: Signed Ledger records
-  details: Store a data signature for an effortless data integrity check.
+  details: Store data signatures for an effortless data integrity check.
 
 - title: Recording contexts
   details: Know in which context a Ledger was created.
