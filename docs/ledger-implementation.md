@@ -5,7 +5,7 @@ The default `Ledger` extends the traditional `Illuminate\Database\Eloquent\Model
 `Ledger` models must implement the `Altek\Accountant\Contracts\Ledger` interface!
 :::
 
-## MongoDB Ledger model example
+## MongoDB Ledger example
 Start by installing the [jenssegers/mongodb](https://github.com/jenssegers/laravel-mongodb) package:
 
 ```sh
@@ -64,8 +64,8 @@ class MongoLedger extends Model implements \Altek\Accountant\Contracts\Ledger
 The bulk of the `Ledger` logic is in the `Altek\Accountant\Ledger` trait.
 :::
 
-## Defining a custom Ledger model
-To use the custom `Ledger`, update the `accountant.ledger.implementation` configuration value with the implementation's `FQCN`:
+## Enabling a custom Ledger
+Set the `accountant.ledger.implementation` configuration value to the `FQCN` of the custom `Ledger` class:
 
 ```php
 return [

@@ -30,7 +30,7 @@ return [
 ### Locally
 The value is set per `Recordable` model, by assigning an `int` to the `$ledgerThreshold` attribute.
 
-::: tip
+::: warning NOTICE
 A locally defined threshold **always** takes precedence over a globally defined one.
 :::
 
@@ -70,7 +70,7 @@ Bear in mind that pruning `Ledger` records will affect operations such as the [D
 
 ### Standard events
 Event name              | Default state
-------------------------|---------------
+------------------------|--------------:
  `retrieved`            | **Disabled**
  `created`              | Enabled
  `updated`              | Enabled
@@ -95,7 +95,7 @@ If you get a **PHP Fatal error: Maximum function nesting level of '512' reached,
 Support for pivot event recording was introduced in version **1.1.0**.
 
 Event name              | Default state
-------------------------|---------------
+------------------------|--------------:
  `toggled`              | **Disabled** 
  `synced`               | **Disabled**
  `existingPivotUpdated` | **Disabled**
@@ -144,7 +144,7 @@ return [
 #### Locally
 The value is set per `Recordable` model, by assigning an `array` to the `$recordableEvents` attribute.
 
-::: tip
+::: warning NOTICE
 Locally defined events **always** take precedence over globally defined ones.
 :::
 

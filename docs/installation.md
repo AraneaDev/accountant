@@ -7,7 +7,7 @@ composer require altek/accountant
 ```
 
 ::: warning NOTICE
-This package supports **Laravel** and **Lumen** from version **5.2** onward.
+This package supports [Laravel](https://laravel.com/docs/5.7/) and [Lumen](https://lumen.laravel.com/docs/5.7/) from versions **5.2** and up.
 :::
 
 # Configuration
@@ -27,7 +27,7 @@ Edit the `config/app.php` file and add the following line to register the servic
 ```
 
 ::: tip
-From Laravel **5.5** onward, you can skip the service provider setup in favour of the [Package Auto-Discovery](https://laravel.com/docs/5.7/packages#package-discovery) feature.
+If you're using Laravel version **5.5** or greater, you can skip the service provider setup in favour of the [Package Auto-Discovery](https://laravel.com/docs/5.7/packages#package-discovery) feature.
 :::
 
 ## Lumen
@@ -82,7 +82,7 @@ protected $commands = [
 ```
 
 ::: warning NOTICE
-The service provider registration is mandatory in order for the configuration to be published!
+The service provider registration is mandatory in order to publish the configuration and migration files!
 :::
 
 # Publishing
@@ -116,6 +116,10 @@ php artisan migrate
 ```
 
 This will create the `ledgers` table in your database.
+
+::: warning NOTICE
+If you run into [problems](troubleshooting.md#changing-columns-for-table-ledgers-requires-doctrine-dbal-install-doctrine-dbal) while migrating, refer to the [Ledger Table](ledger-table.md) section.
+:::
 
 ## User model
 In order to use this package, the `User` model needs to implement the `Altek\Accountant\Contracts\Identifiable` interface.

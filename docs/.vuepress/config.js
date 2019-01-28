@@ -34,8 +34,7 @@ module.exports = {
                 collapsable: false,
                 children: [
                     ['installation', 'Installation'],
-                    ['configuration', 'Configuration'],
-                    ['upgrading', 'Upgrading']
+                    ['configuration', 'Configuration']
                 ]
             },
 

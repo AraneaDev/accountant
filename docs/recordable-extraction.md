@@ -1,6 +1,6 @@
 # Recordable Extraction
 A `Ledger` is a snapshot of a `Recordable` model at a given point in time.
-With the `extract()` method, an exact `Recordable` instance can be recreated from a `Ledger`.
+By calling the `extract()` method, a `Recordable` instance can be recreated from a `Ledger`.
 
 This method supports two modes of operation.
 
@@ -25,7 +25,8 @@ try {
 } catch (DecipherException $e) {
     // Handle potential exception while deciphering
 } catch (AccountantException $e) {
-    // Handle potential exception due to tainted ledger or invalid property/cipher implementation
+    // Handle potential exception due to tainted ledger
+    // or invalid property/cipher implementation
 }
 
 // ...
@@ -50,7 +51,7 @@ try {
     $snapshot = $article->ledgers()->first()->extract(false);
 
 } catch (AccountantException $e) {
-    // Handle potential exception due to tainted ledger or invalid property/cipher implementation
+    // Handle potential exception due to invalid property/cipher implementation
 }
 
 // ...

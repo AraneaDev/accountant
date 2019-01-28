@@ -73,7 +73,7 @@ The `Database` driver is a good starting point to get ideas for a new custom dri
 There are two ways to enable a custom driver.
 
 ### Globally
-This is done in the `config/accountant.php` configuration file.
+Set the `accountant.ledger.driver` configuration value to the `FQCN` of the custom `LedgerDriver` class:
 
 ```php
 return [
@@ -87,8 +87,6 @@ return [
     // ...
 ];
 ```
-
-In this example, the `MyCustomDriver` is set as the default ledger driver for all the `Recordable` models.
 
 ### Locally
 The value is set per `Recordable` model, by assigning the `FQCN` of the driver to the `$ledgerDriver` attribute.
@@ -118,6 +116,6 @@ class Article extends Model implements Recordable
 }
 ```
 
-::: tip
+::: warning NOTICE
 A locally defined driver **always** takes precedence over a globally defined one.
 :::

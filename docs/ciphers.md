@@ -83,7 +83,7 @@ class Article extends Model implements Recordable
 }
 ```
 
-::: warning NOTICE
+::: tip
 Any **two way** ciphered property value will be returned in its original form by the `getData()` method.
 :::
 
