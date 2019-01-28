@@ -18,7 +18,7 @@
         "lumen",
         "record"
     ],
-    "homepage": "https://packagist.org/packages/altek/accountant",
+    "homepage": "https://altek.gitlab.io/accountant/",
     "type": "package",
     "license": "MIT",
     "support": {
