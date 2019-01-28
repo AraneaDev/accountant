@@ -40,7 +40,9 @@ class Article extends Model implements Recordable
 }
 ```
 
-> **CAVEAT:** Bear in mind that **one way** ciphered data cannot be reverted to its original form, which will affect operations such as [Ledger Extract](ledger-extract.md)!
+::: danger CAVEAT
+Bear in mind that **one way** ciphered data cannot be reverted to its original form, which will affect operations such as the [Recordable Extraction](recordable-extraction.md)!
+:::
 
 ## Base64 cipher
 `Base64` is a **two way** cipher that encodes properties using the [Base64](https://en.wikipedia.org/wiki/Base64) encoding scheme.
@@ -81,11 +83,15 @@ class Article extends Model implements Recordable
 }
 ```
 
-> **NOTICE:** Any **two way** ciphered property value will be returned in its original form by the `getData()` method.
+::: warning NOTICE
+Any **two way** ciphered property value will be returned in its original form by the `getData()` method.
+:::
 
 ## Custom ciphers
 If the included ciphers don't suit your needs, you can always roll your own.
 
 A cipher is just a class implementing the `\Altek\Accountant\Contracts\Cipher` interface.
 
-> **TIP:** You can generate a skeleton `Cipher` class with the `php artisan make:cipher` command. You can grab ideas from the included ciphers for your own implementation.
+::: tip
+You can generate a skeleton `Cipher` class with the `php artisan make:cipher` command. You can grab ideas from the included ciphers for your own implementation.
+:::

@@ -16,9 +16,11 @@ composer require doctrine/dbal
 The rationale is to avoid keeping a dependency once the installation process is over.
 
 ### Custom
-If you're just starting and, like myself, prefer to have just one migration file, you can use the [migration file](../tests/database/migrations/0000_00_00_000001_create_ledgers_test_table.php) used for testing purposes to replace the default migrations.
+If you're just starting and, like myself, prefer to have just one migration file, you can use the [migration file](https://gitlab.com/altek/accountant/blob/master/tests/database/migrations/0000_00_00_000001_create_ledgers_test_table.php) used for testing purposes to replace the default migrations.
 
-> **TIP:** The `doctrine/dbal` dependency isn't required is you use this method!
+::: tip
+The `doctrine/dbal` dependency isn't required is you use this method!
+:::
 
 ## Using a different prefix for the User ID/Type columns
 Instead of the default `user_id` and `user_type` columns, a different prefix can be set:
@@ -39,7 +41,9 @@ return [
 ];
 ```
 
-> **TIP:** Refer to the [User prefix](configuration.md#prefix) section for more details.
+::: tip
+Refer to the [User prefix](configuration.md#prefix) section for more details.
+:::
 
 ## Using UUID instead of auto-incrementing ids
 Some developers prefer to use [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) instead of auto-incrementing identifiers.
@@ -77,7 +81,9 @@ $table->index([
 ]);
 ```
 
-> **NOTICE:** Always make sure the `user_*` and `recordable_*` column types match the ones in their respective tables.
+::: warning NOTICE
+Always make sure the `user_*` and `recordable_*` column types match the ones in their respective tables.
+:::
 
 ## Values with more than 255 characters
 While odd, on some occasions, User Agent values may go over the 255 character mark. To avoid such problems, update the column from
@@ -114,4 +120,6 @@ $table->json('extra');
 
 This change allows for extended data filtering capabilities.
 
-> **CAVEAT:** Not all RDBMS support this feature, so check before making changes!
+::: danger CAVEAT
+Not all RDBMS support this feature, so check before making changes!
+:::

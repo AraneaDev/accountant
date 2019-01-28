@@ -5,7 +5,9 @@ This section describes the basic `Recordable` settings.
 Out of the box, there's no limit for the number of `Ledger` records that are kept for a given `Recordable` model.
 If needed, set the threshold configuration to a positive `int` of your choice, to keep `Ledger` records to a minimum.
 
-> **TIP:** By default, the `accountant.ledger.threshold` value is set to `0` (zero), which stands for no limit.
+::: tip
+By default, the `accountant.ledger.threshold` value is set to `0` (zero), which stands for no limit.
+:::
 
 ### Globally
 This is done in the `config/accountant.php` configuration file.
@@ -28,7 +30,9 @@ return [
 ### Locally
 The value is set per `Recordable` model, by assigning an `int` to the `$ledgerThreshold` attribute.
 
-> **TIP:** A locally defined threshold **always** takes precedence over a globally defined one.
+::: tip
+A locally defined threshold **always** takes precedence over a globally defined one.
+:::
 
 ```php
 <?php
@@ -57,7 +61,9 @@ class Article extends Model implements Recordable
 
 The above configuration, will keep the `10` latest `Ledger` records.
 
-> **CAVEAT:** Bear in mind that pruning `Ledger` records will affect operations such as the [Data Integrity Check](data-integrity-check.md)!
+::: danger CAVEAT
+Bear in mind that pruning `Ledger` records will affect operations such as the [Data Integrity Check](data-integrity-check.md)!
+:::
 
 ## Events
 [Eloquent events](https://laravel.com/docs/5.7/eloquent#events) are what trigger the recording of a `Ledger`, and by default, only the `created`, `updated`, `restored`, `deleted` and `forceDeleted` events are observed.
@@ -77,9 +83,13 @@ From version **5.5.0**, Eloquent introduced the `retrieved` event. While support
 
 The rationale is to prevent large amounts of `Ledger` records, specially on busy applications, so enable it with care.
 
-> **NOTICE:** When caching is active - and depending on how it's configured - the `retrieved` event might not fire as often!
+::: warning NOTICE
+When caching is active - and depending on how it's configured - the `retrieved` event might not fire as often!
+:::
 
-> **TIP:** If you get a **PHP Fatal error: Maximum function nesting level of '512' reached, aborting!** after enabling the `retrieved` event, check the [troubleshooting](troubleshooting.md#php-fatal-error-maximum-function-nesting-level-of-512-reached-aborting) guide for help. 
+::: tip
+If you get a **PHP Fatal error: Maximum function nesting level of '512' reached, aborting!** after enabling the `retrieved` event, check the [troubleshooting](troubleshooting.md#php-fatal-error-maximum-function-nesting-level-of-512-reached-aborting) guide for help.
+::: 
 
 ### Pivot events
 Support for pivot event recording was introduced in version **1.1.0**.
@@ -100,7 +110,9 @@ composer require altek/eventually
 
 and the `\Altek\Eventually\Eventually` trait must be set in the required models.
 
-> **CAVEAT:** The `sync()` and `toggle()` methods fire multiple events, since they call `attach()`, `detach()` and `updateExistingPivot()` internally. To prevent an excess of `Ledger` records for the same action, avoid observing the `toggled` and `synced` events.
+::: danger CAVEAT
+The `sync()` and `toggle()` methods fire multiple events, since they call `attach()`, `detach()` and `updateExistingPivot()` internally. To prevent an excess of `Ledger` records for the same action, avoid observing the `toggled` and `synced` events.
+:::
 
 ### Event configuration
 There are two ways to define which events should be observed.
@@ -132,7 +144,9 @@ return [
 #### Locally
 The value is set per `Recordable` model, by assigning an `array` to the `$recordableEvents` attribute.
 
-> **TIP:** Locally defined events **always** take precedence over globally defined ones.
+::: tip
+Locally defined events **always** take precedence over globally defined ones.
+:::
 
 ```php
 <?php
@@ -170,7 +184,9 @@ class Article extends Model implements Recordable
 }
 ```
 
-> **NOTICE:** The `\Altek\Eventually\Eventually` trait needs to be set in the model for the pivot events to fire.
+::: warning NOTICE
+The `\Altek\Eventually\Eventually` trait needs to be set in the model for the pivot events to fire.
+:::
 
 ## Enable/Disable recording
 The `Recordable` trait provides two static methods to enable and disable the recording functionality.

@@ -16,7 +16,9 @@ The package already includes concrete implementations that can be replaced with 
 ## Context Resolver
 The default `ContextResolver` implementation uses `App::runningUnitTests()` and `App::runningInConsole()` for its logic.
 
-> **TIP:** You can generate a skeleton `ContextResolver` class with the `php artisan make:context-resolver` command.
+::: tip
+You can generate a skeleton `ContextResolver` class with the `php artisan make:context-resolver` command.
+:::
 
 Here's an alternative implementation that does not depend on `Illuminate\Foundation\Application`:
 
@@ -72,7 +74,9 @@ While that works for most applications, the ones running behind a proxy or a [lo
 
 Usually, the real IP address will be passed in a **X-Forwarded-For** HTTP header.
 
-> **TIP:** You can generate a skeleton `IpAddressResolver` class with the `php artisan make:ip-address-resolver` command.
+::: tip
+You can generate a skeleton `IpAddressResolver` class with the `php artisan make:ip-address-resolver` command.
+:::
 
 Here's a resolver example for this use case.
 
@@ -117,7 +121,9 @@ return [
 ## URL Resolver
 The default resolver uses the `Request::fullUrl()` method to get the current URL (including any query strings).
 
-> **TIP:** You can generate a skeleton `UrlResolver` class with the `php artisan make:url-resolver` command.
+::: tip
+You can generate a skeleton `UrlResolver` class with the `php artisan make:url-resolver` command.
+:::
 
 Here's a resolver example where query strings are not included.
 
@@ -168,7 +174,9 @@ return [
 ## User Agent Resolver
 This resolver uses the `Request::header()` method without a default value, which returns `null` if a User Agent isn't available.
 
-> **TIP:** You can generate a skeleton `UserAgentResolver` class with the `php artisan make:user-agent-resolver` command.
+::: tip
+You can generate a skeleton `UserAgentResolver` class with the `php artisan make:user-agent-resolver` command.
+:::
 
 The following example will return a default string when the `User-Agent` HTTP header is empty/unavailable.
 
@@ -216,7 +224,9 @@ The included `UserResolver` implementation uses the Laravel `Auth::guard()` meth
 
 The `resolve()` method must return an object implementing `Altek\Accountant\Contracts\Identifiable`, or `null` if the user cannot be resolved.
 
-> **TIP:** You can generate a skeleton `UserResolver` class with the `php artisan make:user-resolver` command.
+::: tip
+You can generate a skeleton `UserResolver` class with the `php artisan make:user-resolver` command.
+:::
 
 ### Identifiable implementation
 Implementing the `Altek\Accountant\Contracts\Identifiable` interface on a `User` model:
@@ -288,4 +298,6 @@ return [
 ];
 ```
 
-> **CAVEAT:** Resolving a `User` in the CLI may not work.
+::: danger CAVEAT
+Resolving a `User` in the CLI may not work.
+:::

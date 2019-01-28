@@ -23,7 +23,9 @@ foreach ($article->ledgers()->get() as $ledger) {
 }
 ```
 
-> **NOTICE:** If no custom ordering is applied, `Ledger` records will be returned by `created_at` in ascending order.
+::: warning NOTICE
+If no custom ordering is applied, `Ledger` records will be returned by `created_at` in ascending order.
+:::
 
 ## Getting Ledgers with the associated User model
 ```php
@@ -35,7 +37,9 @@ foreach ($ledgers as $ledger) {
 }
 ```
 
-> **TIP:** Make sure the `User` [prefix](configuration.md#prefix) and [guards](configuration.md#auth-guards) are properly set.
+::: tip
+Make sure the `User` [prefix](configuration.md#prefix) and [guards](configuration.md#auth-guards) are properly set.
+:::
 
 ## Getting the Ledger metadata
 Retrieving an `array` with the `Ledger` metadata.
@@ -135,7 +139,9 @@ array(7) {
 }
 ```
 
-> **TIP:** The `getMetadata()` and `getData()` methods will honour any established attribute **mutator** or **cast**.
+::: tip
+The `getMetadata()` and `getData()` methods will honour any established attribute **mutator** or **cast**.
+:::
 
 ## Getting pivot data
 Support for recording pivot events was introduced in version **1.1.0**.

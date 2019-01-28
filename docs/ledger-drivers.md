@@ -65,7 +65,9 @@ class MyCustomDriver implements LedgerDriver
 }
 ```
 
-> **TIP:** The `Database` driver is a good starting point to get ideas for a new custom driver implementation.
+::: tip
+The `Database` driver is a good starting point to get ideas for a new custom driver implementation.
+:::
 
 ## Enabling a custom driver
 There are two ways to enable a custom driver.
@@ -116,4 +118,6 @@ class Article extends Model implements Recordable
 }
 ```
 
-> **TIP:** A locally defined driver **always** takes precedence over a globally defined one.
+::: tip
+A locally defined driver **always** takes precedence over a globally defined one.
+:::

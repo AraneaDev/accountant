@@ -22,7 +22,7 @@ Data discrepancies that may indicate business concerns, suspect activities, and 
 - Laravel and Lumen 5.2+ support;
 
 ## Documentation
-The package documentation can be found [here](docs/index.md).
+The package documentation can be found [here](https://altek.gitlab.io/accountant/).
 
 ## Changelog
 For information on recent changes, check the [CHANGELOG](CHANGELOG.md).

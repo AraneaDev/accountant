@@ -39,4 +39,6 @@ The above example is quite simple, but the `extra` column can be used for all so
 
 By default, the column type is defined as `TEXT` and the data is stored as a string of **JSON**, which can be fetched as an `array` property from the `Ledger` model.
 
-> **TIP:** The user can take advantage of RDBMS that support the `JSON` column type, by updating the `ledgers` table migration accordingly. Refer to the [Ledger Table](ledger-table.md) documentation for more information.
+::: tip
+The user can take advantage of RDBMS that support the `JSON` column type, by updating the `ledgers` table migration accordingly. Refer to the [Ledger Table](ledger-table.md) documentation for more information.
+:::

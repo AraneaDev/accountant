@@ -17,7 +17,9 @@ return [
 ];
 ```
 
-> **TIP:** Read the [Ledger Implementation](ledger-implementation.md) documentation, should you want to create your own custom implementation.
+::: tip
+Read the [Ledger Implementation](ledger-implementation.md) documentation, should you want to create your own custom implementation.
+:::
 
 ## Ledger driver
 The bundled `Database` driver is set as default.
@@ -35,7 +37,9 @@ return [
 ];
 ```
 
-> **TIP:** For custom implementation details, check the [Ledger Drivers](ledger-drivers.md) reference.
+::: tip
+For custom implementation details, check the [Ledger Drivers](ledger-drivers.md) reference.
+:::
 
 ## Recording Contexts
 There are three recording contexts.
@@ -110,4 +114,6 @@ return [
 ];
 ```
 
-> **TIP:** Refer to the [User Resolver](resolvers.md#user-resolver) section for additional information.
+::: tip
+Refer to the [User Resolver](resolvers.md#user-resolver) section for additional information.
+:::

@@ -21,7 +21,9 @@ class Article extends Model implements Recordable
 
 If no changes are made to the configuration, the `Database` driver will be used by default.
 
-> **TIP:** Refer to the [Ledger Driver](ledger-drivers.md) documentation, for alternatives.
+::: tip
+Refer to the [Ledger Driver](ledger-drivers.md) documentation, for alternatives.
+:::
 
 ## Pivot events
 Support for pivot events has been introduced in version **1.1.0**. To enable these events, the `altek/eventually` package needs to be installed
@@ -51,4 +53,6 @@ class Article extends Model implements Recordable
 }
 ```
 
-> **TIP:** Refer to the [Events](recordable-configuration.md#events) section of the `Recordable` configuration for additional information.
+::: tip
+Refer to the [Events](recordable-configuration.md#events) section of the `Recordable` configuration for additional information.
+:::

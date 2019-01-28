@@ -8,7 +8,9 @@ The bundled `Notary` implementation generates signatures using the `SHA-512` alg
 
 If needed, the default implementation can be replaced with a custom one. 
 
-> **TIP:** You can generate a skeleton `Notary` class with the `php artisan make:notary` command.
+::: tip
+You can generate a skeleton `Notary` class with the `php artisan make:notary` command.
+:::
 
 ### Example
 A custom `Notary` implementation using the **Argon2** algorithm.
@@ -87,7 +89,9 @@ return [
 ];
 ```
 
-> **NOTICE:** The default `signature` column type is set to `VARCHAR(255)`, so keep that in mind when generating signatures with other algorithms.
+::: warning NOTICE
+The default `signature` column type is set to `VARCHAR(255)`, so keep that in mind when generating signatures with other algorithms.
+:::
 
 ## Checking Ledger model integrity with isTainted()
 During the `Ledger` creation process, a signature is generated and stored along with the rest of the data.
@@ -129,4 +133,6 @@ if (!$ledger->isCurrentStateReachable()) {
 }
 ```
 
-> **CAVEAT:** Setting a `Ledger` [threshold](recordable-configuration.md#ledger-threshold), excluding [events](recordable-configuration.md#events) or configuring [one way](ciphers.md#bleach-cipher) ciphers will affect `Recordable` state checks!
+::: danger CAVEAT
+Setting a `Ledger` [threshold](recordable-configuration.md#ledger-threshold), excluding [events](recordable-configuration.md#events) or configuring [one way](ciphers.md#bleach-cipher) ciphers will affect `Recordable` state checks!
+:::
