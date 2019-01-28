@@ -61,6 +61,6 @@ class ArticleController extends Illuminate\Routing\Controller
 }
 ```
 
-::: tip
+::: warning NOTICE
 To avoid duplicate `Ledger` records, make sure that the `$recordableEvents` property in the model is set to an empty `array` or disable recording altogether with the `disableRecording()` static method!
 :::

@@ -11,7 +11,7 @@ User       | `Altek\Accountant\Contracts\UserResolver`
 
 Each resolver has a **public static** `resolve()` method with the appropriate logic.
 
-The package already includes concrete implementations that can be replaced with custom ones, should there be a special need.
+The package already includes concrete implementations that can be replaced, should there be a need for it.
 
 ## Context Resolver
 The default `ContextResolver` implementation uses `App::runningUnitTests()` and `App::runningInConsole()` for its logic.
@@ -70,7 +70,7 @@ return [
 ## IP Address Resolver
 The default `IpAddressResolver` implementation uses `Request::ip()` to get client IP addresses.
 
-While that works for most applications, the ones running behind a proxy or a [load balancer](https://en.wikipedia.org/wiki/Load_balancing_(computing)) should get IP addresses differently.
+While that works for most applications, the ones running behind a proxy or a [load balancer](https://en.wikipedia.org/wiki/Load_balancing_(computing)) may need to get IP addresses differently.
 
 Usually, the real IP address will be passed in a **X-Forwarded-For** HTTP header.
 

@@ -128,7 +128,7 @@ This method also returns a `bool` value.
 // Get the first Article created
 $article = Article::first();
 
-if (!$ledger->isCurrentStateReachable()) {
+if (! $ledger->isCurrentStateReachable()) {
     // The current state could not be reached
 }
 ```

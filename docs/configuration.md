@@ -18,7 +18,7 @@ return [
 ```
 
 ::: tip
-Read the [Ledger Implementation](ledger-implementation.md) documentation, should you want to create your own custom implementation.
+Read the [Ledger Implementation](ledger-implementation.md) documentation for more details.
 :::
 
 ## Ledger driver
@@ -44,17 +44,17 @@ For custom implementation details, check the [Ledger Drivers](ledger-drivers.md)
 ## Recording Contexts
 There are three recording contexts.
 
-Name                   | Constant                         | Value   | Resolved when running
------------------------|----------------------------------|---------|----------------------------------------
-Testing                | `Altek\Accountant\Context::TEST` | `0b001` | PHPUnit, ...
-Command Line Interface | `Altek\Accountant\Context::CLI`  | `0b010` | Migrations, Jobs, Commands, Tinker, ...
-Web                    | `Altek\Accountant\Context::WEB`  | `0b100` | Apache, CGI, FPM, ...
+Name                   | Constant                         | Value | Resolved when running
+-----------------------|----------------------------------|------:|----------------------------------------
+Testing                | `Altek\Accountant\Context::TEST` | `1`   | PHPUnit, ...
+Command Line Interface | `Altek\Accountant\Context::CLI`  | `2`   | Migrations, Jobs, Commands, Tinker, ...
+Web                    | `Altek\Accountant\Context::WEB`  | `4`   | Apache, CGI, FPM, ...
 
-By default, the package **only** records in a `WEB` context.
+By default, the package is set to record **only** in the `Altek\Accountant\Context::WEB` context.
 
-To enable additional contexts, set the `accountant.contexts` value to a [bit mask](https://en.wikipedia.org/wiki/Mask_(computing)).
+To enable other contexts, set the `accountant.contexts` value to a context [bit mask](https://en.wikipedia.org/wiki/Mask_(computing)).
 
-The following example promotes all available contexts for recording.
+The following example promotes all the available contexts for recording.
 
 ```php
 return [
@@ -81,7 +81,7 @@ return [
 ```
 
 ## User
-This package supports multiple user types by the use of a polymorphic `MorphTo` relation.
+This package supports multiple user types through the use of a `MorphTo` relation.
 
 ### Prefix
 By default, the column names used are `user_id` and `user_type`. For a different user column prefix, change the configuration value, and update the [Ledger Table](ledger-table.md) accordingly.
@@ -97,7 +97,7 @@ return [
 ```
 
 ### Auth Guards
-Specify the authentication guards the default `UserResolver` should use when resolving a user.
+Specify which authentication guards the default `UserResolver` should use when trying to resolve a user.
 
 ```php
 return [

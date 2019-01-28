@@ -2,7 +2,7 @@
 During and after the recording process, two events are fired.
 
 ## Recording
-This first event is fired during the recording of a `Ledger`. If necessary, the recording can be aborted by returning `false` from the event listener's `handle()` method.
+This first event is fired during the recording of a `Ledger`. If necessary, the recording can be canceled by returning `false` from the event listener's `handle()` method.
 
 ```php
 <?php
@@ -27,7 +27,8 @@ class RecordingListener
      * Handle the Recording event.
      *
      * @param \Altek\Accountant\Events\Recording $event
-     * @return void
+     *
+     * @return mixed
      */
     public function handle(Recording $event)
     {
@@ -63,7 +64,8 @@ class RecordedListener
      * Handle the Recorded event.
      *
      * @param \Altek\Accountant\Events\Recorded $event
-     * @return void
+     *
+     * @return mixed
      */
     public function handle(Recorded $event)
     {

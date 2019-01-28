@@ -5,7 +5,7 @@
 Example with an `Article` model:
 
 ```php
-// Get the fourth Article created
+// Get the fourth Article
 $article = Article::find(4);
 
 // Get the first Ledger
@@ -83,7 +83,7 @@ array(11) {
 }
 ```
 
-## Getting modified only Recordable properties (default)
+## Getting modified only Recordable properties
 When calling the `getData()` method with no arguments, only the **modified** `Recordable` properties will be included in the `array`. 
 
 ### Usage example
