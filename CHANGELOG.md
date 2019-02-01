@@ -1,4 +1,5 @@
 # Changelog
+Relevant changes to the Accountant package will be documented here.
 
 ## v1.1.2 (2019-01-26)
 ### Added
