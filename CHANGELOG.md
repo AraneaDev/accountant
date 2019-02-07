@@ -1,6 +1,10 @@
 # Changelog
 Relevant changes to the Accountant package will be documented here.
 
+## v1.1.3 (2019-02-07)
+### Fixed
+- Fetching a user returns `null` when using a custom prefix
+
 ## v1.1.2 (2019-01-26)
 ### Added
 - Documented migration requirements ([#2](https://gitlab.com/altek/accountant/issues/2))
