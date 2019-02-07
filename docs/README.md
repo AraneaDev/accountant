@@ -3,7 +3,7 @@ home: true
 
 heroImage: /hero.png
 
-actionText: Let's Start!
+actionText: Find out more!
 actionLink: /installation
 
 features:
@@ -25,5 +25,5 @@ features:
 - title: Huge customisation support
   details: Create your own custom drivers, resolvers, and more!
 
-footer: MIT Licensed | Copyright (C) 2018-present Quetzy Garcia
+footer: MIT Licensed | Copyright (C) 2018-2019 Quetzy Garcia
 ---
