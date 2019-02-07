@@ -34,7 +34,9 @@ trait Ledger
      */
     public function user()
     {
-        return $this->morphTo();
+        $userPrefix = Config::get('accountant.user.prefix');
+
+        return $this->morphTo($userPrefix, $userPrefix.'_type', $userPrefix.'_id');
     }
 
     /**
