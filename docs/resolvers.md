@@ -257,6 +257,10 @@ class User extends Model implements Identifiable
 }
 ```
 
+::: tip
+Since version **1.1.4**, the `Altek\Accountant\Contracts\Recordable` interface extends `Altek\Accountant\Contracts\Identifiable`. If the `User` model is already implementing `Recordable`, there is no need for an explicit `Identifiable` implementation.
+:::
+
 ### Other authentication systems
 When using different auth mechanisms like [Sentinel](https://github.com/cartalyst/sentinel), make sure to implement a corresponding resolver.
 
