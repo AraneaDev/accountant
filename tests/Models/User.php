@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Altek\Accountant\Tests\Models;
 
-use Altek\Accountant\Contracts\Identifiable;
 use Altek\Accountant\Contracts\Recordable;
 use Altek\Eventually\Relations\BelongsToMany;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model implements Recordable, Identifiable, Authenticatable
+class User extends Model implements Recordable, Authenticatable
 {
     use \Altek\Accountant\Recordable;
     use \Altek\Eventually\Eventually;
@@ -38,14 +37,6 @@ class User extends Model implements Recordable, Identifiable, Authenticatable
         return $this->belongsToMany(Article::class)
             ->withPivot('liked')
             ->withTimestamps();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getIdentifier()
-    {
-        return $this->getAuthIdentifier();
     }
 
     /**
