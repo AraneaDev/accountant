@@ -1,9 +1,9 @@
 # Accountant
 The `Accountant` class is in charge of recording and clearing `Ledger` records.
 
-Normally, there's no reason for its explicit use, given the `RecordableObserver` calls it to take care of those tasks behind the scenes.
+Normally, there's no reason for its explicit use, given the `RecordableObserver` takes care of those tasks behind the scenes.
 
-Still, if there's a need to manually use it, here are two examples.
+Still, here are two usage examples.
 
 ## Using the Accountant Facade in a controller
 ```php
