@@ -7,7 +7,7 @@ namespace Altek\Accountant\Contracts;
 interface Identifiable
 {
     /**
-     * Get the User unique identifier.
+     * Get a unique identifier.
      *
      * @return mixed
      */
