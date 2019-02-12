@@ -1,6 +1,10 @@
 # Changelog
 Relevant changes to the Accountant package will be documented here.
 
+## v1.1.4 (2019-02-12)
+### Added
+- Ability to use a different value for the `recordable_id` when creating a `Ledger`
+
 ## v1.1.3 (2019-02-07)
 ### Fixed
 - Fetching a user returns `null` when using a custom prefix
