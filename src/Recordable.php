@@ -72,6 +72,14 @@ trait Recordable
     /**
      * {@inheritdoc}
      */
+    public function getIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function ledgers(): MorphMany
     {
         return $this->morphMany(Config::get('accountant.ledger.implementation'), 'recordable');
@@ -154,7 +162,7 @@ trait Recordable
             $userPrefix.'_type' => $user ? $user->getMorphClass() : null,
             'context'           => Resolve::context(),
             'event'             => $event,
-            'recordable_id'     => $this->getKey(),
+            'recordable_id'     => $this->getIdentifier(),
             'recordable_type'   => $this->getMorphClass(),
             'properties'        => $properties,
             'modified'          => \array_keys($this->getDirty()),

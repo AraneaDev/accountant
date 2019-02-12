@@ -6,7 +6,7 @@ namespace Altek\Accountant\Contracts;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-interface Recordable
+interface Recordable extends Identifiable
 {
     /**
      * Recordable Model ledgers.
