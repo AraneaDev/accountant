@@ -1,5 +1,5 @@
 # Ledger retrieval
-`Ledger` records can be easily fetched, through typical [Eloquent](https://laravel.com/docs/5.7/eloquent) relations.
+`Ledger` records can be easily fetched, through typical [Eloquent](https://laravel.com/docs/5.8/eloquent) relations.
 
 ## Getting Ledgers
 Example with an `Article` model:

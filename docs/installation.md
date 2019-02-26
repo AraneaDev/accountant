@@ -7,7 +7,7 @@ composer require altek/accountant
 ```
 
 ::: warning NOTICE
-This package supports [Laravel](https://laravel.com/docs/5.7/) and [Lumen](https://lumen.laravel.com/docs/5.7/) from versions **5.2** and up.
+This package supports [Laravel](https://laravel.com/docs/5.8/) and [Lumen](https://lumen.laravel.com/docs/5.8/) from versions **5.2** and up.
 :::
 
 # Configuration
@@ -27,7 +27,7 @@ Edit the `config/app.php` file and add the following line to register the servic
 ```
 
 ::: tip
-If you're using Laravel version **5.5** or greater, you can skip the service provider setup in favour of the [Package Auto-Discovery](https://laravel.com/docs/5.7/packages#package-discovery) feature.
+If you're using Laravel version **5.5** or greater, you can skip the service provider setup in favour of the [Package Auto-Discovery](https://laravel.com/docs/5.8/packages#package-discovery) feature.
 :::
 
 ## Lumen

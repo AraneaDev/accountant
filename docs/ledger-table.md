@@ -98,7 +98,7 @@ $table->text('user_agent')->nullable();
 ```
 
 ## Using JSON column type instead of TEXT
-The Laravel [Query Builder](https://laravel.com/docs/5.7/queries#json-where-clauses) supports querying `JSON` type columns.
+The Laravel [Query Builder](https://laravel.com/docs/5.8/queries#json-where-clauses) supports querying `JSON` type columns.
 
 By default, the `properties`, `modified`, `pivot` and `extra` columns store JSON data as `TEXT`, but the column types can be updated from
 

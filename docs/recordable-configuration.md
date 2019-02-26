@@ -66,7 +66,7 @@ Bear in mind that pruning `Ledger` records will affect operations such as the [D
 :::
 
 ## Events
-[Eloquent events](https://laravel.com/docs/5.7/eloquent#events) are what trigger the recording of a `Ledger`, and by default, only the `created`, `updated`, `restored`, `deleted` and `forceDeleted` events are observed.
+[Eloquent events](https://laravel.com/docs/5.8/eloquent#events) are what trigger the recording of a `Ledger`, and by default, only the `created`, `updated`, `restored`, `deleted` and `forceDeleted` events are observed.
 
 ### Standard events
 Event name              | Default state

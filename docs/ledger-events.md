@@ -75,5 +75,5 @@ class RecordedListener
 ```
 
 ::: tip
-For more information about events, check Laravel's official [documentation](https://laravel.com/docs/5.7/events)!
+For more information about events, check Laravel's official [documentation](https://laravel.com/docs/5.8/events)!
 :::

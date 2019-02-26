@@ -8,7 +8,7 @@ Refer to the [Ledger Table Migrations](ledger-table.md#migrations) section for a
 You followed all the steps in the documentation and still, `Ledger` records are not being created?
 
 ### Query Builder vs. Eloquent
-Bear in mind that this package relies on Eloquent [events](https://laravel.com/docs/5.7/eloquent#events) and if they don't fire, a `Ledger` won't be created.
+Bear in mind that this package relies on Eloquent [events](https://laravel.com/docs/5.8/eloquent#events) and if they don't fire, a `Ledger` won't be created.
 
 The most common mistake is performing an `update` or `delete` operation using a `Builder` instance, instead of an Eloquent `Model`.
 

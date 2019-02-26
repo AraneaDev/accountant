@@ -47,7 +47,7 @@ Bear in mind that **one way** ciphered data cannot be reverted to its original f
 ## Base64 cipher
 `Base64` is a **two way** cipher that encodes properties using the [Base64](https://en.wikipedia.org/wiki/Base64) encoding scheme.
 
-It is specially useful when keeping track of binary data, which would otherwise break the [casting](https://laravel.com/docs/5.7/eloquent-mutators#array-and-json-casting) to JSON functionality of the underlying `Eloquent` model.
+It is specially useful when keeping track of binary data, which would otherwise break the [casting](https://laravel.com/docs/5.8/eloquent-mutators#array-and-json-casting) to JSON functionality of the underlying `Eloquent` model.
 
 ### Example
 Input value                               | Output value
