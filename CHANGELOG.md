@@ -1,6 +1,10 @@
 # Changelog
 Relevant changes to the Accountant package will be documented here.
 
+## v1.1.5 (2019-02-26)
+### Added
+- Support version 5.8 of the Illuminate components
+
 ## v1.1.4 (2019-02-12)
 ### Added
 - Ability to use a different value for the `recordable_id` when creating a `Ledger`
