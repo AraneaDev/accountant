@@ -80,6 +80,6 @@ class Accountant extends Manager implements Contracts\Accountant
             $driver->prune($model);
         }
 
-        $this->app->make('events')->fire(new Recorded($model, $driver, $ledger));
+        $this->app->make('events')->dispatch(new Recorded($model, $driver, $ledger));
     }
 }
