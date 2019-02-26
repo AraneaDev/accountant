@@ -8,7 +8,7 @@ Data discrepancies that may indicate business concerns, suspect activities, and 
 ## Version Information
  Version   | Illuminate    | Status             | PHP Version
 -----------|---------------|--------------------|-------------
- 1.x       | 5.2.x - 5.7.x | Actively supported | >= 7.1.3
+ 1.x       | 5.2.x - 5.8.x | Actively supported | >= 7.1.3
 
 ## Key Features
 - Many-to-many (`BelongsToMany` and `MorphToMany`) relation support;
