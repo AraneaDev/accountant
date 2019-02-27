@@ -16,6 +16,7 @@ use Altek\Accountant\Tests\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Str;
 
 class RecordableTest extends AccountantTestCase
 {
@@ -506,7 +507,7 @@ class RecordableTest extends AccountantTestCase
             public function supplyExtra(string $event, array $properties, ?Identifiable $user): array
             {
                 return [
-                    'slug' => str_slug($properties['title']),
+                    'slug' => Str::slug($properties['title']),
                 ];
             }
         };

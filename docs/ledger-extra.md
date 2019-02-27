@@ -16,6 +16,7 @@ namespace App\Models;
 use Altek\Accountant\Contracts\Identifiable;
 use Altek\Accountant\Contracts\Recordable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Article extends Model implements Recordable
 {
@@ -29,7 +30,7 @@ class Article extends Model implements Recordable
     public function supplyExtra(string $event, array $properties, ?Identifiable $user): array
     {
         return [
-            'slug' => str_slug($properties['title']),
+            'slug' => Str::slug($properties['title']),
         ];
     }
 }

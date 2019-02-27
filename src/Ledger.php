@@ -12,6 +12,7 @@ use Altek\Accountant\Exceptions\AccountantException;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Str;
 
 trait Ledger
 {
@@ -173,14 +174,14 @@ trait Ledger
         // User property
         $userPrefix = Config::get('accountant.user.prefix');
 
-        if ($this->user && starts_with($key, $userPrefix.'_')) {
+        if ($this->user && Str::startsWith($key, $userPrefix.'_')) {
             $userPrefixOffset = \mb_strlen($userPrefix.'_');
 
             return $this->getFormattedProperty($this->user, \mb_substr($key, $userPrefixOffset), $value);
         }
 
         // Recordable property
-        if (starts_with($key, 'recordable_')) {
+        if (Str::startsWith($key, 'recordable_')) {
             return $this->getFormattedProperty($this->getRecordableInstance(), \mb_substr($key, 11), $value);
         }
 
