@@ -5,7 +5,7 @@ Data discrepancies that may indicate business concerns, suspect activities, and 
 
 [![Latest Stable Version](https://poser.pugx.org/altek/accountant/v/stable)](https://packagist.org/packages/altek/accountant) [![Total Downloads](https://poser.pugx.org/altek/accountant/downloads)](https://packagist.org/packages/altek/accountant) [![pipeline status](https://gitlab.com/altek/accountant/badges/master/pipeline.svg)](https://gitlab.com/altek/accountant/commits/master) [![coverage report](https://gitlab.com/altek/accountant/badges/master/coverage.svg)](https://gitlab.com/altek/accountant/commits/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/gl/altek/altek/accountant/badges/quality-score.png?b=master&s=b863b32db2dc1674d15d7c9396db46a4139db09e)](https://scrutinizer-ci.com/gl/altek/altek/accountant/?branch=master) [![License](https://poser.pugx.org/altek/accountant/license)](https://packagist.org/packages/altek/accountant)
 
-## Version Information
+## Version Matrix
  Version   | Illuminate    | Status             | PHP Version
 -----------|---------------|--------------------|-------------
  1.x       | 5.2.x - 5.8.x | Actively supported | >= 7.1.3
