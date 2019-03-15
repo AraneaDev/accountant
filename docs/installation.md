@@ -117,10 +117,6 @@ php artisan migrate
 
 This will create the `ledgers` table in your database.
 
-::: warning NOTICE
-If you run into [problems](troubleshooting.md#changing-columns-for-table-ledgers-requires-doctrine-dbal-install-doctrine-dbal) while migrating, refer to the [Ledger Table](ledger-table.md) section.
-:::
-
 ## User model
 In order to use this package, the `User` model needs to implement the `Altek\Accountant\Contracts\Identifiable` interface.
 

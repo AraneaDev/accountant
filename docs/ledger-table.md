@@ -4,23 +4,7 @@ Even though the default table schema covers most use cases, there's room for cus
 Here you'll find some of the changes that can be performed.
 
 ## Migrations
-### Default
-Currently, the package ships with **three** migrations which, once executed, create the necessary table schema for the package to function properly.
-
-While the `doctrine/dbal` is not a required dependency, it will be needed to run the default migrations, so make sure you have it.
-
-```sh
-composer require doctrine/dbal
-```
-
-The rationale is to avoid keeping an unnecessary dependency once the installation process is over.
-
-### Custom
-If you're just starting and prefer just one migration file, you can replace the default files with the [one](https://gitlab.com/altek/accountant/blob/master/tests/database/migrations/0000_00_00_000001_create_ledgers_test_table.php) included for testing.
-
-::: tip
-The `doctrine/dbal` dependency isn't required is you use this method.
-:::
+Currently, a migration file is included to create the necessary table schema for the package to function properly.
 
 ## Using a different prefix for the User ID/Type columns
 Instead of the default `user_id` and `user_type` columns, a different prefix can be set:
