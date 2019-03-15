@@ -54,7 +54,9 @@ abstract class AccountantTestCase extends TestCase
     {
         parent::setUp();
 
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+
         $this->withFactories(__DIR__.'/database/factories');
 
         // Define an exact date/time to be always returned
