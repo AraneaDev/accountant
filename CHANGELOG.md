@@ -1,6 +1,10 @@
 # Changelog
 Relevant changes to the Accountant package will be documented here.
 
+## v1.1.6 (2019-03-15)
+### Changed
+- Merged migration files into one, properly solving ([#2](https://gitlab.com/altek/accountant/issues/2)) and ([#5](https://gitlab.com/altek/accountant/issues/5))
+
 ## v1.1.5 (2019-02-26)
 ### Added
 - Support version 5.8 of the Illuminate components
