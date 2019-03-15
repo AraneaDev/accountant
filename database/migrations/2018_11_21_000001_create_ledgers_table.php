@@ -22,9 +22,10 @@ class CreateLedgersTable extends Migration
             $table->morphs('recordable');
             $table->unsignedTinyInteger('context');
             $table->string('event');
-            $table->text('properties')->nullable();
-            $table->text('modified')->nullable();
-            $table->text('extra')->nullable();
+            $table->text('properties');
+            $table->text('modified');
+            $table->text('pivot');
+            $table->text('extra');
             $table->text('url')->nullable();
             $table->ipAddress('ip_address')->nullable();
             $table->string('user_agent')->nullable();
