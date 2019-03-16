@@ -233,7 +233,6 @@ class RecordableTest extends AccountantTestCase
             'existingPivotUpdated',
             'attached',
             'detached',
-
         ];
 
         $this->assertTrue($article->isEventRecordable('retrieved'));
