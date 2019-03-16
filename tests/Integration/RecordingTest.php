@@ -411,12 +411,20 @@ class RecordingTest extends AccountantTestCase
     {
         $this->app['config']->set('accountant.events', [
             'toggled',
+            'attached',
+            'detached',
         ]);
 
         $user = factory(User::class)->create();
         factory(Article::class, 2)->create();
 
         $this->assertSame(0, Ledger::count());
+
+        $user->articles()->sync([
+            2 => [
+                'liked' => false,
+            ],
+        ]);
 
         $user->articles()->toggle([
             2 => [
@@ -459,12 +467,22 @@ class RecordingTest extends AccountantTestCase
     {
         $this->app['config']->set('accountant.events', [
             'synced',
+            'existingPivotUpdated',
+            'attached',
+            'detached',
         ]);
 
         $user = factory(User::class)->create();
-        factory(Article::class, 2)->create();
+        factory(Article::class, 3)->create();
 
-        $this->assertSame(0, Ledger::count());
+        $user->articles()->toggle([
+            2 => [
+                'liked' => true,
+            ],
+            3 => [
+                'liked' => false,
+            ],
+        ]);
 
         $user->articles()->sync([
             2 => [
