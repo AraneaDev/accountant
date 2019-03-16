@@ -110,10 +110,6 @@ composer require altek/eventually
 
 and the `\Altek\Eventually\Eventually` trait must be set in the required models.
 
-::: danger CAVEAT
-The `sync()` and `toggle()` methods fire multiple events, since they call `attach()`, `detach()` and `updateExistingPivot()` internally. To prevent an excess of `Ledger` records for the same action, avoid observing the `toggled` and `synced` events.
-:::
-
 ### Event configuration
 There are two ways to define which events should be observed.
 
