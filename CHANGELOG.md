@@ -1,6 +1,10 @@
 # Changelog
 Relevant changes to the Accountant package will be documented here.
 
+## v1.1.7 (2019-03-16)
+### Changed
+- Ignore `existingPivotUpdated`, `attached` and `detached` events when toggling or syncing. Fixes ([#6](https://gitlab.com/altek/accountant/issues/6))
+
 ## v1.1.6 (2019-03-15)
 ### Changed
 - Merged migration files into one, properly solving ([#2](https://gitlab.com/altek/accountant/issues/2)) and ([#5](https://gitlab.com/altek/accountant/issues/5))
