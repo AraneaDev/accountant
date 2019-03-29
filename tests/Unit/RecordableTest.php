@@ -539,7 +539,7 @@ class RecordableTest extends AccountantTestCase
                 'reviewed',
                 'published_at',
             ],
-            'extra'      => [
+            'extra' => [
                 'slug' => 'keeping-track-of-eloquent-model-changes',
             ],
             'url'        => 'Command Line Interface',
