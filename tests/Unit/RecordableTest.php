@@ -155,13 +155,13 @@ class RecordableTest extends AccountantTestCase
     {
         $article = new Article();
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'created',
             'updated',
             'restored',
             'deleted',
             'forceDeleted',
-        ], $article->getRecordableEvents(), true);
+        ], $article->getRecordableEvents());
     }
 
     /**
@@ -177,10 +177,10 @@ class RecordableTest extends AccountantTestCase
             'restored',
         ];
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'deleted',
             'restored',
-        ], $article->getRecordableEvents(), true);
+        ], $article->getRecordableEvents());
     }
 
     /**
@@ -196,10 +196,10 @@ class RecordableTest extends AccountantTestCase
 
         $article = new Article();
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'deleted',
             'restored',
-        ], $article->getRecordableEvents(), true);
+        ], $article->getRecordableEvents());
     }
 
     /**
@@ -377,7 +377,7 @@ class RecordableTest extends AccountantTestCase
 
         $this->assertCount(12, $data = $article->collect('created'));
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'user_id'         => null,
             'user_type'       => null,
             'context'         => Context::TEST,
@@ -387,8 +387,8 @@ class RecordableTest extends AccountantTestCase
             'properties'      => [
                 'title'        => 'Keeping Track Of Eloquent Model Changes',
                 'content'      => 'First step: install the Accountant package.',
-                'reviewed'     => 1,
                 'published_at' => '2012-06-14 15:03:03',
+                'reviewed'     => 1,
             ],
             'modified' => [
                 'title',
@@ -396,11 +396,11 @@ class RecordableTest extends AccountantTestCase
                 'published_at',
                 'reviewed',
             ],
+            'extra'      => [],
             'url'        => 'Command Line Interface',
             'ip_address' => '127.0.0.1',
             'user_agent' => 'Symfony',
-            'extra'      => [],
-        ], $data, true);
+        ], $data);
     }
 
     /**
@@ -437,7 +437,7 @@ class RecordableTest extends AccountantTestCase
 
         $this->assertCount(12, $data = $article->collect('created'));
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'user_id'         => $id,
             'user_type'       => $type,
             'context'         => Context::TEST,
@@ -447,8 +447,8 @@ class RecordableTest extends AccountantTestCase
             'properties'      => [
                 'title'        => 'Keeping Track Of Eloquent Model Changes',
                 'content'      => 'First step: install the Accountant package.',
-                'reviewed'     => 1,
                 'published_at' => '2012-06-14 15:03:03',
+                'reviewed'     => 1,
             ],
             'modified' => [
                 'title',
@@ -456,11 +456,11 @@ class RecordableTest extends AccountantTestCase
                 'published_at',
                 'reviewed',
             ],
+            'extra'      => [],
             'url'        => 'Command Line Interface',
             'ip_address' => '127.0.0.1',
             'user_agent' => 'Symfony',
-            'extra'      => [],
-        ], $data, true);
+        ], $data);
     }
 
     /**
@@ -520,7 +520,7 @@ class RecordableTest extends AccountantTestCase
 
         $this->assertCount(12, $data = $article->collect('created'));
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'user_id'         => null,
             'user_type'       => null,
             'context'         => Context::TEST,
@@ -539,13 +539,13 @@ class RecordableTest extends AccountantTestCase
                 'reviewed',
                 'published_at',
             ],
-            'url'        => 'Command Line Interface',
-            'ip_address' => '127.0.0.1',
-            'user_agent' => 'Symfony',
             'extra'      => [
                 'slug' => 'keeping-track-of-eloquent-model-changes',
             ],
-        ], $data, true);
+            'url'        => 'Command Line Interface',
+            'ip_address' => '127.0.0.1',
+            'user_agent' => 'Symfony',
+        ], $data);
     }
 
     /**
@@ -611,7 +611,7 @@ class RecordableTest extends AccountantTestCase
 
         $this->assertCount(12, $data = $article->collect('updated'));
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'user_id'         => null,
             'user_type'       => null,
             'context'         => Context::TEST,
@@ -635,11 +635,11 @@ class RecordableTest extends AccountantTestCase
                 'reviewed',
                 'ciphers',
             ],
+            'extra'      => [],
             'url'        => 'Command Line Interface',
             'ip_address' => '127.0.0.1',
             'user_agent' => 'Symfony',
-            'extra'      => [],
-        ], $data, true);
+        ], $data);
     }
 
     /**

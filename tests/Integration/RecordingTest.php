@@ -178,16 +178,16 @@ class RecordingTest extends AccountantTestCase
 
         $this->assertSame('retrieved', $ledger->event);
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'id'           => '1',
             'title'        => 'Keeping Track Of Eloquent Model Changes',
             'content'      => 'N/A',
-            'published_at' => null,
             'reviewed'     => '0',
-            'updated_at'   => '2012-06-14 15:03:03',
+            'published_at' => null,
             'created_at'   => '2012-06-14 15:03:03',
+            'updated_at'   => '2012-06-14 15:03:03',
             'deleted_at'   => null,
-        ], $ledger->properties, true);
+        ], $ledger->properties);
 
         $this->assertEmpty($ledger->modified);
     }
@@ -216,7 +216,7 @@ class RecordingTest extends AccountantTestCase
 
         $this->assertSame('created', $ledger->event);
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'title'        => 'Keeping Track Of Eloquent Model Changes',
             'content'      => 'N/A',
             'published_at' => null,
@@ -224,9 +224,9 @@ class RecordingTest extends AccountantTestCase
             'updated_at'   => '2012-06-14 15:03:03',
             'created_at'   => '2012-06-14 15:03:03',
             'id'           => 1,
-        ], $ledger->properties, true);
+        ], $ledger->properties);
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'title',
             'content',
             'published_at',
@@ -234,7 +234,7 @@ class RecordingTest extends AccountantTestCase
             'updated_at',
             'created_at',
             'id',
-        ], $ledger->modified, true);
+        ], $ledger->modified);
     }
 
     /**
@@ -267,7 +267,7 @@ class RecordingTest extends AccountantTestCase
 
         $this->assertSame('updated', $ledger->event);
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'title'        => 'Keeping Track Of Eloquent Model Changes',
             'content'      => 'First step: install the Accountant package.',
             'published_at' => '2012-06-14 15:03:03',
@@ -275,13 +275,13 @@ class RecordingTest extends AccountantTestCase
             'updated_at'   => '2012-06-14 15:03:03',
             'created_at'   => '2012-06-14 15:03:03',
             'id'           => 1,
-        ], $ledger->properties, true);
+        ], $ledger->properties);
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'content',
             'published_at',
             'reviewed',
-        ], $ledger->modified, true);
+        ], $ledger->modified);
     }
 
     /**
@@ -309,16 +309,16 @@ class RecordingTest extends AccountantTestCase
 
         $this->assertSame('restored', $ledger->event);
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'title'        => 'Keeping Track Of Eloquent Model Changes',
             'content'      => 'N/A',
             'published_at' => null,
             'reviewed'     => 0,
+            'deleted_at'   => null,
             'updated_at'   => '2012-06-14 15:03:03',
             'created_at'   => '2012-06-14 15:03:03',
             'id'           => 1,
-            'deleted_at'   => null,
-        ], $ledger->properties, true);
+        ], $ledger->properties);
 
         $this->assertEmpty($ledger->modified);
     }
@@ -349,7 +349,7 @@ class RecordingTest extends AccountantTestCase
 
         $this->assertSame('deleted', $ledger->event);
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'title'        => 'Keeping Track Of Eloquent Model Changes',
             'content'      => 'N/A',
             'published_at' => null,
@@ -358,11 +358,11 @@ class RecordingTest extends AccountantTestCase
             'created_at'   => '2012-06-14 15:03:03',
             'id'           => 1,
             'deleted_at'   => '2012-06-14 15:03:03',
-        ], $ledger->properties, true);
+        ], $ledger->properties);
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'deleted_at',
-        ], $ledger->modified, true);
+        ], $ledger->modified);
     }
 
     /**
@@ -390,7 +390,7 @@ class RecordingTest extends AccountantTestCase
 
         $this->assertSame('forceDeleted', $ledger->event);
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'title'        => 'Keeping Track Of Eloquent Model Changes',
             'content'      => 'N/A',
             'published_at' => null,
@@ -399,7 +399,7 @@ class RecordingTest extends AccountantTestCase
             'updated_at'   => '2012-06-14 15:03:03',
             'created_at'   => '2012-06-14 15:03:03',
             'id'           => 1,
-        ], $ledger->properties, true);
+        ], $ledger->properties);
 
         $this->assertEmpty($ledger->modified);
     }
@@ -443,21 +443,21 @@ class RecordingTest extends AccountantTestCase
 
         $this->assertEmpty($ledger->modified);
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'relation'   => 'articles',
             'properties' => [
                 [
                     'user_id'    => 1,
-                    'article_id' => 2,
                     'liked'      => false,
+                    'article_id' => 2,
                 ],
                 [
                     'user_id'    => 1,
-                    'article_id' => 1,
                     'liked'      => true,
+                    'article_id' => 1,
                 ],
             ],
-        ], $ledger->getPivotData(), true);
+        ], $ledger->getPivotData());
     }
 
     /**
@@ -501,21 +501,21 @@ class RecordingTest extends AccountantTestCase
 
         $this->assertEmpty($ledger->modified);
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'relation'   => 'articles',
             'properties' => [
                 [
                     'user_id'    => 1,
-                    'article_id' => 2,
                     'liked'      => false,
+                    'article_id' => 2,
                 ],
                 [
                     'user_id'    => 1,
-                    'article_id' => 1,
                     'liked'      => true,
+                    'article_id' => 1,
                 ],
             ],
-        ], $ledger->getPivotData(), true);
+        ], $ledger->getPivotData());
     }
 
     /**
@@ -549,21 +549,21 @@ class RecordingTest extends AccountantTestCase
 
         $this->assertEmpty($ledger->modified);
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'relation'   => 'articles',
             'properties' => [
                 [
                     'user_id'    => 1,
-                    'article_id' => 1,
                     'liked'      => true,
+                    'article_id' => 1,
                 ],
                 [
                     'user_id'    => 1,
-                    'article_id' => 2,
                     'liked'      => true,
+                    'article_id' => 2,
                 ],
             ],
-        ], $ledger->getPivotData(), true);
+        ], $ledger->getPivotData());
     }
 
     /**
@@ -597,21 +597,21 @@ class RecordingTest extends AccountantTestCase
 
         $this->assertEmpty($ledger->modified);
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'relation'   => 'articles',
             'properties' => [
                 [
                     'user_id'    => 1,
-                    'article_id' => 2,
                     'liked'      => false,
+                    'article_id' => 2,
                 ],
                 [
                     'user_id'    => 1,
-                    'article_id' => 1,
                     'liked'      => true,
+                    'article_id' => 1,
                 ],
             ],
-        ], $ledger->getPivotData(), true);
+        ], $ledger->getPivotData());
     }
 
     /**
@@ -643,7 +643,7 @@ class RecordingTest extends AccountantTestCase
 
         $this->assertEmpty($ledger->modified);
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'relation'   => 'articles',
             'properties' => [
                 [
@@ -655,7 +655,7 @@ class RecordingTest extends AccountantTestCase
                     'article_id' => '2',
                 ],
             ],
-        ], $ledger->getPivotData(), true);
+        ], $ledger->getPivotData());
     }
 
     /**
@@ -775,7 +775,7 @@ class RecordingTest extends AccountantTestCase
 
         $ledger = Ledger::first();
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'title'        => 'Keeping Track Of Eloquent Model Changes Using The Fallback Driver',
             'content'      => 'N/A',
             'published_at' => null,
@@ -783,9 +783,9 @@ class RecordingTest extends AccountantTestCase
             'updated_at'   => '2012-06-14 15:03:03',
             'created_at'   => '2012-06-14 15:03:03',
             'id'           => 1,
-        ], $ledger->properties, true);
+        ], $ledger->properties);
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'title',
             'content',
             'published_at',
@@ -793,7 +793,7 @@ class RecordingTest extends AccountantTestCase
             'updated_at',
             'created_at',
             'id',
-        ], $ledger->modified, true);
+        ], $ledger->modified);
     }
 
     /**

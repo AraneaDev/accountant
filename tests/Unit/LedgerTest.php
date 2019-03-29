@@ -37,7 +37,7 @@ class LedgerTest extends AccountantTestCase
 
         $this->assertCount(18, $compiled = $ledger->compile());
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'ledger_id'               => 1,
             'ledger_context'          => Context::TEST,
             'ledger_event'            => 'created',
@@ -46,16 +46,17 @@ class LedgerTest extends AccountantTestCase
             'ledger_user_agent'       => 'Symfony',
             'ledger_created_at'       => '2012-06-14 15:03:03',
             'ledger_updated_at'       => '2012-06-14 15:03:03',
+            'ledger_signature'        => '6ed5592c2d8907d6ad934779b7aebfaed9d416a2fa014a22d671b689ad1dec33285749f98a1d7217539f654e7e213f0d250d5513d27ab0a8949f9a713432a483',
             'user_id'                 => null,
             'user_type'               => null,
             'recordable_title'        => 'Keeping Track Of Eloquent Model Changes',
             'recordable_content'      => 'First step: install the Accountant package.',
             'recordable_published_at' => '2012-06-14 15:03:03',
             'recordable_reviewed'     => 1,
-            'recordable_created_at'   => '2012-06-14 15:03:03',
             'recordable_updated_at'   => '2012-06-14 15:03:03',
+            'recordable_created_at'   => '2012-06-14 15:03:03',
             'recordable_id'           => 1,
-        ], $compiled, true);
+        ], $compiled);
 
         $this->assertArrayHasKey('ledger_signature', $compiled);
     }
@@ -86,7 +87,7 @@ class LedgerTest extends AccountantTestCase
 
         $this->assertCount(24, $compiled = $ledger->compile());
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'ledger_id'               => 2,
             'ledger_context'          => Context::TEST,
             'ledger_event'            => 'created',
@@ -95,6 +96,7 @@ class LedgerTest extends AccountantTestCase
             'ledger_user_agent'       => 'Symfony',
             'ledger_created_at'       => '2012-06-14 15:03:03',
             'ledger_updated_at'       => '2012-06-14 15:03:03',
+            'ledger_signature'        => '51514d4cdcc9a3653eae86c87d878e007b32c3f5e2d5c6f77b9375fccd39098c52cf0d40309da71f0621b1e50ae9f3a8505f0b17e1bb0814b496305efdb6ea5f',
             'user_id'                 => '1',
             'user_type'               => User::class,
             'user_is_admin'           => '1',
@@ -107,10 +109,10 @@ class LedgerTest extends AccountantTestCase
             'recordable_content'      => 'First step: install the Accountant package.',
             'recordable_published_at' => '2012-06-14 15:03:03',
             'recordable_reviewed'     => 1,
-            'recordable_created_at'   => '2012-06-14 15:03:03',
             'recordable_updated_at'   => '2012-06-14 15:03:03',
+            'recordable_created_at'   => '2012-06-14 15:03:03',
             'recordable_id'           => 1,
-        ], $compiled, true);
+        ], $compiled);
 
         $this->assertArrayHasKey('ledger_signature', $compiled);
     }
@@ -250,7 +252,7 @@ class LedgerTest extends AccountantTestCase
 
         $this->assertCount(7, $data = $ledger->getData());
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'title'        => 'KEEPING TRACK OF ELOQUENT MODEL CHANGES',
             'content'      => 'First step: install the Accountant package.',
             'published_at' => '2012-06-14 15:03:03',
@@ -258,7 +260,7 @@ class LedgerTest extends AccountantTestCase
             'updated_at'   => '2012-06-14 15:03:03',
             'created_at'   => '2012-06-14 15:03:03',
             'id'           => 1,
-        ], $data, true);
+        ], $data);
     }
 
     /**
@@ -321,11 +323,11 @@ class LedgerTest extends AccountantTestCase
         $this->assertCount(1, $modified = $ledger->getData());
         $this->assertCount(7, $all = $ledger->getData(true));
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'content' => '--------------------------------------kage.',
-        ], $modified, true);
+        ], $modified);
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'title'        => 'KEEPING TRACK OF ELOQUENT MODEL CHANGES',
             'content'      => '--------------------------------------kage.',
             'published_at' => '2012-06-18 21:32:34',
@@ -333,7 +335,7 @@ class LedgerTest extends AccountantTestCase
             'updated_at'   => '2015-10-24 23:11:10',
             'created_at'   => '2012-06-14 15:03:03',
             'id'           => 1,
-        ], $all, true);
+        ], $all);
     }
 
     /**
@@ -369,11 +371,11 @@ class LedgerTest extends AccountantTestCase
         $this->assertCount(1, $modified = $ledger->getData());
         $this->assertCount(7, $all = $ledger->getData(true));
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'content' => 'First step: install the Accountant package.',
-        ], $modified, true);
+        ], $modified);
 
-        $this->assertArraySubset([
+        $this->assertSame([
             'title'        => 'KEEPING TRACK OF ELOQUENT MODEL CHANGES',
             'content'      => 'First step: install the Accountant package.',
             'published_at' => '2012-06-18 21:32:34',
@@ -381,7 +383,7 @@ class LedgerTest extends AccountantTestCase
             'updated_at'   => '2015-10-24 23:11:10',
             'created_at'   => '2012-06-14 15:03:03',
             'id'           => 1,
-        ], $all, true);
+        ], $all);
     }
 
     /**
