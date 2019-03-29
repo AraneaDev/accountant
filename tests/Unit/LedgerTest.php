@@ -178,7 +178,11 @@ class LedgerTest extends AccountantTestCase
 
         $this->assertCount(11, $metadata = $ledger->getMetadata());
 
-        $this->assertArraySubset([
+        $this->assertArrayHasKey('ledger_signature', $metadata);
+
+        unset($metadata['ledger_signature']);
+
+        $this->assertSame([
             'ledger_id'         => 1,
             'ledger_context'    => Context::TEST,
             'ledger_event'      => 'created',
@@ -189,9 +193,7 @@ class LedgerTest extends AccountantTestCase
             'ledger_updated_at' => '2012-06-14 15:03:03',
             'user_id'           => null,
             'user_type'         => null,
-        ], $metadata, true);
-
-        $this->assertArrayHasKey('ledger_signature', $metadata);
+        ], $metadata);
     }
 
     /**
@@ -213,7 +215,11 @@ class LedgerTest extends AccountantTestCase
 
         $this->assertCount(17, $metadata = $ledger->getMetadata());
 
-        $this->assertArraySubset([
+        $this->assertArrayHasKey('ledger_signature', $metadata);
+
+        unset($metadata['ledger_signature']);
+
+        $this->assertSame([
             'ledger_id'         => 2,
             'ledger_context'    => Context::TEST,
             'ledger_event'      => 'created',
@@ -230,9 +236,7 @@ class LedgerTest extends AccountantTestCase
             'user_email'        => 'rick@wubba-lubba-dub.dub',
             'user_created_at'   => '2012-06-14 15:03:03',
             'user_updated_at'   => '2012-06-14 15:03:03',
-        ], $metadata, true);
-
-        $this->assertArrayHasKey('ledger_signature', $metadata);
+        ], $metadata);
     }
 
     /**
