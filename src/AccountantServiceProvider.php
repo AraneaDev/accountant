@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Altek\Accountant;
 
-use Altek\Accountant\Console\MakeCipherCommand;
-use Altek\Accountant\Console\MakeContextResolverCommand;
-use Altek\Accountant\Console\MakeIpAddressResolverCommand;
-use Altek\Accountant\Console\MakeLedgerDriverCommand;
-use Altek\Accountant\Console\MakeNotaryCommand;
-use Altek\Accountant\Console\MakeUrlResolverCommand;
-use Altek\Accountant\Console\MakeUserAgentResolverCommand;
-use Altek\Accountant\Console\MakeUserResolverCommand;
+use Altek\Accountant\Console\AccountantCipherCommand;
+use Altek\Accountant\Console\AccountantContextResolverCommand;
+use Altek\Accountant\Console\AccountantIpAddressResolverCommand;
+use Altek\Accountant\Console\AccountantLedgerDriverCommand;
+use Altek\Accountant\Console\AccountantNotaryCommand;
+use Altek\Accountant\Console\AccountantUrlResolverCommand;
+use Altek\Accountant\Console\AccountantUserAgentResolverCommand;
+use Altek\Accountant\Console\AccountantUserResolverCommand;
 use Altek\Accountant\Contracts\Accountant;
 use Illuminate\Support\ServiceProvider;
 
@@ -49,14 +49,14 @@ class AccountantServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->commands([
-            MakeCipherCommand::class,
-            MakeContextResolverCommand::class,
-            MakeIpAddressResolverCommand::class,
-            MakeLedgerDriverCommand::class,
-            MakeNotaryCommand::class,
-            MakeUrlResolverCommand::class,
-            MakeUserAgentResolverCommand::class,
-            MakeUserResolverCommand::class,
+            AccountantCipherCommand::class,
+            AccountantContextResolverCommand::class,
+            AccountantIpAddressResolverCommand::class,
+            AccountantLedgerDriverCommand::class,
+            AccountantNotaryCommand::class,
+            AccountantUrlResolverCommand::class,
+            AccountantUserAgentResolverCommand::class,
+            AccountantUserResolverCommand::class,
         ]);
 
         $this->app->singleton(Accountant::class, function ($app) {

@@ -6,12 +6,12 @@ namespace Altek\Accountant\Console;
 
 use Illuminate\Console\GeneratorCommand;
 
-class MakeUrlResolverCommand extends GeneratorCommand
+class AccountantUrlResolverCommand extends GeneratorCommand
 {
     /**
      * {@inheritdoc}
      */
-    protected $name = 'make:url-resolver';
+    protected $name = 'accountant:url-resolver';
 
     /**
      * {@inheritdoc}

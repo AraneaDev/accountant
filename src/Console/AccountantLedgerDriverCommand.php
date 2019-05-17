@@ -6,29 +6,29 @@ namespace Altek\Accountant\Console;
 
 use Illuminate\Console\GeneratorCommand;
 
-class MakeIpAddressResolverCommand extends GeneratorCommand
+class AccountantLedgerDriverCommand extends GeneratorCommand
 {
     /**
      * {@inheritdoc}
      */
-    protected $name = 'make:ip-address-resolver';
+    protected $name = 'accountant:ledger-driver';
 
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Create a new IP Address resolver';
+    protected $description = 'Create a new Ledger driver';
 
     /**
      * {@inheritdoc}
      */
-    protected $type = 'IpAddressResolver';
+    protected $type = 'LedgerDriver';
 
     /**
      * {@inheritdoc}
      */
     protected function getStub(): string
     {
-        return __DIR__.'/../../stubs/IpAddressResolver.stub';
+        return __DIR__.'/../../stubs/LedgerDriver.stub';
     }
 
     /**
@@ -36,6 +36,6 @@ class MakeIpAddressResolverCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\Resolvers';
+        return $rootNamespace.'\LedgerDrivers';
     }
 }

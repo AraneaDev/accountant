@@ -6,29 +6,29 @@ namespace Altek\Accountant\Console;
 
 use Illuminate\Console\GeneratorCommand;
 
-class MakeUserResolverCommand extends GeneratorCommand
+class AccountantIpAddressResolverCommand extends GeneratorCommand
 {
     /**
      * {@inheritdoc}
      */
-    protected $name = 'make:user-resolver';
+    protected $name = 'accountant:ip-address-resolver';
 
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Create a new User resolver';
+    protected $description = 'Create a new IP Address resolver';
 
     /**
      * {@inheritdoc}
      */
-    protected $type = 'UserResolver';
+    protected $type = 'IpAddressResolver';
 
     /**
      * {@inheritdoc}
      */
     protected function getStub(): string
     {
-        return __DIR__.'/../../stubs/UserResolver.stub';
+        return __DIR__.'/../../stubs/IpAddressResolver.stub';
     }
 
     /**

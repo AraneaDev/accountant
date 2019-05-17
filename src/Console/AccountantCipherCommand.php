@@ -6,29 +6,29 @@ namespace Altek\Accountant\Console;
 
 use Illuminate\Console\GeneratorCommand;
 
-class MakeUserAgentResolverCommand extends GeneratorCommand
+class AccountantCipherCommand extends GeneratorCommand
 {
     /**
      * {@inheritdoc}
      */
-    protected $name = 'make:user-agent-resolver';
+    protected $name = 'accountant:cipher';
 
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Create a new User Agent resolver';
+    protected $description = 'Create a new Cipher implementation';
 
     /**
      * {@inheritdoc}
      */
-    protected $type = 'UserAgentResolver';
+    protected $type = 'Cipher';
 
     /**
      * {@inheritdoc}
      */
     protected function getStub(): string
     {
-        return __DIR__.'/../../stubs/UserAgentResolver.stub';
+        return __DIR__.'/../../stubs/Cipher.stub';
     }
 
     /**
@@ -36,6 +36,6 @@ class MakeUserAgentResolverCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\Resolvers';
+        return $rootNamespace.'\Ciphers';
     }
 }

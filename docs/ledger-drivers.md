@@ -12,7 +12,7 @@ A driver is just a class implementing the `LedgerDriver` interface.
 To create a new driver, execute
 
 ```sh
-php artisan make:ledger-driver MyCustomDriver
+php artisan accountant:ledger-driver MyCustomDriver
 ```
 
 The previous command will create a file called `MyCustomDriver.php` in the `app/LedgerDrivers` folder with the following content:

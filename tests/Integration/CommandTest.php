@@ -38,51 +38,51 @@ class CommandTest extends AccountantTestCase
     public function makeCommandProvider(): array
     {
         return [
-            'make:cipher' => [
+            'accountant:cipher' => [
                 'Ciphers/TestCipher.php',
-                'make:cipher',
+                'accountant:cipher',
                 'TestCipher',
             ],
 
-            'make:context-resolver' => [
+            'accountant:context-resolver' => [
                 'Resolvers/TestContextResolver.php',
-                'make:context-resolver',
+                'accountant:context-resolver',
                 'TestContextResolver',
             ],
 
-            'make:ip-address-resolver' => [
+            'accountant:ip-address-resolver' => [
                 'Resolvers/TestIpAddressResolver.php',
-                'make:ip-address-resolver',
+                'accountant:ip-address-resolver',
                 'TestIpAddressResolver',
             ],
 
-            'make:ledger-driver' => [
+            'accountant:ledger-driver' => [
                 'LedgerDrivers/TestDriver.php',
-                'make:ledger-driver',
+                'accountant:ledger-driver',
                 'TestDriver',
             ],
 
-            'make:notary' => [
+            'accountant:notary' => [
                 'TestNotary.php',
-                'make:notary',
+                'accountant:notary',
                 'TestNotary',
             ],
 
-            'make:url-resolver' => [
+            'accountant:url-resolver' => [
                 'Resolvers/TestUrlResolver.php',
-                'make:url-resolver',
+                'accountant:url-resolver',
                 'TestUrlResolver',
             ],
 
-            'make:user-agent-resolver' => [
+            'accountant:user-agent-resolver' => [
                 'Resolvers/TestUserAgentResolver.php',
-                'make:user-agent-resolver',
+                'accountant:user-agent-resolver',
                 'TestUserAgentResolver',
             ],
 
-            'make:user-resolver' => [
+            'accountant:user-resolver' => [
                 'Resolvers/TestUserResolver.php',
-                'make:user-resolver',
+                'accountant:user-resolver',
                 'TestUserResolver',
             ],
         ];

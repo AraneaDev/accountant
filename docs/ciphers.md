@@ -93,5 +93,5 @@ If the included ciphers don't suit your needs, you can always roll your own.
 A cipher is just a class implementing the `\Altek\Accountant\Contracts\Cipher` interface.
 
 ::: tip
-You can generate a skeleton `Cipher` class with the `php artisan make:cipher` command. You can grab ideas from the included ciphers for your own implementation.
+You can generate a skeleton `Cipher` class with the `php artisan accountant:cipher` command. You can grab ideas from the included ciphers for your own implementation.
 :::

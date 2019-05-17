@@ -6,29 +6,29 @@ namespace Altek\Accountant\Console;
 
 use Illuminate\Console\GeneratorCommand;
 
-class MakeCipherCommand extends GeneratorCommand
+class AccountantContextResolverCommand extends GeneratorCommand
 {
     /**
      * {@inheritdoc}
      */
-    protected $name = 'make:cipher';
+    protected $name = 'accountant:context-resolver';
 
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Create a new Cipher implementation';
+    protected $description = 'Create a new Context resolver';
 
     /**
      * {@inheritdoc}
      */
-    protected $type = 'Cipher';
+    protected $type = 'ContextResolver';
 
     /**
      * {@inheritdoc}
      */
     protected function getStub(): string
     {
-        return __DIR__.'/../../stubs/Cipher.stub';
+        return __DIR__.'/../../stubs/ContextResolver.stub';
     }
 
     /**
@@ -36,6 +36,6 @@ class MakeCipherCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\Ciphers';
+        return $rootNamespace.'\Resolvers';
     }
 }

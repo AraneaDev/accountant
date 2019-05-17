@@ -6,29 +6,29 @@ namespace Altek\Accountant\Console;
 
 use Illuminate\Console\GeneratorCommand;
 
-class MakeLedgerDriverCommand extends GeneratorCommand
+class AccountantUserResolverCommand extends GeneratorCommand
 {
     /**
      * {@inheritdoc}
      */
-    protected $name = 'make:ledger-driver';
+    protected $name = 'accountant:user-resolver';
 
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Create a new Ledger driver';
+    protected $description = 'Create a new User resolver';
 
     /**
      * {@inheritdoc}
      */
-    protected $type = 'LedgerDriver';
+    protected $type = 'UserResolver';
 
     /**
      * {@inheritdoc}
      */
     protected function getStub(): string
     {
-        return __DIR__.'/../../stubs/LedgerDriver.stub';
+        return __DIR__.'/../../stubs/UserResolver.stub';
     }
 
     /**
@@ -36,6 +36,6 @@ class MakeLedgerDriverCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\LedgerDrivers';
+        return $rootNamespace.'\Resolvers';
     }
 }

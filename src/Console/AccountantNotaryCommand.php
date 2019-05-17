@@ -6,12 +6,12 @@ namespace Altek\Accountant\Console;
 
 use Illuminate\Console\GeneratorCommand;
 
-class MakeNotaryCommand extends GeneratorCommand
+class AccountantNotaryCommand extends GeneratorCommand
 {
     /**
      * {@inheritdoc}
      */
-    protected $name = 'make:notary';
+    protected $name = 'accountant:notary';
 
     /**
      * {@inheritdoc}
