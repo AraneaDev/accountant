@@ -12,4 +12,11 @@ interface Identifiable
      * @return mixed
      */
     public function getIdentifier();
+
+    /**
+     * Get the class name for polymorphic relations.
+     *
+     * @return string
+     */
+    public function getMorphClass();
 }
