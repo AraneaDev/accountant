@@ -3,7 +3,7 @@ By overriding the `supplyExtra()` method on any `Recordable` model, the user can
 
 Three arguments are injected into the method:
 - The Eloquent event name that was fired;
-- All the `Recordable` model properties (after ciphering)
+- All the `Recordable` model properties (after ciphering);
 - Depending if the user was resolved or not, an `Identifiable` class or `null`;
 
 ```php
