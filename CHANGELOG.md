@@ -1,6 +1,10 @@
 # Changelog
 Relevant changes to the Accountant package will be documented here.
 
+## v1.2.0 (2019-05-20)
+### Changed
+- Update artisan command prefixes to `accountant:*`.
+
 ## v1.1.7 (2019-03-16)
 ### Changed
 - Ignore `existingPivotUpdated`, `attached` and `detached` events when toggling or syncing. Fixes ([#6](https://gitlab.com/altek/accountant/issues/6))
